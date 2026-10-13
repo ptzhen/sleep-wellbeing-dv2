@@ -1,12 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {
-    "text": "Young adults sleep the longest but feel the worst",
-    "subtitle": [
-      "% of adults who usually get enough sleep, and % who often wake up unrefreshed, by age",
-      "Sleep Health Foundation, Sleep Health Survey of Australian Adults 2016, Table 1"
-    ]
-  },
   "width": "container",
   "height": 300,
   "data": {
@@ -120,7 +113,7 @@
   ],
   "config": {
     "background": "transparent",
-    "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+    "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
     "view": {
       "stroke": null
     },
@@ -130,7 +123,7 @@
       "fontWeight": 600,
       "color": "#23263a",
       "anchor": "start",
-      "subtitleFont": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "subtitleFont": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
       "subtitleFontSize": 13,
       "subtitleFontWeight": 400,
       "subtitleColor": "#5d6077",
@@ -162,7 +155,7 @@
       "titleFontSize": 13
     },
     "text": {
-      "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
       "color": "#23263a"
     }
   }

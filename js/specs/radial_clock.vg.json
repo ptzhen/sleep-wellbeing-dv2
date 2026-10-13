@@ -1,12 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {
-    "text": "Weekday alarms get most of us up by 8 am; at the weekend 6 in 10 are still asleep at 7",
-    "subtitle": [
-      "% of people aged 15+ asleep in each hour (midnight at the top, clockwise)",
-      "ABS, How Australians Use Their Time 2020–21, Tables 13–17"
-    ]
-  },
   "data": {
     "url": "data/tus_activity_by_hour.csv",
     "format": {
@@ -61,7 +54,7 @@
         "text": "Weekdays",
         "fontSize": 14,
         "anchor": "middle",
-        "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+        "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
         "fontWeight": 600
       },
       "width": 260,
@@ -215,7 +208,7 @@
         "text": "Weekends",
         "fontSize": 14,
         "anchor": "middle",
-        "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+        "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
         "fontWeight": 600
       },
       "width": 260,
@@ -367,7 +360,7 @@
   },
   "config": {
     "background": "transparent",
-    "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+    "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
     "view": {
       "stroke": null
     },
@@ -377,7 +370,7 @@
       "fontWeight": 600,
       "color": "#23263a",
       "anchor": "start",
-      "subtitleFont": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "subtitleFont": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
       "subtitleFontSize": 13,
       "subtitleFontWeight": 400,
       "subtitleColor": "#5d6077",
@@ -409,7 +402,7 @@
       "titleFontSize": 13
     },
     "text": {
-      "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
       "color": "#23263a"
     }
   }

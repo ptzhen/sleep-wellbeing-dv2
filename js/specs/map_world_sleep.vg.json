@@ -1,12 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {
-    "text": "Australians sleep about as much as most rich countries",
-    "subtitle": [
-      "Average minutes of sleep per day, adults, latest OECD time-use survey",
-      "Survey years vary (1999–2019); hover for each country's year. Grey: no survey"
-    ]
-  },
   "width": "container",
   "height": 420,
   "projection": {
@@ -163,7 +156,7 @@
   ],
   "config": {
     "background": "transparent",
-    "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+    "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
     "view": {
       "stroke": null
     },
@@ -173,7 +166,7 @@
       "fontWeight": 600,
       "color": "#23263a",
       "anchor": "start",
-      "subtitleFont": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "subtitleFont": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
       "subtitleFontSize": 13,
       "subtitleFontWeight": 400,
       "subtitleColor": "#5d6077",
@@ -205,7 +198,7 @@
       "titleFontSize": 13
     },
     "text": {
-      "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
       "color": "#23263a"
     }
   }

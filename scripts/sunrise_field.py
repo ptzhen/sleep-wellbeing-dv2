@@ -1,17 +1,17 @@
-"""Sunrise clock time across Australia on the summer and winter solstices.
-Computes a 0.5 degree grid with the NOAA sunrise equation (zenith 90.833 deg),
-converts it to each state's legal clock time (incl. daylight saving in summer),
-and writes isolines every 30 minutes, clipped to each state.
-Usage: python3 sunrise_field.py <states.geojson> <out_grid.csv> <out_isolines.geojson>"""
+"""Sunrise clock time across Australia on the summer and winter solstices, as 30-minute bands.
+Computes a 0.1 degree grid with the NOAA sunrise equation (zenith 90.833 deg), converts it to
+each state's legal clock time (incl. daylight saving in summer), merges cells into 30-minute
+bands and clips each band to the state outline, so the bands fill exactly to the coast.
+Usage: python3 sunrise_field.py <states.geojson> <out_bands.geojson>
+Then: mapshaper out_bands.geojson name=bands -o sunrise_bands.topojson format=topojson quantization=1e5"""
 import sys, csv, json, math
 import numpy as np
-from shapely.geometry import shape, Point, LineString, mapping
+from shapely.geometry import shape, box, mapping, Polygon, MultiPolygon
+from shapely.geometry.polygon import orient
+from shapely.ops import unary_union
 from shapely.prepared import prep
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
 
-src, out_csv, out_geo = sys.argv[1:4]
+src, out_geo = sys.argv[1:3]
 states = [(f['properties']['STATE_NAME'], shape(f['geometry']).buffer(0)) for f in json.load(open(src))['features']]
 prepped = [(n, prep(g), g) for n, g in states]
 
@@ -33,35 +33,38 @@ def sunrise_utc(lat, lon, doy):
                                 - math.tan(phi) * math.tan(decl)))
     return 720 - 4 * (lon + ha) - eqtime
 
-step = 0.5
-lons = np.arange(112.75, 154, step)
-lats = np.arange(-43.75, -10, step)
-rows, iso = [], []
+step = 0.1
+BREAKS = [270, 300, 330, 360, 390, 420, 450]
+def band_label(i):
+    t = lambda m: f'{m // 60}:{m % 60:02d}'
+    if i == 0: return f'before {t(BREAKS[0])} am'
+    if i == len(BREAKS): return f'after {t(BREAKS[-1])} am'
+    return f'{t(BREAKS[i - 1])}–{t(BREAKS[i])} am'
+
+feats = []
 for season, (doy, si) in SEASONS.items():
     for name, pg, geom in prepped:
-        z = np.full((len(lats), len(lons)), np.nan)
-        # wider evaluation (no mask) so contours extend to the coast, then clip to the state
-        for i, la in enumerate(lats):
-            for j, lo in enumerate(lons):
-                z[i, j] = (sunrise_utc(la, lo, doy) + TZ[name][si] * 60) % 1440
-                if pg.contains(Point(lo, la)):
-                    rows.append([season, name, lo, la, round(z[i, j], 1)])
-        levels = np.arange(240, 540, 30)
-        cs = plt.contour(lons, lats, z, levels=levels)
-        for lev, segs in zip(cs.levels, cs.allsegs):
-            for seg in segs:
-                if len(seg) < 2: continue
-                clipped = LineString(seg).intersection(geom)
-                if clipped.is_empty: continue
-                label = f'{int(lev // 60)}:{int(lev % 60):02d}'
-                iso.append({'type': 'Feature', 'properties': {'season': season, 'state': name, 'minutes': int(lev), 'label': label},
-                            'geometry': json.loads(json.dumps(mapping(clipped.simplify(0.05))))})
-        plt.close('all')
+        x0, y0, x1, y1 = geom.bounds
+        cells = {}
+        # integer cell indices so neighbouring cells share exact edges and merge without slivers
+        for ix in range(int(math.floor(x0 / step)), int(math.ceil(x1 / step)) + 1):
+            for iy in range(int(math.floor(y0 / step)), int(math.ceil(y1 / step)) + 1):
+                lo, la = round(ix * step, 6), round(iy * step, 6)
+                m = (sunrise_utc(la + step / 2, lo + step / 2, doy) + TZ[name][si] * 60) % 1440
+                i = int(np.searchsorted(BREAKS, m, side='right'))
+                cells.setdefault(i, []).append(box(lo, la, round(lo + step, 6), round(la + step, 6)))
+        for i, boxes in cells.items():
+            band = unary_union(boxes).buffer(1e-7).intersection(geom).simplify(0.02)
+            if band.is_empty: continue
+            # d3-geo (used by Vega) expects clockwise outer rings
+            polys = [q for q in getattr(band, 'geoms', [band]) if isinstance(q, Polygon)]
+            g = mapping(MultiPolygon([orient(q, sign=-1.0) for q in polys]))
+            feats.append({'type': 'Feature', 'properties': {'season': season, 'state': name, 'band': i, 'label': band_label(i)},
+                          'geometry': g})
 
-with open(out_csv, 'w', newline='') as f:
-    w = csv.writer(f); w.writerow(['season', 'state', 'lon', 'lat', 'sunrise_min']); w.writerows(rows)
 def rnd(c):
     return [rnd(x) for x in c] if isinstance(c[0], (list, tuple)) else [round(c[0], 3), round(c[1], 3)]
-for f in iso: f['geometry']['coordinates'] = rnd(f['geometry']['coordinates'])
-json.dump({'type': 'FeatureCollection', 'features': [f for f in iso if f['geometry']['coordinates']]}, open(out_geo, 'w'))
-print(len(rows), 'cells,', len(iso), 'isolines')
+for f in feats:
+    f['geometry'] = {'type': f['geometry']['type'], 'coordinates': rnd(f['geometry']['coordinates'])}
+json.dump({'type': 'FeatureCollection', 'features': feats}, open(out_geo, 'w'))
+print(len(feats), 'band polygons')

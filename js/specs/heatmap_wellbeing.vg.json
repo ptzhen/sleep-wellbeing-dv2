@@ -1,12 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {
-    "text": "People with back pain and mental health conditions sleep worst on every measure",
-    "subtitle": [
-      "Sleep measures by health condition. Colour: how many times worse than adults with neither",
-      "Sleep Health Foundation, Aussie Sleep Snapshot 2025 (n = 1,012)"
-    ]
-  },
   "width": "container",
   "height": {
     "step": 48
@@ -129,7 +122,7 @@
   },
   "config": {
     "background": "transparent",
-    "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+    "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
     "view": {
       "stroke": null
     },
@@ -139,7 +132,7 @@
       "fontWeight": 600,
       "color": "#23263a",
       "anchor": "start",
-      "subtitleFont": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "subtitleFont": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
       "subtitleFontSize": 13,
       "subtitleFontWeight": 400,
       "subtitleColor": "#5d6077",
@@ -171,7 +164,7 @@
       "titleFontSize": 13
     },
     "text": {
-      "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
       "color": "#23263a"
     }
   },

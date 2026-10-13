@@ -1,42 +1,166 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {
-    "text": "But most distressed Australians live in the big cities",
-    "subtitle": [
-      "Estimated number of adults with high or very high distress, by PHN, 2022",
-      "Circle area shows the number; each circle sits inside its PHN. PHIDU Social Health Atlas"
-    ]
-  },
-  "width": "container",
-  "height": 460,
-  "projection": {
-    "type": "conicEqualArea",
-    "parallels": [
-      -18,
-      -36
-    ],
-    "rotate": [
-      -134,
-      0
-    ]
-  },
-  "layer": [
+  "hconcat": [
     {
-      "data": {
-        "url": "data/aus_states.topojson",
-        "format": {
-          "type": "topojson",
-          "feature": "aus_states"
-        }
+      "name": "symmap",
+      "width": 520,
+      "height": 440,
+      "projection": {
+        "type": "conicEqualArea",
+        "parallels": [
+          -18,
+          -36
+        ],
+        "rotate": [
+          -134,
+          0
+        ]
       },
-      "mark": {
-        "type": "geoshape",
-        "fill": "#ece9e2",
-        "stroke": "#ffffff",
-        "strokeWidth": 1
-      }
+      "layer": [
+        {
+          "data": {
+            "url": "data/aus_states.topojson",
+            "format": {
+              "type": "topojson",
+              "feature": "aus_states"
+            }
+          },
+          "mark": {
+            "type": "geoshape",
+            "fill": "#ece9e2",
+            "stroke": "#ffffff",
+            "strokeWidth": 1
+          }
+        },
+        {
+          "data": {
+            "url": "data/phn_distress_counts.csv"
+          },
+          "transform": [
+            {
+              "filter": "isValid(datum.distressed_adults) && datum.distressed_adults > 0"
+            }
+          ],
+          "params": [
+            {
+              "name": "hoverMap",
+              "select": {
+                "type": "point",
+                "fields": [
+                  "code"
+                ],
+                "on": "pointerover",
+                "clear": "pointerout"
+              }
+            }
+          ],
+          "mark": {
+            "type": "circle",
+            "stroke": "#ffffff",
+            "strokeWidth": 1
+          },
+          "encoding": {
+            "longitude": {
+              "field": "lon",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "lat",
+              "type": "quantitative"
+            },
+            "size": {
+              "field": "distressed_adults",
+              "type": "quantitative",
+              "title": "Distressed adults",
+              "scale": {
+                "type": "sqrt",
+                "domain": [
+                  0,
+                  210000
+                ],
+                "range": [
+                  0,
+                  1500
+                ]
+              },
+              "legend": {
+                "orient": "top-left",
+                "values": [
+                  25000,
+                  100000,
+                  200000
+                ],
+                "format": ",.0f",
+                "symbolFillColor": "#5e4a9e",
+                "symbolOpacity": 0.6,
+                "symbolStrokeColor": "#ffffff"
+              }
+            },
+            "color": {
+              "condition": {
+                "test": {
+                  "or": [
+                    {
+                      "param": "hoverMap",
+                      "empty": false
+                    },
+                    {
+                      "param": "hoverBar",
+                      "empty": false
+                    }
+                  ]
+                },
+                "value": "#d08a1e"
+              },
+              "value": "#5e4a9e"
+            },
+            "opacity": {
+              "condition": {
+                "test": {
+                  "or": [
+                    {
+                      "param": "hoverMap",
+                      "empty": false
+                    },
+                    {
+                      "param": "hoverBar",
+                      "empty": false
+                    }
+                  ]
+                },
+                "value": 0.95
+              },
+              "value": 0.6
+            },
+            "order": {
+              "field": "distressed_adults",
+              "sort": "descending"
+            },
+            "tooltip": [
+              {
+                "field": "name",
+                "title": "PHN"
+              },
+              {
+                "field": "state",
+                "title": "State"
+              },
+              {
+                "field": "distressed_adults",
+                "title": "Distressed adults (est.)",
+                "format": ",.0f"
+              }
+            ]
+          }
+        }
+      ]
     },
     {
+      "name": "symbars",
+      "width": 200,
+      "height": {
+        "step": 14
+      },
       "data": {
         "url": "data/phn_distress_counts.csv"
       },
@@ -47,79 +171,67 @@
       ],
       "params": [
         {
-          "name": "symHover",
+          "name": "hoverBar",
           "select": {
             "type": "point",
+            "fields": [
+              "code"
+            ],
             "on": "pointerover",
             "clear": "pointerout"
           }
         }
       ],
       "mark": {
-        "type": "circle",
-        "stroke": "#ffffff",
-        "strokeWidth": 1
+        "type": "bar",
+        "height": 10,
+        "cornerRadiusEnd": 2
       },
       "encoding": {
-        "longitude": {
-          "field": "lon",
-          "type": "quantitative"
+        "y": {
+          "field": "name",
+          "type": "nominal",
+          "title": null,
+          "sort": "-x",
+          "axis": {
+            "domain": false,
+            "ticks": false,
+            "labelFontSize": 11,
+            "labelLimit": 220
+          }
         },
-        "latitude": {
-          "field": "lat",
-          "type": "quantitative"
-        },
-        "size": {
+        "x": {
           "field": "distressed_adults",
           "type": "quantitative",
           "title": "Distressed adults",
-          "scale": {
-            "type": "sqrt",
-            "domain": [
-              0,
-              210000
-            ],
-            "range": [
-              0,
-              900
-            ]
-          },
-          "legend": {
-            "orient": "top-left",
-            "values": [
-              20000,
-              100000,
-              200000
-            ],
-            "format": ",.0f",
-            "symbolFillColor": "#5e4a9e",
-            "symbolOpacity": 0.6,
-            "symbolStrokeColor": "#ffffff"
+          "axis": {
+            "format": "~s",
+            "grid": true,
+            "tickCount": 4
           }
         },
         "color": {
-          "value": "#5e4a9e"
-        },
-        "opacity": {
           "condition": {
-            "param": "symHover",
-            "empty": true,
-            "value": 0.7
+            "test": {
+              "or": [
+                {
+                  "param": "hoverMap",
+                  "empty": false
+                },
+                {
+                  "param": "hoverBar",
+                  "empty": false
+                }
+              ]
+            },
+            "value": "#d08a1e"
           },
-          "value": 0.3
-        },
-        "order": {
-          "field": "distressed_adults",
-          "sort": "descending"
+          "value": "#5e4a9e"
         },
         "tooltip": [
           {
             "field": "name",
             "title": "PHN"
-          },
-          {
-            "field": "state",
-            "title": "State"
           },
           {
             "field": "distressed_adults",
@@ -130,9 +242,10 @@
       }
     }
   ],
+  "spacing": 40,
   "config": {
     "background": "transparent",
-    "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+    "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
     "view": {
       "stroke": null
     },
@@ -142,7 +255,7 @@
       "fontWeight": 600,
       "color": "#23263a",
       "anchor": "start",
-      "subtitleFont": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "subtitleFont": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
       "subtitleFontSize": 13,
       "subtitleFontWeight": 400,
       "subtitleColor": "#5d6077",
@@ -174,7 +287,7 @@
       "titleFontSize": 13
     },
     "text": {
-      "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
       "color": "#23263a"
     }
   }

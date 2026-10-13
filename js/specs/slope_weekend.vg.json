@@ -1,14 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {
-    "text": "Weekends buy back about 36 extra minutes of sleep",
-    "subtitle": [
-      "Average minutes asleep per day for people who slept, ages 15+",
-      "ABS, How Australians Use Their Time 2020–21, Table 2"
-    ]
-  },
-  "width": 280,
-  "height": 300,
+  "width": "container",
+  "height": 240,
   "data": {
     "url": "data/tus_sleep_summary.csv"
   },
@@ -142,7 +135,7 @@
   ],
   "config": {
     "background": "transparent",
-    "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+    "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
     "view": {
       "stroke": null
     },
@@ -152,7 +145,7 @@
       "fontWeight": 600,
       "color": "#23263a",
       "anchor": "start",
-      "subtitleFont": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "subtitleFont": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
       "subtitleFontSize": 13,
       "subtitleFontWeight": 400,
       "subtitleColor": "#5d6077",
@@ -184,7 +177,7 @@
       "titleFontSize": 13
     },
     "text": {
-      "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
       "color": "#23263a"
     }
   }

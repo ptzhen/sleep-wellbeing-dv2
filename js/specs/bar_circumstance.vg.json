@@ -1,12 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {
-    "text": "Young children, caring and volunteering all cut into sleep",
-    "subtitle": [
-      "Minutes asleep a day compared with the average adult (522 minutes), ages 15+",
-      "ABS, How Australians Use Their Time 2020–21, Tables 8–11"
-    ]
-  },
   "width": "container",
   "height": {
     "step": 30
@@ -77,7 +70,19 @@
         ]
       },
       "axis": {
-        "grid": true
+        "grid": true,
+        "values": [
+          -40,
+          -30,
+          -20,
+          -10,
+          0,
+          10,
+          20,
+          30,
+          40,
+          50
+        ]
       }
     }
   },
@@ -160,7 +165,7 @@
   },
   "config": {
     "background": "transparent",
-    "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+    "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
     "view": {
       "stroke": null
     },
@@ -170,7 +175,7 @@
       "fontWeight": 600,
       "color": "#23263a",
       "anchor": "start",
-      "subtitleFont": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "subtitleFont": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
       "subtitleFontSize": 13,
       "subtitleFontWeight": 400,
       "subtitleColor": "#5d6077",
@@ -202,7 +207,7 @@
       "titleFontSize": 13
     },
     "text": {
-      "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
       "color": "#23263a"
     }
   }

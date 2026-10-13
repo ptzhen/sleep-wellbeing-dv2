@@ -1,20 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {
-    "text": "In summer the sun rises before 5 am in Brisbane, almost an hour before Sydney",
-    "subtitle": [
-      "Clock time of sunrise on the longest and shortest days, white lines every 30 minutes",
-      "Qld, WA and the NT have no daylight saving. Calculated with NOAA solar equations"
-    ]
-  },
   "width": "container",
-  "height": 460,
-  "padding": {
-    "left": 10,
-    "right": 10,
-    "top": 5,
-    "bottom": 5
-  },
+  "height": 440,
   "projection": {
     "type": "conicEqualArea",
     "parallels": [
@@ -36,6 +23,10 @@
           "Summer (21 December)",
           "Winter (21 June)"
         ],
+        "labels": [
+          "Summer (21 December)",
+          "Winter (21 June)"
+        ],
         "name": "Day: "
       }
     }
@@ -43,45 +34,37 @@
   "layer": [
     {
       "data": {
-        "url": "data/sunrise_grid.csv"
+        "url": "data/sunrise_bands.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "bands"
+        }
       },
       "transform": [
         {
-          "filter": "datum.season == season"
-        },
-        {
-          "calculate": "floor(datum.sunrise_min/60) + ':' + (floor(datum.sunrise_min%60) < 10 ? '0' : '') + floor(datum.sunrise_min%60) + ' am'",
-          "as": "t"
+          "filter": "datum.properties.season == season"
         }
       ],
       "mark": {
-        "type": "square",
-        "size": 70,
-        "opacity": 1
+        "type": "geoshape",
+        "stroke": "#ffffff",
+        "strokeWidth": 0.6
       },
       "encoding": {
-        "longitude": {
-          "field": "lon",
-          "type": "quantitative"
-        },
-        "latitude": {
-          "field": "lat",
-          "type": "quantitative"
-        },
         "color": {
-          "field": "sunrise_min",
-          "type": "quantitative",
+          "field": "properties.label",
+          "type": "ordinal",
           "title": "Sunrise (clock time)",
           "scale": {
-            "type": "threshold",
             "domain": [
-              270,
-              300,
-              330,
-              360,
-              390,
-              420,
-              450
+              "before 4:30 am",
+              "4:30–5:00 am",
+              "5:00–5:30 am",
+              "5:30–6:00 am",
+              "6:00–6:30 am",
+              "6:30–7:00 am",
+              "7:00–7:30 am",
+              "after 7:30 am"
             ],
             "range": [
               "#fff4c8",
@@ -95,42 +78,26 @@
             ]
           },
           "legend": {
-            "orient": "top-left",
-            "direction": "vertical",
-            "labelExpr": "isFinite(datum.value) ? 'from ' + floor(datum.value/60) + ':' + (datum.value%60 == 0 ? '00' : datum.value%60) + ' am' : 'before 4:30 am'"
+            "orient": "bottom",
+            "direction": "horizontal",
+            "columns": 4,
+            "symbolType": "square",
+            "symbolSize": 160,
+            "labelFontSize": 12,
+            "columnPadding": 16,
+            "rowPadding": 6
           }
         },
         "tooltip": [
           {
-            "field": "state",
+            "field": "properties.state",
             "title": "State"
           },
           {
-            "field": "t",
+            "field": "properties.label",
             "title": "Sunrise"
           }
         ]
-      }
-    },
-    {
-      "data": {
-        "url": "data/sunrise_isolines.geojson",
-        "format": {
-          "type": "json",
-          "property": "features"
-        }
-      },
-      "transform": [
-        {
-          "filter": "datum.properties.season == season"
-        }
-      ],
-      "mark": {
-        "type": "geoshape",
-        "filled": false,
-        "stroke": "#ffffff",
-        "strokeWidth": 0.8,
-        "strokeOpacity": 0.8
       }
     },
     {
@@ -175,7 +142,7 @@
         {
           "mark": {
             "type": "circle",
-            "size": 30,
+            "size": 34,
             "color": "#23263a",
             "stroke": "#ffffff",
             "strokeWidth": 1,
@@ -221,7 +188,7 @@
   ],
   "config": {
     "background": "transparent",
-    "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+    "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
     "view": {
       "stroke": null
     },
@@ -231,7 +198,7 @@
       "fontWeight": 600,
       "color": "#23263a",
       "anchor": "start",
-      "subtitleFont": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "subtitleFont": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
       "subtitleFontSize": 13,
       "subtitleFontWeight": 400,
       "subtitleColor": "#5d6077",
@@ -263,7 +230,7 @@
       "titleFontSize": 13
     },
     "text": {
-      "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
       "color": "#23263a"
     }
   }
