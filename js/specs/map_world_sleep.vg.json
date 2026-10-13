@@ -1,0 +1,212 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Australians sleep about as much as most rich countries",
+    "subtitle": [
+      "Average minutes of sleep per day, adults, latest OECD time-use survey",
+      "Survey years vary (1999–2019); hover for each country's year. Grey: no survey"
+    ]
+  },
+  "width": "container",
+  "height": 420,
+  "projection": {
+    "type": "equalEarth"
+  },
+  "data": {
+    "url": "data/world_countries.topojson",
+    "format": {
+      "type": "topojson",
+      "feature": "countries"
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum.properties.CONTINENT != 'Antarctica'"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "geoshape",
+        "fill": "#ecebe6",
+        "stroke": "#ffffff",
+        "strokeWidth": 0.4
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "properties.NAME",
+            "title": "Country"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "lookup": "properties.ADM0_A3",
+          "from": {
+            "data": {
+              "url": "data/oecd_sleep_by_country.csv"
+            },
+            "key": "iso3",
+            "fields": [
+              "sleep_min_total",
+              "survey_year",
+              "age_group",
+              "country"
+            ]
+          }
+        },
+        {
+          "filter": "isValid(datum.sleep_min_total)"
+        },
+        {
+          "calculate": "floor(datum.sleep_min_total/60) + 'h ' + round(datum.sleep_min_total % 60) + 'm'",
+          "as": "hm"
+        }
+      ],
+      "params": [
+        {
+          "name": "hoverCountry",
+          "select": {
+            "type": "point",
+            "on": "pointerover",
+            "clear": "pointerout"
+          }
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#ffffff",
+        "strokeWidth": 0.4
+      },
+      "encoding": {
+        "color": {
+          "field": "sleep_min_total",
+          "type": "quantitative",
+          "title": "Minutes of sleep a day",
+          "scale": {
+            "type": "threshold",
+            "domain": [
+              480,
+              500,
+              510,
+              520,
+              530
+            ],
+            "range": [
+              "#cfd9f0",
+              "#a9bce4",
+              "#7f9bd2",
+              "#5679bd",
+              "#3b5ba5",
+              "#1e2f63"
+            ]
+          },
+          "legend": {
+            "orient": "bottom-left",
+            "direction": "horizontal",
+            "gradientLength": 320,
+            "labelOverlap": false
+          }
+        },
+        "stroke": {
+          "condition": {
+            "param": "hoverCountry",
+            "empty": false,
+            "value": "#23263a"
+          },
+          "value": "#ffffff"
+        },
+        "strokeWidth": {
+          "condition": {
+            "param": "hoverCountry",
+            "empty": false,
+            "value": 1.5
+          },
+          "value": 0.4
+        },
+        "tooltip": [
+          {
+            "field": "country",
+            "title": "Country"
+          },
+          {
+            "field": "hm",
+            "title": "Sleep per day"
+          },
+          {
+            "field": "survey_year",
+            "title": "Survey year"
+          },
+          {
+            "field": "age_group",
+            "title": "Ages covered"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.properties.ADM0_A3 == 'AUS'"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "fill": null,
+        "stroke": "#d08a1e",
+        "strokeWidth": 2
+      }
+    }
+  ],
+  "config": {
+    "background": "transparent",
+    "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "font": "Fraunces, Georgia, serif",
+      "fontSize": 18,
+      "fontWeight": 600,
+      "color": "#23263a",
+      "anchor": "start",
+      "subtitleFont": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "subtitleFontSize": 13,
+      "subtitleFontWeight": 400,
+      "subtitleColor": "#5d6077",
+      "offset": 12
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleColor": "#5d6077",
+      "labelColor": "#5d6077",
+      "gridColor": "#e6e3dc",
+      "labelLimit": 320,
+      "domainColor": "#c9c5bb",
+      "tickColor": "#c9c5bb",
+      "titleFontWeight": 400
+    },
+    "legend": {
+      "labelLimit": 260,
+      "titleLimit": 300,
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleColor": "#5d6077",
+      "labelColor": "#23263a",
+      "titleFontWeight": 400
+    },
+    "header": {
+      "labelFontSize": 13,
+      "labelColor": "#23263a",
+      "titleFontSize": 13
+    },
+    "text": {
+      "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "color": "#23263a"
+    }
+  }
+}

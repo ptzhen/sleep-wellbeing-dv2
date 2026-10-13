@@ -1,0 +1,209 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Young children, caring and volunteering all cut into sleep",
+    "subtitle": [
+      "Minutes asleep a day compared with the average adult (522 minutes), ages 15+",
+      "ABS, How Australians Use Their Time 2020–21, Tables 8–11"
+    ]
+  },
+  "width": "container",
+  "height": {
+    "step": 30
+  },
+  "data": {
+    "url": "data/sleep_by_circumstance.csv"
+  },
+  "params": [
+    {
+      "name": "circSex",
+      "value": "All",
+      "bind": {
+        "input": "radio",
+        "options": [
+          "All",
+          "Women",
+          "Men"
+        ],
+        "labels": [
+          "Everyone",
+          "Women",
+          "Men"
+        ],
+        "name": "Show: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum.sex == circSex"
+    },
+    {
+      "calculate": "datum.sleep_min - 522",
+      "as": "diff"
+    },
+    {
+      "calculate": "datum.diff >= 0 ? 'More than average' : 'Less than average'",
+      "as": "dir"
+    },
+    {
+      "calculate": "(datum.diff > 0 ? '+' : '') + datum.diff + ' min'",
+      "as": "difflabel"
+    }
+  ],
+  "encoding": {
+    "y": {
+      "field": "group",
+      "type": "nominal",
+      "title": null,
+      "sort": {
+        "field": "diff",
+        "order": "ascending"
+      },
+      "axis": {
+        "domain": false,
+        "ticks": false,
+        "labelLimit": 320
+      }
+    },
+    "x": {
+      "field": "diff",
+      "type": "quantitative",
+      "title": "Minutes compared with the average adult",
+      "scale": {
+        "domain": [
+          -40,
+          50
+        ]
+      },
+      "axis": {
+        "grid": true
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "height": 16,
+        "cornerRadius": 3
+      },
+      "encoding": {
+        "color": {
+          "field": "dir",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "domain": [
+              "Less than average",
+              "More than average"
+            ],
+            "range": [
+              "#d08a1e",
+              "#3b5ba5"
+            ]
+          },
+          "legend": {
+            "orient": "top",
+            "direction": "horizontal"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "group",
+            "title": "Group"
+          },
+          {
+            "field": "sleep_min",
+            "title": "Minutes asleep"
+          },
+          {
+            "field": "difflabel",
+            "title": "Compared with average"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "color": "#23263a"
+      },
+      "encoding": {
+        "x": {
+          "datum": 0
+        },
+        "y": null
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "dx": {
+          "expr": "datum.diff >= 0 ? 6 : -6"
+        },
+        "align": {
+          "expr": "datum.diff >= 0 ? 'left' : 'right'"
+        }
+      },
+      "encoding": {
+        "text": {
+          "field": "difflabel"
+        }
+      }
+    }
+  ],
+  "autosize": {
+    "type": "fit-x",
+    "contains": "padding"
+  },
+  "config": {
+    "background": "transparent",
+    "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "font": "Fraunces, Georgia, serif",
+      "fontSize": 18,
+      "fontWeight": 600,
+      "color": "#23263a",
+      "anchor": "start",
+      "subtitleFont": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "subtitleFontSize": 13,
+      "subtitleFontWeight": 400,
+      "subtitleColor": "#5d6077",
+      "offset": 12
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleColor": "#5d6077",
+      "labelColor": "#5d6077",
+      "gridColor": "#e6e3dc",
+      "labelLimit": 320,
+      "domainColor": "#c9c5bb",
+      "tickColor": "#c9c5bb",
+      "titleFontWeight": 400
+    },
+    "legend": {
+      "labelLimit": 260,
+      "titleLimit": 300,
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleColor": "#5d6077",
+      "labelColor": "#23263a",
+      "titleFontWeight": 400
+    },
+    "header": {
+      "labelFontSize": 13,
+      "labelColor": "#23263a",
+      "titleFontSize": 13
+    },
+    "text": {
+      "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "color": "#23263a"
+    }
+  }
+}

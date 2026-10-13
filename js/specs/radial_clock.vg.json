@@ -1,0 +1,416 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Weekday alarms get most of us up by 8 am; at the weekend 6 in 10 are still asleep at 7",
+    "subtitle": [
+      "% of people aged 15+ asleep in each hour (midnight at the top, clockwise)",
+      "ABS, How Australians Use Their Time 2020–21, Tables 13–17"
+    ]
+  },
+  "data": {
+    "url": "data/tus_activity_by_hour.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "hour_start": "number",
+        "pct": "number"
+      }
+    }
+  },
+  "params": [
+    {
+      "name": "sexSel",
+      "value": "Persons",
+      "bind": {
+        "input": "radio",
+        "options": [
+          "Persons",
+          "Females",
+          "Males"
+        ],
+        "labels": [
+          "Everyone",
+          "Women",
+          "Men"
+        ],
+        "name": "Show: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum.activity == 'Sleep' && datum.sex == sexSel && datum.day_type != 'All days'"
+    },
+    {
+      "calculate": "datum.hour_start + 1",
+      "as": "hour_end"
+    },
+    {
+      "calculate": "datum.hour_start % 3 != 0 ? '' : datum.hour_start == 0 ? '12 am' : datum.hour_start == 12 ? '12 pm' : datum.hour_start < 12 ? datum.hour_start + ' am' : (datum.hour_start - 12) + ' pm'",
+      "as": "hourlabel"
+    }
+  ],
+  "hconcat": [
+    {
+      "transform": [
+        {
+          "filter": "datum.day_type == 'Weekday'"
+        }
+      ],
+      "title": {
+        "text": "Weekdays",
+        "fontSize": 14,
+        "anchor": "middle",
+        "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+        "fontWeight": 600
+      },
+      "width": 260,
+      "height": 260,
+      "layer": [
+        {
+          "mark": {
+            "type": "arc",
+            "stroke": "#fbfaf7",
+            "strokeWidth": 1,
+            "innerRadius": 18,
+            "cornerRadius": 2
+          },
+          "encoding": {
+            "theta": {
+              "field": "hour_start",
+              "type": "quantitative",
+              "scale": {
+                "domain": [
+                  0,
+                  24
+                ]
+              }
+            },
+            "theta2": {
+              "field": "hour_end"
+            },
+            "radius": {
+              "field": "pct",
+              "type": "quantitative",
+              "scale": {
+                "type": "sqrt",
+                "zero": true,
+                "domain": [
+                  0,
+                  100
+                ],
+                "range": [
+                  18,
+                  125
+                ]
+              }
+            },
+            "color": {
+              "value": "#3b5ba5"
+            },
+            "opacity": {
+              "condition": {
+                "param": "hourHover",
+                "empty": true,
+                "value": 1
+              },
+              "value": 0.35
+            },
+            "tooltip": [
+              {
+                "field": "time_label",
+                "title": "Time"
+              },
+              {
+                "field": "pct",
+                "title": "% asleep",
+                "format": ".1f"
+              }
+            ]
+          },
+          "params": [
+            {
+              "name": "hourHover",
+              "select": {
+                "type": "point",
+                "fields": [
+                  "hour_start"
+                ],
+                "on": "pointerover",
+                "clear": "pointerout"
+              }
+            }
+          ]
+        },
+        {
+          "data": {
+            "values": [
+              {
+                "r": 50
+              }
+            ]
+          },
+          "mark": {
+            "type": "arc",
+            "filled": false,
+            "stroke": "#ffffff",
+            "strokeWidth": 1,
+            "strokeDash": [
+              3,
+              3
+            ]
+          },
+          "encoding": {
+            "theta": {
+              "datum": 0,
+              "type": "quantitative",
+              "scale": {
+                "domain": [
+                  0,
+                  24
+                ]
+              }
+            },
+            "theta2": {
+              "datum": 24
+            },
+            "radius": {
+              "field": "r",
+              "type": "quantitative"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "radius": 140,
+            "fontSize": 11,
+            "color": "#5d6077"
+          },
+          "encoding": {
+            "theta": {
+              "field": "hour_start",
+              "type": "quantitative",
+              "scale": {
+                "domain": [
+                  0,
+                  24
+                ]
+              }
+            },
+            "text": {
+              "field": "hourlabel"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.day_type == 'Weekend'"
+        }
+      ],
+      "title": {
+        "text": "Weekends",
+        "fontSize": 14,
+        "anchor": "middle",
+        "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+        "fontWeight": 600
+      },
+      "width": 260,
+      "height": 260,
+      "layer": [
+        {
+          "mark": {
+            "type": "arc",
+            "stroke": "#fbfaf7",
+            "strokeWidth": 1,
+            "innerRadius": 18,
+            "cornerRadius": 2
+          },
+          "encoding": {
+            "theta": {
+              "field": "hour_start",
+              "type": "quantitative",
+              "scale": {
+                "domain": [
+                  0,
+                  24
+                ]
+              }
+            },
+            "theta2": {
+              "field": "hour_end"
+            },
+            "radius": {
+              "field": "pct",
+              "type": "quantitative",
+              "scale": {
+                "type": "sqrt",
+                "zero": true,
+                "domain": [
+                  0,
+                  100
+                ],
+                "range": [
+                  18,
+                  125
+                ]
+              }
+            },
+            "color": {
+              "value": "#d08a1e"
+            },
+            "opacity": {
+              "condition": {
+                "param": "hourHover",
+                "empty": true,
+                "value": 1
+              },
+              "value": 0.35
+            },
+            "tooltip": [
+              {
+                "field": "time_label",
+                "title": "Time"
+              },
+              {
+                "field": "pct",
+                "title": "% asleep",
+                "format": ".1f"
+              }
+            ]
+          },
+          "params": [
+            {
+              "name": "hourHover",
+              "select": {
+                "type": "point",
+                "fields": [
+                  "hour_start"
+                ],
+                "on": "pointerover",
+                "clear": "pointerout"
+              }
+            }
+          ]
+        },
+        {
+          "data": {
+            "values": [
+              {
+                "r": 50
+              }
+            ]
+          },
+          "mark": {
+            "type": "arc",
+            "filled": false,
+            "stroke": "#ffffff",
+            "strokeWidth": 1,
+            "strokeDash": [
+              3,
+              3
+            ]
+          },
+          "encoding": {
+            "theta": {
+              "datum": 0,
+              "type": "quantitative",
+              "scale": {
+                "domain": [
+                  0,
+                  24
+                ]
+              }
+            },
+            "theta2": {
+              "datum": 24
+            },
+            "radius": {
+              "field": "r",
+              "type": "quantitative"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "radius": 140,
+            "fontSize": 11,
+            "color": "#5d6077"
+          },
+          "encoding": {
+            "theta": {
+              "field": "hour_start",
+              "type": "quantitative",
+              "scale": {
+                "domain": [
+                  0,
+                  24
+                ]
+              }
+            },
+            "text": {
+              "field": "hourlabel"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "resolve": {
+    "scale": {
+      "color": "independent"
+    }
+  },
+  "config": {
+    "background": "transparent",
+    "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "font": "Fraunces, Georgia, serif",
+      "fontSize": 18,
+      "fontWeight": 600,
+      "color": "#23263a",
+      "anchor": "start",
+      "subtitleFont": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "subtitleFontSize": 13,
+      "subtitleFontWeight": 400,
+      "subtitleColor": "#5d6077",
+      "offset": 12
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleColor": "#5d6077",
+      "labelColor": "#5d6077",
+      "gridColor": "#e6e3dc",
+      "labelLimit": 320,
+      "domainColor": "#c9c5bb",
+      "tickColor": "#c9c5bb",
+      "titleFontWeight": 400
+    },
+    "legend": {
+      "labelLimit": 260,
+      "titleLimit": 300,
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleColor": "#5d6077",
+      "labelColor": "#23263a",
+      "titleFontWeight": 400
+    },
+    "header": {
+      "labelFontSize": 13,
+      "labelColor": "#23263a",
+      "titleFontSize": 13
+    },
+    "text": {
+      "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "color": "#23263a"
+    }
+  }
+}

@@ -1,0 +1,328 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Women report more distress than men in every region",
+    "subtitle": [
+      "% of women and of men with high or very high psychological distress, by PHN, 2022",
+      "PHIDU Social Health Atlas of Australia"
+    ]
+  },
+  "data": {
+    "url": "data/phn.topojson",
+    "format": {
+      "type": "topojson",
+      "feature": "phn"
+    }
+  },
+  "hconcat": [
+    {
+      "projection": {
+        "type": "conicEqualArea",
+        "parallels": [
+          -18,
+          -36
+        ],
+        "rotate": [
+          -134,
+          0
+        ]
+      },
+      "layer": [
+        {
+          "transform": [
+            {
+              "calculate": "'No data (suppressed)'",
+              "as": "status"
+            }
+          ],
+          "mark": {
+            "type": "geoshape",
+            "fill": "#e4e4ea",
+            "stroke": "#ffffff",
+            "strokeWidth": 0.5
+          },
+          "encoding": {
+            "tooltip": [
+              {
+                "field": "properties.PHN_NAME",
+                "title": "PHN"
+              },
+              {
+                "field": "status",
+                "title": "Distress"
+              }
+            ]
+          }
+        },
+        {
+          "transform": [
+            {
+              "lookup": "properties.PHN_CODE",
+              "from": {
+                "data": {
+                  "url": "data/phidu_phn_2022.csv"
+                },
+                "key": "code",
+                "fields": [
+                  "k10_high_persons",
+                  "k10_high_female",
+                  "k10_high_male"
+                ]
+              }
+            },
+            {
+              "filter": "isValid(datum.k10_high_persons)"
+            }
+          ],
+          "mark": {
+            "type": "geoshape",
+            "stroke": "#ffffff",
+            "strokeWidth": 0.5
+          },
+          "encoding": {
+            "color": {
+              "field": "k10_high_female",
+              "type": "quantitative",
+              "scale": {
+                "type": "threshold",
+                "domain": [
+                  11,
+                  13,
+                  15,
+                  17
+                ],
+                "range": [
+                  "#e6e1f2",
+                  "#bdb0dd",
+                  "#8e7cc3",
+                  "#5e4a9e",
+                  "#2f2366"
+                ]
+              },
+              "legend": {
+                "orient": "bottom-left",
+                "title": "% in high distress",
+                "direction": "horizontal"
+              }
+            },
+            "tooltip": [
+              {
+                "field": "properties.PHN_NAME",
+                "title": "PHN"
+              },
+              {
+                "field": "properties.STATE_NAME",
+                "title": "State"
+              },
+              {
+                "field": "k10_high_persons",
+                "type": "quantitative",
+                "title": "All adults (%)",
+                "format": ".1f"
+              },
+              {
+                "field": "k10_high_female",
+                "type": "quantitative",
+                "title": "Women (%)",
+                "format": ".1f"
+              },
+              {
+                "field": "k10_high_male",
+                "type": "quantitative",
+                "title": "Men (%)",
+                "format": ".1f"
+              }
+            ]
+          }
+        }
+      ],
+      "width": 470,
+      "height": 380,
+      "title": {
+        "text": "Women",
+        "fontSize": 14,
+        "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+        "fontWeight": 600
+      }
+    },
+    {
+      "projection": {
+        "type": "conicEqualArea",
+        "parallels": [
+          -18,
+          -36
+        ],
+        "rotate": [
+          -134,
+          0
+        ]
+      },
+      "layer": [
+        {
+          "transform": [
+            {
+              "calculate": "'No data (suppressed)'",
+              "as": "status"
+            }
+          ],
+          "mark": {
+            "type": "geoshape",
+            "fill": "#e4e4ea",
+            "stroke": "#ffffff",
+            "strokeWidth": 0.5
+          },
+          "encoding": {
+            "tooltip": [
+              {
+                "field": "properties.PHN_NAME",
+                "title": "PHN"
+              },
+              {
+                "field": "status",
+                "title": "Distress"
+              }
+            ]
+          }
+        },
+        {
+          "transform": [
+            {
+              "lookup": "properties.PHN_CODE",
+              "from": {
+                "data": {
+                  "url": "data/phidu_phn_2022.csv"
+                },
+                "key": "code",
+                "fields": [
+                  "k10_high_persons",
+                  "k10_high_female",
+                  "k10_high_male"
+                ]
+              }
+            },
+            {
+              "filter": "isValid(datum.k10_high_persons)"
+            }
+          ],
+          "mark": {
+            "type": "geoshape",
+            "stroke": "#ffffff",
+            "strokeWidth": 0.5
+          },
+          "encoding": {
+            "color": {
+              "field": "k10_high_male",
+              "type": "quantitative",
+              "scale": {
+                "type": "threshold",
+                "domain": [
+                  11,
+                  13,
+                  15,
+                  17
+                ],
+                "range": [
+                  "#e6e1f2",
+                  "#bdb0dd",
+                  "#8e7cc3",
+                  "#5e4a9e",
+                  "#2f2366"
+                ]
+              },
+              "legend": null
+            },
+            "tooltip": [
+              {
+                "field": "properties.PHN_NAME",
+                "title": "PHN"
+              },
+              {
+                "field": "properties.STATE_NAME",
+                "title": "State"
+              },
+              {
+                "field": "k10_high_persons",
+                "type": "quantitative",
+                "title": "All adults (%)",
+                "format": ".1f"
+              },
+              {
+                "field": "k10_high_female",
+                "type": "quantitative",
+                "title": "Women (%)",
+                "format": ".1f"
+              },
+              {
+                "field": "k10_high_male",
+                "type": "quantitative",
+                "title": "Men (%)",
+                "format": ".1f"
+              }
+            ]
+          }
+        }
+      ],
+      "width": 470,
+      "height": 380,
+      "title": {
+        "text": "Men",
+        "fontSize": 14,
+        "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+        "fontWeight": 600
+      }
+    }
+  ],
+  "resolve": {
+    "scale": {
+      "color": "shared"
+    }
+  },
+  "config": {
+    "background": "transparent",
+    "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "font": "Fraunces, Georgia, serif",
+      "fontSize": 18,
+      "fontWeight": 600,
+      "color": "#23263a",
+      "anchor": "start",
+      "subtitleFont": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "subtitleFontSize": 13,
+      "subtitleFontWeight": 400,
+      "subtitleColor": "#5d6077",
+      "offset": 12
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleColor": "#5d6077",
+      "labelColor": "#5d6077",
+      "gridColor": "#e6e3dc",
+      "labelLimit": 320,
+      "domainColor": "#c9c5bb",
+      "tickColor": "#c9c5bb",
+      "titleFontWeight": 400
+    },
+    "legend": {
+      "labelLimit": 260,
+      "titleLimit": 300,
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleColor": "#5d6077",
+      "labelColor": "#23263a",
+      "titleFontWeight": 400
+    },
+    "header": {
+      "labelFontSize": 13,
+      "labelColor": "#23263a",
+      "titleFontSize": 13
+    },
+    "text": {
+      "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "color": "#23263a"
+    }
+  }
+}

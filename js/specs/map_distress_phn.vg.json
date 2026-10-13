@@ -1,15 +1,21 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
-    "text": "Distress is highest outside the big cities",
+    "text": "Distress is worst in regional Queensland, NSW and Tasmania",
     "subtitle": [
-      "Adults with high or very high psychological distress (K10), age-standardised %, by Primary Health Network, 2022",
-      "Grey: Western Queensland, estimate suppressed"
-    ],
-    "anchor": "start"
+      "% of adults with high or very high distress (K10), age-standardised, by PHN, 2022",
+      "Grey: Western Queensland, estimate suppressed. PHIDU Social Health Atlas"
+    ]
   },
   "width": "container",
   "height": 460,
+  "data": {
+    "url": "data/phn.topojson",
+    "format": {
+      "type": "topojson",
+      "feature": "phn"
+    }
+  },
   "projection": {
     "type": "conicEqualArea",
     "parallels": [
@@ -21,15 +27,14 @@
       0
     ]
   },
-  "data": {
-    "url": "data/phn.topojson",
-    "format": {
-      "type": "topojson",
-      "feature": "phn"
-    }
-  },
   "layer": [
     {
+      "transform": [
+        {
+          "calculate": "'No data (suppressed)'",
+          "as": "status"
+        }
+      ],
       "mark": {
         "type": "geoshape",
         "fill": "#e4e4ea",
@@ -40,22 +45,14 @@
         "tooltip": [
           {
             "field": "properties.PHN_NAME",
-            "type": "nominal",
             "title": "PHN"
           },
           {
             "field": "status",
-            "type": "nominal",
             "title": "Distress"
           }
         ]
-      },
-      "transform": [
-        {
-          "calculate": "'No data (suppressed)'",
-          "as": "status"
-        }
-      ]
+      }
     },
     {
       "transform": [
@@ -104,19 +101,16 @@
           },
           "legend": {
             "orient": "top-left",
-            "title": "% adults in high distress",
-            "labelExpr": "replace(datum.label, 'null', '')"
+            "title": "% adults in high distress"
           }
         },
         "tooltip": [
           {
             "field": "properties.PHN_NAME",
-            "type": "nominal",
             "title": "PHN"
           },
           {
             "field": "properties.STATE_NAME",
-            "type": "nominal",
             "title": "State"
           },
           {
@@ -141,22 +135,52 @@
       }
     }
   ],
-  "background": "transparent",
   "config": {
+    "background": "transparent",
+    "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
     "view": {
       "stroke": null
     },
-    "font": "Source Sans 3",
     "title": {
+      "font": "Fraunces, Georgia, serif",
       "fontSize": 18,
+      "fontWeight": 600,
+      "color": "#23263a",
+      "anchor": "start",
+      "subtitleFont": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
       "subtitleFontSize": 13,
+      "subtitleFontWeight": 400,
       "subtitleColor": "#5d6077",
-      "font": "Fraunces",
-      "subtitleFont": "Source Sans 3"
+      "offset": 12
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleColor": "#5d6077",
+      "labelColor": "#5d6077",
+      "gridColor": "#e6e3dc",
+      "labelLimit": 320,
+      "domainColor": "#c9c5bb",
+      "tickColor": "#c9c5bb",
+      "titleFontWeight": 400
     },
     "legend": {
-      "titleFontSize": 13,
-      "labelFontSize": 12
+      "labelLimit": 260,
+      "titleLimit": 300,
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleColor": "#5d6077",
+      "labelColor": "#23263a",
+      "titleFontWeight": 400
+    },
+    "header": {
+      "labelFontSize": 13,
+      "labelColor": "#23263a",
+      "titleFontSize": 13
+    },
+    "text": {
+      "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "color": "#23263a"
     }
   }
 }

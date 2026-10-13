@@ -1,0 +1,15 @@
+state,area,area_name,k10_high_persons
+New South Wales,Capital city,Greater Sydney,11.78
+New South Wales,Rest of state,Rest of New South Wales,15.37
+Victoria,Capital city,Greater Melbourne,12.72
+Victoria,Rest of state,Rest of Victoria,15.39
+Queensland,Capital city,Greater Brisbane,14.94
+Queensland,Rest of state,Rest of Queensland,14.85
+South Australia,Capital city,Greater Adelaide,14.55
+South Australia,Rest of state,Rest of South Australia,15.72
+Western Australia,Capital city,Greater Perth,12.75
+Western Australia,Rest of state,Rest of Western Australia,14.02
+Tasmania,Capital city,Greater Hobart,17.37
+Tasmania,Rest of state,Rest of Tasmania,16.51
+Northern Territory,Capital city,Greater Darwin,12.19
+Northern Territory,Rest of state,Rest of Northern Territory,15.34

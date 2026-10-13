@@ -1,0 +1,17 @@
+season,city,lon,lat,sunrise_min,sunrise_label
+Winter (21 June),Perth,115.86,-31.95,436.2,7:16 am
+Winter (21 June),Darwin,130.84,-12.46,426.2,7:06 am
+Winter (21 June),Adelaide,138.6,-34.93,442.8,7:22 am
+Winter (21 June),Brisbane,153.03,-27.47,397.2,6:37 am
+Winter (21 June),Sydney,151.21,-33.87,419.6,6:59 am
+Winter (21 June),Canberra,149.13,-35.28,431.6,7:11 am
+Winter (21 June),Melbourne,144.96,-37.81,455.3,7:35 am
+Winter (21 June),Hobart,147.33,-42.88,461.6,7:41 am
+Summer (21 December),Perth,115.86,-31.95,307.2,5:07 am
+Summer (21 December),Darwin,130.84,-12.46,378.8,6:18 am
+Summer (21 December),Adelaide,138.6,-34.93,358.3,5:58 am
+Summer (21 December),Brisbane,153.03,-27.47,289.4,4:49 am
+Summer (21 December),Sydney,151.21,-33.87,340.8,5:40 am
+Summer (21 December),Canberra,149.13,-35.28,345.2,5:45 am
+Summer (21 December),Melbourne,144.96,-37.81,354.5,5:54 am
+Summer (21 December),Hobart,147.33,-42.88,328.2,5:28 am

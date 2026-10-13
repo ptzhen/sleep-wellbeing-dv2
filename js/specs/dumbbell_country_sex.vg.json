@@ -1,0 +1,202 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Women out-sleep men in most countries",
+    "subtitle": [
+      "Minutes of sleep per day for women and men, latest survey per country",
+      "Australia's OECD figure is from 2006 and covers ages 15+. OECD Time Use Database"
+    ]
+  },
+  "width": "container",
+  "height": {
+    "step": 15
+  },
+  "data": {
+    "url": "data/oecd_sleep_by_country.csv"
+  },
+  "transform": [
+    {
+      "fold": [
+        "sleep_min_men",
+        "sleep_min_women"
+      ],
+      "as": [
+        "sexkey",
+        "minutes"
+      ]
+    },
+    {
+      "calculate": "datum.sexkey == 'sleep_min_men' ? 'Men' : 'Women'",
+      "as": "sex"
+    },
+    {
+      "calculate": "datum.country == 'Australia' ? 'Australia ★' : datum.country",
+      "as": "label"
+    }
+  ],
+  "encoding": {
+    "y": {
+      "field": "label",
+      "type": "nominal",
+      "title": null,
+      "sort": {
+        "field": "sleep_min_total",
+        "op": "mean",
+        "order": "descending"
+      },
+      "axis": {
+        "labelColor": {
+          "condition": {
+            "test": "datum.value == 'Australia ★'",
+            "value": "#d08a1e"
+          },
+          "value": "#23263a"
+        },
+        "labelFontWeight": {
+          "condition": {
+            "test": "datum.value == 'Australia ★'",
+            "value": 700
+          },
+          "value": 400
+        },
+        "domain": false,
+        "ticks": false
+      }
+    },
+    "x": {
+      "field": "minutes",
+      "type": "quantitative",
+      "title": "Minutes of sleep per day",
+      "scale": {
+        "domain": [
+          430,
+          560
+        ]
+      },
+      "axis": {
+        "grid": true,
+        "orient": "top"
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "color": "#c9c5bb",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "x": {
+          "aggregate": "min",
+          "field": "minutes"
+        },
+        "x2": {
+          "aggregate": "max",
+          "field": "minutes"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "size": 70,
+        "opacity": 1,
+        "stroke": "#fbfaf7",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "color": {
+          "field": "sex",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "domain": [
+              "Women",
+              "Men"
+            ],
+            "range": [
+              "#c4527a",
+              "#2a7fbf"
+            ]
+          },
+          "legend": {
+            "orient": "top",
+            "direction": "horizontal"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "country",
+            "title": "Country"
+          },
+          {
+            "field": "sex",
+            "title": "Sex"
+          },
+          {
+            "field": "minutes",
+            "title": "Minutes a day",
+            "format": ".0f"
+          },
+          {
+            "field": "survey_year",
+            "title": "Survey year"
+          }
+        ]
+      }
+    }
+  ],
+  "autosize": {
+    "type": "fit-x",
+    "contains": "padding"
+  },
+  "config": {
+    "background": "transparent",
+    "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "font": "Fraunces, Georgia, serif",
+      "fontSize": 18,
+      "fontWeight": 600,
+      "color": "#23263a",
+      "anchor": "start",
+      "subtitleFont": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "subtitleFontSize": 13,
+      "subtitleFontWeight": 400,
+      "subtitleColor": "#5d6077",
+      "offset": 12
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleColor": "#5d6077",
+      "labelColor": "#5d6077",
+      "gridColor": "#e6e3dc",
+      "labelLimit": 320,
+      "domainColor": "#c9c5bb",
+      "tickColor": "#c9c5bb",
+      "titleFontWeight": 400
+    },
+    "legend": {
+      "labelLimit": 260,
+      "titleLimit": 300,
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleColor": "#5d6077",
+      "labelColor": "#23263a",
+      "titleFontWeight": 400
+    },
+    "header": {
+      "labelFontSize": 13,
+      "labelColor": "#23263a",
+      "titleFontSize": 13
+    },
+    "text": {
+      "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "color": "#23263a"
+    }
+  }
+}

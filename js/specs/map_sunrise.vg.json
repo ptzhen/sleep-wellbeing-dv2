@@ -1,0 +1,270 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "In summer the sun rises before 5 am in Brisbane, almost an hour before Sydney",
+    "subtitle": [
+      "Clock time of sunrise on the longest and shortest days, white lines every 30 minutes",
+      "Qld, WA and the NT have no daylight saving. Calculated with NOAA solar equations"
+    ]
+  },
+  "width": "container",
+  "height": 460,
+  "padding": {
+    "left": 10,
+    "right": 10,
+    "top": 5,
+    "bottom": 5
+  },
+  "projection": {
+    "type": "conicEqualArea",
+    "parallels": [
+      -18,
+      -36
+    ],
+    "rotate": [
+      -134,
+      0
+    ]
+  },
+  "params": [
+    {
+      "name": "season",
+      "value": "Summer (21 December)",
+      "bind": {
+        "input": "radio",
+        "options": [
+          "Summer (21 December)",
+          "Winter (21 June)"
+        ],
+        "name": "Day: "
+      }
+    }
+  ],
+  "layer": [
+    {
+      "data": {
+        "url": "data/sunrise_grid.csv"
+      },
+      "transform": [
+        {
+          "filter": "datum.season == season"
+        },
+        {
+          "calculate": "floor(datum.sunrise_min/60) + ':' + (floor(datum.sunrise_min%60) < 10 ? '0' : '') + floor(datum.sunrise_min%60) + ' am'",
+          "as": "t"
+        }
+      ],
+      "mark": {
+        "type": "square",
+        "size": 70,
+        "opacity": 1
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "color": {
+          "field": "sunrise_min",
+          "type": "quantitative",
+          "title": "Sunrise (clock time)",
+          "scale": {
+            "type": "threshold",
+            "domain": [
+              270,
+              300,
+              330,
+              360,
+              390,
+              420,
+              450
+            ],
+            "range": [
+              "#fff4c8",
+              "#fde2a0",
+              "#f6c27a",
+              "#e79a5c",
+              "#c96f4f",
+              "#96505a",
+              "#5e3a5e",
+              "#2b2a55"
+            ]
+          },
+          "legend": {
+            "orient": "top-left",
+            "direction": "vertical",
+            "labelExpr": "isFinite(datum.value) ? 'from ' + floor(datum.value/60) + ':' + (datum.value%60 == 0 ? '00' : datum.value%60) + ' am' : 'before 4:30 am'"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "title": "State"
+          },
+          {
+            "field": "t",
+            "title": "Sunrise"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "data/sunrise_isolines.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.properties.season == season"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "filled": false,
+        "stroke": "#ffffff",
+        "strokeWidth": 0.8,
+        "strokeOpacity": 0.8
+      }
+    },
+    {
+      "data": {
+        "url": "data/aus_states.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "aus_states"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "filled": false,
+        "stroke": "#23263a",
+        "strokeWidth": 0.8
+      }
+    },
+    {
+      "data": {
+        "url": "data/sunrise_cities.csv"
+      },
+      "transform": [
+        {
+          "filter": "datum.season == season"
+        },
+        {
+          "calculate": "datum.city + ' ' + datum.sunrise_label",
+          "as": "lab"
+        }
+      ],
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        }
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "circle",
+            "size": 30,
+            "color": "#23263a",
+            "stroke": "#ffffff",
+            "strokeWidth": 1,
+            "opacity": 1
+          },
+          "encoding": {
+            "tooltip": [
+              {
+                "field": "city",
+                "title": "City"
+              },
+              {
+                "field": "sunrise_label",
+                "title": "Sunrise"
+              }
+            ]
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "fontSize": 11,
+            "fontWeight": 600,
+            "color": "#23263a",
+            "dx": {
+              "expr": "datum.city == 'Adelaide' || datum.city == 'Melbourne' ? -6 : 6"
+            },
+            "align": {
+              "expr": "datum.city == 'Adelaide' || datum.city == 'Melbourne' ? 'right' : 'left'"
+            },
+            "dy": {
+              "expr": "datum.city == 'Canberra' ? 8 : datum.city == 'Sydney' ? -4 : 0"
+            }
+          },
+          "encoding": {
+            "text": {
+              "field": "lab"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "config": {
+    "background": "transparent",
+    "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "font": "Fraunces, Georgia, serif",
+      "fontSize": 18,
+      "fontWeight": 600,
+      "color": "#23263a",
+      "anchor": "start",
+      "subtitleFont": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "subtitleFontSize": 13,
+      "subtitleFontWeight": 400,
+      "subtitleColor": "#5d6077",
+      "offset": 12
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleColor": "#5d6077",
+      "labelColor": "#5d6077",
+      "gridColor": "#e6e3dc",
+      "labelLimit": 320,
+      "domainColor": "#c9c5bb",
+      "tickColor": "#c9c5bb",
+      "titleFontWeight": 400
+    },
+    "legend": {
+      "labelLimit": 260,
+      "titleLimit": 300,
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleColor": "#5d6077",
+      "labelColor": "#23263a",
+      "titleFontWeight": 400
+    },
+    "header": {
+      "labelFontSize": 13,
+      "labelColor": "#23263a",
+      "titleFontSize": 13
+    },
+    "text": {
+      "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "color": "#23263a"
+    }
+  }
+}

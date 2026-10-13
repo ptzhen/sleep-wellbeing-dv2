@@ -1,0 +1,226 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Late-night screens, work and caffeine go with poorer sleep",
+    "subtitle": [
+      "% of adults with two or more sleep problems, healthier vs riskier habit",
+      "Sleep Health Foundation, Survey of Australian Adults 2016, Table 9"
+    ]
+  },
+  "width": "container",
+  "height": {
+    "step": 46
+  },
+  "data": {
+    "values": [
+      {
+        "habit": "Work in the hour before bed",
+        "level": "Never",
+        "kind": "Healthier habit",
+        "pct": 36.5
+      },
+      {
+        "habit": "Work in the hour before bed",
+        "level": "Nightly",
+        "kind": "Riskier habit",
+        "pct": 71.4
+      },
+      {
+        "habit": "Sleep before work days",
+        "level": "5.5 to 9 hours",
+        "kind": "Healthier habit",
+        "pct": 43.6
+      },
+      {
+        "habit": "Sleep before work days",
+        "level": "Under 5.5 hours",
+        "kind": "Riskier habit",
+        "pct": 75.7
+      },
+      {
+        "habit": "Caffeinated drinks a day",
+        "level": "None",
+        "kind": "Healthier habit",
+        "pct": 40.5
+      },
+      {
+        "habit": "Caffeinated drinks a day",
+        "level": "6 or more",
+        "kind": "Riskier habit",
+        "pct": 60.6
+      },
+      {
+        "habit": "Internet in the hour before bed",
+        "level": "Never",
+        "kind": "Healthier habit",
+        "pct": 38.8
+      },
+      {
+        "habit": "Internet in the hour before bed",
+        "level": "Nightly",
+        "kind": "Riskier habit",
+        "pct": 58.5
+      }
+    ]
+  },
+  "encoding": {
+    "y": {
+      "field": "habit",
+      "type": "nominal",
+      "title": null,
+      "sort": {
+        "field": "pct",
+        "op": "max",
+        "order": "descending"
+      },
+      "axis": {
+        "domain": false,
+        "ticks": false,
+        "labelLimit": 320
+      }
+    },
+    "x": {
+      "field": "pct",
+      "type": "quantitative",
+      "title": "% with two or more sleep problems",
+      "scale": {
+        "domain": [
+          0,
+          100
+        ]
+      },
+      "axis": {
+        "grid": true
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 3,
+        "color": "#c9c5bb"
+      },
+      "encoding": {
+        "x": {
+          "aggregate": "min",
+          "field": "pct"
+        },
+        "x2": {
+          "aggregate": "max",
+          "field": "pct"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "size": 140,
+        "opacity": 1,
+        "stroke": "#fbfaf7",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "color": {
+          "field": "kind",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "domain": [
+              "Healthier habit",
+              "Riskier habit"
+            ],
+            "range": [
+              "#3b5ba5",
+              "#d08a1e"
+            ]
+          },
+          "legend": {
+            "orient": "top",
+            "direction": "horizontal"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "habit",
+            "title": "Habit"
+          },
+          {
+            "field": "level",
+            "title": "Level"
+          },
+          {
+            "field": "pct",
+            "title": "% with 2+ problems",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "dy": -14,
+        "fontSize": 11,
+        "color": "#5d6077"
+      },
+      "encoding": {
+        "text": {
+          "field": "level"
+        }
+      }
+    }
+  ],
+  "autosize": {
+    "type": "fit-x",
+    "contains": "padding"
+  },
+  "config": {
+    "background": "transparent",
+    "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "font": "Fraunces, Georgia, serif",
+      "fontSize": 18,
+      "fontWeight": 600,
+      "color": "#23263a",
+      "anchor": "start",
+      "subtitleFont": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "subtitleFontSize": 13,
+      "subtitleFontWeight": 400,
+      "subtitleColor": "#5d6077",
+      "offset": 12
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleColor": "#5d6077",
+      "labelColor": "#5d6077",
+      "gridColor": "#e6e3dc",
+      "labelLimit": 320,
+      "domainColor": "#c9c5bb",
+      "tickColor": "#c9c5bb",
+      "titleFontWeight": 400
+    },
+    "legend": {
+      "labelLimit": 260,
+      "titleLimit": 300,
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleColor": "#5d6077",
+      "labelColor": "#23263a",
+      "titleFontWeight": 400
+    },
+    "header": {
+      "labelFontSize": 13,
+      "labelColor": "#23263a",
+      "titleFontSize": 13
+    },
+    "text": {
+      "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "color": "#23263a"
+    }
+  }
+}

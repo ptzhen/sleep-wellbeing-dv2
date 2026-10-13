@@ -1,0 +1,169 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Young adults sleep the longest but feel the worst",
+    "subtitle": [
+      "% of adults who usually get enough sleep, and % who often wake up unrefreshed, by age",
+      "Sleep Health Foundation, Sleep Health Survey of Australian Adults 2016, Table 1"
+    ]
+  },
+  "width": "container",
+  "height": 300,
+  "data": {
+    "url": "data/shf2016_by_age.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum.age_group != 'All' && (datum.measure == 'adequate_sleep' || datum.measure == 'wake_unrefreshed')"
+    },
+    {
+      "calculate": "datum.measure == 'adequate_sleep' ? 'Get enough sleep' : 'Wake up unrefreshed'",
+      "as": "label"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "age_group",
+      "type": "ordinal",
+      "title": "Age group",
+      "sort": [
+        "18-24",
+        "25-34",
+        "35-44",
+        "45-54",
+        "55-64",
+        "65+"
+      ],
+      "axis": {
+        "labelAngle": 0
+      }
+    },
+    "y": {
+      "field": "pct",
+      "type": "quantitative",
+      "title": "% of adults",
+      "scale": {
+        "domain": [
+          0,
+          80
+        ]
+      }
+    },
+    "color": {
+      "field": "label",
+      "type": "nominal",
+      "title": null,
+      "scale": {
+        "domain": [
+          "Get enough sleep",
+          "Wake up unrefreshed"
+        ],
+        "range": [
+          "#3b5ba5",
+          "#d08a1e"
+        ]
+      },
+      "legend": {
+        "orient": "top",
+        "direction": "horizontal"
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 2.5,
+        "point": {
+          "size": 60,
+          "filled": true
+        }
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "label",
+            "title": "Measure"
+          },
+          {
+            "field": "age_group",
+            "title": "Age"
+          },
+          {
+            "field": "pct",
+            "title": "% of adults",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.age_group == '18-24' || datum.age_group == '65+'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "dy": -12,
+        "fontSize": 12,
+        "fontWeight": 600
+      },
+      "encoding": {
+        "text": {
+          "field": "pct",
+          "type": "quantitative",
+          "format": ".0f"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": "transparent",
+    "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "font": "Fraunces, Georgia, serif",
+      "fontSize": 18,
+      "fontWeight": 600,
+      "color": "#23263a",
+      "anchor": "start",
+      "subtitleFont": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "subtitleFontSize": 13,
+      "subtitleFontWeight": 400,
+      "subtitleColor": "#5d6077",
+      "offset": 12
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleColor": "#5d6077",
+      "labelColor": "#5d6077",
+      "gridColor": "#e6e3dc",
+      "labelLimit": 320,
+      "domainColor": "#c9c5bb",
+      "tickColor": "#c9c5bb",
+      "titleFontWeight": 400
+    },
+    "legend": {
+      "labelLimit": 260,
+      "titleLimit": 300,
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleColor": "#5d6077",
+      "labelColor": "#23263a",
+      "titleFontWeight": 400
+    },
+    "header": {
+      "labelFontSize": 13,
+      "labelColor": "#23263a",
+      "titleFontSize": 13
+    },
+    "text": {
+      "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "color": "#23263a"
+    }
+  }
+}

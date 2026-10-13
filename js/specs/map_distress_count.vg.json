@@ -1,0 +1,181 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "But most distressed Australians live in the big cities",
+    "subtitle": [
+      "Estimated number of adults with high or very high distress, by PHN, 2022",
+      "Circle area shows the number; each circle sits inside its PHN. PHIDU Social Health Atlas"
+    ]
+  },
+  "width": "container",
+  "height": 460,
+  "projection": {
+    "type": "conicEqualArea",
+    "parallels": [
+      -18,
+      -36
+    ],
+    "rotate": [
+      -134,
+      0
+    ]
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "data/aus_states.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "aus_states"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#ece9e2",
+        "stroke": "#ffffff",
+        "strokeWidth": 1
+      }
+    },
+    {
+      "data": {
+        "url": "data/phn_distress_counts.csv"
+      },
+      "transform": [
+        {
+          "filter": "isValid(datum.distressed_adults) && datum.distressed_adults > 0"
+        }
+      ],
+      "params": [
+        {
+          "name": "symHover",
+          "select": {
+            "type": "point",
+            "on": "pointerover",
+            "clear": "pointerout"
+          }
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "stroke": "#ffffff",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "distressed_adults",
+          "type": "quantitative",
+          "title": "Distressed adults",
+          "scale": {
+            "type": "sqrt",
+            "domain": [
+              0,
+              210000
+            ],
+            "range": [
+              0,
+              900
+            ]
+          },
+          "legend": {
+            "orient": "top-left",
+            "values": [
+              20000,
+              100000,
+              200000
+            ],
+            "format": ",.0f",
+            "symbolFillColor": "#5e4a9e",
+            "symbolOpacity": 0.6,
+            "symbolStrokeColor": "#ffffff"
+          }
+        },
+        "color": {
+          "value": "#5e4a9e"
+        },
+        "opacity": {
+          "condition": {
+            "param": "symHover",
+            "empty": true,
+            "value": 0.7
+          },
+          "value": 0.3
+        },
+        "order": {
+          "field": "distressed_adults",
+          "sort": "descending"
+        },
+        "tooltip": [
+          {
+            "field": "name",
+            "title": "PHN"
+          },
+          {
+            "field": "state",
+            "title": "State"
+          },
+          {
+            "field": "distressed_adults",
+            "title": "Distressed adults (est.)",
+            "format": ",.0f"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "background": "transparent",
+    "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "font": "Fraunces, Georgia, serif",
+      "fontSize": 18,
+      "fontWeight": 600,
+      "color": "#23263a",
+      "anchor": "start",
+      "subtitleFont": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "subtitleFontSize": 13,
+      "subtitleFontWeight": 400,
+      "subtitleColor": "#5d6077",
+      "offset": 12
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleColor": "#5d6077",
+      "labelColor": "#5d6077",
+      "gridColor": "#e6e3dc",
+      "labelLimit": 320,
+      "domainColor": "#c9c5bb",
+      "tickColor": "#c9c5bb",
+      "titleFontWeight": 400
+    },
+    "legend": {
+      "labelLimit": 260,
+      "titleLimit": 300,
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleColor": "#5d6077",
+      "labelColor": "#23263a",
+      "titleFontWeight": 400
+    },
+    "header": {
+      "labelFontSize": 13,
+      "labelColor": "#23263a",
+      "titleFontSize": 13
+    },
+    "text": {
+      "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "color": "#23263a"
+    }
+  }
+}

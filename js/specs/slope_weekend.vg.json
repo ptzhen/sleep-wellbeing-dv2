@@ -1,0 +1,191 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Weekends buy back about 36 extra minutes of sleep",
+    "subtitle": [
+      "Average minutes asleep per day for people who slept, ages 15+",
+      "ABS, How Australians Use Their Time 2020–21, Table 2"
+    ]
+  },
+  "width": 280,
+  "height": 300,
+  "data": {
+    "url": "data/tus_sleep_summary.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum.activity == 'Sleeping' && datum.group == 'All 15+' && datum.day_type != 'All days'"
+    },
+    {
+      "calculate": "datum.sex == 'Males' ? 'Men' : datum.sex == 'Females' ? 'Women' : 'Everyone'",
+      "as": "who"
+    },
+    {
+      "calculate": "floor(datum.mins_participants/60) + 'h ' + (datum.mins_participants % 60) + 'm'",
+      "as": "hm"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "day_type",
+      "type": "ordinal",
+      "title": null,
+      "scale": {
+        "padding": 0.4
+      },
+      "axis": {
+        "labelAngle": 0,
+        "labelFontSize": 13,
+        "domain": false,
+        "ticks": false,
+        "orient": "top"
+      }
+    },
+    "y": {
+      "field": "mins_participants",
+      "type": "quantitative",
+      "title": "Minutes asleep",
+      "scale": {
+        "domain": [
+          490,
+          560
+        ]
+      },
+      "axis": {
+        "grid": true,
+        "tickCount": 5
+      }
+    },
+    "color": {
+      "field": "who",
+      "type": "nominal",
+      "title": null,
+      "scale": {
+        "domain": [
+          "Women",
+          "Men",
+          "Everyone"
+        ],
+        "range": [
+          "#c4527a",
+          "#2a7fbf",
+          "#23263a"
+        ]
+      },
+      "legend": null
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "detail": {
+          "field": "who"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "size": 80,
+        "opacity": 1
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "who",
+            "title": "Who"
+          },
+          {
+            "field": "day_type",
+            "title": "Day"
+          },
+          {
+            "field": "hm",
+            "title": "Sleep"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.day_type == 'Weekend'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 10,
+        "fontSize": 12,
+        "color": "#23263a"
+      },
+      "encoding": {
+        "text": {
+          "field": "who"
+        },
+        "color": {
+          "value": "#23263a"
+        },
+        "y": {
+          "field": "mins_participants",
+          "type": "quantitative"
+        },
+        "yOffset": {
+          "value": 0
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": "transparent",
+    "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "font": "Fraunces, Georgia, serif",
+      "fontSize": 18,
+      "fontWeight": 600,
+      "color": "#23263a",
+      "anchor": "start",
+      "subtitleFont": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "subtitleFontSize": 13,
+      "subtitleFontWeight": 400,
+      "subtitleColor": "#5d6077",
+      "offset": 12
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleColor": "#5d6077",
+      "labelColor": "#5d6077",
+      "gridColor": "#e6e3dc",
+      "labelLimit": 320,
+      "domainColor": "#c9c5bb",
+      "tickColor": "#c9c5bb",
+      "titleFontWeight": 400
+    },
+    "legend": {
+      "labelLimit": 260,
+      "titleLimit": 300,
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleColor": "#5d6077",
+      "labelColor": "#23263a",
+      "titleFontWeight": 400
+    },
+    "header": {
+      "labelFontSize": 13,
+      "labelColor": "#23263a",
+      "titleFontSize": 13
+    },
+    "text": {
+      "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "color": "#23263a"
+    }
+  }
+}

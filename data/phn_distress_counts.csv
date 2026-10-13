@@ -1,0 +1,32 @@
+code,name,state,distressed_adults,lon,lat
+PHN401,Adelaide,South Australia,150979,138.589,-34.985
+PHN801,ACT,Australian Capital Territory,44958,148.955,-35.528
+PHN301,Brisbane North,Queensland,125027,152.799,-27.026
+PHN302,Brisbane South,Queensland,134473,152.964,-27.857
+PHN101,Central and Eastern Sydney,New South Wales,145043,151.063,-33.998
+PHN306,"Central Queensland, Wide Bay, Sunshine Coast",Queensland,105535,149.375,-24.555
+PHN402,Country SA,South Australia,57810,136.947,-32.028
+PHN503,Country WA,Western Australia,50506,121.201,-24.426
+PHN304,Darling Downs and West Moreton,Queensland,77826,151.108,-27.293
+PHN202,Eastern Melbourne,Victoria,136505,145.311,-37.621
+PHN204,Gippsland,Victoria,34912,146.903,-37.876
+PHN303,Gold Coast,Queensland,68615,153.283,-28.03
+PHN108,Hunter New England and Central Coast,New South Wales,160013,151.065,-30.962
+PHN205,Murray,Victoria,75091,143.505,-35.899
+PHN110,Murrumbidgee,New South Wales,26647,146.058,-34.749
+PHN104,Nepean Blue Mountains,New South Wales,40199,150.447,-33.392
+PHN109,North Coast,New South Wales,62032,152.766,-29.939
+PHN201,North Western Melbourne,Victoria,205130,144.706,-37.576
+PHN307,Northern Queensland,Queensland,75897,144.204,-17.126
+PHN102,Northern Sydney,New South Wales,62868,151.161,-33.616
+PHN701,Northern Territory,Northern Territory,18031,133.498,-18.428
+PHN501,Perth North,Western Australia,107673,116.037,-31.762
+PHN502,Perth South,Western Australia,109589,116.004,-32.424
+PHN203,South Eastern Melbourne,Victoria,157095,145.413,-38.159
+PHN106,South Eastern NSW,New South Wales,71043,149.698,-35.699
+PHN105,South Western Sydney,New South Wales,108760,150.4,-34.288
+PHN601,Tasmania,Tasmania,73038,146.671,-42.143
+PHN107,Western NSW,New South Wales,34371,145.421,-31.986
+PHN305,Western Queensland,Queensland,,141.206,-22.09
+PHN103,Western Sydney,New South Wales,94583,150.956,-33.634
+PHN206,Western Victoria,Victoria,80148,142.47,-37.095

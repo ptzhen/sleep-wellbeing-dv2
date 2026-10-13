@@ -1,0 +1,287 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "People with back pain and mental health conditions sleep worst on every measure",
+    "subtitle": [
+      "Sleep measures by health condition. Colour: how many times worse than adults with neither",
+      "Sleep Health Foundation, Aussie Sleep Snapshot 2025 (n = 1,012)"
+    ]
+  },
+  "width": "container",
+  "height": {
+    "step": 48
+  },
+  "data": {
+    "url": "data/shf2025_by_group.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum.group_type == 'health'"
+    },
+    {
+      "fold": [
+        "sleep_hours",
+        "poor_nights_per_week",
+        "productivity_days_lost",
+        "pct_consistent_pattern",
+        "pct_insomnia",
+        "pct_sleep_apnoea"
+      ],
+      "as": [
+        "metric",
+        "value"
+      ]
+    },
+    {
+      "calculate": "toNumber(datum.value)",
+      "as": "value"
+    },
+    {
+      "calculate": "datum.group == 'Neither' ? datum.value : null",
+      "as": "ref"
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "max",
+          "field": "ref",
+          "as": "neither"
+        }
+      ],
+      "groupby": [
+        "metric"
+      ]
+    },
+    {
+      "lookup": "metric",
+      "from": {
+        "data": {
+          "values": [
+            {
+              "metric": "sleep_hours",
+              "label": "Sleep (hours)",
+              "better": "higher",
+              "fmt": "h",
+              "ord": 1
+            },
+            {
+              "metric": "poor_nights_per_week",
+              "label": "Poor nights/week",
+              "better": "lower",
+              "fmt": "n",
+              "ord": 2
+            },
+            {
+              "metric": "productivity_days_lost",
+              "label": "Work days hit/week",
+              "better": "lower",
+              "fmt": "n",
+              "ord": 3
+            },
+            {
+              "metric": "pct_consistent_pattern",
+              "label": "Regular routine",
+              "better": "higher",
+              "fmt": "%",
+              "ord": 4
+            },
+            {
+              "metric": "pct_insomnia",
+              "label": "Insomnia",
+              "better": "lower",
+              "fmt": "%",
+              "ord": 5
+            },
+            {
+              "metric": "pct_sleep_apnoea",
+              "label": "Sleep apnoea",
+              "better": "lower",
+              "fmt": "%",
+              "ord": 6
+            }
+          ]
+        },
+        "key": "metric",
+        "fields": [
+          "label",
+          "better",
+          "fmt",
+          "ord"
+        ]
+      }
+    },
+    {
+      "calculate": "datum.better == 'lower' ? datum.value / datum.neither : datum.neither / datum.value",
+      "as": "times_worse"
+    },
+    {
+      "calculate": "datum.fmt == '%' ? format(datum.value, '.0f') + '%' : format(datum.value, '.1f')",
+      "as": "valuelabel"
+    },
+    {
+      "calculate": "datum.group == 'Neither' ? 'Neither condition' : datum.group",
+      "as": "grouplabel"
+    }
+  ],
+  "autosize": {
+    "type": "fit-x",
+    "contains": "padding"
+  },
+  "config": {
+    "background": "transparent",
+    "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "font": "Fraunces, Georgia, serif",
+      "fontSize": 18,
+      "fontWeight": 600,
+      "color": "#23263a",
+      "anchor": "start",
+      "subtitleFont": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "subtitleFontSize": 13,
+      "subtitleFontWeight": 400,
+      "subtitleColor": "#5d6077",
+      "offset": 12
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleColor": "#5d6077",
+      "labelColor": "#5d6077",
+      "gridColor": "#e6e3dc",
+      "labelLimit": 320,
+      "domainColor": "#c9c5bb",
+      "tickColor": "#c9c5bb",
+      "titleFontWeight": 400
+    },
+    "legend": {
+      "labelLimit": 260,
+      "titleLimit": 300,
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleColor": "#5d6077",
+      "labelColor": "#23263a",
+      "titleFontWeight": 400
+    },
+    "header": {
+      "labelFontSize": 13,
+      "labelColor": "#23263a",
+      "titleFontSize": 13
+    },
+    "text": {
+      "font": "Source Sans 3, Helvetica Neue, Arial, sans-serif",
+      "color": "#23263a"
+    }
+  },
+  "encoding": {
+    "x": {
+      "field": "label",
+      "type": "nominal",
+      "title": null,
+      "sort": {
+        "field": "ord"
+      },
+      "axis": {
+        "orient": "top",
+        "labelAngle": 0,
+        "labelLimit": 200,
+        "domain": false,
+        "ticks": false,
+        "labelExpr": "split(datum.label, ' a ')[0] == datum.label ? datum.label : datum.label"
+      }
+    },
+    "y": {
+      "field": "grouplabel",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "Neither condition",
+        "Back pain only",
+        "Mental health only",
+        "Both"
+      ],
+      "axis": {
+        "domain": false,
+        "ticks": false
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": "#fbfaf7",
+        "strokeWidth": 2,
+        "cornerRadius": 3
+      },
+      "encoding": {
+        "color": {
+          "field": "times_worse",
+          "type": "quantitative",
+          "title": "Times worse than neither",
+          "scale": {
+            "type": "threshold",
+            "domain": [
+              1.1,
+              1.5,
+              2,
+              3
+            ],
+            "range": [
+              "#f1efe9",
+              "#f6dcb5",
+              "#e9b46a",
+              "#d08a1e",
+              "#8f5a0c"
+            ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "titleLimit": 300,
+            "labelExpr": "isFinite(datum.value) ? datum.value + '×' : ''"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "grouplabel",
+            "title": "Group"
+          },
+          {
+            "field": "label",
+            "title": "Measure"
+          },
+          {
+            "field": "valuelabel",
+            "title": "Value"
+          },
+          {
+            "field": "times_worse",
+            "title": "Times worse than neither",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 13
+      },
+      "encoding": {
+        "text": {
+          "field": "valuelabel"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.times_worse >= 2",
+            "value": "#ffffff"
+          },
+          "value": "#23263a"
+        }
+      }
+    }
+  ]
+}
