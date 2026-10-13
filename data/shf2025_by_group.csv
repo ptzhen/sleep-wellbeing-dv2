@@ -1,0 +1,7 @@
+group_type,group,n,mean_age,sleep_hours,poor_nights_per_week,productivity_days_lost,pct_consistent_pattern,pct_sleep_apnoea,pct_insomnia,source
+health,Back pain only,188,49.0,6.9,3.7,2.8,63,15,16,SHF Aussie Sleep Snapshot 2025
+health,Mental health only,123,38.4,7.0,3.9,3.3,47,16,18,SHF Aussie Sleep Snapshot 2025
+health,Both,62,42.9,6.7,4.8,4.0,48,18,26,SHF Aussie Sleep Snapshot 2025
+health,Neither,639,47.2,7.2,2.7,2.1,70,6.4,6.9,SHF Aussie Sleep Snapshot 2025
+gender,Male,500,50.0,7.2,2.9,2.2,70,12,8.6,SHF Aussie Sleep Snapshot 2025
+gender,Female,508,42.6,7.0,3.5,2.7,59,8.3,13,SHF Aussie Sleep Snapshot 2025

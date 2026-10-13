@@ -1,0 +1,22 @@
+group,day_type,sex,activity,pct_participated,mins_participants,mins_total_pop
+All 15+,All days,Males,Sleeping,97.9,526,514
+All 15+,All days,Females,Sleeping,98.3,518,509
+All 15+,All days,Persons,Sleeping,98,522,512
+All 15+,All days,Males,Sleeplessness,1,68,1
+All 15+,All days,Females,Sleeplessness,1.3,77,1
+All 15+,All days,Persons,Sleeplessness,1.2,73,1
+15 to 24,All days,Males,Sleeping,99.5,563,557
+15 to 24,All days,Females,Sleeping,99.3,548,536
+15 to 24,All days,Persons,Sleeping,98.7,555,547
+All 15+,Weekday,Males,Sleeping,97.6,516,503
+All 15+,Weekday,Females,Sleeping,98.5,508,500
+All 15+,Weekday,Persons,Sleeping,97.9,512,501
+All 15+,Weekend,Males,Sleeping,98.3,551,542
+All 15+,Weekend,Females,Sleeping,98.2,545,535
+All 15+,Weekend,Persons,Sleeping,98.4,548,539
+All 15+,Weekday,Males,Sleeplessness,1,81,1
+All 15+,Weekday,Females,Sleeplessness,1.1,98,1
+All 15+,Weekday,Persons,Sleeplessness,1.1,89,1
+All 15+,Weekend,Males,Sleeplessness,1.3,38,0
+All 15+,Weekend,Females,Sleeplessness,1.9,29,0
+All 15+,Weekend,Persons,Sleeplessness,1.4,40,1

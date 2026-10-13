@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sleep and Wellbeing in Australia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.30.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.21.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <h1>Sleep and Wellbeing in Australia</h1>
+      <p class="lede">Who sleeps well, who doesn't, and what it means for how Australians feel.</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="where">
+      <h2>Where wellbeing is lowest</h2>
+      <div class="two-col">
+        <div class="text">
+          <p>About <span class="hl">1 in 7</span> Australian adults report high or very high psychological distress. The rate is lowest in Northern Sydney (8.8%) and highest in regional Queensland, the Hunter and Tasmania (16–17%).</p>
+          <p>Hover over a region to see the rates for women and men.</p>
+        </div>
+        <div class="chart" id="map_distress_phn"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <p><strong>Author:</strong> Pierre &middot; <strong>Date:</strong> October 2026</p>
+    <p><strong>Sources:</strong> ABS, How Australians Use Their Time 2020–21; Sleep Health Foundation, Sleep Health Survey of Australian Adults 2016 and Aussie Sleep Snapshot 2025; PHIDU Social Health Atlas of Australia (2022 modelled estimates); OECD Time Use Database; Department of Health PHN boundaries.</p>
+    <p><strong>AI acknowledgement:</strong> to be completed.</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

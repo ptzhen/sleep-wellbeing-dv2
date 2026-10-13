@@ -1,0 +1,151 @@
+sex,dimension,group,personal_care_mins,paid_work_mins,free_time_mins,pop_000
+Males,Age groups (years),15 to 24,652,180,376,1550.3
+Males,Age groups (years),25 to 34,617,333,285,1827.7
+Males,Age groups (years),35 to 44,598,328,238,1680.2
+Males,Age groups (years),45 to 54,606,294,293,1558.6
+Males,Age groups (years),55 to 64,626,264,331,1432.2
+Males,Age groups (years),65 and over,673,39,435,1924
+Males,Remoteness areas,Major Cities of Australia,624,242,326,8033.8
+Males,Remoteness areas,Inner Regional Australia,667,200,346,1341.5
+Males,Remoteness areas,Outer regional and Remote Australia,639,242,311,568.5
+Males,Country of birth,Born in Australia,636,231,337,6804.9
+Males,Country of birth,Born overseas,619,248,308,3164.3
+Males,Labour force status,Employed full-time,596,372,261,5357.9
+Males,Labour force status,Employed part-time,630,227,331,1292.4
+Males,Labour force status,Unemployed,712,29,388,450.5
+Males,Labour force status,Not in the labour force,683,17,443,2855.1
+Males,Level of highest non-school qualification,Postgraduate Degree,578,293,289,766
+Males,Level of highest non-school qualification,Graduate Diploma/Graduate Certificate,584,211,322,268.9
+Males,Level of highest non-school qualification,Bachelor degree,600,311,297,1696.7
+Males,Level of highest non-school qualification,Advanced Diploma/Diploma,620,236,297,836.6
+Males,Level of highest non-school qualification,Certificate level,627,278,308,2481.4
+Males,Level of highest non-school qualification,No non-school qualifications,661,171,362,3697.5
+Males,Equivalised weekly household income,Lowest quintile,688,79,388,1478.7
+Males,Equivalised weekly household income,Second quintile,663,133,376,1692.1
+Males,Equivalised weekly household income,Third quintile,595,283,292,1934.6
+Males,Equivalised weekly household income,Fourth quintile,616,322,290,2311.5
+Males,Equivalised weekly household income,Highest quintile,607,289,317,2055.4
+Males,Weekly personal income,Lowest quintile,684,78,385,1819.8
+Males,Weekly personal income,Second quintile,700,75,401,1511.9
+Males,Weekly personal income,Third quintile,620,255,342,1576.4
+Males,Weekly personal income,Fourth quintile,585,354,285,2200.2
+Males,Weekly personal income,Highest quintile,596,325,275,2564.7
+Males,Index of Relative Socio-economic Disadvantage,Lowest quintile,651,179,347,1346.7
+Males,Index of Relative Socio-economic Disadvantage,Second quintile,653,229,329,2395.4
+Males,Index of Relative Socio-economic Disadvantage,Third quintile,603,259,323,1673.5
+Males,Index of Relative Socio-economic Disadvantage,Fourth quintile,609,249,322,1738.2
+Males,Index of Relative Socio-economic Disadvantage,Highest quintile,631,249,325,2781
+Males,Living situation,Parent in couple family with child <15 years,599,333,219,2271.1
+Males,Living situation,Other parents in couple family,621,268,328,822.4
+Males,Living situation,Lone parent,651,165,347,156.3
+Males,Living situation,Partner in couple family with no children,639,196,365,3218.8
+Males,Living situation,Non-dependent child,658,260,362,991.1
+Males,Living situation,Dependent child (student) aged 15 to 24 years,667,85,398,814.6
+Males,Living situation,Lone person aged 15 to 64 years,619,264,341,829.4
+Males,Living situation,Lone person aged 65 years and over,625,55,477,316.1
+Males,Living situation,Other,636,291,297,524.6
+Males,Self assessed health status,Excellent,642,220,365,964.9
+Males,Self assessed health status,Very good,610,267,317,3249.7
+Males,Self assessed health status,Good,630,250,314,3641.8
+Males,Self assessed health status,Fair,650,179,368,1415.7
+Males,Self assessed health status,Poor,741,89,386,395.9
+Females,Age groups (years),15 to 24,652,190,300,1453.8
+Females,Age groups (years),25 to 34,635,216,259,1854.2
+Females,Age groups (years),35 to 44,598,202,215,1748.6
+Females,Age groups (years),45 to 54,636,217,276,1630.5
+Females,Age groups (years),55 to 64,639,152,312,1521.8
+Females,Age groups (years),65 and over,662,20,412,2128.9
+Females,Remoteness areas,Major Cities of Australia,634,169,298,8418.2
+Females,Remoteness areas,Inner Regional Australia,645,120,317,1293.4
+Females,Remoteness areas,Outer regional and Remote Australia,680,148,292,620.1
+Females,Country of birth,Born in Australia,643,164,307,6883.1
+Females,Country of birth,Born overseas,629,156,285,3469.5
+Females,Labour force status,Employed full-time,614,335,240,3274.5
+Females,Labour force status,Employed part-time,616,192,274,2732.8
+Females,Labour force status,Unemployed,701,34,317,380.3
+Females,Labour force status,Not in the labour force,667,8,365,3938.9
+Females,Level of highest non-school qualification,Postgraduate Degree,608,254,278,766.1
+Females,Level of highest non-school qualification,Graduate Diploma/Graduate Certificate,608,188,298,438.1
+Females,Level of highest non-school qualification,Bachelor degree,622,212,264,2136.1
+Females,Level of highest non-school qualification,Advanced Diploma/Diploma,621,218,270,1105.3
+Females,Level of highest non-school qualification,Certificate level,642,155,272,1704.1
+Females,Level of highest non-school qualification,No non-school qualifications,658,106,341,4061.6
+Females,Equivalised weekly household income,Lowest quintile,652,52,325,1682.7
+Females,Equivalised weekly household income,Second quintile,660,91,334,1939.7
+Females,Equivalised weekly household income,Third quintile,632,177,293,2081.8
+Females,Equivalised weekly household income,Fourth quintile,631,210,268,2268.8
+Females,Equivalised weekly household income,Highest quintile,614,254,283,1922.6
+Females,Weekly personal income,Lowest quintile,661,55,309,2546.4
+Females,Weekly personal income,Second quintile,676,74,358,2218.7
+Females,Weekly personal income,Third quintile,610,176,293,2202.1
+Females,Weekly personal income,Fourth quintile,614,287,260,1866.7
+Females,Weekly personal income,Highest quintile,606,311,238,1273.5
+Females,Index of Relative Socio-economic Disadvantage,Lowest quintile,645,120,334,1445
+Females,Index of Relative Socio-economic Disadvantage,Second quintile,649,154,298,2278.8
+Females,Index of Relative Socio-economic Disadvantage,Third quintile,613,158,288,1751.2
+Females,Index of Relative Socio-economic Disadvantage,Fourth quintile,651,172,294,1938.1
+Females,Index of Relative Socio-economic Disadvantage,Highest quintile,632,179,295,2947.1
+Females,Living situation,Parent in couple family with child <15 years,594,179,198,2168.8
+Females,Living situation,Other parents in couple family,648,160,303,821.9
+Females,Living situation,Lone parent,628,158,247,798.3
+Females,Living situation,Partner in couple family with no children,652,154,339,3138
+Females,Living situation,Non-dependent child,708,212,300,651.3
+Females,Living situation,Dependent child (student) aged 15 to 24 years,649,134,307,841.9
+Females,Living situation,Lone person aged 15 to 64 years,631,212,318,741.2
+Females,Living situation,Lone person aged 65 years and over,625,17,446,669.4
+Females,Living situation,Other,632,214,327,511
+Females,Self assessed health status,Excellent,647,205,275,1098.1
+Females,Self assessed health status,Very good,633,162,299,3346.9
+Females,Self assessed health status,Good,632,173,300,3673.8
+Females,Self assessed health status,Fair,653,114,323,1468.2
+Females,Self assessed health status,Poor,700,113,358,362.9
+Persons,Age groups (years),15 to 24,653,186,339,3000.4
+Persons,Age groups (years),25 to 34,627,274,272,3671.4
+Persons,Age groups (years),35 to 44,598,265,226,3441.8
+Persons,Age groups (years),45 to 54,622,255,284,3191.9
+Persons,Age groups (years),55 to 64,633,207,321,2949.1
+Persons,Age groups (years),65 and over,668,30,423,4050.5
+Persons,Remoteness areas,Major Cities of Australia,629,205,311,16461.4
+Persons,Remoteness areas,Inner Regional Australia,655,161,331,2640
+Persons,Remoteness areas,Outer regional and Remote Australia,661,194,300,1197.3
+Persons,Country of birth,Born in Australia,639,197,322,13679
+Persons,Country of birth,Born overseas,624,200,296,6617
+Persons,Labour force status,Employed full-time,603,358,253,8626.3
+Persons,Labour force status,Employed part-time,621,204,292,4031.2
+Persons,Labour force status,Unemployed,705,34,354,827.2
+Persons,Labour force status,Not in the labour force,674,12,398,6802.1
+Persons,Level of highest non-school qualification,Postgraduate Degree,593,273,283,1550.6
+Persons,Level of highest non-school qualification,Graduate Diploma/Graduate Certificate,602,195,309,718.2
+Persons,Level of highest non-school qualification,Bachelor degree,612,256,278,3827.7
+Persons,Level of highest non-school qualification,Advanced Diploma/Diploma,620,228,282,1927.4
+Persons,Level of highest non-school qualification,Certificate level,633,228,294,4177.2
+Persons,Level of highest non-school qualification,No non-school qualifications,660,137,351,7756.6
+Persons,Equivalised weekly household income,Lowest quintile,669,65,354,3161.6
+Persons,Equivalised weekly household income,Second quintile,661,110,354,3629.2
+Persons,Equivalised weekly household income,Third quintile,613,228,293,4013.7
+Persons,Equivalised weekly household income,Fourth quintile,624,267,280,4586.6
+Persons,Equivalised weekly household income,Highest quintile,610,272,300,3975.2
+Persons,Weekly personal income,Lowest quintile,670,64,341,4356.6
+Persons,Weekly personal income,Second quintile,686,75,376,3749.4
+Persons,Weekly personal income,Third quintile,615,209,313,3775.3
+Persons,Weekly personal income,Fourth quintile,598,324,273,4084.7
+Persons,Weekly personal income,Highest quintile,600,321,264,3852
+Persons,Index of Relative Socio-economic Disadvantage,Lowest quintile,647,149,341,2802.3
+Persons,Index of Relative Socio-economic Disadvantage,Second quintile,651,193,313,4685.6
+Persons,Index of Relative Socio-economic Disadvantage,Third quintile,607,207,306,3427.5
+Persons,Index of Relative Socio-economic Disadvantage,Fourth quintile,632,209,308,3667.6
+Persons,Index of Relative Socio-economic Disadvantage,Highest quintile,632,214,310,5728.1
+Persons,Living situation,Parent in couple family with child <15 years,597,258,208,4443.2
+Persons,Living situation,Other parents in couple family,634,215,315,1654.8
+Persons,Living situation,Lone parent,636,156,262,952.3
+Persons,Living situation,Partner in couple family with no children,646,176,353,6359.5
+Persons,Living situation,Non-dependent child,680,242,337,1652.9
+Persons,Living situation,Dependent child (student) aged 15 to 24 years,659,111,353,1644.7
+Persons,Living situation,Lone person aged 15 to 64 years,625,240,330,1578.5
+Persons,Living situation,Lone person aged 65 years and over,623,29,457,990.1
+Persons,Living situation,Other,636,251,309,1018.8
+Persons,Self assessed health status,Excellent,644,213,317,2065.7
+Persons,Self assessed health status,Very good,622,213,307,6581.9
+Persons,Self assessed health status,Good,631,211,307,7319
+Persons,Self assessed health status,Fair,652,146,345,2897.9
+Persons,Self assessed health status,Poor,723,98,371,762.6

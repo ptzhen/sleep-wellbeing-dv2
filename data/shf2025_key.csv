@@ -1,0 +1,18 @@
+measure,value,unit,source
+most_common_duration_7h,31,%,SHF 2025 p.1
+duration_8h,28,%,SHF 2025 p.1
+under_7h,33,%,SHF 2025 p.1
+short_sleep_under6h_18-24,5.9,%,SHF 2025 p.1
+short_sleep_under6h_55-64,15.7,%,SHF 2025 p.1
+short_sleep_under6h_65+,11.4,%,SHF 2025 p.1
+poor_sleep_5plus_nights_past_week,28,%,SHF 2025 p.1
+productivity_hit_1plus_day_past_week,46,%,SHF 2025 p.1
+factor_busy_mind,47,%,SHF 2025 p.1
+factor_worry_anxiety,42,%,SHF 2025 p.1
+factor_restlessness,31,%,SHF 2025 p.1
+ever_used_sleep_medication,41.7,%,SHF 2025 p.1
+used_sleep_medication_past_month,18,%,SHF 2025 p.1
+always_control_sleep_schedule,36,%,SHF 2025 p.1
+external_pressures_affect_sleep,70,%,SHF 2025 p.1
+phone_in_bed_or_reach,28,%,SHF 2025 p.2
+consistent_sleep_pattern,25,%,SHF 2025 p.2

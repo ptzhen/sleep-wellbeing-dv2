@@ -1,0 +1,9 @@
+factor,level,pct_2plus_sleep_problems,source
+sleep_before_workdays,<5.5h,75.7,SHF 2016 Table 9
+sleep_before_workdays,5.5-9h,43.6,SHF 2016 Table 9
+internet_before_bed,nightly,58.5,SHF 2016 Table 9
+internet_before_bed,never,38.8,SHF 2016 Table 9
+caffeinated_drinks_per_day,6+,60.6,SHF 2016 Table 9
+caffeinated_drinks_per_day,0,40.5,SHF 2016 Table 9
+work_activity_before_bed,nightly,71.4,SHF 2016 Table 9
+work_activity_before_bed,never,36.5,SHF 2016 Table 9

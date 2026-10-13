@@ -1,0 +1,162 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Distress is highest outside the big cities",
+    "subtitle": [
+      "Adults with high or very high psychological distress (K10), age-standardised %, by Primary Health Network, 2022",
+      "Grey: Western Queensland, estimate suppressed"
+    ],
+    "anchor": "start"
+  },
+  "width": "container",
+  "height": 460,
+  "projection": {
+    "type": "conicEqualArea",
+    "parallels": [
+      -18,
+      -36
+    ],
+    "rotate": [
+      -134,
+      0
+    ]
+  },
+  "data": {
+    "url": "data/phn.topojson",
+    "format": {
+      "type": "topojson",
+      "feature": "phn"
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e4e4ea",
+        "stroke": "#ffffff",
+        "strokeWidth": 0.5
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "properties.PHN_NAME",
+            "type": "nominal",
+            "title": "PHN"
+          },
+          {
+            "field": "status",
+            "type": "nominal",
+            "title": "Distress"
+          }
+        ]
+      },
+      "transform": [
+        {
+          "calculate": "'No data (suppressed)'",
+          "as": "status"
+        }
+      ]
+    },
+    {
+      "transform": [
+        {
+          "lookup": "properties.PHN_CODE",
+          "from": {
+            "data": {
+              "url": "data/phidu_phn_2022.csv"
+            },
+            "key": "code",
+            "fields": [
+              "k10_high_persons",
+              "k10_high_female",
+              "k10_high_male"
+            ]
+          }
+        },
+        {
+          "filter": "isValid(datum.k10_high_persons)"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#ffffff",
+        "strokeWidth": 0.5
+      },
+      "encoding": {
+        "color": {
+          "field": "k10_high_persons",
+          "type": "quantitative",
+          "scale": {
+            "type": "threshold",
+            "domain": [
+              11,
+              13,
+              15,
+              17
+            ],
+            "range": [
+              "#e6e1f2",
+              "#bdb0dd",
+              "#8e7cc3",
+              "#5e4a9e",
+              "#2f2366"
+            ]
+          },
+          "legend": {
+            "orient": "top-left",
+            "title": "% adults in high distress",
+            "labelExpr": "replace(datum.label, 'null', '')"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "properties.PHN_NAME",
+            "type": "nominal",
+            "title": "PHN"
+          },
+          {
+            "field": "properties.STATE_NAME",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "k10_high_persons",
+            "type": "quantitative",
+            "title": "All adults (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "k10_high_female",
+            "type": "quantitative",
+            "title": "Women (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "k10_high_male",
+            "type": "quantitative",
+            "title": "Men (%)",
+            "format": ".1f"
+          }
+        ]
+      }
+    }
+  ],
+  "background": "transparent",
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "Source Sans 3",
+    "title": {
+      "fontSize": 18,
+      "subtitleFontSize": 13,
+      "subtitleColor": "#5d6077",
+      "font": "Fraunces",
+      "subtitleFont": "Source Sans 3"
+    },
+    "legend": {
+      "titleFontSize": 13,
+      "labelFontSize": 12
+    }
+  }
+}
