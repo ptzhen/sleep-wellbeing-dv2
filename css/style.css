@@ -71,7 +71,8 @@ h2 { font-size: clamp(1.7rem, 3vw, 2.5rem); max-width: 24ch; margin: 0 0 40px; }
 .nightbar ol { list-style: none; display: flex; gap: 4px; margin: 0 0 0 auto; padding: 0; overflow-x: auto; scrollbar-width: none; }
 .nightbar ol::-webkit-scrollbar { display: none; }
 .nightbar li a { display: block; padding: 6px 10px; border-radius: 999px; color: var(--night-muted); text-decoration: none; font-size: .82rem; white-space: nowrap; }
-.nightbar li a b { color: #fff; font-weight: 600; margin-right: 4px; }
+.nightbar li a { display: flex; align-items: center; gap: 6px; }
+.nightbar li a b { display: inline-flex; color: #fff; }
 .nightbar li a:hover, .nightbar li a.on { background: rgba(255,255,255,.1); color: #fff; }
 .nightbar li a.on b { color: var(--gold); }
 .progress { height: 2px; background: rgba(255,255,255,.06); }
@@ -90,7 +91,7 @@ h2 { font-size: clamp(1.7rem, 3vw, 2.5rem); max-width: 24ch; margin: 0 0 40px; }
 .night .note { color: var(--night-muted); }
 
 .eyebrow { display: flex; align-items: center; gap: 12px; margin: 0 0 14px; font-size: .8rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
-.eyebrow .clock { font-family: var(--serif); text-transform: none; letter-spacing: 0; font-size: 1rem; padding: 3px 12px; border-radius: 999px; background: rgba(243,182,78,.14); color: var(--gold); border: 1px solid rgba(243,182,78,.35); }
+.eyebrow .clock { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 30px; padding: 0; border-radius: 999px; background: rgba(243,182,78,.14); color: var(--gold); border: 1px solid rgba(243,182,78,.35); }
 .night .eyebrow { color: var(--night-muted); }
 .day .eyebrow { color: var(--accent); }
 .day .eyebrow .clock { color: #9a5d06; background: rgba(208,138,30,.1); border-color: rgba(208,138,30,.35); }
