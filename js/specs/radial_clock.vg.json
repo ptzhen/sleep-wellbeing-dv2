@@ -28,6 +28,21 @@
         ],
         "name": "Show: "
       }
+    },
+    {
+      "name": "playHour",
+      "value": 7,
+      "bind": {
+        "input": "range",
+        "min": 0,
+        "max": 23,
+        "step": 1,
+        "name": "Hour (0 = midnight): "
+      }
+    },
+    {
+      "name": "playing",
+      "value": false
     }
   ],
   "transform": [
@@ -63,7 +78,7 @@
         {
           "transform": [
             {
-              "filter": "datum.hour_start == 7"
+              "filter": "datum.hour_start == playHour"
             }
           ],
           "mark": {
@@ -147,11 +162,17 @@
               "value": "#3b5ba5"
             },
             "opacity": {
-              "condition": {
-                "param": "hourHover",
-                "empty": true,
-                "value": 1
-              },
+              "condition": [
+                {
+                  "test": "playing && datum.hour_start != playHour",
+                  "value": 0.3
+                },
+                {
+                  "param": "hourHover",
+                  "empty": true,
+                  "value": 1
+                }
+              ],
               "value": 0.35
             },
             "tooltip": [
@@ -255,10 +276,10 @@
         {
           "transform": [
             {
-              "filter": "datum.hour_start == 7"
+              "filter": "datum.hour_start == playHour"
             },
             {
-              "calculate": "format(datum.pct, '.0f') + '% asleep at 7–8 am'",
+              "calculate": "format(datum.pct, '.0f') + '% asleep at ' + (playHour == 0 ? '12' : playHour <= 12 ? playHour : playHour - 12) + (playHour < 12 ? ' am' : ' pm') + '–' + ((playHour + 1) % 24 == 0 ? '12' : (playHour + 1) <= 12 ? playHour + 1 : playHour - 11) + ((playHour + 1) % 24 < 12 ? ' am' : ' pm')",
               "as": "note"
             }
           ],
@@ -325,7 +346,7 @@
         {
           "transform": [
             {
-              "filter": "datum.hour_start == 7"
+              "filter": "datum.hour_start == playHour"
             }
           ],
           "mark": {
@@ -409,11 +430,17 @@
               "value": "#d08a1e"
             },
             "opacity": {
-              "condition": {
-                "param": "hourHover",
-                "empty": true,
-                "value": 1
-              },
+              "condition": [
+                {
+                  "test": "playing && datum.hour_start != playHour",
+                  "value": 0.3
+                },
+                {
+                  "param": "hourHover",
+                  "empty": true,
+                  "value": 1
+                }
+              ],
               "value": 0.35
             },
             "tooltip": [
@@ -517,10 +544,10 @@
         {
           "transform": [
             {
-              "filter": "datum.hour_start == 7"
+              "filter": "datum.hour_start == playHour"
             },
             {
-              "calculate": "format(datum.pct, '.0f') + '% asleep at 7–8 am'",
+              "calculate": "format(datum.pct, '.0f') + '% asleep at ' + (playHour == 0 ? '12' : playHour <= 12 ? playHour : playHour - 12) + (playHour < 12 ? ' am' : ' pm') + '–' + ((playHour + 1) % 24 == 0 ? '12' : (playHour + 1) <= 12 ? playHour + 1 : playHour - 11) + ((playHour + 1) % 24 < 12 ? ' am' : ' pm')",
               "as": "note"
             }
           ],
