@@ -36,7 +36,8 @@ spec("waffle_short_sleep", "1 in 3 Australian adults sleep less than 7 hours",
     "transform": [
         {"calculate": "datum.i % 10", "as": "col"},
         {"calculate": "floor(datum.i / 10)", "as": "row"},
-        {"calculate": "datum.i < 33 ? 'Less than 7 hours' : '7 hours or more'", "as": "group"}],
+        {"calculate": "datum.i < round(33 * reveal) ? 'Less than 7 hours' : '7 hours or more'", "as": "group"}],
+    "params": [{"name": "reveal", "value": 1}],  # page script counts the squares in from 0 to 1
     "mark": {"type": "square", "size": 520, "cornerRadius": 3},
     "encoding": {
         "x": {"field": "col", "type": "ordinal", "axis": None},
@@ -159,15 +160,19 @@ spec("radial_clock", "Weekday alarms get most of us up by 8 am; at the weekend 6
 spec("slope_weekend", "Weekends buy back about 44 extra minutes of sleep",
      ["Average minutes asleep a day, people aged 15+", "ABS, How Australians Use Their Time 2024, Table 4.1"], {
     "width": "container", "height": 260,
-    "data": {"url": "data/tus2024_sleep_summary.csv"},
+    "data": {"url": "data/tus2024_sleep_summary.csv", "format": {"parse": {"sleep_min": "number"}}},
     "transform": [{"filter": "datum.day_type != 'All days'"},
                   {"calculate": "datum.sex == 'All' ? 'Everyone' : datum.sex", "as": "who"},
                   {"calculate": "floor(datum.sleep_min/60) + 'h ' + (datum.sleep_min % 60) + 'm'", "as": "hm"},
-                  {"calculate": "datum.who == 'Men' ? -9 : datum.who == 'Women' ? 9 : 0", "as": "nudge"}],
+                  {"calculate": "datum.who == 'Men' ? -9 : datum.who == 'Women' ? 9 : 0", "as": "nudge"},
+                  {"calculate": "datum.day_type == 'Weekday' ? datum.sleep_min : null", "as": "wk"},
+                  {"joinaggregate": [{"op": "max", "field": "wk", "as": "wkval"}], "groupby": ["who"]},
+                  {"calculate": "datum.wkval + (datum.sleep_min - datum.wkval) * reveal", "as": "shown"}],
+    "params": [{"name": "reveal", "value": 1}],
     "encoding": {
         "x": {"field": "day_type", "type": "ordinal", "title": None, "scale": {"padding": 0.5},
               "axis": {"labelAngle": 0, "labelFontSize": 13, "domain": False, "ticks": False, "orient": "top"}},
-        "y": {"field": "sleep_min", "type": "quantitative", "title": "Minutes asleep", "scale": {"domain": [500, 570]},
+        "y": {"field": "shown", "type": "quantitative", "title": "Minutes asleep", "scale": {"domain": [500, 570]},
               "axis": {"grid": True, "values": [500, 510, 520, 530, 540, 550, 560, 570]}},
         "color": {"field": "who", "type": "nominal", "title": None,
                   "scale": {"domain": ["Women", "Men", "Everyone"], "range": [WOMEN, MEN, INK]}, "legend": None}},
@@ -182,7 +187,7 @@ spec("slope_weekend", "Weekends buy back about 44 extra minutes of sleep",
          "mark": {"type": "text", "align": "right", "dx": -12, "fontSize": 12},
          "encoding": {"text": {"field": "hm"}}},
         {"transform": [{"filter": "datum.day_type == 'Weekend' && datum.who == 'Everyone'"}],
-         "mark": {"type": "text", "align": "left", "dx": 70, "fontSize": 12, "fontWeight": 700},
+         "mark": {"type": "text", "align": "left", "dx": 70, "fontSize": 12, "fontWeight": 700, "opacity": {"expr": "reveal"}},
          "encoding": {"text": {"value": "+44 min"}, "color": {"value": WEEKEND}}}]})
 
 # 6. Sleep by age (SHF 2016): the young paradox
@@ -218,16 +223,18 @@ spec("bar_circumstance", "A baby at home costs about half an hour of sleep a nig
     "width": "container", "height": {"step": 28},
     "data": {"url": "data/sleep_by_circumstance.csv"},
     "params": [{"name": "circSex", "value": "All",
-                "bind": {"input": "radio", "options": ["All", "Women", "Men"], "labels": ["Everyone", "Women", "Men"], "name": "Show: "}}],
+                "bind": {"input": "radio", "options": ["All", "Women", "Men"], "labels": ["Everyone", "Women", "Men"], "name": "Show: "}},
+               {"name": "reveal", "value": 1}],
     "transform": [{"filter": "datum.sex == circSex"},
                   {"calculate": "datum.sleep_min - 528", "as": "diff"},
                   {"calculate": "datum.diff >= 0 ? 'More than average' : 'Less than average'", "as": "dir"},
                   {"calculate": "(datum.diff > 0 ? '+' : '') + datum.diff + ' min'", "as": "difflabel"},
-                  {"calculate": "floor(datum.sleep_min/60) + 'h ' + (datum.sleep_min % 60) + 'm'", "as": "hm"}],
+                  {"calculate": "floor(datum.sleep_min/60) + 'h ' + (datum.sleep_min % 60) + 'm'", "as": "hm"},
+                  {"calculate": "datum.diff * reveal", "as": "diff_shown"}],
     "encoding": {
         "y": {"field": "group", "type": "nominal", "title": None, "sort": CIRC_ORDER,
               "axis": {"domain": False, "ticks": False, "labelLimit": 320}},
-        "x": {"field": "diff", "type": "quantitative", "title": "Minutes compared with the average adult",
+        "x": {"field": "diff_shown", "type": "quantitative", "title": "Minutes compared with the average adult",
               "scale": {"domain": [-40, 20]}, "axis": {"grid": True, "values": [-40, -30, -20, -10, 0, 10, 20]}}},
     "layer": [
         {"mark": {"type": "bar", "height": 16, "cornerRadius": 3},
@@ -238,7 +245,7 @@ spec("bar_circumstance", "A baby at home costs about half an hour of sleep a nig
                                   {"field": "difflabel", "title": "Compared with average"}]}},
         {"mark": {"type": "rule", "color": INK}, "encoding": {"x": {"datum": 0}, "y": None}},
         {"mark": {"type": "text", "fontSize": 12, "dx": {"expr": "datum.diff >= 0 ? 6 : -6"},
-                  "align": {"expr": "datum.diff >= 0 ? 'left' : 'right'"}},
+                  "align": {"expr": "datum.diff >= 0 ? 'left' : 'right'"}, "opacity": {"expr": "reveal"}},
          "encoding": {"text": {"field": "difflabel"}}}]})
 
 # 8. Lifestyle dumbbell (SHF 2016 Table 9)
@@ -329,7 +336,9 @@ hm["transform"] = hm["transform"][:3] + [
     hm["transform"][-1],
     {"calculate": "datum.better == 'lower' ? datum.value / datum.neither : datum.neither / datum.value", "as": "times_worse"},
     {"calculate": "datum.fmt == '%' ? format(datum.value, '.0f') + '%' : format(datum.value, '.1f')", "as": "valuelabel"},
-    {"calculate": "datum.group == 'Neither' ? 'Neither condition' : datum.group", "as": "grouplabel"}]
+    {"calculate": "datum.group == 'Neither' ? 'Neither condition' : datum.group", "as": "grouplabel"},
+    {"calculate": "indexof(['Neither condition', 'Back pain only', 'Mental health only', 'Both'], datum.grouplabel)", "as": "rowi"}]
+hm["params"] = [{"name": "reveal", "value": 1}]  # page script fades rows in, mildest first
 del hm["mark"]
 hm["encoding"] = {
     "x": {"field": "label", "type": "nominal", "title": None, "sort": {"field": "ord"},
@@ -339,14 +348,15 @@ hm["encoding"] = {
           "sort": ["Neither condition", "Back pain only", "Mental health only", "Both"],
           "axis": {"domain": False, "ticks": False}}}
 hm["layer"] = [
-    {"mark": {"type": "rect", "stroke": "#fbfaf7", "strokeWidth": 2, "cornerRadius": 3},
+    {"mark": {"type": "rect", "stroke": "#fbfaf7", "strokeWidth": 2, "cornerRadius": 3,
+              "opacity": {"expr": "clamp(reveal * 4 - datum.rowi, 0, 1)"}},
      "encoding": {"color": {"field": "times_worse", "type": "quantitative", "title": "Times worse than neither",
                             "scale": {"type": "threshold", "domain": [1.1, 1.5, 2, 3], "range": ["#f1efe9", "#f6dcb5", "#e9b46a", "#d08a1e", "#8f5a0c"]},
                             "legend": {"orient": "bottom", "direction": "horizontal", "titleLimit": 300, "labelExpr": "isFinite(datum.value) ? datum.value + '×' : ''"}},
                   "tooltip": [{"field": "grouplabel", "title": "Group"}, {"field": "label", "title": "Measure"},
                               {"field": "valuelabel", "title": "Value"},
                               {"field": "times_worse", "title": "Times worse than neither", "format": ".1f"}]}},
-    {"mark": {"type": "text", "fontSize": 13},
+    {"mark": {"type": "text", "fontSize": 13, "opacity": {"expr": "clamp(reveal * 4 - datum.rowi, 0, 1)"}},
      "encoding": {"text": {"field": "valuelabel"},
                   "color": {"condition": {"test": "datum.times_worse >= 2", "value": "#ffffff"}, "value": INK}}}]
 hm["width"] = "container"

@@ -10,15 +10,40 @@ const charts = [
 ];
 
 const views = {};
+// Charts that build up once when first scrolled into view. Each spec has a
+// "reveal" parameter (default 1 = the finished chart); here we run it from 0 to 1.
+const REVEAL = {waffle_short_sleep: 1500, bar_circumstance: 1000, slope_weekend: 1100, heatmap_wellbeing: 1200};
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 charts.forEach(id => {
   vegaEmbed("#" + id, "js/specs/" + id + ".vg.json", {actions: false})
-    .then(r => { views[id] = r.view; })
+    .then(r => {
+      views[id] = r.view;
+      if (REVEAL[id] && !reduceMotion) prepareReveal(id, r.view);
+    })
     .catch(console.error);
 });
 
+function prepareReveal(id, view) {
+  view.signal("reveal", 0).run();
+  const el = document.getElementById(id);
+  const obs = new IntersectionObserver(entries => {
+    if (!entries.some(e => e.isIntersecting)) return;
+    obs.disconnect();
+    const start = performance.now() + 250, dur = REVEAL[id];
+    const ease = t => 1 - Math.pow(1 - t, 3);
+    const step = now => {
+      const t = Math.min(1, Math.max(0, (now - start) / dur));
+      view.signal("reveal", ease(t)).run();
+      if (t < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, {threshold: 0.45});
+  obs.observe(el);
+}
+
 // "Play the night": steps the radial clock's own hour parameter from 10 pm to 10 am
 const playBtn = document.getElementById("playNight");
-const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 let timer = null;
 const NIGHT = [22, 23, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 function stopPlay() {

@@ -114,6 +114,10 @@
     {
       "calculate": "datum.group == 'Neither' ? 'Neither condition' : datum.group",
       "as": "grouplabel"
+    },
+    {
+      "calculate": "indexof(['Neither condition', 'Back pain only', 'Mental health only', 'Both'], datum.grouplabel)",
+      "as": "rowi"
     }
   ],
   "autosize": {
@@ -168,6 +172,12 @@
       "color": "#23263a"
     }
   },
+  "params": [
+    {
+      "name": "reveal",
+      "value": 1
+    }
+  ],
   "encoding": {
     "x": {
       "field": "label",
@@ -207,7 +217,10 @@
         "type": "rect",
         "stroke": "#fbfaf7",
         "strokeWidth": 2,
-        "cornerRadius": 3
+        "cornerRadius": 3,
+        "opacity": {
+          "expr": "clamp(reveal * 4 - datum.rowi, 0, 1)"
+        }
       },
       "encoding": {
         "color": {
@@ -261,7 +274,10 @@
     {
       "mark": {
         "type": "text",
-        "fontSize": 13
+        "fontSize": 13,
+        "opacity": {
+          "expr": "clamp(reveal * 4 - datum.rowi, 0, 1)"
+        }
       },
       "encoding": {
         "text": {

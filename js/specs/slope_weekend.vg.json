@@ -3,7 +3,12 @@
   "width": "container",
   "height": 260,
   "data": {
-    "url": "data/tus2024_sleep_summary.csv"
+    "url": "data/tus2024_sleep_summary.csv",
+    "format": {
+      "parse": {
+        "sleep_min": "number"
+      }
+    }
   },
   "transform": [
     {
@@ -20,6 +25,32 @@
     {
       "calculate": "datum.who == 'Men' ? -9 : datum.who == 'Women' ? 9 : 0",
       "as": "nudge"
+    },
+    {
+      "calculate": "datum.day_type == 'Weekday' ? datum.sleep_min : null",
+      "as": "wk"
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "max",
+          "field": "wk",
+          "as": "wkval"
+        }
+      ],
+      "groupby": [
+        "who"
+      ]
+    },
+    {
+      "calculate": "datum.wkval + (datum.sleep_min - datum.wkval) * reveal",
+      "as": "shown"
+    }
+  ],
+  "params": [
+    {
+      "name": "reveal",
+      "value": 1
     }
   ],
   "encoding": {
@@ -39,7 +70,7 @@
       }
     },
     "y": {
-      "field": "sleep_min",
+      "field": "shown",
       "type": "quantitative",
       "title": "Minutes asleep",
       "scale": {
@@ -166,7 +197,10 @@
         "align": "left",
         "dx": 70,
         "fontSize": 12,
-        "fontWeight": 700
+        "fontWeight": 700,
+        "opacity": {
+          "expr": "reveal"
+        }
       },
       "encoding": {
         "text": {

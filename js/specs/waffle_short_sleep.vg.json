@@ -19,8 +19,14 @@
       "as": "row"
     },
     {
-      "calculate": "datum.i < 33 ? 'Less than 7 hours' : '7 hours or more'",
+      "calculate": "datum.i < round(33 * reveal) ? 'Less than 7 hours' : '7 hours or more'",
       "as": "group"
+    }
+  ],
+  "params": [
+    {
+      "name": "reveal",
+      "value": 1
     }
   ],
   "mark": {

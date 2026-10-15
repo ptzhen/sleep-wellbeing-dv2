@@ -25,6 +25,10 @@
         ],
         "name": "Show: "
       }
+    },
+    {
+      "name": "reveal",
+      "value": 1
     }
   ],
   "transform": [
@@ -46,6 +50,10 @@
     {
       "calculate": "floor(datum.sleep_min/60) + 'h ' + (datum.sleep_min % 60) + 'm'",
       "as": "hm"
+    },
+    {
+      "calculate": "datum.diff * reveal",
+      "as": "diff_shown"
     }
   ],
   "encoding": {
@@ -74,7 +82,7 @@
       }
     },
     "x": {
-      "field": "diff",
+      "field": "diff_shown",
       "type": "quantitative",
       "title": "Minutes compared with the average adult",
       "scale": {
@@ -161,6 +169,9 @@
         },
         "align": {
           "expr": "datum.diff >= 0 ? 'left' : 'right'"
+        },
+        "opacity": {
+          "expr": "reveal"
         }
       },
       "encoding": {
