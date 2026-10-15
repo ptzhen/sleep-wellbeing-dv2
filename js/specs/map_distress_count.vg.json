@@ -3,8 +3,8 @@
   "hconcat": [
     {
       "name": "symmap",
-      "width": 520,
-      "height": 440,
+      "width": 500,
+      "height": 430,
       "projection": {
         "type": "conicEqualArea",
         "parallels": [

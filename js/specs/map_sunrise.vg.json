@@ -174,7 +174,32 @@
               "expr": "datum.city == 'Adelaide' || datum.city == 'Melbourne' ? 'right' : 'left'"
             },
             "dy": {
-              "expr": "datum.city == 'Canberra' ? 8 : datum.city == 'Sydney' ? -4 : 0"
+              "expr": "datum.city == 'Canberra' ? 8 : datum.city == 'Sydney' ? -4 : datum.city == 'Melbourne' ? 6 : datum.city == 'Adelaide' ? -4 : 0"
+            },
+            "stroke": "#ffffff",
+            "strokeWidth": 3,
+            "strokeOpacity": 0.85
+          },
+          "encoding": {
+            "text": {
+              "field": "lab"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "fontSize": 11,
+            "fontWeight": 600,
+            "color": "#23263a",
+            "dx": {
+              "expr": "datum.city == 'Adelaide' || datum.city == 'Melbourne' ? -6 : 6"
+            },
+            "align": {
+              "expr": "datum.city == 'Adelaide' || datum.city == 'Melbourne' ? 'right' : 'left'"
+            },
+            "dy": {
+              "expr": "datum.city == 'Canberra' ? 8 : datum.city == 'Sydney' ? -4 : datum.city == 'Melbourne' ? 6 : datum.city == 'Adelaide' ? -4 : 0"
             }
           },
           "encoding": {

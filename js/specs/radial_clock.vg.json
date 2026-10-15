@@ -61,6 +61,51 @@
       "height": 260,
       "layer": [
         {
+          "transform": [
+            {
+              "filter": "datum.hour_start == 7"
+            }
+          ],
+          "mark": {
+            "type": "arc",
+            "filled": false,
+            "stroke": "#23263a",
+            "strokeWidth": 2,
+            "innerRadius": 18
+          },
+          "encoding": {
+            "theta": {
+              "field": "hour_start",
+              "type": "quantitative",
+              "scale": {
+                "domain": [
+                  0,
+                  24
+                ]
+              }
+            },
+            "theta2": {
+              "field": "hour_end"
+            },
+            "radius": {
+              "field": "pct",
+              "type": "quantitative",
+              "scale": {
+                "type": "sqrt",
+                "zero": true,
+                "domain": [
+                  0,
+                  100
+                ],
+                "range": [
+                  18,
+                  125
+                ]
+              }
+            }
+          }
+        },
+        {
           "mark": {
             "type": "arc",
             "stroke": "#fbfaf7",
@@ -147,6 +192,40 @@
             "type": "arc",
             "filled": false,
             "stroke": "#ffffff",
+            "strokeWidth": 2.5
+          },
+          "encoding": {
+            "theta": {
+              "datum": 0,
+              "type": "quantitative",
+              "scale": {
+                "domain": [
+                  0,
+                  24
+                ]
+              }
+            },
+            "theta2": {
+              "datum": 24
+            },
+            "radius": {
+              "field": "r",
+              "type": "quantitative"
+            }
+          }
+        },
+        {
+          "data": {
+            "values": [
+              {
+                "r": 50
+              }
+            ]
+          },
+          "mark": {
+            "type": "arc",
+            "filled": false,
+            "stroke": "#23263a",
             "strokeWidth": 1,
             "strokeDash": [
               3,
@@ -170,6 +249,35 @@
             "radius": {
               "field": "r",
               "type": "quantitative"
+            }
+          }
+        },
+        {
+          "transform": [
+            {
+              "filter": "datum.hour_start == 7"
+            },
+            {
+              "calculate": "format(datum.pct, '.0f') + '% asleep at 7–8 am'",
+              "as": "note"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "fontSize": 12,
+            "fontWeight": 700,
+            "color": "#23263a",
+            "align": "center"
+          },
+          "encoding": {
+            "x": {
+              "value": 130
+            },
+            "y": {
+              "value": 292
+            },
+            "text": {
+              "field": "note"
             }
           }
         },
@@ -214,6 +322,51 @@
       "width": 260,
       "height": 260,
       "layer": [
+        {
+          "transform": [
+            {
+              "filter": "datum.hour_start == 7"
+            }
+          ],
+          "mark": {
+            "type": "arc",
+            "filled": false,
+            "stroke": "#23263a",
+            "strokeWidth": 2,
+            "innerRadius": 18
+          },
+          "encoding": {
+            "theta": {
+              "field": "hour_start",
+              "type": "quantitative",
+              "scale": {
+                "domain": [
+                  0,
+                  24
+                ]
+              }
+            },
+            "theta2": {
+              "field": "hour_end"
+            },
+            "radius": {
+              "field": "pct",
+              "type": "quantitative",
+              "scale": {
+                "type": "sqrt",
+                "zero": true,
+                "domain": [
+                  0,
+                  100
+                ],
+                "range": [
+                  18,
+                  125
+                ]
+              }
+            }
+          }
+        },
         {
           "mark": {
             "type": "arc",
@@ -301,6 +454,40 @@
             "type": "arc",
             "filled": false,
             "stroke": "#ffffff",
+            "strokeWidth": 2.5
+          },
+          "encoding": {
+            "theta": {
+              "datum": 0,
+              "type": "quantitative",
+              "scale": {
+                "domain": [
+                  0,
+                  24
+                ]
+              }
+            },
+            "theta2": {
+              "datum": 24
+            },
+            "radius": {
+              "field": "r",
+              "type": "quantitative"
+            }
+          }
+        },
+        {
+          "data": {
+            "values": [
+              {
+                "r": 50
+              }
+            ]
+          },
+          "mark": {
+            "type": "arc",
+            "filled": false,
+            "stroke": "#23263a",
             "strokeWidth": 1,
             "strokeDash": [
               3,
@@ -324,6 +511,35 @@
             "radius": {
               "field": "r",
               "type": "quantitative"
+            }
+          }
+        },
+        {
+          "transform": [
+            {
+              "filter": "datum.hour_start == 7"
+            },
+            {
+              "calculate": "format(datum.pct, '.0f') + '% asleep at 7–8 am'",
+              "as": "note"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "fontSize": 12,
+            "fontWeight": 700,
+            "color": "#23263a",
+            "align": "center"
+          },
+          "encoding": {
+            "x": {
+              "value": 130
+            },
+            "y": {
+              "value": 292
+            },
+            "text": {
+              "field": "note"
             }
           }
         },

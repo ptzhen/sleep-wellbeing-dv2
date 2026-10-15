@@ -65,6 +65,10 @@
         },
         {
           "filter": "isValid(datum.k10_high_persons)"
+        },
+        {
+          "calculate": "datum.k10_high_female - datum.k10_high_male",
+          "as": "gap"
         }
       ],
       "mark": {
@@ -123,9 +127,147 @@
             "type": "quantitative",
             "title": "Men (%)",
             "format": ".1f"
+          },
+          {
+            "field": "gap",
+            "type": "quantitative",
+            "title": "Gap (points)",
+            "format": ".1f"
           }
         ]
       }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lon": 151.16,
+            "lat": -33.62,
+            "lab": "Northern Sydney 8.8%",
+            "dx": 34,
+            "dy": 14
+          },
+          {
+            "lon": 151.11,
+            "lat": -27.29,
+            "lab": "Darling Downs and\nWest Moreton 17.3%",
+            "dx": 44,
+            "dy": -30
+          }
+        ]
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        }
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "rule",
+            "color": "#23263a",
+            "strokeWidth": 0.8
+          },
+          "encoding": {
+            "longitude2": {
+              "field": "lon2"
+            },
+            "latitude2": {
+              "field": "lat2"
+            }
+          },
+          "transform": [
+            {
+              "calculate": "datum.lon + datum.dx / 14",
+              "as": "lon2"
+            },
+            {
+              "calculate": "datum.lat - datum.dy / 14",
+              "as": "lat2"
+            }
+          ]
+        },
+        {
+          "mark": {
+            "type": "circle",
+            "size": 22,
+            "color": "#23263a",
+            "opacity": 1
+          }
+        },
+        {
+          "transform": [
+            {
+              "calculate": "datum.lon + datum.dx / 14",
+              "as": "lon2"
+            },
+            {
+              "calculate": "datum.lat - datum.dy / 14",
+              "as": "lat2"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "dx": 4,
+            "fontSize": 12,
+            "fontWeight": 600,
+            "color": "#23263a",
+            "lineBreak": "\n",
+            "stroke": "#fbfaf7",
+            "strokeWidth": 3,
+            "strokeOpacity": 0.9
+          },
+          "encoding": {
+            "longitude": {
+              "field": "lon2"
+            },
+            "latitude": {
+              "field": "lat2"
+            },
+            "text": {
+              "field": "lab"
+            }
+          }
+        },
+        {
+          "transform": [
+            {
+              "calculate": "datum.lon + datum.dx / 14",
+              "as": "lon2"
+            },
+            {
+              "calculate": "datum.lat - datum.dy / 14",
+              "as": "lat2"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "dx": 4,
+            "fontSize": 12,
+            "fontWeight": 600,
+            "color": "#23263a",
+            "lineBreak": "\n"
+          },
+          "encoding": {
+            "longitude": {
+              "field": "lon2"
+            },
+            "latitude": {
+              "field": "lat2"
+            },
+            "text": {
+              "field": "lab"
+            }
+          }
+        }
+      ]
     }
   ],
   "config": {

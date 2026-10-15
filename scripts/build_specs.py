@@ -110,6 +110,11 @@ clock_layer = lambda day: {
     "title": {"text": day + "s", "fontSize": 14, "anchor": "middle", "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif", "fontWeight": 600},
     "width": 260, "height": 260,
     "layer": [
+        {"transform": [{"filter": "datum.hour_start == 7"}],
+         "mark": {"type": "arc", "filled": False, "stroke": INK, "strokeWidth": 2, "innerRadius": 18},
+         "encoding": {"theta": {"field": "hour_start", "type": "quantitative", "scale": {"domain": [0, 24]}},
+                      "theta2": {"field": "hour_end"},
+                      "radius": {"field": "pct", "type": "quantitative", "scale": {"type": "sqrt", "zero": True, "domain": [0, 100], "range": [18, 125]}}}},
         {"mark": {"type": "arc", "stroke": "#fbfaf7", "strokeWidth": 1, "innerRadius": 18, "cornerRadius": 2},
          "encoding": {
              "theta": {"field": "hour_start", "type": "quantitative", "scale": {"domain": [0, 24]}},
@@ -120,9 +125,16 @@ clock_layer = lambda day: {
              "tooltip": [{"field": "time_label", "title": "Time"}, {"field": "pct", "title": "% asleep", "format": ".1f"}]},
          "params": [{"name": "hourHover", "select": {"type": "point", "fields": ["hour_start"], "on": "pointerover", "clear": "pointerout"}}]},
         {"data": {"values": [{"r": 50}]},
-         "mark": {"type": "arc", "filled": False, "stroke": "#ffffff", "strokeWidth": 1, "strokeDash": [3, 3]},
+         "mark": {"type": "arc", "filled": False, "stroke": "#ffffff", "strokeWidth": 2.5},
          "encoding": {"theta": {"datum": 0, "type": "quantitative", "scale": {"domain": [0, 24]}}, "theta2": {"datum": 24},
                       "radius": {"field": "r", "type": "quantitative"}}},
+        {"data": {"values": [{"r": 50}]},
+         "mark": {"type": "arc", "filled": False, "stroke": INK, "strokeWidth": 1, "strokeDash": [3, 3]},
+         "encoding": {"theta": {"datum": 0, "type": "quantitative", "scale": {"domain": [0, 24]}}, "theta2": {"datum": 24},
+                      "radius": {"field": "r", "type": "quantitative"}}},
+        {"transform": [{"filter": "datum.hour_start == 7"}, {"calculate": "format(datum.pct, '.0f') + '% asleep at 7–8 am'", "as": "note"}],
+         "mark": {"type": "text", "fontSize": 12, "fontWeight": 700, "color": INK, "align": "center"},
+         "encoding": {"x": {"value": 130}, "y": {"value": 292}, "text": {"field": "note"}}},
         {"mark": {"type": "text", "radius": 140, "fontSize": 11, "color": MUTED},
          "encoding": {"theta": {"field": "hour_start", "type": "quantitative", "scale": {"domain": [0, 24]}},
                       "text": {"field": "hourlabel"}}}]}
@@ -335,7 +347,7 @@ hm["layer"] = [
 hm["width"] = "container"
 
 # 11. PHN choropleth (existing, restyled here)
-def phn_choro(field, title_suffix=""):
+def phn_choro(field, title_suffix="", scale=None, extra=None):
     return {
         "projection": AUS_PROJ,
         "layer": [
@@ -345,36 +357,63 @@ def phn_choro(field, title_suffix=""):
             {"transform": [
                 {"lookup": "properties.PHN_CODE", "from": {"data": {"url": "data/phidu_phn_2022.csv"}, "key": "code",
                                                          "fields": ["k10_high_persons", "k10_high_female", "k10_high_male"]}},
-                {"filter": "isValid(datum.k10_high_persons)"}],
+                {"filter": "isValid(datum.k10_high_persons)"},
+                {"calculate": "datum.k10_high_female - datum.k10_high_male", "as": "gap"}],
              "mark": {"type": "geoshape", "stroke": "#ffffff", "strokeWidth": 0.5},
              "encoding": {
                  "color": {"field": field, "type": "quantitative",
-                           "scale": {"type": "threshold", "domain": [11, 13, 15, 17], "range": PURPLES},
+                           "scale": scale or {"type": "threshold", "domain": [11, 13, 15, 17], "range": PURPLES},
                            "legend": {"orient": "top-left", "title": "% adults in high distress"}},
                  "tooltip": [{"field": "properties.PHN_NAME", "title": "PHN"}, {"field": "properties.STATE_NAME", "title": "State"},
                              {"field": "k10_high_persons", "type": "quantitative", "title": "All adults (%)", "format": ".1f"},
                              {"field": "k10_high_female", "type": "quantitative", "title": "Women (%)", "format": ".1f"},
-                             {"field": "k10_high_male", "type": "quantitative", "title": "Men (%)", "format": ".1f"}]}}]}
+                             {"field": "k10_high_male", "type": "quantitative", "title": "Men (%)", "format": ".1f"},
+                             {"field": "gap", "type": "quantitative", "title": "Gap (points)", "format": ".1f"}]}}]}
 spec("map_distress_phn", "Distress is worst in regional Queensland, NSW and Tasmania",
      ["% of adults with high or very high distress (K10), age-standardised, by PHN, 2022", "Grey: Western Queensland, estimate suppressed. PHIDU Social Health Atlas"], {
     "width": "container", "height": 460,
     "data": {"url": "data/phn.topojson", "format": {"type": "topojson", "feature": "phn"}}, **phn_choro("k10_high_persons")})
+PHN_NOTES = {"values": [
+    {"lon": 151.16, "lat": -33.62, "lab": "Northern Sydney 8.8%", "dx": 34, "dy": 14},
+    {"lon": 151.11, "lat": -27.29, "lab": "Darling Downs and\nWest Moreton 17.3%", "dx": 44, "dy": -30}]}
+specs["map_distress_phn"]["layer"].append(
+    {"data": PHN_NOTES, "encoding": {"longitude": {"field": "lon", "type": "quantitative"}, "latitude": {"field": "lat", "type": "quantitative"}},
+     "layer": [
+        {"mark": {"type": "rule", "color": INK, "strokeWidth": 0.8}, "encoding": {
+            "longitude2": {"field": "lon2"}, "latitude2": {"field": "lat2"}}, "transform": [
+            {"calculate": "datum.lon + datum.dx / 14", "as": "lon2"}, {"calculate": "datum.lat - datum.dy / 14", "as": "lat2"}]},
+        {"mark": {"type": "circle", "size": 22, "color": INK, "opacity": 1}},
+        {"transform": [{"calculate": "datum.lon + datum.dx / 14", "as": "lon2"}, {"calculate": "datum.lat - datum.dy / 14", "as": "lat2"}],
+         "mark": {"type": "text", "align": "left", "dx": 4, "fontSize": 12, "fontWeight": 600, "color": INK, "lineBreak": "\n",
+                  "stroke": "#fbfaf7", "strokeWidth": 3, "strokeOpacity": 0.9},
+         "encoding": {"longitude": {"field": "lon2"}, "latitude": {"field": "lat2"}, "text": {"field": "lab"}}},
+        {"transform": [{"calculate": "datum.lon + datum.dx / 14", "as": "lon2"}, {"calculate": "datum.lat - datum.dy / 14", "as": "lat2"}],
+         "mark": {"type": "text", "align": "left", "dx": 4, "fontSize": 12, "fontWeight": 600, "color": INK, "lineBreak": "\n"},
+         "encoding": {"longitude": {"field": "lon2"}, "latitude": {"field": "lat2"}, "text": {"field": "lab"}}}]})
 
-# 12. Small multiples: women vs men
+# 12. Small multiples: women, men (shared finer bins) and the gap between them
+PURPLES7 = ["#efedf6", "#d9d3ea", "#bdb0dd", "#9b8bca", "#7a66b4", "#5a4697", "#2f2366"]
+SEX_SCALE = {"type": "threshold", "domain": [9, 11, 13, 15, 17, 19], "range": PURPLES7}
+GAP_SCALE = {"type": "threshold", "domain": [3, 4, 5, 6], "range": ["#fbeedd", "#f6d3a6", "#eaa95c", "#d08a1e", "#8f5a0c"]}
 sm = {"data": {"url": "data/phn.topojson", "format": {"type": "topojson", "feature": "phn"}}, "hconcat": []}
-for f, lab in [("k10_high_female", "Women"), ("k10_high_male", "Men")]:
-    v = phn_choro(f); v["width"] = 470; v["height"] = 380
-    v["layer"][1]["encoding"]["color"]["legend"] = {"orient": "bottom-left", "title": "% in high distress", "direction": "horizontal"} if lab == "Women" else None
+for f, lab, sc in [("k10_high_female", "Women", SEX_SCALE), ("k10_high_male", "Men", SEX_SCALE),
+                   ("gap", "Gap: women minus men", GAP_SCALE)]:
+    v = phn_choro(f, scale=sc); v["width"] = 300; v["height"] = 270
+    leg = None
+    if lab == "Women": leg = {"orient": "bottom", "title": "% in high distress (women and men)", "direction": "horizontal", "labelOverlap": False}
+    if lab.startswith("Gap"): leg = {"orient": "bottom", "title": "Percentage points more for women", "direction": "horizontal", "labelOverlap": False}
+    v["layer"][1]["encoding"]["color"]["legend"] = leg
     v["title"] = {"text": lab, "fontSize": 14, "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif", "fontWeight": 600}
     sm["hconcat"].append(v)
-sm["resolve"] = {"scale": {"color": "shared"}}
+sm["resolve"] = {"scale": {"color": "independent"}, "legend": {"color": "independent"}}
+sm["spacing"] = 16
 spec("map_distress_sex", "Women report more distress than men in every region",
      ["% of women and of men with high or very high psychological distress, by PHN, 2022", "PHIDU Social Health Atlas of Australia"], sm)
 
 # 13. Proportional symbol: number of distressed adults
 spec("map_distress_count", "", [], {
     "hconcat": [
-        {"name": "symmap", "width": 520, "height": 440, "projection": AUS_PROJ,
+        {"name": "symmap", "width": 500, "height": 430, "projection": AUS_PROJ,
          "layer": [
             {"data": {"url": "data/aus_states.topojson", "format": {"type": "topojson", "feature": "aus_states"}},
              "mark": {"type": "geoshape", "fill": "#ece9e2", "stroke": "#ffffff", "strokeWidth": 1}},
@@ -433,10 +472,15 @@ spec("map_sunrise", "In summer the sun rises before 5 am in Brisbane, almost an 
          "layer": [
              {"mark": {"type": "circle", "size": 34, "color": INK, "stroke": "#ffffff", "strokeWidth": 1, "opacity": 1},
               "encoding": {"tooltip": [{"field": "city", "title": "City"}, {"field": "sunrise_label", "title": "Sunrise"}]}},
+             {"mark": dict({"type": "text", "fontSize": 11, "fontWeight": 600, "color": INK,
+                       "dx": {"expr": "datum.city == 'Adelaide' || datum.city == 'Melbourne' ? -6 : 6"},
+                       "align": {"expr": "datum.city == 'Adelaide' || datum.city == 'Melbourne' ? 'right' : 'left'"},
+                       "dy": {"expr": "datum.city == 'Canberra' ? 8 : datum.city == 'Sydney' ? -4 : datum.city == 'Melbourne' ? 6 : datum.city == 'Adelaide' ? -4 : 0"}}, stroke="#ffffff", strokeWidth=3, strokeOpacity=0.85),
+              "encoding": {"text": {"field": "lab"}}},
              {"mark": {"type": "text", "fontSize": 11, "fontWeight": 600, "color": INK,
                        "dx": {"expr": "datum.city == 'Adelaide' || datum.city == 'Melbourne' ? -6 : 6"},
                        "align": {"expr": "datum.city == 'Adelaide' || datum.city == 'Melbourne' ? 'right' : 'left'"},
-                       "dy": {"expr": "datum.city == 'Canberra' ? 8 : datum.city == 'Sydney' ? -4 : 0"}},
+                       "dy": {"expr": "datum.city == 'Canberra' ? 8 : datum.city == 'Sydney' ? -4 : datum.city == 'Melbourne' ? 6 : datum.city == 'Adelaide' ? -4 : 0"}},
               "encoding": {"text": {"field": "lab"}}}]}]})
 
 # 16. Ridgeline: when in the day each activity happens (ABS 2020-21 Tables 13-17)
@@ -456,7 +500,7 @@ spec("ridgeline_day", "Sleep hands over to work between 6 and 9 am",
     "spacing": 0,
     "bounds": "flush",
     "spec": {
-        "width": 520, "height": 40,
+        "width": 470, "height": 40,
         "layer": [
             {"mark": {"type": "area", "interpolate": "monotone", "fillOpacity": 0.85, "stroke": "#fbfaf7", "strokeWidth": 1},
              "encoding": {
