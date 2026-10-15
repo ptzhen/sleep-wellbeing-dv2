@@ -6,7 +6,7 @@ const charts = [
   "line_age_quality", "bar_circumstance",
   "dumbbell_lifestyle", "bar_work_impacts",
   "heatmap_wellbeing",
-  "map_distress_phn", "map_distress_sex", "map_distress_count", "dumbbell_capital_rest"
+  "map_distress_phn", "map_distress_sex", "map_distress_count"
 ];
 
 charts.forEach(id => {

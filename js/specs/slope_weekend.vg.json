@@ -1,21 +1,25 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 240,
+  "height": 260,
   "data": {
-    "url": "data/tus_sleep_summary.csv"
+    "url": "data/tus2024_sleep_summary.csv"
   },
   "transform": [
     {
-      "filter": "datum.activity == 'Sleeping' && datum.group == 'All 15+' && datum.day_type != 'All days'"
+      "filter": "datum.day_type != 'All days'"
     },
     {
-      "calculate": "datum.sex == 'Males' ? 'Men' : datum.sex == 'Females' ? 'Women' : 'Everyone'",
+      "calculate": "datum.sex == 'All' ? 'Everyone' : datum.sex",
       "as": "who"
     },
     {
-      "calculate": "floor(datum.mins_participants/60) + 'h ' + (datum.mins_participants % 60) + 'm'",
+      "calculate": "floor(datum.sleep_min/60) + 'h ' + (datum.sleep_min % 60) + 'm'",
       "as": "hm"
+    },
+    {
+      "calculate": "datum.who == 'Men' ? -9 : datum.who == 'Women' ? 9 : 0",
+      "as": "nudge"
     }
   ],
   "encoding": {
@@ -24,7 +28,7 @@
       "type": "ordinal",
       "title": null,
       "scale": {
-        "padding": 0.4
+        "padding": 0.5
       },
       "axis": {
         "labelAngle": 0,
@@ -35,18 +39,27 @@
       }
     },
     "y": {
-      "field": "mins_participants",
+      "field": "sleep_min",
       "type": "quantitative",
       "title": "Minutes asleep",
       "scale": {
         "domain": [
-          490,
-          560
+          500,
+          570
         ]
       },
       "axis": {
         "grid": true,
-        "tickCount": 5
+        "values": [
+          500,
+          510,
+          520,
+          530,
+          540,
+          550,
+          560,
+          570
+        ]
       }
     },
     "color": {
@@ -83,7 +96,7 @@
     {
       "mark": {
         "type": "circle",
-        "size": 80,
+        "size": 70,
         "opacity": 1
       },
       "encoding": {
@@ -114,21 +127,53 @@
         "align": "left",
         "dx": 10,
         "fontSize": 12,
-        "color": "#23263a"
+        "dy": {
+          "expr": "datum.nudge"
+        }
       },
       "encoding": {
         "text": {
           "field": "who"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.day_type == 'Weekday' && datum.who == 'Everyone'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -12,
+        "fontSize": 12
+      },
+      "encoding": {
+        "text": {
+          "field": "hm"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.day_type == 'Weekend' && datum.who == 'Everyone'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 70,
+        "fontSize": 12,
+        "fontWeight": 700
+      },
+      "encoding": {
+        "text": {
+          "value": "+44 min"
         },
         "color": {
-          "value": "#23263a"
-        },
-        "y": {
-          "field": "mins_participants",
-          "type": "quantitative"
-        },
-        "yOffset": {
-          "value": 0
+          "value": "#d08a1e"
         }
       }
     }

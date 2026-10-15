@@ -1,28 +1,37 @@
 group,sex,sleep_min,source_table
-Has a disability,Men,544.0,T8
-Has a disability,Women,535.0,T8
-Has a disability,All,539.0,T8
-No disability,Men,520.0,T8
-No disability,Women,513.0,T8
-No disability,All,517.0,T8
-Carer,Men,521.0,T9
-Carer,Women,489.0,T9
-Carer,All,504.0,T9
-Not a carer,Men,527.0,T9
-Not a carer,Women,525.0,T9
-Not a carer,All,526.0,T9
-Volunteer,Men,505.0,T10
-Volunteer,Women,501.0,T10
-Volunteer,All,502.0,T10
-Not a volunteer,Men,532.0,T10
-Not a volunteer,Women,526.0,T10
-Not a volunteer,All,529.0,T10
-"Parent, youngest child 0–4",Men,493.0,T11
-"Parent, youngest child 0–4",Women,488.0,T11
-"Parent, youngest child 0–4",All,490.0,T11
-"Parent, youngest child 5–14",Men,518.0,T11
-"Parent, youngest child 5–14",Women,501.0,T11
-"Parent, youngest child 5–14",All,511.0,T11
-No child under 15,Men,532.0,T11
-No child under 15,Women,526.0,T11
-No child under 15,All,529.0,T11
+"Parent, youngest child under 1",Men,497,ABS TUS 2024 Table 5.3
+"Parent, youngest child under 1",Women,496,ABS TUS 2024 Table 5.3
+"Parent, youngest child under 1",All,496,ABS TUS 2024 Table 5.3
+"Parent, youngest child aged 1",Men,503,ABS TUS 2024 Table 5.3
+"Parent, youngest child aged 1",Women,503,ABS TUS 2024 Table 5.3
+"Parent, youngest child aged 1",All,503,ABS TUS 2024 Table 5.3
+"Parent, youngest child 2–4",Men,511,ABS TUS 2024 Table 5.3
+"Parent, youngest child 2–4",Women,520,ABS TUS 2024 Table 5.3
+"Parent, youngest child 2–4",All,516,ABS TUS 2024 Table 5.3
+"Parent, youngest child 5–11",Men,506,ABS TUS 2024 Table 5.3
+"Parent, youngest child 5–11",Women,511,ABS TUS 2024 Table 5.3
+"Parent, youngest child 5–11",All,509,ABS TUS 2024 Table 5.3
+"Parent, youngest child 12–14",Men,513,ABS TUS 2024 Table 5.3
+"Parent, youngest child 12–14",Women,505,ABS TUS 2024 Table 5.3
+"Parent, youngest child 12–14",All,508,ABS TUS 2024 Table 5.3
+No child under 15 at home,Men,534,ABS TUS 2024 Table 5.3
+No child under 15 at home,Women,535,ABS TUS 2024 Table 5.3
+No child under 15 at home,All,534,ABS TUS 2024 Table 5.3
+Carer,Men,520,ABS TUS 2024 Table 12.3
+Carer,Women,520,ABS TUS 2024 Table 12.3
+Carer,All,520,ABS TUS 2024 Table 12.3
+Not a carer,Men,528,ABS TUS 2024 Table 12.3
+Not a carer,Women,531,ABS TUS 2024 Table 12.3
+Not a carer,All,530,ABS TUS 2024 Table 12.3
+Volunteer,Men,522,ABS TUS 2024 Table 13.3
+Volunteer,Women,518,ABS TUS 2024 Table 13.3
+Volunteer,All,520,ABS TUS 2024 Table 13.3
+Not a volunteer,Men,532,ABS TUS 2024 Table 13.3
+Not a volunteer,Women,538,ABS TUS 2024 Table 13.3
+Not a volunteer,All,535,ABS TUS 2024 Table 13.3
+Has a disability,Men,540,ABS TUS 2024 Table 11.3
+Has a disability,Women,539,ABS TUS 2024 Table 11.3
+Has a disability,All,539,ABS TUS 2024 Table 11.3
+No disability,Men,524,ABS TUS 2024 Table 11.3
+No disability,Women,526,ABS TUS 2024 Table 11.3
+No disability,All,525,ABS TUS 2024 Table 11.3

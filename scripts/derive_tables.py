@@ -3,29 +3,7 @@ Usage: python3 derive_tables.py <data_dir>"""
 import sys, csv, math, os
 d = sys.argv[1]
 
-# 1. Sleep minutes (participants, primary activity) by life circumstance, ABS TUS 2020-21 Tables 8-11
-pick = {
-    ('Table 8.3', 'Has disability'): 'Has a disability',
-    ('Table 8.3', 'Has no disability'): 'No disability',
-    ('Table 9.3', 'Provided care to another person'): 'Carer',
-    ('Table 9.3', 'Did not provide care to another person'): 'Not a carer',
-    ('Table 10.3', 'Did unpaid voluntary work in last 12 months'): 'Volunteer',
-    ('Table 10.3', 'Did not do unpaid voluntary work in last 12 months'): 'Not a volunteer',
-    ('Table 11.3', 'Youngest child in household 0 to 4 years'): 'Parent, youngest child 0–4',
-    ('Table 11.3', 'Youngest child in household 5 to 14 years'): 'Parent, youngest child 5–14',
-    ('Table 11.3', 'Non-parents'): 'No child under 15',
-}
-sexmap = {'Males': 'Men', 'Male parents': 'Men', 'Females': 'Women', 'Female parents': 'Women',
-          'Persons': 'All', 'Total parents': 'All', 'Total': 'All'}
-out, seen = [], set()
-for r in csv.DictReader(open(f'{d}/abs_tus_sleep_extra_tables.csv')):
-    if r['activity'] != 'Sleeping' or r['activity_scope'] != 'Primary Activity': continue
-    g = pick.get((r['sheet'], r['group']))
-    s = sexmap.get(r['subgroup'].strip())
-    if g and s and (g, s) not in seen:
-        seen.add((g, s)); out.append([g, s, float(r['value']), r['table']])
-with open(f'{d}/sleep_by_circumstance.csv', 'w', newline='') as f:
-    w = csv.writer(f); w.writerow(['group', 'sex', 'sleep_min', 'source_table']); w.writerows(out)
+# 1. Sleep by life circumstance now comes from extract_abs_tus2024.py (ABS 2024)
 
 # 2. Capital city vs rest of state, high/very high distress (PHIDU 2022)
 rows = {r['name'].strip(): r for r in csv.DictReader(open(f'{d}/phidu_state_2022.csv'))}
@@ -55,4 +33,4 @@ with open(f'{d}/sunrise_cities.csv', 'w', newline='') as f:
         for c, la, lo, tw, ts in cities:
             m = ns['sunrise_utc'](la, lo, doy) + (tw, ts)[k] * 60
             w.writerow([season, c, lo, la, round(m, 1), f'{int(m // 60)}:{int(m % 60):02d} am'])
-print(len(out), 'circumstance rows')
+print('done')

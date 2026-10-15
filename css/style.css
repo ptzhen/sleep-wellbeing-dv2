@@ -76,3 +76,7 @@ footer p { max-width: 90ch; }
   .chart { overflow-x: auto; }
   .two-col .text { position: static; }
 }
+.fig .src a, footer a { color: inherit; text-decoration: underline; text-decoration-color: #b9b5c9; text-underline-offset: 2px; }
+.fig .src a:hover, footer a:hover { color: var(--weekday); }
+.sources { padding-left: 1.2em; max-width: 90ch; }
+.sources li { margin-bottom: 4px; }

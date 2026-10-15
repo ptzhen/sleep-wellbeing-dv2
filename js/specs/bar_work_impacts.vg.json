@@ -1,49 +1,62 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": "container",
-  "height": {
-    "step": 34
-  },
   "data": {
     "values": [
       {
+        "base": "Among people in work",
         "impact": "Made errors at work (past 3 months)",
         "pct": 29.0,
-        "note": "20.0% on 1–2 days, 9.0% on 3 or more days"
+        "note": "45.8% of 18–24 and 39.2% of 25–34 year olds"
       },
       {
+        "base": "Among people in work",
+        "impact": "Fell or nearly fell asleep on the job (past month)",
+        "pct": 17.1,
+        "note": "27.1% of 18–24 year olds"
+      },
+      {
+        "base": "Among people in work",
+        "impact": "Missed a day of work (past 4 weeks)",
+        "pct": 17.0,
+        "note": "30.4% of 25–34 year olds"
+      },
+      {
+        "base": "Among all adults",
         "impact": "Ever nodded off while driving",
         "pct": 19.9,
         "note": "22.3% of men, 17.2% of women"
       },
       {
-        "impact": "Fell or nearly fell asleep at work (past month)",
-        "pct": 17.1,
-        "note": "27.1% of 18–24 year olds"
-      },
-      {
-        "impact": "Missed work because too sleepy (past 4 weeks)",
-        "pct": 17.0,
-        "note": "30.4% of 25–34 year olds"
-      },
-      {
+        "base": "Among all adults",
         "impact": "Drove drowsy every week (past year)",
         "pct": 16.0,
         "note": "30.1% of 25–34 year olds"
       },
       {
+        "base": "Among all adults",
         "impact": "Crashed after dozing off (past year)",
         "pct": 5.5,
         "note": "10.1% of 25–34 year olds"
       }
     ]
   },
+  "width": "container",
+  "height": {
+    "step": 32
+  },
   "encoding": {
     "y": {
       "field": "impact",
       "type": "nominal",
       "title": null,
-      "sort": "-x",
+      "sort": [
+        "Made errors at work (past 3 months)",
+        "Fell or nearly fell asleep on the job (past month)",
+        "Missed a day of work (past 4 weeks)",
+        "Ever nodded off while driving",
+        "Drove drowsy every week (past year)",
+        "Crashed after dozing off (past year)"
+      ],
       "axis": {
         "domain": false,
         "ticks": false,
@@ -53,7 +66,7 @@
     "x": {
       "field": "pct",
       "type": "quantitative",
-      "title": "% of adults",
+      "title": "% of the group",
       "scale": {
         "domain": [
           0,
@@ -63,6 +76,25 @@
       "axis": {
         "grid": true
       }
+    },
+    "color": {
+      "field": "base",
+      "type": "nominal",
+      "title": null,
+      "scale": {
+        "domain": [
+          "Among people in work",
+          "Among all adults"
+        ],
+        "range": [
+          "#3b5ba5",
+          "#8fa6d6"
+        ]
+      },
+      "legend": {
+        "orient": "top",
+        "direction": "horizontal"
+      }
     }
   },
   "layer": [
@@ -70,8 +102,7 @@
       "mark": {
         "type": "bar",
         "height": 18,
-        "cornerRadiusEnd": 3,
-        "color": "#3b5ba5"
+        "cornerRadiusEnd": 3
       },
       "encoding": {
         "tooltip": [
@@ -80,13 +111,17 @@
             "title": "Impact"
           },
           {
+            "field": "base",
+            "title": "Out of"
+          },
+          {
             "field": "pct",
-            "title": "% of adults",
+            "title": "%",
             "format": ".1f"
           },
           {
             "field": "note",
-            "title": "Detail"
+            "title": "Highest group"
           }
         ]
       }
@@ -103,6 +138,9 @@
           "field": "pct",
           "type": "quantitative",
           "format": ".0f"
+        },
+        "color": {
+          "value": "#23263a"
         }
       }
     }

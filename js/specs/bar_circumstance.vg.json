@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
   "height": {
-    "step": 30
+    "step": 28
   },
   "data": {
     "url": "data/sleep_by_circumstance.csv"
@@ -32,7 +32,7 @@
       "filter": "datum.sex == circSex"
     },
     {
-      "calculate": "datum.sleep_min - 522",
+      "calculate": "datum.sleep_min - 528",
       "as": "diff"
     },
     {
@@ -42,6 +42,10 @@
     {
       "calculate": "(datum.diff > 0 ? '+' : '') + datum.diff + ' min'",
       "as": "difflabel"
+    },
+    {
+      "calculate": "floor(datum.sleep_min/60) + 'h ' + (datum.sleep_min % 60) + 'm'",
+      "as": "hm"
     }
   ],
   "encoding": {
@@ -49,10 +53,20 @@
       "field": "group",
       "type": "nominal",
       "title": null,
-      "sort": {
-        "field": "diff",
-        "order": "ascending"
-      },
+      "sort": [
+        "Parent, youngest child under 1",
+        "Parent, youngest child aged 1",
+        "Parent, youngest child 2–4",
+        "Parent, youngest child 5–11",
+        "Parent, youngest child 12–14",
+        "No child under 15 at home",
+        "Carer",
+        "Not a carer",
+        "Volunteer",
+        "Not a volunteer",
+        "Has a disability",
+        "No disability"
+      ],
       "axis": {
         "domain": false,
         "ticks": false,
@@ -66,7 +80,7 @@
       "scale": {
         "domain": [
           -40,
-          50
+          20
         ]
       },
       "axis": {
@@ -78,10 +92,7 @@
           -10,
           0,
           10,
-          20,
-          30,
-          40,
-          50
+          20
         ]
       }
     }
@@ -119,8 +130,8 @@
             "title": "Group"
           },
           {
-            "field": "sleep_min",
-            "title": "Minutes asleep"
+            "field": "hm",
+            "title": "Sleep a day"
           },
           {
             "field": "difflabel",

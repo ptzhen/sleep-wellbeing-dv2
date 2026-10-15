@@ -47,7 +47,7 @@ spec("waffle_short_sleep", "1 in 3 Australian adults sleep less than 7 hours",
         "tooltip": [{"field": "group", "title": "Usual sleep"}]}})
 
 # 2. World choropleth (OECD time use)
-spec("map_world_sleep", "Australians sleep about as much as most rich countries",
+spec("map_world_sleep", "Australians sleep about as long as people in most surveyed countries",
      ["Average minutes of sleep per day, adults, latest OECD time-use survey", "Survey years vary (1999–2019); hover for each country's year. Grey: no survey"], {
     "width": "container", "height": 420,
     "projection": {"type": "equalEarth"},
@@ -138,29 +138,35 @@ spec("radial_clock", "Weekday alarms get most of us up by 8 am; at the weekend 6
     "hconcat": [clock_layer("Weekday"), clock_layer("Weekend")],
     "resolve": {"scale": {"color": "independent"}}})
 
-# 5. Slope weekday vs weekend
-spec("slope_weekend", "Weekends buy back about 36 extra minutes of sleep",
-     ["Average minutes asleep per day for people who slept, ages 15+", "ABS, How Australians Use Their Time 2020–21, Table 2"], {
-    "width": "container", "height": 240,
-    "data": {"url": "data/tus_sleep_summary.csv"},
-    "transform": [{"filter": "datum.activity == 'Sleeping' && datum.group == 'All 15+' && datum.day_type != 'All days'"},
-                  {"calculate": "datum.sex == 'Males' ? 'Men' : datum.sex == 'Females' ? 'Women' : 'Everyone'", "as": "who"},
-                  {"calculate": "floor(datum.mins_participants/60) + 'h ' + (datum.mins_participants % 60) + 'm'", "as": "hm"}],
+# 5. Slope weekday vs weekend (ABS 2024)
+spec("slope_weekend", "Weekends buy back about 44 extra minutes of sleep",
+     ["Average minutes asleep a day, people aged 15+", "ABS, How Australians Use Their Time 2024, Table 4.1"], {
+    "width": "container", "height": 260,
+    "data": {"url": "data/tus2024_sleep_summary.csv"},
+    "transform": [{"filter": "datum.day_type != 'All days'"},
+                  {"calculate": "datum.sex == 'All' ? 'Everyone' : datum.sex", "as": "who"},
+                  {"calculate": "floor(datum.sleep_min/60) + 'h ' + (datum.sleep_min % 60) + 'm'", "as": "hm"},
+                  {"calculate": "datum.who == 'Men' ? -9 : datum.who == 'Women' ? 9 : 0", "as": "nudge"}],
     "encoding": {
-        "x": {"field": "day_type", "type": "ordinal", "title": None, "scale": {"padding": 0.4},
+        "x": {"field": "day_type", "type": "ordinal", "title": None, "scale": {"padding": 0.5},
               "axis": {"labelAngle": 0, "labelFontSize": 13, "domain": False, "ticks": False, "orient": "top"}},
-        "y": {"field": "mins_participants", "type": "quantitative", "title": "Minutes asleep", "scale": {"domain": [490, 560]},
-              "axis": {"grid": True, "tickCount": 5}},
+        "y": {"field": "sleep_min", "type": "quantitative", "title": "Minutes asleep", "scale": {"domain": [500, 570]},
+              "axis": {"grid": True, "values": [500, 510, 520, 530, 540, 550, 560, 570]}},
         "color": {"field": "who", "type": "nominal", "title": None,
                   "scale": {"domain": ["Women", "Men", "Everyone"], "range": [WOMEN, MEN, INK]}, "legend": None}},
     "layer": [
         {"mark": {"type": "line", "strokeWidth": 2}, "encoding": {"detail": {"field": "who"}}},
-        {"mark": {"type": "circle", "size": 80, "opacity": 1},
+        {"mark": {"type": "circle", "size": 70, "opacity": 1},
          "encoding": {"tooltip": [{"field": "who", "title": "Who"}, {"field": "day_type", "title": "Day"}, {"field": "hm", "title": "Sleep"}]}},
         {"transform": [{"filter": "datum.day_type == 'Weekend'"}],
-         "mark": {"type": "text", "align": "left", "dx": 10, "fontSize": 12, "color": INK},
-         "encoding": {"text": {"field": "who"}, "color": {"value": INK}, "y": {"field": "mins_participants", "type": "quantitative"},
-                      "yOffset": {"value": 0}}}]})
+         "mark": {"type": "text", "align": "left", "dx": 10, "fontSize": 12, "dy": {"expr": "datum.nudge"}},
+         "encoding": {"text": {"field": "who"}}},
+        {"transform": [{"filter": "datum.day_type == 'Weekday' && datum.who == 'Everyone'"}],
+         "mark": {"type": "text", "align": "right", "dx": -12, "fontSize": 12},
+         "encoding": {"text": {"field": "hm"}}},
+        {"transform": [{"filter": "datum.day_type == 'Weekend' && datum.who == 'Everyone'"}],
+         "mark": {"type": "text", "align": "left", "dx": 70, "fontSize": 12, "fontWeight": 700},
+         "encoding": {"text": {"value": "+44 min"}, "color": {"value": WEEKEND}}}]})
 
 # 6. Sleep by age (SHF 2016): the young paradox
 spec("line_age_quality", "Young adults sleep the longest but feel the worst",
@@ -185,29 +191,33 @@ spec("line_age_quality", "Young adults sleep the longest but feel the worst",
          "mark": {"type": "text", "dy": -12, "fontSize": 12, "fontWeight": 600},
          "encoding": {"text": {"field": "pct", "type": "quantitative", "format": ".0f"}}}]})
 
-# 7. Life circumstances diverging bar
-spec("bar_circumstance", "Young children, caring and volunteering all cut into sleep",
-     ["Minutes asleep a day compared with the average adult (522 minutes), ages 15+",
-      "ABS, How Australians Use Their Time 2020–21, Tables 8–11"], {
-    "width": "container", "height": {"step": 30},
+# 7. Life circumstances diverging bar (ABS 2024)
+CIRC_ORDER = ["Parent, youngest child under 1", "Parent, youngest child aged 1", "Parent, youngest child 2–4",
+              "Parent, youngest child 5–11", "Parent, youngest child 12–14", "No child under 15 at home",
+              "Carer", "Not a carer", "Volunteer", "Not a volunteer", "Has a disability", "No disability"]
+spec("bar_circumstance", "A baby at home costs about half an hour of sleep a night",
+     ["Minutes asleep a day compared with the average adult (528 minutes), people aged 15+",
+      "ABS, How Australians Use Their Time 2024, Tables 5, 11, 12 and 13"], {
+    "width": "container", "height": {"step": 28},
     "data": {"url": "data/sleep_by_circumstance.csv"},
     "params": [{"name": "circSex", "value": "All",
                 "bind": {"input": "radio", "options": ["All", "Women", "Men"], "labels": ["Everyone", "Women", "Men"], "name": "Show: "}}],
     "transform": [{"filter": "datum.sex == circSex"},
-                  {"calculate": "datum.sleep_min - 522", "as": "diff"},
+                  {"calculate": "datum.sleep_min - 528", "as": "diff"},
                   {"calculate": "datum.diff >= 0 ? 'More than average' : 'Less than average'", "as": "dir"},
-                  {"calculate": "(datum.diff > 0 ? '+' : '') + datum.diff + ' min'", "as": "difflabel"}],
+                  {"calculate": "(datum.diff > 0 ? '+' : '') + datum.diff + ' min'", "as": "difflabel"},
+                  {"calculate": "floor(datum.sleep_min/60) + 'h ' + (datum.sleep_min % 60) + 'm'", "as": "hm"}],
     "encoding": {
-        "y": {"field": "group", "type": "nominal", "title": None, "sort": {"field": "diff", "order": "ascending"},
+        "y": {"field": "group", "type": "nominal", "title": None, "sort": CIRC_ORDER,
               "axis": {"domain": False, "ticks": False, "labelLimit": 320}},
         "x": {"field": "diff", "type": "quantitative", "title": "Minutes compared with the average adult",
-              "scale": {"domain": [-40, 50]}, "axis": {"grid": True, "values": [-40, -30, -20, -10, 0, 10, 20, 30, 40, 50]}}},
+              "scale": {"domain": [-40, 20]}, "axis": {"grid": True, "values": [-40, -30, -20, -10, 0, 10, 20]}}},
     "layer": [
         {"mark": {"type": "bar", "height": 16, "cornerRadius": 3},
          "encoding": {"color": {"field": "dir", "type": "nominal", "title": None,
                                 "scale": {"domain": ["Less than average", "More than average"], "range": [WEEKEND, WEEKDAY]},
                                 "legend": {"orient": "top", "direction": "horizontal"}},
-                      "tooltip": [{"field": "group", "title": "Group"}, {"field": "sleep_min", "title": "Minutes asleep"},
+                      "tooltip": [{"field": "group", "title": "Group"}, {"field": "hm", "title": "Sleep a day"},
                                   {"field": "difflabel", "title": "Compared with average"}]}},
         {"mark": {"type": "rule", "color": INK}, "encoding": {"x": {"datum": 0}, "y": None}},
         {"mark": {"type": "text", "fontSize": 12, "dx": {"expr": "datum.diff >= 0 ? 6 : -6"},
@@ -243,26 +253,34 @@ spec("dumbbell_lifestyle", "Late-night screens, work and caffeine go with poorer
                                   {"field": "pct", "title": "% with 2+ problems", "format": ".1f"}]}},
         {"mark": {"type": "text", "dy": -14, "fontSize": 11, "color": MUTED}, "encoding": {"text": {"field": "level"}}}]})
 
-# 9. Work and driving impacts
-spec("bar_work_impacts", "Tired workers make mistakes, miss work and nod off at the wheel",
-     ["% of all adults surveyed, because of sleepiness or a sleep problem", "Sleep Health Foundation, Sleep Health Survey of Australian Adults 2016, Table 7"], {
-    "width": "container", "height": {"step": 34},
+# 9. Work and driving impacts: two bases, shown as two panels
+spec("bar_work_impacts", "Sleepiness follows people to work and onto the road",
+     ["% because of sleepiness or a sleep problem; work questions were answered by people in work",
+      "Sleep Health Foundation, Sleep Health Survey of Australian Adults 2016, Table 7"], {
     "data": {"values": [
-        {"impact": "Made errors at work (past 3 months)", "pct": 29.0, "note": "20.0% on 1–2 days, 9.0% on 3 or more days"},
-        {"impact": "Ever nodded off while driving", "pct": 19.9, "note": "22.3% of men, 17.2% of women"},
-        {"impact": "Fell or nearly fell asleep at work (past month)", "pct": 17.1, "note": "27.1% of 18–24 year olds"},
-        {"impact": "Missed work because too sleepy (past 4 weeks)", "pct": 17.0, "note": "30.4% of 25–34 year olds"},
-        {"impact": "Drove drowsy every week (past year)", "pct": 16.0, "note": "30.1% of 25–34 year olds"},
-        {"impact": "Crashed after dozing off (past year)", "pct": 5.5, "note": "10.1% of 25–34 year olds"}]},
+        {"base": "Among people in work", "impact": "Made errors at work (past 3 months)", "pct": 29.0, "note": "45.8% of 18–24 and 39.2% of 25–34 year olds"},
+        {"base": "Among people in work", "impact": "Fell or nearly fell asleep on the job (past month)", "pct": 17.1, "note": "27.1% of 18–24 year olds"},
+        {"base": "Among people in work", "impact": "Missed a day of work (past 4 weeks)", "pct": 17.0, "note": "30.4% of 25–34 year olds"},
+        {"base": "Among all adults", "impact": "Ever nodded off while driving", "pct": 19.9, "note": "22.3% of men, 17.2% of women"},
+        {"base": "Among all adults", "impact": "Drove drowsy every week (past year)", "pct": 16.0, "note": "30.1% of 25–34 year olds"},
+        {"base": "Among all adults", "impact": "Crashed after dozing off (past year)", "pct": 5.5, "note": "10.1% of 25–34 year olds"}]},
+    "width": "container", "height": {"step": 32},
     "encoding": {
-        "y": {"field": "impact", "type": "nominal", "title": None, "sort": "-x", "axis": {"domain": False, "ticks": False, "labelLimit": 320}},
-        "x": {"field": "pct", "type": "quantitative", "title": "% of adults", "scale": {"domain": [0, 35]}, "axis": {"grid": True}}},
+        "y": {"field": "impact", "type": "nominal", "title": None,
+              "sort": ["Made errors at work (past 3 months)", "Fell or nearly fell asleep on the job (past month)",
+                       "Missed a day of work (past 4 weeks)", "Ever nodded off while driving",
+                       "Drove drowsy every week (past year)", "Crashed after dozing off (past year)"],
+              "axis": {"domain": False, "ticks": False, "labelLimit": 320}},
+        "x": {"field": "pct", "type": "quantitative", "title": "% of the group", "scale": {"domain": [0, 35]}, "axis": {"grid": True}},
+        "color": {"field": "base", "type": "nominal", "title": None,
+                  "scale": {"domain": ["Among people in work", "Among all adults"], "range": [WEEKDAY, "#8fa6d6"]},
+                  "legend": {"orient": "top", "direction": "horizontal"}}},
     "layer": [
-        {"mark": {"type": "bar", "height": 18, "cornerRadiusEnd": 3, "color": WEEKDAY},
-         "encoding": {"tooltip": [{"field": "impact", "title": "Impact"}, {"field": "pct", "title": "% of adults", "format": ".1f"},
-                                  {"field": "note", "title": "Detail"}]}},
+        {"mark": {"type": "bar", "height": 18, "cornerRadiusEnd": 3},
+         "encoding": {"tooltip": [{"field": "impact", "title": "Impact"}, {"field": "base", "title": "Out of"},
+                                  {"field": "pct", "title": "%", "format": ".1f"}, {"field": "note", "title": "Highest group"}]}},
         {"mark": {"type": "text", "align": "left", "dx": 6, "fontSize": 12},
-         "encoding": {"text": {"field": "pct", "type": "quantitative", "format": ".0f"}}}]})
+         "encoding": {"text": {"field": "pct", "type": "quantitative", "format": ".0f"}, "color": {"value": INK}}}]})
 
 # 10. Wellbeing heatmap (SHF 2025)
 spec("heatmap_wellbeing", "People with back pain and mental health conditions sleep worst on every measure",
@@ -367,7 +385,7 @@ spec("map_distress_count", "", [], {
              "encoding": {
                  "longitude": {"field": "lon", "type": "quantitative"}, "latitude": {"field": "lat", "type": "quantitative"},
                  "size": {"field": "distressed_adults", "type": "quantitative", "title": "Distressed adults",
-                          "scale": {"type": "sqrt", "domain": [0, 210000], "range": [0, 1500]},
+                          "scale": {"type": "linear", "domain": [0, 210000], "range": [0, 1500]},
                           "legend": {"orient": "top-left", "values": [25000, 100000, 200000], "format": ",.0f",
                                      "symbolFillColor": "#5e4a9e", "symbolOpacity": 0.6, "symbolStrokeColor": "#ffffff"}},
                  "color": {"condition": {"test": {"or": [{"param": "hoverMap", "empty": False}, {"param": "hoverBar", "empty": False}]}, "value": ACCENT}, "value": "#5e4a9e"},
@@ -388,25 +406,6 @@ spec("map_distress_count", "", [], {
              "color": {"condition": {"test": {"or": [{"param": "hoverMap", "empty": False}, {"param": "hoverBar", "empty": False}]}, "value": ACCENT}, "value": "#5e4a9e"},
              "tooltip": [{"field": "name", "title": "PHN"}, {"field": "distressed_adults", "title": "Distressed adults (est.)", "format": ",.0f"}]}}],
     "spacing": 40})
-
-# 14. Capital vs rest dumbbell
-spec("dumbbell_capital_rest", "Outside the capitals distress is higher, except in Brisbane and Hobart",
-     ["% of adults with high or very high distress, capital city vs rest of state, 2022", "PHIDU Social Health Atlas (ACT not shown: it is all capital)"], {
-    "width": "container", "height": {"step": 34},
-    "data": {"url": "data/capital_vs_rest.csv"},
-    "encoding": {
-        "y": {"field": "state", "type": "nominal", "title": None, "sort": {"field": "k10_high_persons", "op": "max", "order": "descending"},
-              "axis": {"domain": False, "ticks": False}},
-        "x": {"field": "k10_high_persons", "type": "quantitative", "title": "% of adults in high distress",
-              "scale": {"domain": [10, 18]}, "axis": {"grid": True, "values": [10, 11, 12, 13, 14, 15, 16, 17, 18]}}},
-    "layer": [
-        {"mark": {"type": "rule", "strokeWidth": 3, "color": "#c9c5bb"}, "encoding": {"x": {"aggregate": "min", "field": "k10_high_persons"}, "x2": {"aggregate": "max", "field": "k10_high_persons"}}},
-        {"mark": {"type": "circle", "size": 120, "opacity": 1, "stroke": "#fbfaf7", "strokeWidth": 1.5},
-         "encoding": {"color": {"field": "area", "type": "nominal", "title": None,
-                                "scale": {"domain": ["Capital city", "Rest of state"], "range": ["#8e7cc3", "#2f2366"]},
-                                "legend": {"orient": "top", "direction": "horizontal"}},
-                      "tooltip": [{"field": "area_name", "title": "Area"},
-                                  {"field": "k10_high_persons", "title": "% in high distress", "format": ".1f"}]}}]})
 
 # 15. Sunrise scalar field
 SUN_LABELS = ["before 4:30 am", "4:30–5:00 am", "5:00–5:30 am", "5:30–6:00 am", "6:00–6:30 am", "6:30–7:00 am", "7:00–7:30 am", "after 7:30 am"]

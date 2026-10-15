@@ -73,7 +73,7 @@
               "type": "quantitative",
               "title": "Distressed adults",
               "scale": {
-                "type": "sqrt",
+                "type": "linear",
                 "domain": [
                   0,
                   210000

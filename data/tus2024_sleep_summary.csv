@@ -1,0 +1,10 @@
+day_type,sex,sleep_min,source
+All days,Men,528,ABS TUS 2024 Table 1.1
+All days,Women,529,ABS TUS 2024 Table 1.1
+All days,All,528,ABS TUS 2024 Table 1.1
+Weekday,Men,514,ABS TUS 2024 Table 4.1
+Weekday,Women,518,ABS TUS 2024 Table 4.1
+Weekday,All,516,ABS TUS 2024 Table 4.1
+Weekend,Men,562,ABS TUS 2024 Table 4.1
+Weekend,Women,558,ABS TUS 2024 Table 4.1
+Weekend,All,560,ABS TUS 2024 Table 4.1
