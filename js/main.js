@@ -108,3 +108,18 @@ function onScroll() {
 }
 document.addEventListener("scroll", onScroll, {passive: true});
 onScroll();
+
+// Keep jargon definitions inside the screen on narrow layouts
+document.querySelectorAll(".term").forEach(t => {
+  const tip = t.querySelector(".tip");
+  const place = () => {
+    t.style.setProperty("--shift", "0px");
+    const r = tip.getBoundingClientRect(), pad = 12;
+    let shift = 0;
+    if (r.left < pad) shift = pad - r.left;
+    else if (r.right > window.innerWidth - pad) shift = window.innerWidth - pad - r.right;
+    t.style.setProperty("--shift", shift + "px");
+  };
+  t.addEventListener("mouseenter", place);
+  t.addEventListener("focus", place);
+});

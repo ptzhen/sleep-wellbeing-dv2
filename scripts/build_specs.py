@@ -76,7 +76,17 @@ spec("map_world_sleep", "Australians sleep about as long as people in most surve
                          {"field": "survey_year", "title": "Survey year"},
                          {"field": "age_group", "title": "Ages covered"}]}},
         {"transform": [{"filter": "datum.properties.ADM0_A3 == 'AUS'"}],
-         "mark": {"type": "geoshape", "fill": None, "stroke": ACCENT, "strokeWidth": 2}}]})
+         "mark": {"type": "geoshape", "fill": None, "stroke": ACCENT, "strokeWidth": 2}},
+        # Annotations: Australia plus the shortest and longest sleepers, placed in open sea
+        *[{"data": {"values": [{"lon": lon, "lat": lat, "t": t}]},
+           "mark": {"type": "text", "fontSize": 11.5, "fontWeight": 600, "baseline": "middle", "align": al, "color": c,
+                    "opacity": {"expr": "width < 520 ? %d : 1" % (1 if al == "center" else 0)},
+                    "dy": {"expr": "width < 520 ? 7 : 0"}},
+           "encoding": {"longitude": {"field": "lon", "type": "quantitative"}, "latitude": {"field": "lat", "type": "quantitative"},
+                        "text": {"field": "t"}}}
+          for lon, lat, t, al, c in [(128, -49, "Australia 8h 32m", "center", ACCENT),
+                                     (147, 31, "Japan 7h 24m, the least", "left", INK),
+                                     (13, -37, "South Africa 9h 13m, the most", "right", INK)]]]})
 
 # 3. Dumbbell: men vs women by country
 spec("dumbbell_country_sex", "Women out-sleep men in most countries",
@@ -517,6 +527,10 @@ spec("ridgeline_day", "Sleep hands over to work between 6 and 9 am",
     "spec": {
         "width": 470, "height": 40,
         "layer": [
+            # Shaded band for the 6 to 9 am handover named in the title
+            {"transform": [{"aggregate": [{"op": "count", "as": "n"}]}],
+             "mark": {"type": "rect", "color": "#f3b64e", "opacity": 0.16},
+             "encoding": {"x": {"datum": 6, "type": "quantitative"}, "x2": {"datum": 9}}},
             {"mark": {"type": "area", "interpolate": "monotone", "fillOpacity": 0.85, "stroke": "#fbfaf7", "strokeWidth": 1},
              "encoding": {
                  "x": {"field": "hour_mid", "type": "quantitative", "title": None, "scale": {"domain": [0, 24]},

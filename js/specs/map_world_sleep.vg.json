@@ -152,6 +152,120 @@
         "stroke": "#d08a1e",
         "strokeWidth": 2
       }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lon": 128,
+            "lat": -49,
+            "t": "Australia 8h 32m"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 11.5,
+        "fontWeight": 600,
+        "baseline": "middle",
+        "align": "center",
+        "color": "#d08a1e",
+        "opacity": {
+          "expr": "width < 520 ? 1 : 1"
+        },
+        "dy": {
+          "expr": "width < 520 ? 7 : 0"
+        }
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "t"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lon": 147,
+            "lat": 31,
+            "t": "Japan 7h 24m, the least"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 11.5,
+        "fontWeight": 600,
+        "baseline": "middle",
+        "align": "left",
+        "color": "#23263a",
+        "opacity": {
+          "expr": "width < 520 ? 0 : 1"
+        },
+        "dy": {
+          "expr": "width < 520 ? 7 : 0"
+        }
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "t"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lon": 13,
+            "lat": -37,
+            "t": "South Africa 9h 13m, the most"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 11.5,
+        "fontWeight": 600,
+        "baseline": "middle",
+        "align": "right",
+        "color": "#23263a",
+        "opacity": {
+          "expr": "width < 520 ? 0 : 1"
+        },
+        "dy": {
+          "expr": "width < 520 ? 7 : 0"
+        }
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "t"
+        }
+      }
     }
   ],
   "config": {

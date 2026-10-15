@@ -71,6 +71,32 @@
     "height": 40,
     "layer": [
       {
+        "transform": [
+          {
+            "aggregate": [
+              {
+                "op": "count",
+                "as": "n"
+              }
+            ]
+          }
+        ],
+        "mark": {
+          "type": "rect",
+          "color": "#f3b64e",
+          "opacity": 0.16
+        },
+        "encoding": {
+          "x": {
+            "datum": 6,
+            "type": "quantitative"
+          },
+          "x2": {
+            "datum": 9
+          }
+        }
+      },
+      {
         "mark": {
           "type": "area",
           "interpolate": "monotone",
