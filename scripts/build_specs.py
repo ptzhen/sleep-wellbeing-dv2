@@ -439,6 +439,84 @@ spec("map_sunrise", "In summer the sun rises before 5 am in Brisbane, almost an 
                        "dy": {"expr": "datum.city == 'Canberra' ? 8 : datum.city == 'Sydney' ? -4 : 0"}},
               "encoding": {"text": {"field": "lab"}}}]}]})
 
+# 16. Ridgeline: when in the day each activity happens (ABS 2020-21 Tables 13-17)
+RIDGE_ORDER = ["Sleep", "Work", "Child care", "Domestic", "Free time"]
+spec("ridgeline_day", "Sleep hands over to work between 6 and 9 am",
+     ["Of people who did each activity that day, % doing it in each hour", "ABS 2020-21 Tables 13-17"], {
+    "data": {"url": "data/tus_activity_by_hour.csv", "format": {"type": "csv", "parse": {"hour_start": "number", "pct": "number"}}},
+    "params": [{"name": "ridgeDay", "value": "Weekday",
+                "bind": {"input": "radio", "options": ["Weekday", "Weekend"], "labels": ["Weekday", "Weekend"], "name": "Day: "}}],
+    "transform": [{"filter": "datum.sex == 'Persons' && datum.day_type == ridgeDay"},
+                  {"calculate": "datum.hour_start + 0.5", "as": "hour_mid"},
+                  {"calculate": "datum.activity == 'Work' ? 'Paid work' : datum.activity == 'Domestic' ? 'Housework' : datum.activity", "as": "act"}],
+    "facet": {"row": {"field": "act", "type": "nominal", "title": None,
+                      "sort": ["Sleep", "Paid work", "Child care", "Housework", "Free time"],
+                      "header": {"labelAngle": 0, "labelAlign": "right", "labelAnchor": "start", "labelOrient": "left",
+                                 "labelFontSize": 13, "labelPadding": 8, "labelBaseline": "bottom"}}},
+    "spacing": 0,
+    "bounds": "flush",
+    "spec": {
+        "width": 520, "height": 40,
+        "layer": [
+            {"mark": {"type": "area", "interpolate": "monotone", "fillOpacity": 0.85, "stroke": "#fbfaf7", "strokeWidth": 1},
+             "encoding": {
+                 "x": {"field": "hour_mid", "type": "quantitative", "title": None, "scale": {"domain": [0, 24]},
+                       "axis": {"values": [0, 3, 6, 9, 12, 15, 18, 21, 24], "grid": True, "labelExpr":
+                                "datum.value % 24 == 0 ? '12 am' : datum.value == 12 ? '12 pm' : datum.value < 12 ? datum.value + ' am' : (datum.value - 12) + ' pm'"}},
+                 "y": {"field": "pct", "type": "quantitative", "title": None, "axis": None,
+                       "scale": {"domain": [0, 100], "range": [40, -42]}},
+                 "color": {"field": "act", "type": "nominal", "legend": None,
+                           "scale": {"domain": ["Sleep", "Paid work", "Child care", "Housework", "Free time"],
+                                     "range": [WEEKDAY, "#8a8fa8", "#c4527a", "#b9a58a", "#4f9a8f"]}},
+                 "tooltip": [{"field": "act", "title": "Activity"}, {"field": "time_label", "title": "Hour"},
+                             {"field": "pct", "title": "% doing it", "format": ".0f"}]}}]}})
+
+# 17. Tile-grid cartogram: capital city vs rest of state (PHIDU 2022)
+spec("tile_capital_rest", "Outside the capitals, distress is higher in most states",
+     ["% of adults with high or very high distress, capital city (left half) vs rest of state (right half)", "PHIDU 2022"], {
+    "width": 400, "height": 400,
+    "data": {"url": "data/capital_vs_rest.csv", "format": {"type": "csv", "parse": {"col": "number", "row": "number", "k10_high_persons": "number", "k10_high_female": "number", "k10_high_male": "number"}}},
+    "transform": [{"calculate": "datum.area == 'Capital city' ? 0 : 0.5", "as": "half"},
+                  {"calculate": "datum.abbr == 'ACT' ? 1 : 0.5", "as": "w"},
+                  {"calculate": "datum.col + datum.half + (datum.half == 0 ? 0.04 : 0.01)", "as": "x0"},
+                  {"calculate": "datum.col + datum.half + datum.w - (datum.half == 0 && datum.w == 0.5 ? 0.01 : 0.04)", "as": "x1"},
+                  {"calculate": "datum.row + 0.24", "as": "y0"},
+                  {"calculate": "datum.col + 0.5", "as": "xc"},
+                  {"calculate": "datum.row + 0.12", "as": "ytop"},
+                  {"calculate": "datum.row + 0.6", "as": "ymid"},
+                  {"calculate": "datum.row + 0.94", "as": "y1"},
+                  {"calculate": "datum.col + datum.half + datum.w / 2", "as": "xm"},
+                  {"calculate": "datum.area == 'Capital city' ? 'City' : 'Rest'", "as": "short"},
+                  {"calculate": "format(datum.k10_high_persons, '.1f') + '%'", "as": "lab"}],
+    "encoding": {
+        "x": {"type": "quantitative", "scale": {"domain": [0, 4]}, "axis": None},
+        "y": {"type": "quantitative", "scale": {"domain": [0, 4], "reverse": True}, "axis": None}},
+    "layer": [
+        {"params": [{"name": "tileHover", "select": {"type": "point", "on": "pointerover", "clear": "pointerout"}}],
+         "mark": {"type": "rect", "cornerRadius": 3},
+         "encoding": {
+             "x": {"field": "x0"}, "x2": {"field": "x1"}, "y": {"field": "y0"}, "y2": {"field": "y1"},
+             "color": {"field": "k10_high_persons", "type": "quantitative", "title": "% adults in high distress",
+                       "scale": {"type": "threshold", "domain": [11, 13, 15, 17], "range": PURPLES},
+                       "legend": {"orient": "bottom", "direction": "horizontal", "labelOverlap": False}},
+             "stroke": {"condition": {"param": "tileHover", "empty": False, "value": INK}, "value": None},
+             "strokeWidth": {"value": 2},
+             "tooltip": [{"field": "area_name", "title": "Area"}, {"field": "k10_high_persons", "title": "All adults (%)", "format": ".1f"},
+                         {"field": "k10_high_female", "title": "Women (%)", "format": ".1f"},
+                         {"field": "k10_high_male", "title": "Men (%)", "format": ".1f"}]}},
+        {"transform": [{"filter": "datum.area == 'Capital city'"}],
+         "mark": {"type": "text", "fontSize": 14, "fontWeight": 700},
+         "encoding": {"x": {"field": "xc", "type": "quantitative"}, "y": {"field": "ytop", "type": "quantitative"},
+                      "text": {"field": "abbr"}, "color": {"value": INK}}},
+        {"mark": {"type": "text", "fontSize": 11, "dy": -9},
+         "encoding": {"x": {"field": "xm"}, "y": {"field": "ymid", "type": "quantitative"},
+                      "text": {"field": "short"},
+                      "color": {"condition": {"test": "datum.k10_high_persons >= 15", "value": "#ffffff"}, "value": INK}}},
+        {"mark": {"type": "text", "fontSize": 13, "fontWeight": 600, "dy": 8},
+         "encoding": {"x": {"field": "xm"}, "y": {"field": "ymid", "type": "quantitative"},
+                      "text": {"field": "lab"},
+                      "color": {"condition": {"test": "datum.k10_high_persons >= 15", "value": "#ffffff"}, "value": INK}}}]})
+
 for k, v in specs.items():
     with open(f"{OUT}/{k}.vg.json", "w") as f:
         json.dump(v, f, indent=2, ensure_ascii=False); f.write("\n")

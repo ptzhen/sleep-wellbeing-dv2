@@ -18,6 +18,18 @@ with open(f'{out}/tus_activity_by_hour.csv', 'w', newline='') as fo:
     for t, act in acts.items():
         rows = sheet('ABS_TUS_T13-17.xlsx', f'Table {t}')
         groups = [(d, s) for d in ['Weekday', 'Weekend', 'All days'] for s in ['Males', 'Females', 'Persons']]
+        if t == '17.1':
+            # Table 17.1 is laid out differently: a WEEKDAY block then a WEEKEND DAY block,
+            # with columns for two sub-groups and then 'Total Free time' (columns 7-9)
+            day, h = None, 0
+            for r in rows:
+                if r[0] is None and r[1] in ('WEEKDAY', 'WEEKEND DAY'):
+                    day, h = ('Weekday' if r[1] == 'WEEKDAY' else 'Weekend'), 0
+                elif day and r[0] and ('AM–' in str(r[0]) or 'PM–' in str(r[0])):
+                    for k, sx in enumerate(['Males', 'Females', 'Persons']):
+                        w.writerow([act, h, str(r[0]), day, sx, r[7 + k]])
+                    h += 1
+            continue
         h = 0
         for r in rows:
             if r[0] and ('AM–' in str(r[0]) or 'PM–' in str(r[0])):

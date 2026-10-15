@@ -1,0 +1,212 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "data/tus_activity_by_hour.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "hour_start": "number",
+        "pct": "number"
+      }
+    }
+  },
+  "params": [
+    {
+      "name": "ridgeDay",
+      "value": "Weekday",
+      "bind": {
+        "input": "radio",
+        "options": [
+          "Weekday",
+          "Weekend"
+        ],
+        "labels": [
+          "Weekday",
+          "Weekend"
+        ],
+        "name": "Day: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum.sex == 'Persons' && datum.day_type == ridgeDay"
+    },
+    {
+      "calculate": "datum.hour_start + 0.5",
+      "as": "hour_mid"
+    },
+    {
+      "calculate": "datum.activity == 'Work' ? 'Paid work' : datum.activity == 'Domestic' ? 'Housework' : datum.activity",
+      "as": "act"
+    }
+  ],
+  "facet": {
+    "row": {
+      "field": "act",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "Sleep",
+        "Paid work",
+        "Child care",
+        "Housework",
+        "Free time"
+      ],
+      "header": {
+        "labelAngle": 0,
+        "labelAlign": "right",
+        "labelAnchor": "start",
+        "labelOrient": "left",
+        "labelFontSize": 13,
+        "labelPadding": 8,
+        "labelBaseline": "bottom"
+      }
+    }
+  },
+  "spacing": 0,
+  "bounds": "flush",
+  "spec": {
+    "width": 520,
+    "height": 40,
+    "layer": [
+      {
+        "mark": {
+          "type": "area",
+          "interpolate": "monotone",
+          "fillOpacity": 0.85,
+          "stroke": "#fbfaf7",
+          "strokeWidth": 1
+        },
+        "encoding": {
+          "x": {
+            "field": "hour_mid",
+            "type": "quantitative",
+            "title": null,
+            "scale": {
+              "domain": [
+                0,
+                24
+              ]
+            },
+            "axis": {
+              "values": [
+                0,
+                3,
+                6,
+                9,
+                12,
+                15,
+                18,
+                21,
+                24
+              ],
+              "grid": true,
+              "labelExpr": "datum.value % 24 == 0 ? '12 am' : datum.value == 12 ? '12 pm' : datum.value < 12 ? datum.value + ' am' : (datum.value - 12) + ' pm'"
+            }
+          },
+          "y": {
+            "field": "pct",
+            "type": "quantitative",
+            "title": null,
+            "axis": null,
+            "scale": {
+              "domain": [
+                0,
+                100
+              ],
+              "range": [
+                40,
+                -42
+              ]
+            }
+          },
+          "color": {
+            "field": "act",
+            "type": "nominal",
+            "legend": null,
+            "scale": {
+              "domain": [
+                "Sleep",
+                "Paid work",
+                "Child care",
+                "Housework",
+                "Free time"
+              ],
+              "range": [
+                "#3b5ba5",
+                "#8a8fa8",
+                "#c4527a",
+                "#b9a58a",
+                "#4f9a8f"
+              ]
+            }
+          },
+          "tooltip": [
+            {
+              "field": "act",
+              "title": "Activity"
+            },
+            {
+              "field": "time_label",
+              "title": "Hour"
+            },
+            {
+              "field": "pct",
+              "title": "% doing it",
+              "format": ".0f"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "config": {
+    "background": "transparent",
+    "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "font": "Fraunces, Georgia, serif",
+      "fontSize": 18,
+      "fontWeight": 600,
+      "color": "#23263a",
+      "anchor": "start",
+      "subtitleFont": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
+      "subtitleFontSize": 13,
+      "subtitleFontWeight": 400,
+      "subtitleColor": "#5d6077",
+      "offset": 12
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleColor": "#5d6077",
+      "labelColor": "#5d6077",
+      "gridColor": "#e6e3dc",
+      "labelLimit": 320,
+      "domainColor": "#c9c5bb",
+      "tickColor": "#c9c5bb",
+      "titleFontWeight": 400
+    },
+    "legend": {
+      "labelLimit": 260,
+      "titleLimit": 300,
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleColor": "#5d6077",
+      "labelColor": "#23263a",
+      "titleFontWeight": 400
+    },
+    "header": {
+      "labelFontSize": 13,
+      "labelColor": "#23263a",
+      "titleFontSize": 13
+    },
+    "text": {
+      "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
+      "color": "#23263a"
+    }
+  }
+}

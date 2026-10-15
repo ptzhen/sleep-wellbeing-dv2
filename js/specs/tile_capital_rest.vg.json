@@ -1,0 +1,310 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 400,
+  "height": 400,
+  "data": {
+    "url": "data/capital_vs_rest.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "col": "number",
+        "row": "number",
+        "k10_high_persons": "number",
+        "k10_high_female": "number",
+        "k10_high_male": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "calculate": "datum.area == 'Capital city' ? 0 : 0.5",
+      "as": "half"
+    },
+    {
+      "calculate": "datum.abbr == 'ACT' ? 1 : 0.5",
+      "as": "w"
+    },
+    {
+      "calculate": "datum.col + datum.half + (datum.half == 0 ? 0.04 : 0.01)",
+      "as": "x0"
+    },
+    {
+      "calculate": "datum.col + datum.half + datum.w - (datum.half == 0 && datum.w == 0.5 ? 0.01 : 0.04)",
+      "as": "x1"
+    },
+    {
+      "calculate": "datum.row + 0.24",
+      "as": "y0"
+    },
+    {
+      "calculate": "datum.col + 0.5",
+      "as": "xc"
+    },
+    {
+      "calculate": "datum.row + 0.12",
+      "as": "ytop"
+    },
+    {
+      "calculate": "datum.row + 0.6",
+      "as": "ymid"
+    },
+    {
+      "calculate": "datum.row + 0.94",
+      "as": "y1"
+    },
+    {
+      "calculate": "datum.col + datum.half + datum.w / 2",
+      "as": "xm"
+    },
+    {
+      "calculate": "datum.area == 'Capital city' ? 'City' : 'Rest'",
+      "as": "short"
+    },
+    {
+      "calculate": "format(datum.k10_high_persons, '.1f') + '%'",
+      "as": "lab"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "type": "quantitative",
+      "scale": {
+        "domain": [
+          0,
+          4
+        ]
+      },
+      "axis": null
+    },
+    "y": {
+      "type": "quantitative",
+      "scale": {
+        "domain": [
+          0,
+          4
+        ],
+        "reverse": true
+      },
+      "axis": null
+    }
+  },
+  "layer": [
+    {
+      "params": [
+        {
+          "name": "tileHover",
+          "select": {
+            "type": "point",
+            "on": "pointerover",
+            "clear": "pointerout"
+          }
+        }
+      ],
+      "mark": {
+        "type": "rect",
+        "cornerRadius": 3
+      },
+      "encoding": {
+        "x": {
+          "field": "x0"
+        },
+        "x2": {
+          "field": "x1"
+        },
+        "y": {
+          "field": "y0"
+        },
+        "y2": {
+          "field": "y1"
+        },
+        "color": {
+          "field": "k10_high_persons",
+          "type": "quantitative",
+          "title": "% adults in high distress",
+          "scale": {
+            "type": "threshold",
+            "domain": [
+              11,
+              13,
+              15,
+              17
+            ],
+            "range": [
+              "#e6e1f2",
+              "#bdb0dd",
+              "#8e7cc3",
+              "#5e4a9e",
+              "#2f2366"
+            ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "labelOverlap": false
+          }
+        },
+        "stroke": {
+          "condition": {
+            "param": "tileHover",
+            "empty": false,
+            "value": "#23263a"
+          },
+          "value": null
+        },
+        "strokeWidth": {
+          "value": 2
+        },
+        "tooltip": [
+          {
+            "field": "area_name",
+            "title": "Area"
+          },
+          {
+            "field": "k10_high_persons",
+            "title": "All adults (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "k10_high_female",
+            "title": "Women (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "k10_high_male",
+            "title": "Men (%)",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.area == 'Capital city'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 14,
+        "fontWeight": 700
+      },
+      "encoding": {
+        "x": {
+          "field": "xc",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "ytop",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "abbr"
+        },
+        "color": {
+          "value": "#23263a"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 11,
+        "dy": -9
+      },
+      "encoding": {
+        "x": {
+          "field": "xm"
+        },
+        "y": {
+          "field": "ymid",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "short"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.k10_high_persons >= 15",
+            "value": "#ffffff"
+          },
+          "value": "#23263a"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 13,
+        "fontWeight": 600,
+        "dy": 8
+      },
+      "encoding": {
+        "x": {
+          "field": "xm"
+        },
+        "y": {
+          "field": "ymid",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "lab"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.k10_high_persons >= 15",
+            "value": "#ffffff"
+          },
+          "value": "#23263a"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": "transparent",
+    "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "font": "Fraunces, Georgia, serif",
+      "fontSize": 18,
+      "fontWeight": 600,
+      "color": "#23263a",
+      "anchor": "start",
+      "subtitleFont": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
+      "subtitleFontSize": 13,
+      "subtitleFontWeight": 400,
+      "subtitleColor": "#5d6077",
+      "offset": 12
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleColor": "#5d6077",
+      "labelColor": "#5d6077",
+      "gridColor": "#e6e3dc",
+      "labelLimit": 320,
+      "domainColor": "#c9c5bb",
+      "tickColor": "#c9c5bb",
+      "titleFontWeight": 400
+    },
+    "legend": {
+      "labelLimit": 260,
+      "titleLimit": 300,
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleColor": "#5d6077",
+      "labelColor": "#23263a",
+      "titleFontWeight": 400
+    },
+    "header": {
+      "labelFontSize": 13,
+      "labelColor": "#23263a",
+      "titleFontSize": 13
+    },
+    "text": {
+      "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
+      "color": "#23263a"
+    }
+  }
+}

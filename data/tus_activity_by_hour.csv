@@ -863,435 +863,147 @@ Child care,23,11:00 PM–12:00 AM,Weekend,Persons,4.1
 Child care,23,11:00 PM–12:00 AM,All days,Males,2.4
 Child care,23,11:00 PM–12:00 AM,All days,Females,5.1
 Child care,23,11:00 PM–12:00 AM,All days,Persons,3.7
-Free time,0,12:00 AM–1:00 AM,Weekday,Males,1.1
-Free time,0,12:00 AM–1:00 AM,Weekday,Females,1.3
-Free time,0,12:00 AM–1:00 AM,Weekday,Persons,1.1
-Free time,0,12:00 AM–1:00 AM,Weekend,Males,5.4
-Free time,0,12:00 AM–1:00 AM,Weekend,Females,4.8
-Free time,0,12:00 AM–1:00 AM,Weekend,Persons,5.2
-Free time,0,12:00 AM–1:00 AM,All days,Males,5.6
-Free time,0,12:00 AM–1:00 AM,All days,Females,5.3
-Free time,0,12:00 AM–1:00 AM,All days,Persons,5.4
-Free time,1,1:00 AM–2:00 AM,Weekday,Males,0.9
-Free time,1,1:00 AM–2:00 AM,Weekday,Females,0.2
-Free time,1,1:00 AM–2:00 AM,Weekday,Persons,0.4
-Free time,1,1:00 AM–2:00 AM,Weekend,Males,3
-Free time,1,1:00 AM–2:00 AM,Weekend,Females,3.3
-Free time,1,1:00 AM–2:00 AM,Weekend,Persons,3.2
-Free time,1,1:00 AM–2:00 AM,All days,Males,3.2
-Free time,1,1:00 AM–2:00 AM,All days,Females,3.7
-Free time,1,1:00 AM–2:00 AM,All days,Persons,3.4
-Free time,2,2:00 AM–3:00 AM,Weekday,Males,0.5
-Free time,2,2:00 AM–3:00 AM,Weekday,Females,0.3
-Free time,2,2:00 AM–3:00 AM,Weekday,Persons,0.3
-Free time,2,2:00 AM–3:00 AM,Weekend,Males,0.8
-Free time,2,2:00 AM–3:00 AM,Weekend,Females,1.7
-Free time,2,2:00 AM–3:00 AM,Weekend,Persons,1.2
-Free time,2,2:00 AM–3:00 AM,All days,Males,1
-Free time,2,2:00 AM–3:00 AM,All days,Females,1.5
-Free time,2,2:00 AM–3:00 AM,All days,Persons,1.3
-Free time,3,3:00 AM–4:00 AM,Weekday,Males,0.3
-Free time,3,3:00 AM–4:00 AM,Weekday,Females,0.4
-Free time,3,3:00 AM–4:00 AM,Weekday,Persons,0.3
-Free time,3,3:00 AM–4:00 AM,Weekend,Males,0.8
-Free time,3,3:00 AM–4:00 AM,Weekend,Females,1.9
-Free time,3,3:00 AM–4:00 AM,Weekend,Persons,1.3
-Free time,3,3:00 AM–4:00 AM,All days,Males,0.9
-Free time,3,3:00 AM–4:00 AM,All days,Females,2
-Free time,3,3:00 AM–4:00 AM,All days,Persons,1.3
-Free time,4,4:00 AM–5:00 AM,Weekday,Males,1
-Free time,4,4:00 AM–5:00 AM,Weekday,Females,1
-Free time,4,4:00 AM–5:00 AM,Weekday,Persons,1
-Free time,4,4:00 AM–5:00 AM,Weekend,Males,2.4
-Free time,4,4:00 AM–5:00 AM,Weekend,Females,2.5
-Free time,4,4:00 AM–5:00 AM,Weekend,Persons,2.5
-Free time,4,4:00 AM–5:00 AM,All days,Males,2.7
-Free time,4,4:00 AM–5:00 AM,All days,Females,2.8
-Free time,4,4:00 AM–5:00 AM,All days,Persons,2.8
-Free time,5,5:00 AM–6:00 AM,Weekday,Males,2.2
-Free time,5,5:00 AM–6:00 AM,Weekday,Females,1.8
-Free time,5,5:00 AM–6:00 AM,Weekday,Persons,2.1
-Free time,5,5:00 AM–6:00 AM,Weekend,Males,6.9
-Free time,5,5:00 AM–6:00 AM,Weekend,Females,5.3
-Free time,5,5:00 AM–6:00 AM,Weekend,Persons,6.1
-Free time,5,5:00 AM–6:00 AM,All days,Males,7.3
-Free time,5,5:00 AM–6:00 AM,All days,Females,6.3
-Free time,5,5:00 AM–6:00 AM,All days,Persons,6.8
-Free time,6,6:00 AM–7:00 AM,Weekday,Males,5.8
-Free time,6,6:00 AM–7:00 AM,Weekday,Females,4.2
-Free time,6,6:00 AM–7:00 AM,Weekday,Persons,5
-Free time,6,6:00 AM–7:00 AM,Weekend,Males,13.5
-Free time,6,6:00 AM–7:00 AM,Weekend,Females,14.7
-Free time,6,6:00 AM–7:00 AM,Weekend,Persons,14.1
-Free time,6,6:00 AM–7:00 AM,All days,Males,14.7
-Free time,6,6:00 AM–7:00 AM,All days,Females,16.3
-Free time,6,6:00 AM–7:00 AM,All days,Persons,15.5
-Free time,7,7:00 AM–8:00 AM,Weekday,Males,9.1
-Free time,7,7:00 AM–8:00 AM,Weekday,Females,7.8
-Free time,7,7:00 AM–8:00 AM,Weekday,Persons,8.5
-Free time,7,7:00 AM–8:00 AM,Weekend,Males,19.1
-Free time,7,7:00 AM–8:00 AM,Weekend,Females,21.5
-Free time,7,7:00 AM–8:00 AM,Weekend,Persons,20.4
-Free time,7,7:00 AM–8:00 AM,All days,Males,21.8
-Free time,7,7:00 AM–8:00 AM,All days,Females,24.4
-Free time,7,7:00 AM–8:00 AM,All days,Persons,23.1
-Free time,8,8:00 AM–9:00 AM,Weekday,Males,11.3
-Free time,8,8:00 AM–9:00 AM,Weekday,Females,13.1
-Free time,8,8:00 AM–9:00 AM,Weekday,Persons,12.2
-Free time,8,8:00 AM–9:00 AM,Weekend,Males,21.4
-Free time,8,8:00 AM–9:00 AM,Weekend,Females,20
-Free time,8,8:00 AM–9:00 AM,Weekend,Persons,20.7
-Free time,8,8:00 AM–9:00 AM,All days,Males,24.3
-Free time,8,8:00 AM–9:00 AM,All days,Females,25.5
-Free time,8,8:00 AM–9:00 AM,All days,Persons,25
-Free time,9,9:00 AM–10:00 AM,Weekday,Males,11.8
-Free time,9,9:00 AM–10:00 AM,Weekday,Females,13.6
-Free time,9,9:00 AM–10:00 AM,Weekday,Persons,12.8
-Free time,9,9:00 AM–10:00 AM,Weekend,Males,21.4
-Free time,9,9:00 AM–10:00 AM,Weekend,Females,20.6
-Free time,9,9:00 AM–10:00 AM,Weekend,Persons,21.1
-Free time,9,9:00 AM–10:00 AM,All days,Males,24.7
-Free time,9,9:00 AM–10:00 AM,All days,Females,26.5
-Free time,9,9:00 AM–10:00 AM,All days,Persons,25.5
-Free time,10,10:00 AM–11:00 AM,Weekday,Males,13.6
-Free time,10,10:00 AM–11:00 AM,Weekday,Females,17.3
-Free time,10,10:00 AM–11:00 AM,Weekday,Persons,15.7
-Free time,10,10:00 AM–11:00 AM,Weekend,Males,21.5
-Free time,10,10:00 AM–11:00 AM,Weekend,Females,20.6
-Free time,10,10:00 AM–11:00 AM,Weekend,Persons,21.1
-Free time,10,10:00 AM–11:00 AM,All days,Males,25.3
-Free time,10,10:00 AM–11:00 AM,All days,Females,27.3
-Free time,10,10:00 AM–11:00 AM,All days,Persons,26.4
-Free time,11,11:00 AM–12:00 PM,Weekday,Males,16.1
-Free time,11,11:00 AM–12:00 PM,Weekday,Females,20.3
-Free time,11,11:00 AM–12:00 PM,Weekday,Persons,18.6
-Free time,11,11:00 AM–12:00 PM,Weekend,Males,20.9
-Free time,11,11:00 AM–12:00 PM,Weekend,Females,20.9
-Free time,11,11:00 AM–12:00 PM,Weekend,Persons,20.9
-Free time,11,11:00 AM–12:00 PM,All days,Males,26.5
-Free time,11,11:00 AM–12:00 PM,All days,Females,29.9
-Free time,11,11:00 AM–12:00 PM,All days,Persons,28.3
-Free time,12,12:00 PM–1:00 PM,Weekday,Males,18.6
-Free time,12,12:00 PM–1:00 PM,Weekday,Females,21.5
-Free time,12,12:00 PM–1:00 PM,Weekday,Persons,20.4
-Free time,12,12:00 PM–1:00 PM,Weekend,Males,21.7
-Free time,12,12:00 PM–1:00 PM,Weekend,Females,20
-Free time,12,12:00 PM–1:00 PM,Weekend,Persons,20.9
-Free time,12,12:00 PM–1:00 PM,All days,Males,28.3
-Free time,12,12:00 PM–1:00 PM,All days,Females,30.3
-Free time,12,12:00 PM–1:00 PM,All days,Persons,29.3
-Free time,13,1:00 PM–2:00 PM,Weekday,Males,14.6
-Free time,13,1:00 PM–2:00 PM,Weekday,Females,21.7
-Free time,13,1:00 PM–2:00 PM,Weekday,Persons,18.6
-Free time,13,1:00 PM–2:00 PM,Weekend,Males,23.6
-Free time,13,1:00 PM–2:00 PM,Weekend,Females,22.5
-Free time,13,1:00 PM–2:00 PM,Weekend,Persons,23.2
-Free time,13,1:00 PM–2:00 PM,All days,Males,29
-Free time,13,1:00 PM–2:00 PM,All days,Females,33.4
-Free time,13,1:00 PM–2:00 PM,All days,Persons,31.2
-Free time,14,2:00 PM–3:00 PM,Weekday,Males,16.6
-Free time,14,2:00 PM–3:00 PM,Weekday,Females,20.7
-Free time,14,2:00 PM–3:00 PM,Weekday,Persons,18.8
-Free time,14,2:00 PM–3:00 PM,Weekend,Males,24.4
-Free time,14,2:00 PM–3:00 PM,Weekend,Females,25.6
-Free time,14,2:00 PM–3:00 PM,Weekend,Persons,25
-Free time,14,2:00 PM–3:00 PM,All days,Males,29.7
-Free time,14,2:00 PM–3:00 PM,All days,Females,34.3
-Free time,14,2:00 PM–3:00 PM,All days,Persons,32
-Free time,15,3:00 PM–4:00 PM,Weekday,Males,16.5
-Free time,15,3:00 PM–4:00 PM,Weekday,Females,19.1
-Free time,15,3:00 PM–4:00 PM,Weekday,Persons,18.2
-Free time,15,3:00 PM–4:00 PM,Weekend,Males,28.6
-Free time,15,3:00 PM–4:00 PM,Weekend,Females,27
-Free time,15,3:00 PM–4:00 PM,Weekend,Persons,27.9
-Free time,15,3:00 PM–4:00 PM,All days,Males,33.8
-Free time,15,3:00 PM–4:00 PM,All days,Females,35.4
-Free time,15,3:00 PM–4:00 PM,All days,Persons,34.5
-Free time,16,4:00 PM–5:00 PM,Weekday,Males,18.7
-Free time,16,4:00 PM–5:00 PM,Weekday,Females,20
-Free time,16,4:00 PM–5:00 PM,Weekday,Persons,19.7
-Free time,16,4:00 PM–5:00 PM,Weekend,Males,35.2
-Free time,16,4:00 PM–5:00 PM,Weekend,Females,33.2
-Free time,16,4:00 PM–5:00 PM,Weekend,Persons,34.3
-Free time,16,4:00 PM–5:00 PM,All days,Males,41.6
-Free time,16,4:00 PM–5:00 PM,All days,Females,40.7
-Free time,16,4:00 PM–5:00 PM,All days,Persons,41.1
-Free time,17,5:00 PM–6:00 PM,Weekday,Males,25.8
-Free time,17,5:00 PM–6:00 PM,Weekday,Females,23.8
-Free time,17,5:00 PM–6:00 PM,Weekday,Persons,24.8
-Free time,17,5:00 PM–6:00 PM,Weekend,Males,41.3
-Free time,17,5:00 PM–6:00 PM,Weekend,Females,35.1
-Free time,17,5:00 PM–6:00 PM,Weekend,Persons,38.2
-Free time,17,5:00 PM–6:00 PM,All days,Males,49.8
-Free time,17,5:00 PM–6:00 PM,All days,Females,45.3
-Free time,17,5:00 PM–6:00 PM,All days,Persons,47.4
-Free time,18,6:00 PM–7:00 PM,Weekday,Males,27.6
-Free time,18,6:00 PM–7:00 PM,Weekday,Females,25.9
-Free time,18,6:00 PM–7:00 PM,Weekday,Persons,26.5
-Free time,18,6:00 PM–7:00 PM,Weekend,Males,48.3
-Free time,18,6:00 PM–7:00 PM,Weekend,Females,38.5
-Free time,18,6:00 PM–7:00 PM,Weekend,Persons,43.4
-Free time,18,6:00 PM–7:00 PM,All days,Males,56.7
-Free time,18,6:00 PM–7:00 PM,All days,Females,49.6
-Free time,18,6:00 PM–7:00 PM,All days,Persons,53.1
-Free time,19,7:00 PM–8:00 PM,Weekday,Males,27.1
-Free time,19,7:00 PM–8:00 PM,Weekday,Females,26.1
-Free time,19,7:00 PM–8:00 PM,Weekday,Persons,26.6
-Free time,19,7:00 PM–8:00 PM,Weekend,Males,63.7
-Free time,19,7:00 PM–8:00 PM,Weekend,Females,55.6
-Free time,19,7:00 PM–8:00 PM,Weekend,Persons,59.7
-Free time,19,7:00 PM–8:00 PM,All days,Males,70.8
-Free time,19,7:00 PM–8:00 PM,All days,Females,66.3
-Free time,19,7:00 PM–8:00 PM,All days,Persons,68.4
-Free time,20,8:00 PM–9:00 PM,Weekday,Males,24.3
-Free time,20,8:00 PM–9:00 PM,Weekday,Females,22
-Free time,20,8:00 PM–9:00 PM,Weekday,Persons,23
-Free time,20,8:00 PM–9:00 PM,Weekend,Males,70.7
-Free time,20,8:00 PM–9:00 PM,Weekend,Females,67
-Free time,20,8:00 PM–9:00 PM,Weekend,Persons,68.7
-Free time,20,8:00 PM–9:00 PM,All days,Males,76.2
-Free time,20,8:00 PM–9:00 PM,All days,Females,74.1
-Free time,20,8:00 PM–9:00 PM,All days,Persons,75
-Free time,21,9:00 PM–10:00 PM,Weekday,Males,17.1
-Free time,21,9:00 PM–10:00 PM,Weekday,Females,16.9
-Free time,21,9:00 PM–10:00 PM,Weekday,Persons,17.1
-Free time,21,9:00 PM–10:00 PM,Weekend,Males,58.8
-Free time,21,9:00 PM–10:00 PM,Weekend,Females,57.2
-Free time,21,9:00 PM–10:00 PM,Weekend,Persons,58
-Free time,21,9:00 PM–10:00 PM,All days,Males,62.4
-Free time,21,9:00 PM–10:00 PM,All days,Females,62.8
-Free time,21,9:00 PM–10:00 PM,All days,Persons,62.6
-Free time,22,10:00 PM–11:00 PM,Weekday,Males,9.9
-Free time,22,10:00 PM–11:00 PM,Weekday,Females,10.6
-Free time,22,10:00 PM–11:00 PM,Weekday,Persons,10.3
-Free time,22,10:00 PM–11:00 PM,Weekend,Males,40.7
-Free time,22,10:00 PM–11:00 PM,Weekend,Females,38.3
-Free time,22,10:00 PM–11:00 PM,Weekend,Persons,39.5
-Free time,22,10:00 PM–11:00 PM,All days,Males,42.6
-Free time,22,10:00 PM–11:00 PM,All days,Females,41.4
-Free time,22,10:00 PM–11:00 PM,All days,Persons,41.8
-Free time,23,11:00 PM–12:00 AM,Weekday,Males,4.5
-Free time,23,11:00 PM–12:00 AM,Weekday,Females,5.7
-Free time,23,11:00 PM–12:00 AM,Weekday,Persons,5.2
-Free time,23,11:00 PM–12:00 AM,Weekend,Males,17.9
-Free time,23,11:00 PM–12:00 AM,Weekend,Females,16.7
-Free time,23,11:00 PM–12:00 AM,Weekend,Persons,17.3
-Free time,23,11:00 PM–12:00 AM,All days,Males,19.5
-Free time,23,11:00 PM–12:00 AM,All days,Females,18.7
-Free time,23,11:00 PM–12:00 AM,All days,Persons,19.1
-Free time,24,12:00 AM–1:00 AM,Weekday,Males,2
-Free time,24,12:00 AM–1:00 AM,Weekday,Females,2.2
-Free time,24,12:00 AM–1:00 AM,Weekday,Persons,2.1
-Free time,24,12:00 AM–1:00 AM,Weekend,Males,5.1
-Free time,24,12:00 AM–1:00 AM,Weekend,Females,5.7
-Free time,24,12:00 AM–1:00 AM,Weekend,Persons,5.3
-Free time,24,12:00 AM–1:00 AM,All days,Males,6.1
-Free time,24,12:00 AM–1:00 AM,All days,Females,6.8
-Free time,24,12:00 AM–1:00 AM,All days,Persons,6.7
-Free time,25,1:00 AM–2:00 AM,Weekday,Males,1.7
-Free time,25,1:00 AM–2:00 AM,Weekday,Females,1.5
-Free time,25,1:00 AM–2:00 AM,Weekday,Persons,1.2
-Free time,25,1:00 AM–2:00 AM,Weekend,Males,2.7
-Free time,25,1:00 AM–2:00 AM,Weekend,Females,3.4
-Free time,25,1:00 AM–2:00 AM,Weekend,Persons,3.3
-Free time,25,1:00 AM–2:00 AM,All days,Males,3.5
-Free time,25,1:00 AM–2:00 AM,All days,Females,4.4
-Free time,25,1:00 AM–2:00 AM,All days,Persons,3.8
-Free time,26,2:00 AM–3:00 AM,Weekday,Males,0.7
-Free time,26,2:00 AM–3:00 AM,Weekday,Females,1.3
-Free time,26,2:00 AM–3:00 AM,Weekday,Persons,0.8
-Free time,26,2:00 AM–3:00 AM,Weekend,Males,1.5
-Free time,26,2:00 AM–3:00 AM,Weekend,Females,2.2
-Free time,26,2:00 AM–3:00 AM,Weekend,Persons,2
-Free time,26,2:00 AM–3:00 AM,All days,Males,1.9
-Free time,26,2:00 AM–3:00 AM,All days,Females,2.8
-Free time,26,2:00 AM–3:00 AM,All days,Persons,2.3
-Free time,27,3:00 AM–4:00 AM,Weekday,Males,0.3
-Free time,27,3:00 AM–4:00 AM,Weekday,Females,0.3
-Free time,27,3:00 AM–4:00 AM,Weekday,Persons,0.4
-Free time,27,3:00 AM–4:00 AM,Weekend,Males,1.1
-Free time,27,3:00 AM–4:00 AM,Weekend,Females,1.2
-Free time,27,3:00 AM–4:00 AM,Weekend,Persons,0.9
-Free time,27,3:00 AM–4:00 AM,All days,Males,1.2
-Free time,27,3:00 AM–4:00 AM,All days,Females,1.3
-Free time,27,3:00 AM–4:00 AM,All days,Persons,1.2
-Free time,28,4:00 AM–5:00 AM,Weekday,Males,0.6
-Free time,28,4:00 AM–5:00 AM,Weekday,Females,1
-Free time,28,4:00 AM–5:00 AM,Weekday,Persons,0.8
-Free time,28,4:00 AM–5:00 AM,Weekend,Males,2.7
-Free time,28,4:00 AM–5:00 AM,Weekend,Females,1.4
-Free time,28,4:00 AM–5:00 AM,Weekend,Persons,2.2
-Free time,28,4:00 AM–5:00 AM,All days,Males,2.9
-Free time,28,4:00 AM–5:00 AM,All days,Females,2.2
-Free time,28,4:00 AM–5:00 AM,All days,Persons,2.7
-Free time,29,5:00 AM–6:00 AM,Weekday,Males,4.7
-Free time,29,5:00 AM–6:00 AM,Weekday,Females,2.9
-Free time,29,5:00 AM–6:00 AM,Weekday,Persons,3.4
-Free time,29,5:00 AM–6:00 AM,Weekend,Males,5
-Free time,29,5:00 AM–6:00 AM,Weekend,Females,4.3
-Free time,29,5:00 AM–6:00 AM,Weekend,Persons,4.6
-Free time,29,5:00 AM–6:00 AM,All days,Males,7.2
-Free time,29,5:00 AM–6:00 AM,All days,Females,6.3
-Free time,29,5:00 AM–6:00 AM,All days,Persons,6.4
-Free time,30,6:00 AM–7:00 AM,Weekday,Males,4.5
-Free time,30,6:00 AM–7:00 AM,Weekday,Females,4.4
-Free time,30,6:00 AM–7:00 AM,Weekday,Persons,4.8
-Free time,30,6:00 AM–7:00 AM,Weekend,Males,14
-Free time,30,6:00 AM–7:00 AM,Weekend,Females,12.9
-Free time,30,6:00 AM–7:00 AM,Weekend,Persons,13.6
-Free time,30,6:00 AM–7:00 AM,All days,Males,15.9
-Free time,30,6:00 AM–7:00 AM,All days,Females,15.8
-Free time,30,6:00 AM–7:00 AM,All days,Persons,15.9
-Free time,31,7:00 AM–8:00 AM,Weekday,Males,9.4
-Free time,31,7:00 AM–8:00 AM,Weekday,Females,6.8
-Free time,31,7:00 AM–8:00 AM,Weekday,Persons,7.8
-Free time,31,7:00 AM–8:00 AM,Weekend,Males,23
-Free time,31,7:00 AM–8:00 AM,Weekend,Females,21.6
-Free time,31,7:00 AM–8:00 AM,Weekend,Persons,22.5
-Free time,31,7:00 AM–8:00 AM,All days,Males,27.1
-Free time,31,7:00 AM–8:00 AM,All days,Females,25
-Free time,31,7:00 AM–8:00 AM,All days,Persons,25.8
-Free time,32,8:00 AM–9:00 AM,Weekday,Males,15.3
-Free time,32,8:00 AM–9:00 AM,Weekday,Females,15.6
-Free time,32,8:00 AM–9:00 AM,Weekday,Persons,15
-Free time,32,8:00 AM–9:00 AM,Weekend,Males,31.9
-Free time,32,8:00 AM–9:00 AM,Weekend,Females,29
-Free time,32,8:00 AM–9:00 AM,Weekend,Persons,30.8
-Free time,32,8:00 AM–9:00 AM,All days,Males,38.8
-Free time,32,8:00 AM–9:00 AM,All days,Females,35.8
-Free time,32,8:00 AM–9:00 AM,All days,Persons,37.1
-Free time,33,9:00 AM–10:00 AM,Weekday,Males,21.2
-Free time,33,9:00 AM–10:00 AM,Weekday,Females,23.6
-Free time,33,9:00 AM–10:00 AM,Weekday,Persons,22.6
-Free time,33,9:00 AM–10:00 AM,Weekend,Males,35.2
-Free time,33,9:00 AM–10:00 AM,Weekend,Females,29.8
-Free time,33,9:00 AM–10:00 AM,Weekend,Persons,32.3
-Free time,33,9:00 AM–10:00 AM,All days,Males,44.7
-Free time,33,9:00 AM–10:00 AM,All days,Females,42.8
-Free time,33,9:00 AM–10:00 AM,All days,Persons,43.5
-Free time,34,10:00 AM–11:00 AM,Weekday,Males,27.2
-Free time,34,10:00 AM–11:00 AM,Weekday,Females,28.6
-Free time,34,10:00 AM–11:00 AM,Weekday,Persons,28
-Free time,34,10:00 AM–11:00 AM,Weekend,Males,39.9
-Free time,34,10:00 AM–11:00 AM,Weekend,Females,29
-Free time,34,10:00 AM–11:00 AM,Weekend,Persons,34.1
-Free time,34,10:00 AM–11:00 AM,All days,Males,51.4
-Free time,34,10:00 AM–11:00 AM,All days,Females,44.6
-Free time,34,10:00 AM–11:00 AM,All days,Persons,47.6
-Free time,35,11:00 AM–12:00 PM,Weekday,Males,28.9
-Free time,35,11:00 AM–12:00 PM,Weekday,Females,32.4
-Free time,35,11:00 AM–12:00 PM,Weekday,Persons,31
-Free time,35,11:00 AM–12:00 PM,Weekend,Males,39.2
-Free time,35,11:00 AM–12:00 PM,Weekend,Females,31.4
-Free time,35,11:00 AM–12:00 PM,Weekend,Persons,35.4
-Free time,35,11:00 AM–12:00 PM,All days,Males,53.3
-Free time,35,11:00 AM–12:00 PM,All days,Females,49.4
-Free time,35,11:00 AM–12:00 PM,All days,Persons,51.1
-Free time,36,12:00 PM–1:00 PM,Weekday,Males,28.8
-Free time,36,12:00 PM–1:00 PM,Weekday,Females,33.8
-Free time,36,12:00 PM–1:00 PM,Weekday,Persons,31.2
-Free time,36,12:00 PM–1:00 PM,Weekend,Males,36.2
-Free time,36,12:00 PM–1:00 PM,Weekend,Females,27.7
-Free time,36,12:00 PM–1:00 PM,Weekend,Persons,31.9
-Free time,36,12:00 PM–1:00 PM,All days,Males,49.8
-Free time,36,12:00 PM–1:00 PM,All days,Females,47.4
-Free time,36,12:00 PM–1:00 PM,All days,Persons,48.3
-Free time,37,1:00 PM–2:00 PM,Weekday,Males,32
-Free time,37,1:00 PM–2:00 PM,Weekday,Females,33.6
-Free time,37,1:00 PM–2:00 PM,Weekday,Persons,32.9
-Free time,37,1:00 PM–2:00 PM,Weekend,Males,39.1
-Free time,37,1:00 PM–2:00 PM,Weekend,Females,33.2
-Free time,37,1:00 PM–2:00 PM,Weekend,Persons,36.4
-Free time,37,1:00 PM–2:00 PM,All days,Males,54.4
-Free time,37,1:00 PM–2:00 PM,All days,Females,52.2
-Free time,37,1:00 PM–2:00 PM,All days,Persons,53
-Free time,38,2:00 PM–3:00 PM,Weekday,Males,31.2
-Free time,38,2:00 PM–3:00 PM,Weekday,Females,32.7
-Free time,38,2:00 PM–3:00 PM,Weekday,Persons,32.1
-Free time,38,2:00 PM–3:00 PM,Weekend,Males,38.3
-Free time,38,2:00 PM–3:00 PM,Weekend,Females,37.7
-Free time,38,2:00 PM–3:00 PM,Weekend,Persons,38.2
-Free time,38,2:00 PM–3:00 PM,All days,Males,55.1
-Free time,38,2:00 PM–3:00 PM,All days,Females,56.1
-Free time,38,2:00 PM–3:00 PM,All days,Persons,55.7
-Free time,39,3:00 PM–4:00 PM,Weekday,Males,29.4
-Free time,39,3:00 PM–4:00 PM,Weekday,Females,32.2
-Free time,39,3:00 PM–4:00 PM,Weekday,Persons,31.1
-Free time,39,3:00 PM–4:00 PM,Weekend,Males,44.5
-Free time,39,3:00 PM–4:00 PM,Weekend,Females,37.7
-Free time,39,3:00 PM–4:00 PM,Weekend,Persons,41.1
-Free time,39,3:00 PM–4:00 PM,All days,Males,58.1
-Free time,39,3:00 PM–4:00 PM,All days,Females,54.1
-Free time,39,3:00 PM–4:00 PM,All days,Persons,55.9
-Free time,40,4:00 PM–5:00 PM,Weekday,Males,32.9
-Free time,40,4:00 PM–5:00 PM,Weekday,Females,35
-Free time,40,4:00 PM–5:00 PM,Weekday,Persons,33.9
-Free time,40,4:00 PM–5:00 PM,Weekend,Males,47.2
-Free time,40,4:00 PM–5:00 PM,Weekend,Females,40.1
-Free time,40,4:00 PM–5:00 PM,Weekend,Persons,43.4
-Free time,40,4:00 PM–5:00 PM,All days,Males,61.9
-Free time,40,4:00 PM–5:00 PM,All days,Females,57.7
-Free time,40,4:00 PM–5:00 PM,All days,Persons,59.8
-Free time,41,5:00 PM–6:00 PM,Weekday,Males,36.1
-Free time,41,5:00 PM–6:00 PM,Weekday,Females,34.9
-Free time,41,5:00 PM–6:00 PM,Weekday,Persons,35.3
-Free time,41,5:00 PM–6:00 PM,Weekend,Males,48.2
-Free time,41,5:00 PM–6:00 PM,Weekend,Females,40
-Free time,41,5:00 PM–6:00 PM,Weekend,Persons,44.2
-Free time,41,5:00 PM–6:00 PM,All days,Males,63.1
-Free time,41,5:00 PM–6:00 PM,All days,Females,57.9
-Free time,41,5:00 PM–6:00 PM,All days,Persons,60.5
-Free time,42,6:00 PM–7:00 PM,Weekday,Males,30.5
-Free time,42,6:00 PM–7:00 PM,Weekday,Females,27.6
-Free time,42,6:00 PM–7:00 PM,Weekday,Persons,29.1
-Free time,42,6:00 PM–7:00 PM,Weekend,Males,44.9
-Free time,42,6:00 PM–7:00 PM,Weekend,Females,38.4
-Free time,42,6:00 PM–7:00 PM,Weekend,Persons,41.7
-Free time,42,6:00 PM–7:00 PM,All days,Males,60.6
-Free time,42,6:00 PM–7:00 PM,All days,Females,54.4
-Free time,42,6:00 PM–7:00 PM,All days,Persons,57.2
-Free time,43,7:00 PM–8:00 PM,Weekday,Males,26.8
-Free time,43,7:00 PM–8:00 PM,Weekday,Females,26
-Free time,43,7:00 PM–8:00 PM,Weekday,Persons,26.4
-Free time,43,7:00 PM–8:00 PM,Weekend,Males,57
-Free time,43,7:00 PM–8:00 PM,Weekend,Females,55.4
-Free time,43,7:00 PM–8:00 PM,Weekend,Persons,56
-Free time,43,7:00 PM–8:00 PM,All days,Males,70.1
-Free time,43,7:00 PM–8:00 PM,All days,Females,67.7
-Free time,43,7:00 PM–8:00 PM,All days,Persons,68.9
-Free time,44,8:00 PM–9:00 PM,Weekday,Males,26.1
-Free time,44,8:00 PM–9:00 PM,Weekday,Females,22.6
-Free time,44,8:00 PM–9:00 PM,Weekday,Persons,24.3
-Free time,44,8:00 PM–9:00 PM,Weekend,Males,63.1
-Free time,44,8:00 PM–9:00 PM,Weekend,Females,63.2
-Free time,44,8:00 PM–9:00 PM,Weekend,Persons,63.3
-Free time,44,8:00 PM–9:00 PM,All days,Males,74.7
-Free time,44,8:00 PM–9:00 PM,All days,Females,74.5
-Free time,44,8:00 PM–9:00 PM,All days,Persons,74.4
-Free time,45,9:00 PM–10:00 PM,Weekday,Males,17.2
-Free time,45,9:00 PM–10:00 PM,Weekday,Females,16.1
-Free time,45,9:00 PM–10:00 PM,Weekday,Persons,16.9
-Free time,45,9:00 PM–10:00 PM,Weekend,Males,56.3
-Free time,45,9:00 PM–10:00 PM,Weekend,Females,56.7
-Free time,45,9:00 PM–10:00 PM,Weekend,Persons,56.7
-Free time,45,9:00 PM–10:00 PM,All days,Males,64
-Free time,45,9:00 PM–10:00 PM,All days,Females,64.7
-Free time,45,9:00 PM–10:00 PM,All days,Persons,64.1
-Free time,46,10:00 PM–11:00 PM,Weekday,Males,14.2
-Free time,46,10:00 PM–11:00 PM,Weekday,Females,12.3
-Free time,46,10:00 PM–11:00 PM,Weekday,Persons,13.1
-Free time,46,10:00 PM–11:00 PM,Weekend,Males,39.2
-Free time,46,10:00 PM–11:00 PM,Weekend,Females,36.6
-Free time,46,10:00 PM–11:00 PM,Weekend,Persons,38
-Free time,46,10:00 PM–11:00 PM,All days,Males,44.9
-Free time,46,10:00 PM–11:00 PM,All days,Females,42.8
-Free time,46,10:00 PM–11:00 PM,All days,Persons,43.7
-Free time,47,11:00 PM–12:00 AM,Weekday,Males,8.7
-Free time,47,11:00 PM–12:00 AM,Weekday,Females,5.8
-Free time,47,11:00 PM–12:00 AM,Weekday,Persons,7.1
-Free time,47,11:00 PM–12:00 AM,Weekend,Males,18.5
-Free time,47,11:00 PM–12:00 AM,Weekend,Females,13.5
-Free time,47,11:00 PM–12:00 AM,Weekend,Persons,15.8
-Free time,47,11:00 PM–12:00 AM,All days,Males,22.4
-Free time,47,11:00 PM–12:00 AM,All days,Females,16.9
-Free time,47,11:00 PM–12:00 AM,All days,Persons,19.5
+Free time,0,12:00 AM–1:00 AM,Weekday,Males,5.6
+Free time,0,12:00 AM–1:00 AM,Weekday,Females,5.3
+Free time,0,12:00 AM–1:00 AM,Weekday,Persons,5.4
+Free time,1,1:00 AM–2:00 AM,Weekday,Males,3.2
+Free time,1,1:00 AM–2:00 AM,Weekday,Females,3.7
+Free time,1,1:00 AM–2:00 AM,Weekday,Persons,3.4
+Free time,2,2:00 AM–3:00 AM,Weekday,Males,1
+Free time,2,2:00 AM–3:00 AM,Weekday,Females,1.5
+Free time,2,2:00 AM–3:00 AM,Weekday,Persons,1.3
+Free time,3,3:00 AM–4:00 AM,Weekday,Males,0.9
+Free time,3,3:00 AM–4:00 AM,Weekday,Females,2
+Free time,3,3:00 AM–4:00 AM,Weekday,Persons,1.3
+Free time,4,4:00 AM–5:00 AM,Weekday,Males,2.7
+Free time,4,4:00 AM–5:00 AM,Weekday,Females,2.8
+Free time,4,4:00 AM–5:00 AM,Weekday,Persons,2.8
+Free time,5,5:00 AM–6:00 AM,Weekday,Males,7.3
+Free time,5,5:00 AM–6:00 AM,Weekday,Females,6.3
+Free time,5,5:00 AM–6:00 AM,Weekday,Persons,6.8
+Free time,6,6:00 AM–7:00 AM,Weekday,Males,14.7
+Free time,6,6:00 AM–7:00 AM,Weekday,Females,16.3
+Free time,6,6:00 AM–7:00 AM,Weekday,Persons,15.5
+Free time,7,7:00 AM–8:00 AM,Weekday,Males,21.8
+Free time,7,7:00 AM–8:00 AM,Weekday,Females,24.4
+Free time,7,7:00 AM–8:00 AM,Weekday,Persons,23.1
+Free time,8,8:00 AM–9:00 AM,Weekday,Males,24.3
+Free time,8,8:00 AM–9:00 AM,Weekday,Females,25.5
+Free time,8,8:00 AM–9:00 AM,Weekday,Persons,25
+Free time,9,9:00 AM–10:00 AM,Weekday,Males,24.7
+Free time,9,9:00 AM–10:00 AM,Weekday,Females,26.5
+Free time,9,9:00 AM–10:00 AM,Weekday,Persons,25.5
+Free time,10,10:00 AM–11:00 AM,Weekday,Males,25.3
+Free time,10,10:00 AM–11:00 AM,Weekday,Females,27.3
+Free time,10,10:00 AM–11:00 AM,Weekday,Persons,26.4
+Free time,11,11:00 AM–12:00 PM,Weekday,Males,26.5
+Free time,11,11:00 AM–12:00 PM,Weekday,Females,29.9
+Free time,11,11:00 AM–12:00 PM,Weekday,Persons,28.3
+Free time,12,12:00 PM–1:00 PM,Weekday,Males,28.3
+Free time,12,12:00 PM–1:00 PM,Weekday,Females,30.3
+Free time,12,12:00 PM–1:00 PM,Weekday,Persons,29.3
+Free time,13,1:00 PM–2:00 PM,Weekday,Males,29
+Free time,13,1:00 PM–2:00 PM,Weekday,Females,33.4
+Free time,13,1:00 PM–2:00 PM,Weekday,Persons,31.2
+Free time,14,2:00 PM–3:00 PM,Weekday,Males,29.7
+Free time,14,2:00 PM–3:00 PM,Weekday,Females,34.3
+Free time,14,2:00 PM–3:00 PM,Weekday,Persons,32
+Free time,15,3:00 PM–4:00 PM,Weekday,Males,33.8
+Free time,15,3:00 PM–4:00 PM,Weekday,Females,35.4
+Free time,15,3:00 PM–4:00 PM,Weekday,Persons,34.5
+Free time,16,4:00 PM–5:00 PM,Weekday,Males,41.6
+Free time,16,4:00 PM–5:00 PM,Weekday,Females,40.7
+Free time,16,4:00 PM–5:00 PM,Weekday,Persons,41.1
+Free time,17,5:00 PM–6:00 PM,Weekday,Males,49.8
+Free time,17,5:00 PM–6:00 PM,Weekday,Females,45.3
+Free time,17,5:00 PM–6:00 PM,Weekday,Persons,47.4
+Free time,18,6:00 PM–7:00 PM,Weekday,Males,56.7
+Free time,18,6:00 PM–7:00 PM,Weekday,Females,49.6
+Free time,18,6:00 PM–7:00 PM,Weekday,Persons,53.1
+Free time,19,7:00 PM–8:00 PM,Weekday,Males,70.8
+Free time,19,7:00 PM–8:00 PM,Weekday,Females,66.3
+Free time,19,7:00 PM–8:00 PM,Weekday,Persons,68.4
+Free time,20,8:00 PM–9:00 PM,Weekday,Males,76.2
+Free time,20,8:00 PM–9:00 PM,Weekday,Females,74.1
+Free time,20,8:00 PM–9:00 PM,Weekday,Persons,75
+Free time,21,9:00 PM–10:00 PM,Weekday,Males,62.4
+Free time,21,9:00 PM–10:00 PM,Weekday,Females,62.8
+Free time,21,9:00 PM–10:00 PM,Weekday,Persons,62.6
+Free time,22,10:00 PM–11:00 PM,Weekday,Males,42.6
+Free time,22,10:00 PM–11:00 PM,Weekday,Females,41.4
+Free time,22,10:00 PM–11:00 PM,Weekday,Persons,41.8
+Free time,23,11:00 PM–12:00 AM,Weekday,Males,19.5
+Free time,23,11:00 PM–12:00 AM,Weekday,Females,18.7
+Free time,23,11:00 PM–12:00 AM,Weekday,Persons,19.1
+Free time,0,12:00 AM–1:00 AM,Weekend,Males,6.1
+Free time,0,12:00 AM–1:00 AM,Weekend,Females,6.8
+Free time,0,12:00 AM–1:00 AM,Weekend,Persons,6.7
+Free time,1,1:00 AM–2:00 AM,Weekend,Males,3.5
+Free time,1,1:00 AM–2:00 AM,Weekend,Females,4.4
+Free time,1,1:00 AM–2:00 AM,Weekend,Persons,3.8
+Free time,2,2:00 AM–3:00 AM,Weekend,Males,1.9
+Free time,2,2:00 AM–3:00 AM,Weekend,Females,2.8
+Free time,2,2:00 AM–3:00 AM,Weekend,Persons,2.3
+Free time,3,3:00 AM–4:00 AM,Weekend,Males,1.2
+Free time,3,3:00 AM–4:00 AM,Weekend,Females,1.3
+Free time,3,3:00 AM–4:00 AM,Weekend,Persons,1.2
+Free time,4,4:00 AM–5:00 AM,Weekend,Males,2.9
+Free time,4,4:00 AM–5:00 AM,Weekend,Females,2.2
+Free time,4,4:00 AM–5:00 AM,Weekend,Persons,2.7
+Free time,5,5:00 AM–6:00 AM,Weekend,Males,7.2
+Free time,5,5:00 AM–6:00 AM,Weekend,Females,6.3
+Free time,5,5:00 AM–6:00 AM,Weekend,Persons,6.4
+Free time,6,6:00 AM–7:00 AM,Weekend,Males,15.9
+Free time,6,6:00 AM–7:00 AM,Weekend,Females,15.8
+Free time,6,6:00 AM–7:00 AM,Weekend,Persons,15.9
+Free time,7,7:00 AM–8:00 AM,Weekend,Males,27.1
+Free time,7,7:00 AM–8:00 AM,Weekend,Females,25
+Free time,7,7:00 AM–8:00 AM,Weekend,Persons,25.8
+Free time,8,8:00 AM–9:00 AM,Weekend,Males,38.8
+Free time,8,8:00 AM–9:00 AM,Weekend,Females,35.8
+Free time,8,8:00 AM–9:00 AM,Weekend,Persons,37.1
+Free time,9,9:00 AM–10:00 AM,Weekend,Males,44.7
+Free time,9,9:00 AM–10:00 AM,Weekend,Females,42.8
+Free time,9,9:00 AM–10:00 AM,Weekend,Persons,43.5
+Free time,10,10:00 AM–11:00 AM,Weekend,Males,51.4
+Free time,10,10:00 AM–11:00 AM,Weekend,Females,44.6
+Free time,10,10:00 AM–11:00 AM,Weekend,Persons,47.6
+Free time,11,11:00 AM–12:00 PM,Weekend,Males,53.3
+Free time,11,11:00 AM–12:00 PM,Weekend,Females,49.4
+Free time,11,11:00 AM–12:00 PM,Weekend,Persons,51.1
+Free time,12,12:00 PM–1:00 PM,Weekend,Males,49.8
+Free time,12,12:00 PM–1:00 PM,Weekend,Females,47.4
+Free time,12,12:00 PM–1:00 PM,Weekend,Persons,48.3
+Free time,13,1:00 PM–2:00 PM,Weekend,Males,54.4
+Free time,13,1:00 PM–2:00 PM,Weekend,Females,52.2
+Free time,13,1:00 PM–2:00 PM,Weekend,Persons,53
+Free time,14,2:00 PM–3:00 PM,Weekend,Males,55.1
+Free time,14,2:00 PM–3:00 PM,Weekend,Females,56.1
+Free time,14,2:00 PM–3:00 PM,Weekend,Persons,55.7
+Free time,15,3:00 PM–4:00 PM,Weekend,Males,58.1
+Free time,15,3:00 PM–4:00 PM,Weekend,Females,54.1
+Free time,15,3:00 PM–4:00 PM,Weekend,Persons,55.9
+Free time,16,4:00 PM–5:00 PM,Weekend,Males,61.9
+Free time,16,4:00 PM–5:00 PM,Weekend,Females,57.7
+Free time,16,4:00 PM–5:00 PM,Weekend,Persons,59.8
+Free time,17,5:00 PM–6:00 PM,Weekend,Males,63.1
+Free time,17,5:00 PM–6:00 PM,Weekend,Females,57.9
+Free time,17,5:00 PM–6:00 PM,Weekend,Persons,60.5
+Free time,18,6:00 PM–7:00 PM,Weekend,Males,60.6
+Free time,18,6:00 PM–7:00 PM,Weekend,Females,54.4
+Free time,18,6:00 PM–7:00 PM,Weekend,Persons,57.2
+Free time,19,7:00 PM–8:00 PM,Weekend,Males,70.1
+Free time,19,7:00 PM–8:00 PM,Weekend,Females,67.7
+Free time,19,7:00 PM–8:00 PM,Weekend,Persons,68.9
+Free time,20,8:00 PM–9:00 PM,Weekend,Males,74.7
+Free time,20,8:00 PM–9:00 PM,Weekend,Females,74.5
+Free time,20,8:00 PM–9:00 PM,Weekend,Persons,74.4
+Free time,21,9:00 PM–10:00 PM,Weekend,Males,64
+Free time,21,9:00 PM–10:00 PM,Weekend,Females,64.7
+Free time,21,9:00 PM–10:00 PM,Weekend,Persons,64.1
+Free time,22,10:00 PM–11:00 PM,Weekend,Males,44.9
+Free time,22,10:00 PM–11:00 PM,Weekend,Females,42.8
+Free time,22,10:00 PM–11:00 PM,Weekend,Persons,43.7
+Free time,23,11:00 PM–12:00 AM,Weekend,Males,22.4
+Free time,23,11:00 PM–12:00 AM,Weekend,Females,16.9
+Free time,23,11:00 PM–12:00 AM,Weekend,Persons,19.5
