@@ -123,7 +123,8 @@
                     "orient": "bottom",
                     "title": "% in high distress (women and men)",
                     "direction": "horizontal",
-                    "labelOverlap": false
+                    "labelOverlap": false,
+                    "titleLimit": 400
                   }
                 },
                 "tooltip": [
@@ -433,7 +434,8 @@
                 "orient": "bottom",
                 "title": "Percentage points more for women",
                 "direction": "horizontal",
-                "labelOverlap": false
+                "labelOverlap": false,
+                "titleLimit": 400
               }
             },
             "tooltip": [

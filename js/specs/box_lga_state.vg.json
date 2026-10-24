@@ -18,6 +18,9 @@
       "filter": "isValid(datum.k10_high_persons)"
     },
     {
+      "filter": "!test(/[b-z]$/, datum.code)"
+    },
+    {
       "calculate": "{'1': 'NSW', '2': 'Vic', '3': 'Qld', '4': 'SA', '5': 'WA', '6': 'Tas', '7': 'NT', '8': 'ACT'}[slice(datum.code, 0, 1)]",
       "as": "state"
     },

@@ -448,8 +448,8 @@ for f, lab, sc in [("k10_high_female", "Women", SEX_SCALE), ("k10_high_male", "M
     v["projection"] = dict(AUS_PROJ, center=[0, -27], scale=590 if lab != "Gap: women minus men" else 780,
                            translate=[v["width"] / 2 - (40 if lab.startswith("Gap") else 0), v["height"] / 2 - 10])
     leg = None
-    if lab == "Women": leg = {"orient": "bottom", "title": "% in high distress (women and men)", "direction": "horizontal", "labelOverlap": False}
-    if lab.startswith("Gap"): leg = {"orient": "bottom", "title": "Percentage points more for women", "direction": "horizontal", "labelOverlap": False}
+    if lab == "Women": leg = {"orient": "bottom", "title": "% in high distress (women and men)", "direction": "horizontal", "labelOverlap": False, "titleLimit": 400}
+    if lab.startswith("Gap"): leg = {"orient": "bottom", "title": "Percentage points more for women", "direction": "horizontal", "labelOverlap": False, "titleLimit": 400}
     v["layer"][1]["encoding"]["color"]["legend"] = leg
     v["title"] = {"text": lab, "fontSize": 14, "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif", "fontWeight": 600}
     sm["hconcat"].append(v)
@@ -633,6 +633,8 @@ spec("box_lga_state", "Within every state, some local areas have twice the distr
     "data": {"url": "data/phidu_lga_2022.csv", "format": {"type": "csv", "parse": {"k10_high_persons": "number"}}},
     "transform": [
         {"filter": "isValid(datum.k10_high_persons)"},
+        # councils split across two PHNs appear as "part a/b/c" rows with the same value: keep one row each
+        {"filter": "!test(/[b-z]$/, datum.code)"},
         {"calculate": "{'1': 'NSW', '2': 'Vic', '3': 'Qld', '4': 'SA', '5': 'WA', '6': 'Tas', '7': 'NT', '8': 'ACT'}[slice(datum.code, 0, 1)]", "as": "state"},
         {"filter": "datum.state && datum.state != 'ACT'"},  # the ACT is a single area, so it has no spread to show
         # fixed (not random) vertical jitter so the dots sit in the same place on every load

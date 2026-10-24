@@ -52,7 +52,7 @@ function fitSpec(spec, avail) {
 }
 
 charts.forEach(id => {
-  const url = "js/specs/" + id + ".vg.json?v=6";
+  const url = "js/specs/" + id + ".vg.json?v=7";
   const el = document.getElementById(id);
   const src = FIT.includes(id)
     ? fetch(url).then(r => r.json()).then(s => fitSpec(s, el.clientWidth - 24))
