@@ -294,7 +294,7 @@ spec("bar_work_impacts", "Sleepiness follows people to work and onto the road",
 
 # 10. Wellbeing heatmap (SHF 2025)
 spec("heatmap_wellbeing", "People with back pain and mental health conditions sleep worst on every measure",
-     ["Sleep measures by health condition. Colour: how many times worse than adults with neither", "Sleep Health Foundation, Aussie Sleep Snapshot 2025 (n = 1,012)"], {
+     ["Sleep measures by health condition. Each column shaded from best to worst group", "Sleep Health Foundation, Aussie Sleep Snapshot 2025 (n = 1,012)"], {
     "width": "container", "height": {"step": 48},
     "data": {"url": "data/shf2025_by_group.csv"},
     "transform": [
@@ -306,12 +306,12 @@ spec("heatmap_wellbeing", "People with back pain and mental health conditions sl
         {"window": [{"op": "first_value", "field": "value", "as": "neither"}], "groupby": ["metric"],
          "sort": [{"field": "is_neither", "order": "descending"}]},
         {"lookup": "metric", "from": {"data": {"values": [
-            {"metric": "sleep_hours", "label": "Sleep (hours)", "better": "higher", "fmt": "h", "ord": 1},
-            {"metric": "poor_nights_per_week", "label": "Poor nights/week", "better": "lower", "fmt": "n", "ord": 2},
-            {"metric": "productivity_days_lost", "label": "Work days hit/week", "better": "lower", "fmt": "n", "ord": 3},
-            {"metric": "pct_consistent_pattern", "label": "Regular routine", "better": "higher", "fmt": "%", "ord": 4},
+            {"metric": "sleep_hours", "label": "Sleep|(hours)", "better": "higher", "fmt": "h", "ord": 1},
+            {"metric": "poor_nights_per_week", "label": "Poor nights|a week", "better": "lower", "fmt": "n", "ord": 2},
+            {"metric": "productivity_days_lost", "label": "Work days|hit a week", "better": "lower", "fmt": "n", "ord": 3},
+            {"metric": "pct_consistent_pattern", "label": "Regular|routine", "better": "higher", "fmt": "%", "ord": 4},
             {"metric": "pct_insomnia", "label": "Insomnia", "better": "lower", "fmt": "%", "ord": 5},
-            {"metric": "pct_sleep_apnoea", "label": "Sleep apnoea", "better": "lower", "fmt": "%", "ord": 6}]},
+            {"metric": "pct_sleep_apnoea", "label": "Sleep|apnoea", "better": "lower", "fmt": "%", "ord": 6}]},
             "key": "metric", "fields": ["label", "better", "fmt", "ord"]}}],
     "mark": "rect"})
 # heatmap needs the 'Neither' reference: compute with joinaggregate on a flag instead of the window trick
@@ -320,7 +320,12 @@ hm["transform"] = hm["transform"][:3] + [
     {"calculate": "datum.group == 'Neither' ? datum.value : null", "as": "ref"},
     {"joinaggregate": [{"op": "max", "field": "ref", "as": "neither"}], "groupby": ["metric"]},
     hm["transform"][-1],
-    {"calculate": "datum.better == 'lower' ? datum.value / datum.neither : datum.neither / datum.value", "as": "times_worse"},
+    # shade within each measure only, from the best group (0) to the worst (1): the six measures use
+    # different units, so no single "times worse" scale across them would be honest
+    {"joinaggregate": [{"op": "min", "field": "value", "as": "vmin"}, {"op": "max", "field": "value", "as": "vmax"}], "groupby": ["metric"]},
+    {"calculate": "datum.better == 'lower' ? (datum.value - datum.vmin) / (datum.vmax - datum.vmin) : (datum.vmax - datum.value) / (datum.vmax - datum.vmin)", "as": "worse"},
+    {"calculate": "datum.group == 'Neither' ? 'Reference group' : (datum.value >= datum.neither ? '+' : '') + format(datum.value - datum.neither, datum.fmt == '%' ? '.0f' : '.1f') + (datum.fmt == '%' ? ' points' : datum.fmt == 'h' ? ' hours' : '')", "as": "diff"},
+    {"calculate": "replace(datum.label, '|', ' ')", "as": "measure"},
     {"calculate": "datum.fmt == '%' ? format(datum.value, '.0f') + '%' : format(datum.value, '.1f')", "as": "valuelabel"},
     {"calculate": "datum.group == 'Neither' ? 'Neither condition' : datum.group", "as": "grouplabel"},
     {"calculate": "indexof(['Neither condition', 'Back pain only', 'Mental health only', 'Both'], datum.grouplabel)", "as": "rowi"}]
@@ -329,25 +334,25 @@ del hm["mark"]
 hm["encoding"] = {
     "x": {"field": "label", "type": "nominal", "title": None, "sort": {"field": "ord"},
           "axis": {"orient": "top", "labelAngle": 0, "labelLimit": 200, "domain": False, "ticks": False,
-                   "labelExpr": "split(datum.label, ' a ')[0] == datum.label ? datum.label : datum.label"}},
+                   "labelExpr": "split(datum.label, '|')", "labelLineHeight": 15, "labelPadding": 20}},
     "y": {"field": "grouplabel", "type": "nominal", "title": None,
           "sort": ["Neither condition", "Back pain only", "Mental health only", "Both"],
-          "axis": {"domain": False, "ticks": False}}}
+          "axis": {"domain": False, "ticks": False, "labelExpr": "width < 420 ? split({'Neither condition': 'Neither|n = 639', 'Back pain only': 'Back pain|n = 188', 'Mental health only': 'Mental health|n = 123', 'Both': 'Both|n = 62'}[datum.label], '|') : {'Neither condition': 'Neither condition (n = 639)', 'Back pain only': 'Back pain only (n = 188)', 'Mental health only': 'Mental health only (n = 123)', 'Both': 'Both (n = 62)'}[datum.label]"}}}
 hm["layer"] = [
     {"mark": {"type": "rect", "stroke": "#fbfaf7", "strokeWidth": 2, "cornerRadius": 3,
               "opacity": {"expr": "clamp(reveal * 4 - datum.rowi, 0, 1)"}},
-     "encoding": {"color": {"field": "times_worse", "type": "quantitative", "title": "Times worse than neither",
-                            "scale": {"type": "threshold", "domain": [1.1, 1.5, 2, 3], "range": ["#f1efe9", "#f6dcb5", "#e9b46a", "#d08a1e", "#8f5a0c"]},
-                            "legend": {"orient": "bottom", "direction": "horizontal", "titleLimit": 300, "labelExpr": "isFinite(datum.value) ? datum.value + '×' : ''"}},
-                  "tooltip": [{"field": "grouplabel", "title": "Group"}, {"field": "label", "title": "Measure"},
+     "encoding": {"color": {"field": "worse", "type": "quantitative", "title": "Within each measure",
+                            "scale": {"domain": [0, 0.5, 1], "range": ["#f6efe4", "#e9b46a", "#8f5a0c"]},
+                            "legend": None},  # the subtitle says light = best, dark = worst
+                  "tooltip": [{"field": "grouplabel", "title": "Group"}, {"field": "measure", "title": "Measure"},
                               {"field": "valuelabel", "title": "Value"},
-                              {"field": "times_worse", "title": "Times worse than neither", "format": ".1f"}]}},
+                              {"field": "diff", "title": "Compared with neither condition"}]}},
     {"transform": [{"filter": "datum.grouplabel == 'Both'"}],
      "mark": {"type": "rect", "filled": False, "stroke": INK, "strokeWidth": 2, "cornerRadius": 3,
               "opacity": {"expr": "clamp(reveal * 4 - datum.rowi, 0, 1)"}}},
     {"mark": {"type": "text", "fontSize": 13, "opacity": {"expr": "clamp(reveal * 4 - datum.rowi, 0, 1)"}},
      "encoding": {"text": {"field": "valuelabel"},
-                  "color": {"condition": {"test": "datum.times_worse >= 2", "value": "#ffffff"}, "value": INK}}}]
+                  "color": {"condition": {"test": "datum.worse >= 0.6", "value": "#ffffff"}, "value": INK}}}]
 hm["width"] = "container"
 
 # 11. PHN choropleth (existing, restyled here)

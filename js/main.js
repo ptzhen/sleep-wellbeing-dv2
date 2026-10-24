@@ -20,6 +20,7 @@ const FIT = ["map_distress_phn", "map_distress_sex"];
 function naturalWidth(s) {
   if (s.hconcat) return s.hconcat.reduce((a, c) => a + naturalWidth(c), 0) + (s.spacing ?? 20) * (s.hconcat.length - 1);
   if (s.vconcat) return Math.max(...s.vconcat.map(naturalWidth));
+  if (s.spec) return naturalWidth(s.spec);
   return typeof s.width === "number" ? s.width : 0;
 }
 function stack(s, avail) {
@@ -28,10 +29,21 @@ function stack(s, avail) {
 }
 function shrink(s, f) {
   (s.hconcat || s.vconcat || []).forEach(c => shrink(c, f));
+  if (s.spec) shrink(s.spec, f);
   if (typeof s.width === "number") s.width = Math.round(s.width * f);
   if (typeof s.height === "number") s.height = Math.round(s.height * f);
   const p = s.projection;
   if (p && p.scale) { p.scale *= f; if (p.translate) p.translate = p.translate.map(t => t * f); }
+  (s.layer || []).forEach(l => shrinkPixels(l, f));
+}
+// Pixel sizes inside a view (the clock's radii, fixed label positions) shrink with it
+function shrinkPixels(l, f) {
+  const m = l.mark;
+  if (m && typeof m === "object") ["radius", "innerRadius", "outerRadius"].forEach(k => { if (typeof m[k] === "number") m[k] *= f; });
+  const e = l.encoding || {};
+  if (e.radius && e.radius.scale && Array.isArray(e.radius.scale.range)) e.radius.scale.range = e.radius.scale.range.map(v => v * f);
+  ["x", "y"].forEach(k => { if (e[k] && typeof e[k].value === "number") e[k].value *= f; });
+  (l.layer || []).forEach(c => shrinkPixels(c, f));
 }
 // Map labels stay full size, so on a shrunk map they would spill over; the tooltips carry the values instead
 function dropLabels(s) {
@@ -51,13 +63,25 @@ function fitSpec(spec, avail) {
   return spec;
 }
 
-charts.forEach(id => {
-  const url = "js/specs/" + id + ".vg.json?v=7";
+// Load a chart; if it still comes out wider than its card (axis labels and legends
+// do not shrink), scale its fixed-size views down and draw it again
+async function embed(id) {
   const el = document.getElementById(id);
-  const src = FIT.includes(id)
-    ? fetch(url).then(r => r.json()).then(s => fitSpec(s, el.clientWidth - 24))
-    : Promise.resolve(url);
-  src.then(s => vegaEmbed("#" + id, s, {actions: false}))
+  let spec = await fetch("js/specs/" + id + ".vg.json?v=8").then(r => r.json());
+  if (FIT.includes(id)) spec = fitSpec(spec, el.clientWidth - 24);
+  let r = await vegaEmbed("#" + id, spec, {actions: false});
+  for (let i = 0; i < 4; i++) {
+    const over = el.scrollWidth - el.clientWidth, nat = naturalWidth(spec);
+    if (over <= 1 || !nat) break;
+    r.finalize();
+    shrink(spec, Math.max(0.3, (nat - over - 4) / nat));
+    r = await vegaEmbed("#" + id, spec, {actions: false});
+  }
+  return r;
+}
+
+charts.forEach(id => {
+  embed(id)
     .then(r => {
       views[id] = r.view;
       if (REVEAL[id] && !reduceMotion) prepareReveal(id, r.view);
