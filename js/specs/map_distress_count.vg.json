@@ -152,6 +152,105 @@
               }
             ]
           }
+        },
+        {
+          "data": {
+            "values": [
+              {
+                "lon": 144.706,
+                "lat": -37.576,
+                "lon2": 137.5,
+                "lat2": -41.5,
+                "lab": "Most: North Western Melbourne,\nabout 205,000 adults"
+              }
+            ]
+          },
+          "encoding": {
+            "longitude": {
+              "field": "lon",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "lat",
+              "type": "quantitative"
+            }
+          },
+          "layer": [
+            {
+              "mark": {
+                "type": "rule",
+                "color": "#23263a",
+                "strokeWidth": 0.8
+              },
+              "encoding": {
+                "longitude2": {
+                  "field": "lon2"
+                },
+                "latitude2": {
+                  "field": "lat2"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "circle",
+                "size": 20,
+                "color": "#23263a",
+                "opacity": 1
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "center",
+                "baseline": "middle",
+                "fontSize": 11,
+                "fontWeight": 600,
+                "color": "#23263a",
+                "lineBreak": "\n",
+                "stroke": "#fbfaf7",
+                "strokeWidth": 3,
+                "strokeOpacity": 0.9
+              },
+              "encoding": {
+                "longitude": {
+                  "field": "lon2",
+                  "type": "quantitative"
+                },
+                "latitude": {
+                  "field": "lat2",
+                  "type": "quantitative"
+                },
+                "text": {
+                  "field": "lab"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "center",
+                "baseline": "middle",
+                "fontSize": 11,
+                "fontWeight": 600,
+                "color": "#23263a",
+                "lineBreak": "\n"
+              },
+              "encoding": {
+                "longitude": {
+                  "field": "lon2",
+                  "type": "quantitative"
+                },
+                "latitude": {
+                  "field": "lat2",
+                  "type": "quantitative"
+                },
+                "text": {
+                  "field": "lab"
+                }
+              }
+            }
+          ]
         }
       ]
     },

@@ -49,6 +49,9 @@ h2 { font-size: clamp(1.7rem, 3vw, 2.5rem); max-width: 24ch; margin: 0 0 40px; }
 .stats { display: flex; gap: 36px; flex-wrap: wrap; }
 .stat { max-width: 15ch; padding-left: 14px; border-left: 2px solid rgba(243,182,78,.55); }
 .stat .num { display: block; font-family: var(--serif); font-size: 2.3rem; color: var(--gold); line-height: 1.1; }
+.colour-key { margin: 26px 0 0; max-width: 46ch; font-size: .85rem; line-height: 1.5; color: #b4b2cf; }
+.colour-key .sw { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin: 0 5px 0 2px; vertical-align: baseline; }
+.sw-or { background: #d08a1e; } .sw-bl { background: #5679bd; } .sw-pk { background: #c4527a; } .sw-pu { background: #7a66b4; }
 .stat .lab { display: block; font-size: .9rem; line-height: 1.35; color: #c9c7dd; }
 .hero-card { justify-self: center; max-width: 390px; }
 .hero-card h3 { font-size: 1.1rem; }

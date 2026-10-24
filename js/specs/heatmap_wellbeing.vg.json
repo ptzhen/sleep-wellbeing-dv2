@@ -272,6 +272,23 @@
       }
     },
     {
+      "transform": [
+        {
+          "filter": "datum.grouplabel == 'Both'"
+        }
+      ],
+      "mark": {
+        "type": "rect",
+        "filled": false,
+        "stroke": "#23263a",
+        "strokeWidth": 2,
+        "cornerRadius": 3,
+        "opacity": {
+          "expr": "clamp(reveal * 4 - datum.rowi, 0, 1)"
+        }
+      }
+    },
+    {
       "mark": {
         "type": "text",
         "fontSize": 13,

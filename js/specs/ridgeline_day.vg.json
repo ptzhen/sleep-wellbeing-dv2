@@ -97,6 +97,45 @@
         }
       },
       {
+        "transform": [
+          {
+            "filter": "datum.act == 'Sleep'"
+          },
+          {
+            "aggregate": [
+              {
+                "op": "count",
+                "as": "n"
+              }
+            ],
+            "groupby": [
+              "act"
+            ]
+          }
+        ],
+        "mark": {
+          "type": "text",
+          "text": "6 to 9 am: sleep hands over to work",
+          "align": "left",
+          "fontSize": 11.5,
+          "fontWeight": 600,
+          "color": "#23263a",
+          "dy": -2,
+          "stroke": "#ffffff",
+          "strokeWidth": 3,
+          "strokeOpacity": 0
+        },
+        "encoding": {
+          "x": {
+            "datum": 9.3,
+            "type": "quantitative"
+          },
+          "y": {
+            "value": 10
+          }
+        }
+      },
+      {
         "mark": {
           "type": "area",
           "interpolate": "monotone",

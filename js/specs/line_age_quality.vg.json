@@ -109,6 +109,37 @@
           "format": ".0f"
         }
       }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "t": "From the mid-30s, more feel rested than unrefreshed"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "fontStyle": "italic",
+        "color": "#5d6077",
+        "align": "center"
+      },
+      "encoding": {
+        "x": {
+          "datum": "35-44",
+          "type": "ordinal"
+        },
+        "y": {
+          "value": 200
+        },
+        "text": {
+          "field": "t"
+        },
+        "color": {
+          "value": "#5d6077"
+        }
+      }
     }
   ],
   "config": {

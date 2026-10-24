@@ -221,7 +221,10 @@ spec("line_age_quality", "Young adults sleep the longest but feel the worst",
                                   {"field": "pct", "title": "% of adults", "format": ".1f"}]}},
         {"transform": [{"filter": "datum.age_group == '18-24' || datum.age_group == '65+'"}],
          "mark": {"type": "text", "dy": -12, "fontSize": 12, "fontWeight": 600},
-         "encoding": {"text": {"field": "pct", "type": "quantitative", "format": ".0f"}}}]})
+         "encoding": {"text": {"field": "pct", "type": "quantitative", "format": ".0f"}}},
+        {"data": {"values": [{"t": "From the mid-30s, more feel rested than unrefreshed"}]},
+         "mark": {"type": "text", "fontSize": 12, "fontStyle": "italic", "color": "#5d6077", "align": "center"},
+         "encoding": {"x": {"datum": "35-44", "type": "ordinal"}, "y": {"value": 200}, "text": {"field": "t"}, "color": {"value": "#5d6077"}}}]})
 
 # 7. Life circumstances diverging bar (ABS 2024)
 CIRC_ORDER = ["Parent, youngest child under 1", "Parent, youngest child aged 1", "Parent, youngest child 2–4",
@@ -366,6 +369,9 @@ hm["layer"] = [
                   "tooltip": [{"field": "grouplabel", "title": "Group"}, {"field": "label", "title": "Measure"},
                               {"field": "valuelabel", "title": "Value"},
                               {"field": "times_worse", "title": "Times worse than neither", "format": ".1f"}]}},
+    {"transform": [{"filter": "datum.grouplabel == 'Both'"}],
+     "mark": {"type": "rect", "filled": False, "stroke": INK, "strokeWidth": 2, "cornerRadius": 3,
+              "opacity": {"expr": "clamp(reveal * 4 - datum.rowi, 0, 1)"}}},
     {"mark": {"type": "text", "fontSize": 13, "opacity": {"expr": "clamp(reveal * 4 - datum.rowi, 0, 1)"}},
      "encoding": {"text": {"field": "valuelabel"},
                   "color": {"condition": {"test": "datum.times_worse >= 2", "value": "#ffffff"}, "value": INK}}}]
@@ -416,6 +422,18 @@ specs["map_distress_phn"]["layer"].append(
          "mark": {"type": "text", "align": "left", "dx": 4, "fontSize": 12, "fontWeight": 600, "color": INK, "lineBreak": "\n"},
          "encoding": {"longitude": {"field": "lon2"}, "latitude": {"field": "lat2"}, "text": {"field": "lab"}}}]})
 
+def callouts(values, align="left", size=11):
+    pos = {"longitude": {"field": "lon2", "type": "quantitative"}, "latitude": {"field": "lat2", "type": "quantitative"}}
+    txt = {"type": "text", "align": align, "baseline": "middle", "fontSize": size, "fontWeight": 600, "color": INK, "lineBreak": "\n"}
+    return {"data": {"values": values},
+            "encoding": {"longitude": {"field": "lon", "type": "quantitative"}, "latitude": {"field": "lat", "type": "quantitative"}},
+            "layer": [
+                {"mark": {"type": "rule", "color": INK, "strokeWidth": 0.8},
+                 "encoding": {"longitude2": {"field": "lon2"}, "latitude2": {"field": "lat2"}}},
+                {"mark": {"type": "circle", "size": 20, "color": INK, "opacity": 1}},
+                {"mark": dict(txt, stroke="#fbfaf7", strokeWidth=3, strokeOpacity=0.9), "encoding": dict(pos, text={"field": "lab"})},
+                {"mark": txt, "encoding": dict(pos, text={"field": "lab"})}]}
+
 # 12. Small multiples: women, men (shared finer bins) and the gap between them
 PURPLES7 = ["#efedf6", "#d9d3ea", "#bdb0dd", "#9b8bca", "#7a66b4", "#5a4697", "#2f2366"]
 SEX_SCALE = {"type": "threshold", "domain": [9, 11, 13, 15, 17, 19], "range": PURPLES7}
@@ -430,6 +448,10 @@ for f, lab, sc in [("k10_high_female", "Women", SEX_SCALE), ("k10_high_male", "M
     v["layer"][1]["encoding"]["color"]["legend"] = leg
     v["title"] = {"text": lab, "fontSize": 14, "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif", "fontWeight": 600}
     sm["hconcat"].append(v)
+sm["hconcat"][2]["layer"].append(callouts([
+    {"lon": 151.11, "lat": -27.29, "lon2": 135.5, "lat2": -17.5, "lab": "Largest gap:\nDarling Downs 7.3"}], align="center", size=10.5))
+sm["hconcat"][2]["layer"].append(callouts([
+    {"lon": 151.16, "lat": -33.62, "lon2": 141, "lat2": -40.5, "lab": "Smallest: Northern Sydney 2.4"}], align="center", size=10.5))
 sm["resolve"] = {"scale": {"color": "independent"}, "legend": {"color": "independent"}}
 sm["spacing"] = 16
 spec("map_distress_sex", "Women report more distress than men in every region",
@@ -456,7 +478,9 @@ spec("map_distress_count", "", [], {
                  "opacity": {"condition": {"test": {"or": [{"param": "hoverMap", "empty": False}, {"param": "hoverBar", "empty": False}]}, "value": 0.95}, "value": 0.6},
                  "order": {"field": "distressed_adults", "sort": "descending"},
                  "tooltip": [{"field": "name", "title": "PHN"}, {"field": "state", "title": "State"},
-                             {"field": "distressed_adults", "title": "Distressed adults (est.)", "format": ",.0f"}]}}]},
+                             {"field": "distressed_adults", "title": "Distressed adults (est.)", "format": ",.0f"}]}},
+            callouts([{"lon": 144.706, "lat": -37.576, "lon2": 137.5, "lat2": -41.5,
+                       "lab": "Most: North Western Melbourne,\nabout 205,000 adults"}], align="center")]},
         {"name": "symbars", "width": 200, "height": {"step": 14},
          "data": {"url": "data/phn_distress_counts.csv"},
          "transform": [{"filter": "isValid(datum.distressed_adults) && datum.distressed_adults > 0"}],
@@ -531,6 +555,10 @@ spec("ridgeline_day", "Sleep hands over to work between 6 and 9 am",
             {"transform": [{"aggregate": [{"op": "count", "as": "n"}]}],
              "mark": {"type": "rect", "color": "#f3b64e", "opacity": 0.16},
              "encoding": {"x": {"datum": 6, "type": "quantitative"}, "x2": {"datum": 9}}},
+            {"transform": [{"filter": "datum.act == 'Sleep'"}, {"aggregate": [{"op": "count", "as": "n"}], "groupby": ["act"]}],
+             "mark": {"type": "text", "text": "6 to 9 am: sleep hands over to work", "align": "left", "fontSize": 11.5,
+                      "fontWeight": 600, "color": INK, "dy": -2, "stroke": "#ffffff", "strokeWidth": 3, "strokeOpacity": 0},
+             "encoding": {"x": {"datum": 9.3, "type": "quantitative"}, "y": {"value": 10}}},
             {"mark": {"type": "area", "interpolate": "monotone", "fillOpacity": 0.85, "stroke": "#fbfaf7", "strokeWidth": 1},
              "encoding": {
                  "x": {"field": "hour_mid", "type": "quantitative", "title": None, "scale": {"domain": [0, 24]},

@@ -16,7 +16,7 @@ const REVEAL = {waffle_short_sleep: 1500, bar_circumstance: 1000, slope_weekend:
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 charts.forEach(id => {
-  vegaEmbed("#" + id, "js/specs/" + id + ".vg.json?v=3", {actions: false})
+  vegaEmbed("#" + id, "js/specs/" + id + ".vg.json?v=4", {actions: false})
     .then(r => {
       views[id] = r.view;
       if (REVEAL[id] && !reduceMotion) prepareReveal(id, r.view);

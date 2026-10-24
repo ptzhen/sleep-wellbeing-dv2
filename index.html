@@ -9,7 +9,7 @@
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=3">
+  <link rel="stylesheet" href="css/style.css?v=4">
   <script src="https://cdn.jsdelivr.net/npm/vega@5.30.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.21.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
@@ -27,10 +27,11 @@
           <div class="stat"><span class="num">46%</span><span class="lab">had a day's work or study hurt by poor sleep last week</span></div>
           <div class="stat"><span class="num">1 in 7</span><span class="lab">adults report high psychological distress</span></div>
         </div>
+        <p class="colour-key"><span class="sw sw-or"></span>Orange marks the group or time each chart points to, <span class="sw sw-bl"></span>blue what it is compared with. <span class="sw sw-pk"></span>Pink and blue mean women and men, and <span class="sw sw-pu"></span>purple means distress.</p>
       </div>
       <figure class="fig card hero-card">
           <h3>1 in 3 Australian adults sleep less than 7 hours</h3>
-          <p class="sub">Each square is 1 in 100 adults, by usual sleep a night.</p>
+          <p class="sub">Each square is 1 in 100 adults, by usual sleep a night, 2025.</p>
           <div class="chart" id="waffle_short_sleep"></div>
           <p class="src">Source: <a href="https://www.sleephealthfoundation.org.au/news-and-articles/poor-sleep-is-costing-young-australians-five-days-a-week-in-lost-productivity-and-nearly-half-the-nation-turns-to-sleep-medication">Sleep Health Foundation, Aussie Sleep Snapshot 2025</a> (n = 1,012)</p>
         </figure>
@@ -61,7 +62,7 @@
       <h2>On paper, Australians sleep well</h2>
       <div class="two-col">
         <div class="text">
-          <p>In the latest ABS <span class="term" tabindex="0">time-use survey<span class="tip" role="tooltip">People record what they do across a whole day in a diary, so sleep is added up from the diary rather than estimated from memory.</span></span> (2024), Australians aged 15 and over recorded about <span class="hl">8 hours 48 minutes</span> of sleep a day. On the <span class="term" tabindex="0">OECD<span class="tip" role="tooltip">Organisation for Economic Co-operation and Development, a group of 38 mostly high-income countries. Its time-use data also covers a few non-members, such as China, India and South Africa.</span></span>'s comparable figures, Australia sits in the middle of the pack. Adults in Japan get about an hour less, and in Korea about 40 minutes less.</p>
+          <p>In the ABS <span class="term" tabindex="0">time-use survey<span class="tip" role="tooltip">People record what they do across a whole day in a diary, so sleep is added up from the diary rather than estimated from memory.</span></span> (2024), Australians aged 15 and over recorded about <span class=\"hl\">8 hours 48 minutes</span> of sleep a day. That puts Australia mid-pack among <span class="term" tabindex="0">OECD<span class="tip" role="tooltip">Organisation for Economic Co-operation and Development, a group of 38 mostly high-income countries. Its time-use data also covers a few non-members, such as China, India and South Africa.</span></span> countries: Japan sleeps about an hour less, and Korea about 40 minutes less.</p>
           <p>In most countries <span class="women">women</span> sleep a few minutes longer than <span class="men">men</span>. Australia's 2006 OECD figures follow that pattern. In the 2024 ABS survey the gap has all but closed: women and men both sleep about 8 hours 48 minutes.</p>
           <p class="note">Time-use diaries add up all the time people record as sleeping across the day, including naps, so these figures are higher than the hours people report in sleep surveys.</p>
         </div>
@@ -113,7 +114,7 @@
         </div>
         <figure class="fig card">
           <h3>Sleep hands over to paid work between 6 and 9 am</h3>
-          <p class="sub">Of the people who did each activity that day, % doing it in each hour. Each ridge is scaled from 0 to 100%; the shaded band marks 6 to 9 am. Switch between weekdays and weekends.</p>
+          <p class="sub">Of the people who did each activity that day, % doing it in each hour, 2020–21. Each ridge is scaled from 0 to 100%; the shaded band marks 6 to 9 am. Switch between weekdays and weekends.</p>
           <div class="chart" id="ridgeline_day"></div>
           <p class="src">Source: <a href="https://www.abs.gov.au/statistics/people/people-and-communities/how-australians-use-their-time/2020-21">ABS, How Australians Use Their Time 2020–21</a>, Tables 13–17</p>
         </figure>
@@ -124,7 +125,7 @@
         </div>
         <figure class="fig card">
           <h3>Weekends buy back about 44 extra minutes of sleep</h3>
-          <p class="sub">Average time asleep a day, people aged 15+.</p>
+          <p class="sub">Average time asleep a day, people aged 15+, 2024.</p>
           <div class="chart" id="slope_weekend"></div>
           <p class="src">Source: <a href="https://www.abs.gov.au/statistics/people/people-and-communities/how-australians-use-their-time/2024">ABS, How Australians Use Their Time 2024</a>, Table 4.1</p>
         </figure>
@@ -136,7 +137,7 @@
         </div>
         <figure class="fig card">
           <h3>In summer the sun rises before 5 am in Brisbane, almost an hour before Sydney</h3>
-          <p class="sub">Clock time of sunrise on the longest and shortest days of the year, in 30-minute bands. Queensland, WA and the NT have no daylight saving.</p>
+          <p class="sub">Clock time of sunrise on the longest and shortest days of the year (21 December and 21 June), in 30-minute bands. Queensland, WA and the NT have no daylight saving.</p>
           <div class="chart" id="map_sunrise"></div>
           <p class="src">Source: calculated with the <a href="https://gml.noaa.gov/grad/solcalc/solareqns.PDF">NOAA solar position equations</a>, using each state's time zone and daylight saving rules</p>
         </figure>
@@ -155,19 +156,19 @@
         </div>
         <figure class="fig card">
           <h3>Young adults are the least likely to feel they get enough sleep</h3>
-          <p class="sub">% of adults who usually get enough sleep, and % who often wake up unrefreshed, by age.</p>
+          <p class="sub">% of adults who usually get enough sleep, and % who often wake up unrefreshed, by age, 2016.</p>
           <div class="chart" id="line_age_quality"></div>
           <p class="src">Source: Sleep Health Foundation, Sleep Health Survey of Australian Adults 2016, Table 1</p>
         </figure>
       </div>
       <div class="two-col">
         <div class="text">
-          <p>Life circumstances matter too. Parents whose youngest child is under one sleep about <span class="hl">half an hour less</span> than the average adult (8 hours 16 minutes against 8 hours 48). The gap is biggest while the youngest child is a baby, but parents of school-age children still sleep about 20 minutes less. Carers and volunteers sleep about 8 minutes less.</p>
+          <p>A baby costs the most sleep: parents whose youngest child is under one get about <span class="hl">half an hour less</span> than the average adult (8 hours 16 minutes against 8 hours 48). Parents of school-age children still lose about 20 minutes, and carers and volunteers about 8.</p>
           <p>People with a disability spend longer asleep. Time-use data only records duration, so it can't say whether that means better rest.</p>
         </div>
         <figure class="fig card">
           <h3>A baby at home costs about half an hour of sleep a day</h3>
-          <p class="sub">Minutes asleep a day compared with the average adult (528 minutes), people aged 15+. Parent groups are by the age of the youngest child at home.</p>
+          <p class="sub">Minutes asleep a day compared with the average adult (528 minutes), people aged 15+, 2024. Parent groups are by the age of the youngest child at home.</p>
           <div class="chart" id="bar_circumstance"></div>
           <p class="src">Source: <a href="https://www.abs.gov.au/statistics/people/people-and-communities/how-australians-use-their-time/2024">ABS, How Australians Use Their Time 2024</a>, Tables 5.3, 11.3, 12.3 and 13.3</p>
         </figure>
@@ -185,7 +186,7 @@
         </div>
         <figure class="fig card">
           <h3>Late-night screens, work and caffeine go with poorer sleep</h3>
-          <p class="sub">% of adults with two or more sleep problems, comparing the healthier and the riskier habit.</p>
+          <p class="sub">% of adults with two or more sleep problems, comparing the healthier and the riskier habit, 2016.</p>
           <div class="chart" id="dumbbell_lifestyle"></div>
           <p class="src">Source: Sleep Health Foundation, Sleep Health Survey of Australian Adults 2016, Table 9</p>
         </figure>
@@ -196,7 +197,7 @@
         </div>
         <figure class="fig card">
           <h3>Sleepiness follows people to work and onto the road</h3>
-          <p class="sub">% who did this because of sleepiness or a sleep problem. Work questions were answered by people in work; driving questions by all adults.</p>
+          <p class="sub">% who did this because of sleepiness or a sleep problem, 2016. Work questions were answered by people in work; driving questions by all adults.</p>
           <div class="chart" id="bar_work_impacts"></div>
           <p class="src">Source: Sleep Health Foundation, Sleep Health Survey of Australian Adults 2016, Table 7</p>
         </figure>
@@ -215,7 +216,7 @@
         </div>
         <figure class="fig card">
           <h3>People with both back pain and a mental health condition sleep worst on five of six measures</h3>
-          <p class="sub">Sleep measures by health condition. Colour shows how many times worse each group is than adults with neither condition.</p>
+          <p class="sub">Sleep measures by health condition, 2025. Colour shows how many times worse each group is than adults with neither condition; the outlined row has both.</p>
           <div class="chart" id="heatmap_wellbeing"></div>
           <p class="src">Source: <a href="https://www.sleephealthfoundation.org.au/news-and-articles/poor-sleep-is-costing-young-australians-five-days-a-week-in-lost-productivity-and-nearly-half-the-nation-turns-to-sleep-medication">Sleep Health Foundation, Aussie Sleep Snapshot 2025</a> (n = 1,012)</p>
         </figure>
@@ -236,9 +237,8 @@
       <h2>Where Australians feel worst: distress is highest in the regions, but most distressed people live in cities</h2>
       <div class="two-col">
         <div class="text">
-          <p>No Australian survey measures sleep region by region, so these maps show the wellbeing side of the story instead: <strong>psychological distress, not sleep</strong>. They can show where people feel worst, but not whether poor sleep is the cause.</p>
-          <p>The link is still worth watching: a busy mind (47%) and worry (42%) are the top reasons Australians give for losing sleep. Distress ranges from <span class="hl">8.8%</span> of adults in Northern Sydney to over <span class="hl">17%</span> in Darling Downs and West Moreton (Qld), and outside the capitals it is higher in every state except Queensland and Tasmania.</p>
-          <p class="note"><strong>Terms used here.</strong> <em>Psychological distress</em> is measured with the K10, a 10-question survey of anxiety and depression symptoms over the past four weeks; a "high or very high" score is 22 or more out of 50. <em>Primary Health Networks</em> (PHNs) are the 31 regions the Australian Government uses to plan local health services. <em>Age-standardised</em> rates adjust for differences in age mix, so a region with many older or younger people can be compared fairly.</p>
+          <p>No Australian survey measures sleep region by region, so these maps show the wellbeing side of the story instead: <strong><span class="term" tabindex="0">psychological distress<span class="tip" role="tooltip">Feeling anxious, depressed or overwhelmed, measured with the K10 survey. "High or very high" means a score of 22 or more out of 50.</span></span>, not sleep</strong>. They can show where people feel worst, but not whether poor sleep is the cause.</p>
+          <p>The link still matters: a busy mind (47%) and worry (42%) are the top reasons Australians give for losing sleep. Distress ranges from <span class="hl">8.8%</span> of adults in Northern Sydney to over <span class="hl">17%</span> in Darling Downs and West Moreton (Qld).</p>
           <p>Hover over a region to see the rates for women and men.</p>
         </div>
         <figure class="fig card">
@@ -267,7 +267,7 @@
           <p class="src">Source: <a href="https://phidu.torrens.edu.au/social-health-atlases/data">PHIDU Social Health Atlas of Australia</a>; <a href="https://data.gov.au/data/dataset/primary-health-networks">PHN boundaries, data.gov.au</a></p>
         </figure>
       <div class="text lead-in">
-        <p>Women report more distress than men in every region. The gap is smallest in Sydney (2.4 to 2.7 points) and largest in Darling Downs and West Moreton, Tasmania and Murray (about 7 points), just as women in the 2025 sleep survey reported more poor nights (3.5 vs 2.9 a week) and more insomnia (13% vs 9%).</p>
+        <p>The gap is smallest in Sydney (about 2.5 points) and largest in Darling Downs and West Moreton, Tasmania and Murray (about 7). It echoes the 2025 sleep survey, where women reported more poor nights (3.5 vs 2.9 a week) and more insomnia (13% vs 9%).</p>
         <p>Rates tell only half the story. Because so many people live in the capitals, the largest numbers of distressed adults are in Melbourne, Sydney, Adelaide and Brisbane, plus the populous Hunter and Central Coast.</p>
       </div>
       <figure class="fig card">
@@ -301,7 +301,7 @@
       <div class="about-body">
         <p><strong>What (the data).</strong> Time-use diaries from the ABS (2020–21 and 2024) and the OECD; two Sleep Health Foundation surveys (2016 and 2025); modelled regional estimates of psychological distress from PHIDU (2022); and map boundaries for countries, states and Primary Health Networks. The data mixes quantities (minutes, percentages, counts), categories (sex, life circumstance, health condition), ordered values (age group, hour of day) and places (country, state, region).</p>
         <p><strong>Why (the purpose).</strong> For a general Australian audience: compare Australia's sleep with other countries, see when Australians sleep across the day, find out who sleeps less and which habits go with poor sleep, relate sleep to health, and locate where wellbeing is lowest.</p>
-        <p><strong>How (the design).</strong> Maps (choropleth, isoband, proportional symbol and tile grid) for where; a radial chart and ridgelines for when; bars, dumbbells, a slope chart and a line chart to compare groups; a waffle for a simple share; and a heatmap for many measures at once. Colour is used sparingly: blue and orange for weekday and weekend, pink and blue for women and men, and one sequential scale per map. The page moves from night to morning to carry the story from sleep to wellbeing.</p>
+        <p><strong>How (the design).</strong> Maps (choropleth, isoband, proportional symbol and tile grid) for where; a radial chart and ridgelines for when; bars, dumbbells, a slope chart and a line chart to compare groups; a waffle for a simple share; and a heatmap for many measures at once. Colour is used sparingly: orange marks the group or time each chart points to and blue what it is compared with, pink and blue mean women and men, and purple means distress. The page moves from night to morning to carry the story from sleep to wellbeing.</p>
       </div>
     </details>
     <details class="about">
@@ -345,6 +345,6 @@
     <p><strong>AI acknowledgement:</strong> Claude (Anthropic) is used, an AI assistant, to help clean the source data, brainstorm ideas on storytelling and plan the design framework. Claude also looked for inconsistencies of the overall visualisation and advised on improvements. I chose the topic, story and design, checked the figures against the original sources, and edited the wording.</p>
   </div></footer>
 
-  <script src="js/main.js?v=3"></script>
+  <script src="js/main.js?v=4"></script>
 </body>
 </html>
