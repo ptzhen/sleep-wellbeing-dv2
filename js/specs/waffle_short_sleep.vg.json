@@ -59,10 +59,7 @@
           "#cdd3e6"
         ]
       },
-      "legend": {
-        "orient": "bottom",
-        "direction": "horizontal"
-      }
+      "legend": null
     },
     "tooltip": [
       {

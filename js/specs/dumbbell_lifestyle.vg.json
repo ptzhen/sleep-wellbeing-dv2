@@ -128,10 +128,7 @@
               "#d08a1e"
             ]
           },
-          "legend": {
-            "orient": "top",
-            "direction": "horizontal"
-          }
+          "legend": null
         },
         "tooltip": [
           {

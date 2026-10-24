@@ -91,10 +91,7 @@
           "#8fa6d6"
         ]
       },
-      "legend": {
-        "orient": "top",
-        "direction": "horizontal"
-      }
+      "legend": null
     }
   },
   "layer": [

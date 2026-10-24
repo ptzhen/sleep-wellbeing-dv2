@@ -9,7 +9,7 @@
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=4">
+  <link rel="stylesheet" href="css/style.css?v=5">
   <script src="https://cdn.jsdelivr.net/npm/vega@5.30.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.21.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
@@ -27,11 +27,10 @@
           <div class="stat"><span class="num">46%</span><span class="lab">had a day's work or study hurt by poor sleep last week</span></div>
           <div class="stat"><span class="num">1 in 7</span><span class="lab">adults report high psychological distress</span></div>
         </div>
-        <p class="colour-key"><span class="sw sw-or"></span>Orange marks the group or time each chart points to, <span class="sw sw-bl"></span>blue what it is compared with. <span class="sw sw-pk"></span>Pink and blue mean women and men, and <span class="sw sw-pu"></span>purple means distress.</p>
       </div>
       <figure class="fig card hero-card">
           <h3>1 in 3 Australian adults sleep less than 7 hours</h3>
-          <p class="sub">Each square is 1 in 100 adults, by usual sleep a night, 2025.</p>
+          <p class="sub">Each square is 1 in 100 adults who usually sleep <span class="k k-or">less than 7 hours</span> or <span class="k k-gr">7 hours or more</span> a night, 2025.</p>
           <div class="chart" id="waffle_short_sleep"></div>
           <p class="src">Source: <a href="https://www.sleephealthfoundation.org.au/news-and-articles/poor-sleep-is-costing-young-australians-five-days-a-week-in-lost-productivity-and-nearly-half-the-nation-turns-to-sleep-medication">Sleep Health Foundation, Aussie Sleep Snapshot 2025</a> (n = 1,012)</p>
         </figure>
@@ -75,7 +74,7 @@
       </div>
       <figure class="fig card narrow">
           <h3>Women out-sleep men in most countries</h3>
-          <p class="sub">Minutes of sleep a day for women and men. Australia's OECD figure is from 2006 and covers everyone aged 15 and over.</p>
+          <p class="sub">Minutes of sleep a day for <span class="k k-w">women</span> and <span class="k k-m">men</span>. Australia's OECD figure is from 2006 and covers everyone aged 15 and over.</p>
           <div class="chart" id="dumbbell_country_sex"></div>
           <p class="src">Source: <a href="https://www.oecd.org/en/data/datasets/time-use-database.html">OECD Time Use Database</a></p>
         </figure>
@@ -96,12 +95,11 @@
       <div class="two-col">
         <div class="text">
           <p>By 3 am almost everyone is asleep. The difference is in the morning: between 7 and 8 am on a <span class="weekday">weekday</span> only 43% are still asleep, while at the <span class="weekend">weekend</span> 60% are.</p>
-          <p>In the 2024 survey that lie-in adds up to about <span class="hl">44 extra minutes</span> a night, which suggests many people run short of sleep during the working week.</p>
           <p>Press <strong>Play the night</strong> to step from 10 pm to 10 am, or drag the hour slider. Hover over an hour to see the share asleep, and switch between women and men.</p>
         </div>
         <figure class="fig card">
           <h3>Weekday alarms get most of us up by 8 am; at the weekend 6 in 10 are still asleep at 7</h3>
-          <p class="sub">% of people aged 15+ asleep in each hour of the day. Midnight is at the top and time runs clockwise; the dashed ring marks 50%. Hour-by-hour data comes from the 2020–21 survey, the latest that published it.</p>
+          <p class="sub">% of people aged 15+ asleep in each hour on <span class="k k-bl">weekdays</span> and <span class="k k-or">weekends</span>. Midnight is at the top and time runs clockwise; the dashed ring marks 50%. Hour-by-hour data comes from the 2020–21 survey, the latest that published it.</p>
           <button class="play" id="playNight" type="button" aria-pressed="false"><span class="ico" aria-hidden="true">▶</span> <span class="lbl">Play the night</span></button>
           <div class="chart" id="radial_clock"></div>
           <p class="src">Source: <a href="https://www.abs.gov.au/statistics/people/people-and-communities/how-australians-use-their-time/2020-21">ABS, How Australians Use Their Time 2020–21</a>, Tables 13–17</p>
@@ -121,7 +119,7 @@
       </div>
       <div class="two-col">
         <div class="text">
-          <p>Women and men follow the same pattern. Women sleep about 4 minutes longer on weekdays and men about 4 minutes longer at the weekend, so the lines almost overlap.</p>
+          <p>In the 2024 survey that weekend lie-in adds up to about <span class="hl">44 extra minutes</span> a night, a sign that many people run short of sleep during the working week. Women and men follow the same pattern, so their lines almost overlap.</p>
         </div>
         <figure class="fig card">
           <h3>Weekends buy back about 44 extra minutes of sleep</h3>
@@ -132,8 +130,7 @@
       </div>
       <div class="two-col">
         <div class="text">
-          <p>Clocks set the start of the working day, but the sun sets the body clock. Because Queensland has no daylight saving, on the longest day <span class="hl">Brisbane sees sunrise at 4:49 am</span>, 51 minutes before Sydney. Perth's winter sunrise comes after 7:15 am.</p>
-          <p>Switch between summer and winter to see how far apart the states drift.</p>
+          <p>Clocks set the start of the working day, but the sun sets the body clock. Because Queensland has no daylight saving, on the longest day <span class="hl">Brisbane sees sunrise at 4:49 am</span>, 51 minutes before Sydney. Perth's winter sunrise comes after 7:15 am. Switch between summer and winter to compare.</p>
         </div>
         <figure class="fig card">
           <h3>In summer the sun rises before 5 am in Brisbane, almost an hour before Sydney</h3>
@@ -156,7 +153,7 @@
         </div>
         <figure class="fig card">
           <h3>Young adults are the least likely to feel they get enough sleep</h3>
-          <p class="sub">% of adults who usually get enough sleep, and % who often wake up unrefreshed, by age, 2016.</p>
+          <p class="sub">% of adults who usually <span class="k k-bl">get enough sleep</span>, and % who often <span class="k k-or">wake up unrefreshed</span>, by age, 2016.</p>
           <div class="chart" id="line_age_quality"></div>
           <p class="src">Source: Sleep Health Foundation, Sleep Health Survey of Australian Adults 2016, Table 1</p>
         </figure>
@@ -168,7 +165,7 @@
         </div>
         <figure class="fig card">
           <h3>A baby at home costs about half an hour of sleep a day</h3>
-          <p class="sub">Minutes asleep a day compared with the average adult (528 minutes), people aged 15+, 2024. Parent groups are by the age of the youngest child at home.</p>
+          <p class="sub">Minutes asleep a day <span class="k k-or">below</span> or <span class="k k-bl">above</span> the average adult (528 minutes), people aged 15+, 2024. Parent groups are by the age of the youngest child at home.</p>
           <div class="chart" id="bar_circumstance"></div>
           <p class="src">Source: <a href="https://www.abs.gov.au/statistics/people/people-and-communities/how-australians-use-their-time/2024">ABS, How Australians Use Their Time 2024</a>, Tables 5.3, 11.3, 12.3 and 13.3</p>
         </figure>
@@ -186,7 +183,7 @@
         </div>
         <figure class="fig card">
           <h3>Late-night screens, work and caffeine go with poorer sleep</h3>
-          <p class="sub">% of adults with two or more sleep problems, comparing the healthier and the riskier habit, 2016.</p>
+          <p class="sub">% of adults with two or more sleep problems, comparing the <span class="k k-bl">healthier</span> and the <span class="k k-or">riskier</span> habit, 2016.</p>
           <div class="chart" id="dumbbell_lifestyle"></div>
           <p class="src">Source: Sleep Health Foundation, Sleep Health Survey of Australian Adults 2016, Table 9</p>
         </figure>
@@ -197,7 +194,7 @@
         </div>
         <figure class="fig card">
           <h3>Sleepiness follows people to work and onto the road</h3>
-          <p class="sub">% who did this because of sleepiness or a sleep problem, 2016. Work questions were answered by people in work; driving questions by all adults.</p>
+          <p class="sub">% who did this because of sleepiness or a sleep problem, 2016. Work questions were answered by <span class="k k-bl">people in work</span>; driving questions by <span class="k k-lb">all adults</span>.</p>
           <div class="chart" id="bar_work_impacts"></div>
           <p class="src">Source: Sleep Health Foundation, Sleep Health Survey of Australian Adults 2016, Table 7</p>
         </figure>
@@ -345,6 +342,6 @@
     <p><strong>AI acknowledgement:</strong> Claude (Anthropic) is used, an AI assistant, to help clean the source data, brainstorm ideas on storytelling and plan the design framework. Claude also looked for inconsistencies of the overall visualisation and advised on improvements. I chose the topic, story and design, checked the figures against the original sources, and edited the wording.</p>
   </div></footer>
 
-  <script src="js/main.js?v=4"></script>
+  <script src="js/main.js?v=5"></script>
 </body>
 </html>

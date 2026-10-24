@@ -49,9 +49,6 @@ h2 { font-size: clamp(1.7rem, 3vw, 2.5rem); max-width: 24ch; margin: 0 0 40px; }
 .stats { display: flex; gap: 36px; flex-wrap: wrap; }
 .stat { max-width: 15ch; padding-left: 14px; border-left: 2px solid rgba(243,182,78,.55); }
 .stat .num { display: block; font-family: var(--serif); font-size: 2.3rem; color: var(--gold); line-height: 1.1; }
-.colour-key { margin: 26px 0 0; max-width: 46ch; font-size: .85rem; line-height: 1.5; color: #b4b2cf; }
-.colour-key .sw { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin: 0 5px 0 2px; vertical-align: baseline; }
-.sw-or { background: #d08a1e; } .sw-bl { background: #5679bd; } .sw-pk { background: #c4527a; } .sw-pu { background: #7a66b4; }
 .stat .lab { display: block; font-size: .9rem; line-height: 1.35; color: #c9c7dd; }
 .hero-card { justify-self: center; max-width: 390px; }
 .hero-card h3 { font-size: 1.1rem; }
@@ -113,7 +110,10 @@ h2 { font-size: clamp(1.7rem, 3vw, 2.5rem); max-width: 24ch; margin: 0 0 40px; }
 .night .card { box-shadow: 0 1px 0 rgba(255,255,255,.05) inset, 0 18px 48px rgba(0,0,0,.35); }
 .day .card { box-shadow: 0 1px 2px rgba(60,40,20,.05), 0 10px 30px rgba(120,80,40,.10); }
 .fig h3 { font-family: var(--serif); font-weight: 600; font-size: 1.25rem; line-height: 1.3; margin: 0 0 6px; max-width: 48ch; }
-.fig .sub { font-size: .92rem; line-height: 1.45; color: var(--muted); margin: 0 0 16px; max-width: 75ch; }
+.fig .sub { font-size: .92rem; line-height: 1.45; color: var(--muted); margin: 0 0 16px; max-width: 60ch; }
+/* Coloured words in subtitles stand in for colour legends (darker tints so the text stays readable on white) */
+.fig .k { font-weight: 700; }
+.k-or { color: #a8660a; } .k-bl { color: #3b5ba5; } .k-lb { color: #6f8cc9; } .k-gr { color: #7d8299; } .k-w { color: #b03f68; } .k-m { color: #2a7fbf; }
 .fig .src { font-size: .8rem; color: var(--muted); margin: 10px 0 0; padding-top: 10px; border-top: 1px solid #efece6; }
 .fig.narrow { max-width: 860px; margin-left: auto; margin-right: auto; }
 .chart { width: 100%; min-width: 0; }

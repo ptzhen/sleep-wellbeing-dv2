@@ -206,11 +206,13 @@ spec("line_age_quality", "Young adults sleep the longest but feel the worst",
       "Sleep Health Foundation, Sleep Health Survey of Australian Adults 2016, Table 1"], {
     "width": "container", "height": 300,
     "data": {"url": "data/shf2016_by_age.csv"},
+    "padding": {"left": 5, "top": 5, "bottom": 5, "right": 92},  # room for the direct line labels
     "transform": [{"filter": "datum.age_group != 'All' && (datum.measure == 'adequate_sleep' || datum.measure == 'wake_unrefreshed')"},
-                  {"calculate": "datum.measure == 'adequate_sleep' ? 'Get enough sleep' : 'Wake up unrefreshed'", "as": "label"}],
+                  {"calculate": "datum.measure == 'adequate_sleep' ? 'Get enough sleep' : 'Wake up unrefreshed'", "as": "label"},
+                  {"calculate": "datum.measure == 'adequate_sleep' ? 'Enough sleep' : 'Unrefreshed'", "as": "short"}],
     "encoding": {
         "x": {"field": "age_group", "type": "ordinal", "title": "Age group", "sort": ["18-24", "25-34", "35-44", "45-54", "55-64", "65+"],
-              "axis": {"labelAngle": 0}},
+              "axis": {"labelAngle": {"expr": "width < 420 ? -40 : 0"}}},
         "y": {"field": "pct", "type": "quantitative", "title": "% of adults", "scale": {"domain": [0, 80]}},
         "color": {"field": "label", "type": "nominal", "title": None,
                   "scale": {"domain": ["Get enough sleep", "Wake up unrefreshed"], "range": [WEEKDAY, WEEKEND]},
@@ -222,8 +224,13 @@ spec("line_age_quality", "Young adults sleep the longest but feel the worst",
         {"transform": [{"filter": "datum.age_group == '18-24' || datum.age_group == '65+'"}],
          "mark": {"type": "text", "dy": -12, "fontSize": 12, "fontWeight": 600},
          "encoding": {"text": {"field": "pct", "type": "quantitative", "format": ".0f"}}},
+        # Direct line labels at the right end, so the lines read without a legend
+        {"transform": [{"filter": "datum.age_group == '65+'"}],
+         "mark": {"type": "text", "align": "left", "dx": 10, "fontSize": 12, "fontWeight": 700},
+         "encoding": {"text": {"field": "short"}}},
         {"data": {"values": [{"t": "From the mid-30s, more feel rested than unrefreshed"}]},
-         "mark": {"type": "text", "fontSize": 12, "fontStyle": "italic", "color": "#5d6077", "align": "center"},
+         "mark": {"type": "text", "fontSize": 12, "fontStyle": "italic", "color": "#5d6077", "align": "center",
+                  "opacity": {"expr": "width < 420 ? 0 : 1"}},  # hidden on phones, where it would not fit
          "encoding": {"x": {"datum": "35-44", "type": "ordinal"}, "y": {"value": 200}, "text": {"field": "t"}, "color": {"value": "#5d6077"}}}]})
 
 # 7. Life circumstances diverging bar (ABS 2024)
@@ -617,6 +624,16 @@ spec("tile_capital_rest", "Outside the capitals, distress is higher in most stat
          "encoding": {"x": {"field": "xm"}, "y": {"field": "ymid", "type": "quantitative"},
                       "text": {"field": "lab"},
                       "color": {"condition": {"test": "datum.k10_high_persons >= 15", "value": "#ffffff"}, "value": INK}}}]})
+
+# These charts explain their colours with coloured words in the HTML subtitle, so the legend is dropped
+def drop_colour_legend(o):
+    if isinstance(o, dict):
+        if isinstance(o.get("color"), dict) and "scale" in o["color"]: o["color"]["legend"] = None
+        for v in o.values(): drop_colour_legend(v)
+    elif isinstance(o, list):
+        for v in o: drop_colour_legend(v)
+for k in ["waffle_short_sleep", "dumbbell_country_sex", "line_age_quality", "bar_circumstance", "dumbbell_lifestyle", "bar_work_impacts"]:
+    drop_colour_legend(specs[k])
 
 for k, v in specs.items():
     with open(f"{OUT}/{k}.vg.json", "w") as f:

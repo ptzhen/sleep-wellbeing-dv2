@@ -5,6 +5,12 @@
   "data": {
     "url": "data/shf2016_by_age.csv"
   },
+  "padding": {
+    "left": 5,
+    "top": 5,
+    "bottom": 5,
+    "right": 92
+  },
   "transform": [
     {
       "filter": "datum.age_group != 'All' && (datum.measure == 'adequate_sleep' || datum.measure == 'wake_unrefreshed')"
@@ -12,6 +18,10 @@
     {
       "calculate": "datum.measure == 'adequate_sleep' ? 'Get enough sleep' : 'Wake up unrefreshed'",
       "as": "label"
+    },
+    {
+      "calculate": "datum.measure == 'adequate_sleep' ? 'Enough sleep' : 'Unrefreshed'",
+      "as": "short"
     }
   ],
   "encoding": {
@@ -28,7 +38,9 @@
         "65+"
       ],
       "axis": {
-        "labelAngle": 0
+        "labelAngle": {
+          "expr": "width < 420 ? -40 : 0"
+        }
       }
     },
     "y": {
@@ -56,10 +68,7 @@
           "#d08a1e"
         ]
       },
-      "legend": {
-        "orient": "top",
-        "direction": "horizontal"
-      }
+      "legend": null
     }
   },
   "layer": [
@@ -111,6 +120,25 @@
       }
     },
     {
+      "transform": [
+        {
+          "filter": "datum.age_group == '65+'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 10,
+        "fontSize": 12,
+        "fontWeight": 700
+      },
+      "encoding": {
+        "text": {
+          "field": "short"
+        }
+      }
+    },
+    {
       "data": {
         "values": [
           {
@@ -123,7 +151,10 @@
         "fontSize": 12,
         "fontStyle": "italic",
         "color": "#5d6077",
-        "align": "center"
+        "align": "center",
+        "opacity": {
+          "expr": "width < 420 ? 0 : 1"
+        }
       },
       "encoding": {
         "x": {

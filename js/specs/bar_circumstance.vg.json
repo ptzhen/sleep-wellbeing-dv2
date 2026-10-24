@@ -127,10 +127,7 @@
               "#3b5ba5"
             ]
           },
-          "legend": {
-            "orient": "top",
-            "direction": "horizontal"
-          }
+          "legend": null
         },
         "tooltip": [
           {
