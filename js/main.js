@@ -2,21 +2,62 @@
 const charts = [
   "waffle_short_sleep",
   "map_world_sleep", "dumbbell_country_sex",
-  "radial_clock", "ridgeline_day", "slope_weekend", "map_sunrise",
+  "radial_clock", "ridgeline_day", "map_sunrise",
   "line_age_quality", "bar_circumstance",
   "dumbbell_lifestyle", "bar_work_impacts",
   "heatmap_wellbeing",
-  "map_distress_phn", "map_distress_sex", "map_distress_count", "tile_capital_rest"
+  "map_distress_phn", "map_distress_sex", "map_distress_count", "tile_capital_rest", "box_lga_state"
 ];
 
 const views = {};
 // Charts that build up once when first scrolled into view. Each spec has a
 // "reveal" parameter (default 1 = the finished chart); here we run it from 0 to 1.
-const REVEAL = {waffle_short_sleep: 1500, bar_circumstance: 1000, slope_weekend: 1100, heatmap_wellbeing: 1200};
+const REVEAL = {waffle_short_sleep: 1500, bar_circumstance: 1000, heatmap_wellbeing: 1200};
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+// The multi-map figures have fixed sizes; on narrow screens stack them and shrink them to fit
+const FIT = ["map_distress_phn", "map_distress_sex"];
+function naturalWidth(s) {
+  if (s.hconcat) return s.hconcat.reduce((a, c) => a + naturalWidth(c), 0) + (s.spacing ?? 20) * (s.hconcat.length - 1);
+  if (s.vconcat) return Math.max(...s.vconcat.map(naturalWidth));
+  return typeof s.width === "number" ? s.width : 0;
+}
+function stack(s, avail) {
+  if (s.hconcat && s.hconcat.every(c => naturalWidth(c) >= 300) && naturalWidth(s) > avail) { s.vconcat = s.hconcat; delete s.hconcat; }
+  (s.hconcat || s.vconcat || []).forEach(c => stack(c, avail));
+}
+function shrink(s, f) {
+  (s.hconcat || s.vconcat || []).forEach(c => shrink(c, f));
+  if (typeof s.width === "number") s.width = Math.round(s.width * f);
+  if (typeof s.height === "number") s.height = Math.round(s.height * f);
+  const p = s.projection;
+  if (p && p.scale) { p.scale *= f; if (p.translate) p.translate = p.translate.map(t => t * f); }
+}
+// Map labels stay full size, so on a shrunk map they would spill over; the tooltips carry the values instead
+function dropLabels(s) {
+  (s.hconcat || s.vconcat || []).forEach(dropLabels);
+  if (s.layer) s.layer = s.layer.filter(l => !(l.data && l.data.values && l.data.values.some(v => v.lab)));
+  (s.layer || []).forEach(l => {
+    const leg = l.encoding && l.encoding.color && l.encoding.color.legend;
+    if (leg && leg.orient === "top-left") Object.assign(leg, {orient: "bottom", direction: "horizontal"});
+  });
+}
+function fitSpec(spec, avail) {
+  if (naturalWidth(spec) <= avail) return spec;
+  stack(spec, avail);
+  const f = avail / naturalWidth(spec);
+  if (f < 1) shrink(spec, f);
+  if (f < 0.75) dropLabels(spec);
+  return spec;
+}
+
 charts.forEach(id => {
-  vegaEmbed("#" + id, "js/specs/" + id + ".vg.json?v=5", {actions: false})
+  const url = "js/specs/" + id + ".vg.json?v=6";
+  const el = document.getElementById(id);
+  const src = FIT.includes(id)
+    ? fetch(url).then(r => r.json()).then(s => fitSpec(s, el.clientWidth - 24))
+    : Promise.resolve(url);
+  src.then(s => vegaEmbed("#" + id, s, {actions: false}))
     .then(r => {
       views[id] = r.view;
       if (REVEAL[id] && !reduceMotion) prepareReveal(id, r.view);

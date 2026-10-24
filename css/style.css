@@ -99,6 +99,15 @@ h2 { font-size: clamp(1.7rem, 3vw, 2.5rem); max-width: 24ch; margin: 0 0 40px; }
 .two-col { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr); gap: 48px; align-items: start; margin-bottom: 56px; }
 .two-col .text { position: sticky; top: 84px; padding-top: 8px; }
 .lead-in { margin: 32px 0 24px; }
+.lead-in.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+.lead-in.cols p { margin-top: 0; }
+/* Bridge into the distress maps: the top reasons people give for losing sleep */
+.bridge { margin: 4px 0 20px; padding: 16px 18px; border-radius: 12px; background: #fff; border-left: 4px solid #5e4a9e; box-shadow: 0 6px 18px rgba(120,80,40,.08); }
+.bridge-h { margin: 0 0 2px; font: 600 1.02rem/1.3 var(--serif); }
+.bridge-lab { margin: 0 0 10px; font-size: .82rem; color: var(--muted); }
+.bridge ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.bridge li { font-size: .95rem; }
+.bridge .num { display: inline-block; min-width: 3.2em; font: 600 1.25rem/1.2 var(--serif); color: #5e4a9e; }
 .text p, p.text { max-width: 60ch; margin-top: 0; }
 
 /* ---------- Figures sit on calm white cards ---------- */
@@ -216,6 +225,7 @@ table.behind tbody tr:hover { background: #f4f2ec; }
   .moon { width: 64px; height: 64px; top: 3%; right: 5%; }
   .kicker { padding-right: 72px; }
   .two-col .text { position: static; }
+  .lead-in.cols { grid-template-columns: 1fr; gap: 0; }
   .chart { overflow-x: auto; }
   .card { padding: 20px 16px 14px; border-radius: 12px; }
   .nightbar ol { display: none; }

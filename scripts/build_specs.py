@@ -1,5 +1,5 @@
 """Generates every Vega-Lite spec in js/specs/ (pretty-printed). Usage: python3 build_specs.py js/specs"""
-import json, sys
+import json, math, sys
 OUT = sys.argv[1]
 S = "https://vega.github.io/schema/vega-lite/v5.json"
 INK, MUTED, GRID = "#23263a", "#5d6077", "#e6e3dc"
@@ -165,40 +165,6 @@ spec("radial_clock", "Weekday alarms get most of us up by 8 am; at the weekend 6
                 {"calculate": "datum.hour_start % 3 != 0 ? '' : datum.hour_start == 0 ? '12 am' : datum.hour_start == 12 ? '12 pm' : datum.hour_start < 12 ? datum.hour_start + ' am' : (datum.hour_start - 12) + ' pm'", "as": "hourlabel"}],
     "hconcat": [clock_layer("Weekday"), clock_layer("Weekend")],
     "resolve": {"scale": {"color": "independent"}}})
-
-# 5. Slope weekday vs weekend (ABS 2024)
-spec("slope_weekend", "Weekends buy back about 44 extra minutes of sleep",
-     ["Average minutes asleep a day, people aged 15+", "ABS, How Australians Use Their Time 2024, Table 4.1"], {
-    "width": "container", "height": 260,
-    "data": {"url": "data/tus2024_sleep_summary.csv", "format": {"parse": {"sleep_min": "number"}}},
-    "transform": [{"filter": "datum.day_type != 'All days'"},
-                  {"calculate": "datum.sex == 'All' ? 'Everyone' : datum.sex", "as": "who"},
-                  {"calculate": "floor(datum.sleep_min/60) + 'h ' + (datum.sleep_min % 60) + 'm'", "as": "hm"},
-                  {"calculate": "datum.who == 'Men' ? -9 : datum.who == 'Women' ? 9 : 0", "as": "nudge"},
-                  {"calculate": "datum.day_type == 'Weekday' ? datum.sleep_min : null", "as": "wk"},
-                  {"joinaggregate": [{"op": "max", "field": "wk", "as": "wkval"}], "groupby": ["who"]},
-                  {"calculate": "datum.wkval + (datum.sleep_min - datum.wkval) * reveal", "as": "shown"}],
-    "params": [{"name": "reveal", "value": 1}],
-    "encoding": {
-        "x": {"field": "day_type", "type": "ordinal", "title": None, "scale": {"padding": 0.5},
-              "axis": {"labelAngle": 0, "labelFontSize": 13, "domain": False, "ticks": False, "orient": "top"}},
-        "y": {"field": "shown", "type": "quantitative", "title": "Minutes asleep", "scale": {"domain": [500, 570]},
-              "axis": {"grid": True, "values": [500, 510, 520, 530, 540, 550, 560, 570]}},
-        "color": {"field": "who", "type": "nominal", "title": None,
-                  "scale": {"domain": ["Women", "Men", "Everyone"], "range": [WOMEN, MEN, INK]}, "legend": None}},
-    "layer": [
-        {"mark": {"type": "line", "strokeWidth": 2}, "encoding": {"detail": {"field": "who"}}},
-        {"mark": {"type": "circle", "size": 70, "opacity": 1},
-         "encoding": {"tooltip": [{"field": "who", "title": "Who"}, {"field": "day_type", "title": "Day"}, {"field": "hm", "title": "Sleep"}]}},
-        {"transform": [{"filter": "datum.day_type == 'Weekend'"}],
-         "mark": {"type": "text", "align": "left", "dx": 10, "fontSize": 12, "dy": {"expr": "datum.nudge"}},
-         "encoding": {"text": {"field": "who"}}},
-        {"transform": [{"filter": "datum.day_type == 'Weekday' && datum.who == 'Everyone'"}],
-         "mark": {"type": "text", "align": "right", "dx": -12, "fontSize": 12},
-         "encoding": {"text": {"field": "hm"}}},
-        {"transform": [{"filter": "datum.day_type == 'Weekend' && datum.who == 'Everyone'"}],
-         "mark": {"type": "text", "align": "left", "dx": 70, "fontSize": 12, "fontWeight": 700, "opacity": {"expr": "reveal"}},
-         "encoding": {"text": {"value": "+44 min"}, "color": {"value": WEEKEND}}}]})
 
 # 6. Sleep by age (SHF 2016): the young paradox
 spec("line_age_quality", "Young adults sleep the longest but feel the worst",
@@ -429,6 +395,34 @@ specs["map_distress_phn"]["layer"].append(
          "mark": {"type": "text", "align": "left", "dx": 4, "fontSize": 12, "fontWeight": 600, "color": INK, "lineBreak": "\n"},
          "encoding": {"longitude": {"field": "lon2"}, "latitude": {"field": "lat2"}, "text": {"field": "lab"}}}]})
 
+# City insets: the capitals are only a few pixels wide on the national map, so zoom into three of them
+INSETS = [("Sydney", [150.55, -34.35, 151.45, -33.45]), ("Melbourne", [144.45, -38.35, 145.75, -37.45]),
+          ("Brisbane", [152.55, -28.25, 153.65, -26.95])]
+def bbox_line(name, b):
+    x0, y0, x1, y1 = b
+    return {"type": "Feature", "properties": {"name": name},
+            "geometry": {"type": "LineString", "coordinates": [[x0, y0], [x1, y0], [x1, y1], [x0, y1], [x0, y0]]}}
+main = specs.pop("map_distress_phn")
+geo = main.pop("data"); cfg = main.pop("config"); main.pop("$schema")
+main["width"], main["height"] = 580, 430
+main["layer"].append({"data": {"values": [bbox_line(n, b) for n, b in INSETS]},
+                      "mark": {"type": "geoshape", "filled": False, "stroke": INK, "strokeWidth": 1.2}})
+row = []
+for name, b in INSETS:
+    v = phn_choro("k10_high_persons")
+    # centre and zoom worked out here, so each inset frames its own box
+    x0, y0, x1, y1 = b
+    k = 1 / math.cos(math.radians((y0 + y1) / 2))
+    v["projection"] = {"type": "mercator", "center": [(x0 + x1) / 2, (y0 + y1) / 2], "translate": [90, 85],
+                       "scale": round(min(180 / math.radians(x1 - x0), 170 / math.radians((y1 - y0) * k)))}
+    for l in v["layer"]: l["mark"]["clip"] = True
+    v["layer"][1]["encoding"]["color"]["legend"] = None
+    v.update({"width": 180, "height": 170, "title": {"text": name, "fontSize": 12, "fontWeight": 600, "anchor": "start",
+              "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif"}})
+    row.append(v)
+specs["map_distress_phn"] = {"$schema": S, "data": geo, "vconcat": [main, {"hconcat": row, "spacing": 12}],
+                             "spacing": 18, "config": cfg}
+
 def callouts(values, align="left", size=11):
     pos = {"longitude": {"field": "lon2", "type": "quantitative"}, "latitude": {"field": "lat2", "type": "quantitative"}}
     txt = {"type": "text", "align": align, "baseline": "middle", "fontSize": size, "fontWeight": 600, "color": INK, "lineBreak": "\n"}
@@ -444,11 +438,15 @@ def callouts(values, align="left", size=11):
 # 12. Small multiples: women, men (shared finer bins) and the gap between them
 PURPLES7 = ["#efedf6", "#d9d3ea", "#bdb0dd", "#9b8bca", "#7a66b4", "#5a4697", "#2f2366"]
 SEX_SCALE = {"type": "threshold", "domain": [9, 11, 13, 15, 17, 19], "range": PURPLES7}
-GAP_SCALE = {"type": "threshold", "domain": [3, 4, 5, 6], "range": ["#fbeedd", "#f6d3a6", "#eaa95c", "#d08a1e", "#8f5a0c"]}
+GAP_SCALE = {"type": "threshold", "domain": [3, 4, 5, 6], "range": ["#e3f1ef", "#b5dcd6", "#7cc0b6", "#3f9a8f", "#1f6b62"]}  # own hue: orange means "the focus" elsewhere
 sm = {"data": {"url": "data/phn.topojson", "format": {"type": "topojson", "feature": "phn"}}, "hconcat": []}
 for f, lab, sc in [("k10_high_female", "Women", SEX_SCALE), ("k10_high_male", "Men", SEX_SCALE),
                    ("gap", "Gap: women minus men", GAP_SCALE)]:
-    v = phn_choro(f, scale=sc); v["width"] = 300; v["height"] = 270
+    v = phn_choro(f, scale=sc)
+    v["width"], v["height"] = (440, 390) if not lab.startswith("Gap") else (560, 400)
+    # fixed zoom, so far-off islands in the boundary file do not shrink the mainland
+    v["projection"] = dict(AUS_PROJ, center=[0, -27], scale=590 if lab != "Gap: women minus men" else 780,
+                           translate=[v["width"] / 2 - (40 if lab.startswith("Gap") else 0), v["height"] / 2 - 10])
     leg = None
     if lab == "Women": leg = {"orient": "bottom", "title": "% in high distress (women and men)", "direction": "horizontal", "labelOverlap": False}
     if lab.startswith("Gap"): leg = {"orient": "bottom", "title": "Percentage points more for women", "direction": "horizontal", "labelOverlap": False}
@@ -456,11 +454,15 @@ for f, lab, sc in [("k10_high_female", "Women", SEX_SCALE), ("k10_high_male", "M
     v["title"] = {"text": lab, "fontSize": 14, "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif", "fontWeight": 600}
     sm["hconcat"].append(v)
 sm["hconcat"][2]["layer"].append(callouts([
-    {"lon": 151.11, "lat": -27.29, "lon2": 135.5, "lat2": -17.5, "lab": "Largest gap:\nDarling Downs 7.3"}], align="center", size=10.5))
+    {"lon": 151.11, "lat": -27.29, "lon2": 156.5, "lat2": -24.5, "lab": "Largest gap:\nDarling Downs 7.3"}], align="left", size=10.5))
 sm["hconcat"][2]["layer"].append(callouts([
-    {"lon": 151.16, "lat": -33.62, "lon2": 141, "lat2": -40.5, "lab": "Smallest: Northern Sydney 2.4"}], align="center", size=10.5))
+    {"lon": 151.16, "lat": -33.62, "lon2": 155.5, "lat2": -36.5, "lab": "Smallest:\nNorthern Sydney 2.4"}], align="left", size=10.5))
 sm["resolve"] = {"scale": {"color": "independent"}, "legend": {"color": "independent"}}
-sm["spacing"] = 16
+# Women and men side by side, the gap map larger underneath
+women, men, gapmap = sm.pop("hconcat")
+sm["vconcat"] = [{"hconcat": [women, men], "spacing": 24, "resolve": sm["resolve"]}, gapmap]
+sm["spacing"] = 28
+sm["center"] = True
 spec("map_distress_sex", "Women report more distress than men in every region",
      ["% of women and of men with high or very high psychological distress, by PHN, 2022", "PHIDU Social Health Atlas of Australia"], sm)
 
@@ -624,6 +626,37 @@ spec("tile_capital_rest", "Outside the capitals, distress is higher in most stat
          "encoding": {"x": {"field": "xm"}, "y": {"field": "ymid", "type": "quantitative"},
                       "text": {"field": "lab"},
                       "color": {"condition": {"test": "datum.k10_high_persons >= 15", "value": "#ffffff"}, "value": INK}}}]})
+
+# 18. Box plot with dots: spread of distress across local council areas within each state (PHIDU 2022, LGA level)
+spec("box_lga_state", "Within every state, some local areas have twice the distress of others", [], {
+    "width": "container", "height": {"step": 46},
+    "data": {"url": "data/phidu_lga_2022.csv", "format": {"type": "csv", "parse": {"k10_high_persons": "number"}}},
+    "transform": [
+        {"filter": "isValid(datum.k10_high_persons)"},
+        {"calculate": "{'1': 'NSW', '2': 'Vic', '3': 'Qld', '4': 'SA', '5': 'WA', '6': 'Tas', '7': 'NT', '8': 'ACT'}[slice(datum.code, 0, 1)]", "as": "state"},
+        {"filter": "datum.state && datum.state != 'ACT'"},  # the ACT is a single area, so it has no spread to show
+        # fixed (not random) vertical jitter so the dots sit in the same place on every load
+        {"calculate": "((toNumber(datum.code) * 7919) % 101) / 101 * 26 - 13", "as": "jit"}],
+    "encoding": {
+        "y": {"field": "state", "type": "nominal", "title": None,
+              "sort": ["Tas", "Qld", "SA", "NSW", "Vic", "NT", "WA"],
+              "axis": {"domain": False, "ticks": False, "labelFontSize": 13, "labelFontWeight": 600, "labelPadding": 8}},
+        "x": {"field": "k10_high_persons", "type": "quantitative", "title": "% of adults in high or very high distress",
+              "scale": {"domain": [5, 32]}, "axis": {"grid": True, "tickCount": 6}}},
+    "layer": [
+        {"mark": {"type": "boxplot", "extent": "min-max", "size": 26, "opacity": 1,
+                  "box": {"color": "#bdb0dd", "opacity": 0.55, "stroke": "#5e4a9e", "strokeWidth": 1},
+                  "median": {"color": "#2f2366", "strokeWidth": 2.5},
+                  "rule": {"color": "#5e4a9e"}, "ticks": {"color": "#5e4a9e", "size": 12}},
+         "encoding": {"tooltip": None}},
+        {"mark": {"type": "circle", "size": 18, "color": "#5e4a9e", "opacity": 0.55, "stroke": "#ffffff", "strokeWidth": 0.5},
+         "encoding": {"yOffset": {"field": "jit", "type": "quantitative", "scale": {"domain": [-23, 23]}},
+                      "tooltip": [{"field": "name", "title": "Local council area"}, {"field": "state", "title": "State"},
+                                  {"field": "k10_high_persons", "title": "% in high distress", "format": ".1f"}]}},
+        {"transform": [{"filter": "datum.name == 'Brighton' || datum.name == 'Ku-ring-gai'"},
+                       {"calculate": "datum.name + ' ' + format(datum.k10_high_persons, '.1f') + '%'", "as": "lab"}],
+         "mark": {"type": "text", "fontSize": 11.5, "fontWeight": 600, "color": INK, "dy": -16},
+         "encoding": {"text": {"field": "lab"}}}]})
 
 # These charts explain their colours with coloured words in the HTML subtitle, so the legend is dropped
 def drop_colour_legend(o):

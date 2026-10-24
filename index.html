@@ -9,7 +9,7 @@
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=5">
+  <link rel="stylesheet" href="css/style.css?v=6">
   <script src="https://cdn.jsdelivr.net/npm/vega@5.30.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.21.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
@@ -94,7 +94,7 @@
       <h2>The weekday alarm clock steals sleep we try to win back at the weekend</h2>
       <div class="two-col">
         <div class="text">
-          <p>By 3 am almost everyone is asleep. The difference is in the morning: between 7 and 8 am on a <span class="weekday">weekday</span> only 43% are still asleep, while at the <span class="weekend">weekend</span> 60% are.</p>
+          <p>By 3 am almost everyone is asleep. The difference is in the morning: between 7 and 8 am on a <span class="weekday">weekday</span> only 43% are still asleep, while at the <span class="weekend">weekend</span> 60% are. In the 2024 survey that lie-in adds up to about <span class="hl">44 extra minutes</span> a night, a sign that many people run short of sleep during the working week.</p>
           <p>Press <strong>Play the night</strong> to step from 10 pm to 10 am, or drag the hour slider. Hover over an hour to see the share asleep, and switch between women and men.</p>
         </div>
         <figure class="fig card">
@@ -115,17 +115,6 @@
           <p class="sub">Of the people who did each activity that day, % doing it in each hour, 2020–21. Each ridge is scaled from 0 to 100%; the shaded band marks 6 to 9 am. Switch between weekdays and weekends.</p>
           <div class="chart" id="ridgeline_day"></div>
           <p class="src">Source: <a href="https://www.abs.gov.au/statistics/people/people-and-communities/how-australians-use-their-time/2020-21">ABS, How Australians Use Their Time 2020–21</a>, Tables 13–17</p>
-        </figure>
-      </div>
-      <div class="two-col">
-        <div class="text">
-          <p>In the 2024 survey that weekend lie-in adds up to about <span class="hl">44 extra minutes</span> a night, a sign that many people run short of sleep during the working week. Women and men follow the same pattern, so their lines almost overlap.</p>
-        </div>
-        <figure class="fig card">
-          <h3>Weekends buy back about 44 extra minutes of sleep</h3>
-          <p class="sub">Average time asleep a day, people aged 15+, 2024.</p>
-          <div class="chart" id="slope_weekend"></div>
-          <p class="src">Source: <a href="https://www.abs.gov.au/statistics/people/people-and-communities/how-australians-use-their-time/2024">ABS, How Australians Use Their Time 2024</a>, Table 4.1</p>
         </figure>
       </div>
       <div class="two-col">
@@ -155,7 +144,7 @@
           <h3>Young adults are the least likely to feel they get enough sleep</h3>
           <p class="sub">% of adults who usually <span class="k k-bl">get enough sleep</span>, and % who often <span class="k k-or">wake up unrefreshed</span>, by age, 2016.</p>
           <div class="chart" id="line_age_quality"></div>
-          <p class="src">Source: Sleep Health Foundation, Sleep Health Survey of Australian Adults 2016, Table 1</p>
+          <p class="src">Source: Sleep Health Foundation, Sleep Health Survey of Australian Adults 2016, Table 1. The 2016 survey is the latest that reports these results; newer Sleep Health Foundation surveys do not break them down this way.</p>
         </figure>
       </div>
       <div class="two-col">
@@ -185,7 +174,7 @@
           <h3>Late-night screens, work and caffeine go with poorer sleep</h3>
           <p class="sub">% of adults with two or more sleep problems, comparing the <span class="k k-bl">healthier</span> and the <span class="k k-or">riskier</span> habit, 2016.</p>
           <div class="chart" id="dumbbell_lifestyle"></div>
-          <p class="src">Source: Sleep Health Foundation, Sleep Health Survey of Australian Adults 2016, Table 9</p>
+          <p class="src">Source: Sleep Health Foundation, Sleep Health Survey of Australian Adults 2016, Table 9. The 2016 survey is the latest that reports these results; newer Sleep Health Foundation surveys do not break them down this way.</p>
         </figure>
       </div>
       <div class="two-col">
@@ -196,7 +185,7 @@
           <h3>Sleepiness follows people to work and onto the road</h3>
           <p class="sub">% who did this because of sleepiness or a sleep problem, 2016. Work questions were answered by <span class="k k-bl">people in work</span>; driving questions by <span class="k k-lb">all adults</span>.</p>
           <div class="chart" id="bar_work_impacts"></div>
-          <p class="src">Source: Sleep Health Foundation, Sleep Health Survey of Australian Adults 2016, Table 7</p>
+          <p class="src">Source: Sleep Health Foundation, Sleep Health Survey of Australian Adults 2016, Table 7. The 2016 survey is the latest that reports these results; newer Sleep Health Foundation surveys do not break them down this way.</p>
         </figure>
       </div>
       </div>
@@ -235,12 +224,21 @@
       <div class="two-col">
         <div class="text">
           <p>No Australian survey measures sleep region by region, so these maps show the wellbeing side of the story instead: <strong><span class="term" tabindex="0">psychological distress<span class="tip" role="tooltip">Feeling anxious, depressed or overwhelmed, measured with the K10 survey. "High or very high" means a score of 22 or more out of 50.</span></span>, not sleep</strong>. They can show where people feel worst, but not whether poor sleep is the cause.</p>
-          <p>The link still matters: a busy mind (47%) and worry (42%) are the top reasons Australians give for losing sleep. Distress ranges from <span class="hl">8.8%</span> of adults in Northern Sydney to over <span class="hl">17%</span> in Darling Downs and West Moreton (Qld).</p>
+          <div class="bridge">
+            <p class="bridge-h">Why distress belongs in a sleep story</p>
+            <p class="bridge-lab">Top reasons Australians give for losing sleep, 2025</p>
+            <ul>
+              <li><span class="num">47%</span> a busy mind</li>
+              <li><span class="num">42%</span> worry or anxiety</li>
+              <li><span class="num">31%</span> restlessness</li>
+            </ul>
+          </div>
+          <p>Distress ranges from <span class="hl">8.8%</span> of adults in Northern Sydney to over <span class="hl">17%</span> in Darling Downs and West Moreton (Qld).</p>
           <p>Hover over a region to see the rates for women and men.</p>
         </div>
         <figure class="fig card">
           <h3>Distress is worst in regional Queensland, NSW and Tasmania</h3>
-          <p class="sub">% of adults with high or very high psychological distress (<span class="term" tabindex="0">K10<span class="tip" role="tooltip">The Kessler 10: ten questions about anxiety and depression symptoms over the past four weeks, scored out of 50. High or very high is 22 or more.</span></span>), <span class="term" tabindex="0">age-standardised<span class="tip" role="tooltip">Adjusted for differences in age mix, so regions with older or younger populations can be compared fairly.</span></span>, by <span class="term" tabindex="0">Primary Health Network<span class="tip" role="tooltip">One of 31 regions the Australian Government uses to plan local health services.</span></span>, 2022. Western Queensland (grey) is suppressed.</p>
+          <p class="sub">% of adults with high or very high psychological distress (<span class="term" tabindex="0">K10<span class="tip" role="tooltip">The Kessler 10: ten questions about anxiety and depression symptoms over the past four weeks, scored out of 50. High or very high is 22 or more.</span></span>), <span class="term" tabindex="0">age-standardised<span class="tip" role="tooltip">Adjusted for differences in age mix, so regions with older or younger populations can be compared fairly.</span></span>, by <span class="term" tabindex="0">Primary Health Network<span class="tip" role="tooltip">One of 31 regions the Australian Government uses to plan local health services.</span></span>, 2022. Western Queensland (grey) is suppressed. The boxed areas are enlarged below the map.</p>
           <div class="chart" id="map_distress_phn"></div>
           <p class="src">Source: <a href="https://phidu.torrens.edu.au/social-health-atlases/data">PHIDU Social Health Atlas of Australia</a>; <a href="https://data.gov.au/data/dataset/primary-health-networks">PHN boundaries, data.gov.au</a></p>
         </figure>
@@ -257,13 +255,25 @@
           <p class="src">Source: <a href="https://phidu.torrens.edu.au/social-health-atlases/data">PHIDU Social Health Atlas of Australia</a>, state and capital city data</p>
         </figure>
       </div>
+      <div class="two-col">
+        <div class="text">
+          <p>State averages hide a lot. In four states the most distressed local area has more than twice the rate of the least, and in NSW it ranges from <span class="hl">7.5%</span> in Ku-ring-gai on Sydney's North Shore to almost 20% in Broken Hill.</p>
+          <p>Tasmania has the highest typical area, and Brighton, north of Hobart, stands out at <span class="hl">31%</span>.</p>
+        </div>
+        <figure class="fig card">
+          <h3>Where you live within a state matters: some local areas have twice the distress of others</h3>
+          <p class="sub">% of adults with high or very high psychological distress in each local council area, 2022. <strong>How to read it:</strong> each dot is one council area. The box covers the middle half of a state's areas, the dark line inside is the middle area, and the whiskers reach the lowest and highest.</p>
+          <div class="chart" id="box_lga_state"></div>
+          <p class="src">Source: <a href="https://phidu.torrens.edu.au/social-health-atlases/data">PHIDU Social Health Atlas of Australia</a>, local government area data. The ACT is one area, so it is not shown.</p>
+        </figure>
+      </div>
       <figure class="fig card">
           <h3>Women report more distress than men in every region</h3>
-          <p class="sub">% of women and of men with high or very high psychological distress, by Primary Health Network, 2022, on the same colour scale. The third map shows the gap: how many <span class="term" tabindex="0">percentage points<span class="tip" role="tooltip">The plain difference between two percentages: 15% against 10% is a gap of 5 percentage points.</span></span> higher the rate is for women.</p>
+          <p class="sub">% of women and of men with high or very high psychological distress, by Primary Health Network, 2022, on the same colour scale. The larger map below shows the gap: how many <span class="term" tabindex="0">percentage points<span class="tip" role="tooltip">The plain difference between two percentages: 15% against 10% is a gap of 5 percentage points.</span></span> higher the rate is for women.</p>
           <div class="chart" id="map_distress_sex"></div>
           <p class="src">Source: <a href="https://phidu.torrens.edu.au/social-health-atlases/data">PHIDU Social Health Atlas of Australia</a>; <a href="https://data.gov.au/data/dataset/primary-health-networks">PHN boundaries, data.gov.au</a></p>
         </figure>
-      <div class="text lead-in">
+      <div class="text lead-in cols">
         <p>The gap is smallest in Sydney (about 2.5 points) and largest in Darling Downs and West Moreton, Tasmania and Murray (about 7). It echoes the 2025 sleep survey, where women reported more poor nights (3.5 vs 2.9 a week) and more insomnia (13% vs 9%).</p>
         <p>Rates tell only half the story. Because so many people live in the capitals, the largest numbers of distressed adults are in Melbourne, Sydney, Adelaide and Brisbane, plus the populous Hunter and Central Coast.</p>
       </div>
@@ -292,13 +302,13 @@
   </main>
 
   <footer class="morning"><div class="wrap">
-    <p><strong>Author:</strong> Pierre Thian Zhen · <strong>Date:</strong> 15 October 2026</p>
+    <p><strong>Author:</strong> Pierre Thian Zhen · <strong>Date:</strong> 24 October 2026</p>
     <details class="about">
       <summary>About this story: what, why and how</summary>
       <div class="about-body">
         <p><strong>What (the data).</strong> Time-use diaries from the ABS (2020–21 and 2024) and the OECD; two Sleep Health Foundation surveys (2016 and 2025); modelled regional estimates of psychological distress from PHIDU (2022); and map boundaries for countries, states and Primary Health Networks. The data mixes quantities (minutes, percentages, counts), categories (sex, life circumstance, health condition), ordered values (age group, hour of day) and places (country, state, region).</p>
         <p><strong>Why (the purpose).</strong> For a general Australian audience: compare Australia's sleep with other countries, see when Australians sleep across the day, find out who sleeps less and which habits go with poor sleep, relate sleep to health, and locate where wellbeing is lowest.</p>
-        <p><strong>How (the design).</strong> Maps (choropleth, isoband, proportional symbol and tile grid) for where; a radial chart and ridgelines for when; bars, dumbbells, a slope chart and a line chart to compare groups; a waffle for a simple share; and a heatmap for many measures at once. Colour is used sparingly: orange marks the group or time each chart points to and blue what it is compared with, pink and blue mean women and men, and purple means distress. The page moves from night to morning to carry the story from sleep to wellbeing.</p>
+        <p><strong>How (the design).</strong> Advanced idioms: a waffle chart (share sleeping under 7 hours), a radial (polar) bar chart and a ridgeline plot (time of day), a heatmap (sleep by health condition), a box plot with dots (spread of distress between local areas), and four map idioms: choropleth maps (world and regions, with city insets and small multiples), an isoband map (sunrise times), a proportional symbol map linked to a bar chart (number of distressed adults) and a tile-grid map (capital cities against the rest of each state). Bars, dumbbells and a line chart compare groups. Colour is used sparingly: orange marks the group or time each chart points to and blue what it is compared with, pink and blue mean women and men, and purple means distress. The page moves from night to morning to carry the story from sleep to wellbeing.</p>
       </div>
     </details>
     <details class="about">
@@ -313,7 +323,6 @@
         <tr><th scope="row"><a href="#dumbbell_country_sex">Women and men by country</a></th><td><a href="https://www.oecd.org/en/data/datasets/time-use-database.html">OECD Time Use Database</a></td><td>Same surveys; Australia is 2006, ages 15+</td><td>Minutes of sleep a day</td></tr>
         <tr><th scope="row"><a href="#radial_clock">Asleep around the clock</a></th><td><a href="https://www.abs.gov.au/statistics/people/people-and-communities/how-australians-use-their-time/2020-21">ABS, How Australians Use Their Time 2020–21</a>, Tables 13–17</td><td>People aged 15+, 2020–21</td><td>% asleep in each hour, weekdays and weekends</td></tr>
         <tr><th scope="row"><a href="#ridgeline_day">Activities through the day</a></th><td><a href="https://www.abs.gov.au/statistics/people/people-and-communities/how-australians-use-their-time/2020-21">ABS, How Australians Use Their Time 2020–21</a>, Tables 13–17</td><td>People aged 15+, 2020–21</td><td>% of those doing each activity, in each hour</td></tr>
-        <tr><th scope="row"><a href="#slope_weekend">Weekday and weekend sleep</a></th><td><a href="https://www.abs.gov.au/statistics/people/people-and-communities/how-australians-use-their-time/2024">ABS, How Australians Use Their Time 2024</a>, Table 4.1</td><td>People aged 15+, 2024</td><td>Average minutes asleep a day</td></tr>
         <tr><th scope="row"><a href="#map_sunrise">Sunrise by state</a></th><td>Calculated with the <a href="https://gml.noaa.gov/grad/solcalc/solareqns.PDF">NOAA solar equations</a></td><td>Longest and shortest days of the year</td><td>Local clock time of sunrise, including daylight saving</td></tr>
         <tr><th scope="row"><a href="#line_age_quality">Sleep by age</a></th><td><a href="https://www.sleephealthfoundation.org.au/">Sleep Health Foundation, Sleep Health Survey of Australian Adults 2016</a>, Table 1</td><td>Adults, 2016</td><td>% who usually get enough sleep, and % often unrefreshed</td></tr>
         <tr><th scope="row"><a href="#bar_circumstance">Life circumstances</a></th><td><a href="https://www.abs.gov.au/statistics/people/people-and-communities/how-australians-use-their-time/2024">ABS, How Australians Use Their Time 2024</a>, Tables 5.3, 11.3, 12.3, 13.3</td><td>People aged 15+, 2024</td><td>Minutes asleep a day compared with the average (528)</td></tr>
@@ -322,6 +331,7 @@
         <tr><th scope="row"><a href="#heatmap_wellbeing">Health conditions and sleep</a></th><td><a href="https://www.sleephealthfoundation.org.au/news-and-articles/poor-sleep-is-costing-young-australians-five-days-a-week-in-lost-productivity-and-nearly-half-the-nation-turns-to-sleep-medication">Sleep Health Foundation, Aussie Sleep Snapshot 2025</a></td><td>1,012 adults, 2025</td><td>Six sleep measures, compared with people with neither condition</td></tr>
         <tr><th scope="row"><a href="#map_distress_phn">Distress by region</a></th><td><a href="https://phidu.torrens.edu.au/social-health-atlases/data">PHIDU Social Health Atlas</a>; PHN boundaries (data.gov.au)</td><td>Adults 18+, modelled estimates for 31 PHNs, 2022</td><td>% with high or very high distress (K10), age-standardised</td></tr>
         <tr><th scope="row"><a href="#tile_capital_rest">Capital cities and the rest</a></th><td><a href="https://phidu.torrens.edu.au/social-health-atlases/data">PHIDU Social Health Atlas</a></td><td>Adults 18+, 2022</td><td>% with high or very high distress</td></tr>
+        <tr><th scope="row"><a href="#box_lga_state">Local areas within each state</a></th><td><a href="https://phidu.torrens.edu.au/social-health-atlases/data">PHIDU Social Health Atlas</a></td><td>Adults 18+, 2022, by local council area</td><td>% with high or very high distress</td></tr>
         <tr><th scope="row"><a href="#map_distress_sex">Women, men and the gap</a></th><td><a href="https://phidu.torrens.edu.au/social-health-atlases/data">PHIDU Social Health Atlas</a>; PHN boundaries (data.gov.au)</td><td>Women and men 18+, 2022</td><td>% with high or very high distress, and the gap in percentage points</td></tr>
         <tr><th scope="row"><a href="#map_distress_count">How many people</a></th><td><a href="https://phidu.torrens.edu.au/social-health-atlases/data">PHIDU Social Health Atlas</a>; PHN boundaries (data.gov.au)</td><td>Adults 18+, 2022</td><td>Estimated number of adults with high or very high distress</td></tr>
       </tbody>
@@ -342,6 +352,6 @@
     <p><strong>AI acknowledgement:</strong> Claude (Anthropic) is used, an AI assistant, to help clean the source data, brainstorm ideas on storytelling and plan the design framework. Claude also looked for inconsistencies of the overall visualisation and advised on improvements. I chose the topic, story and design, checked the figures against the original sources, and edited the wording.</p>
   </div></footer>
 
-  <script src="js/main.js?v=5"></script>
+  <script src="js/main.js?v=6"></script>
 </body>
 </html>

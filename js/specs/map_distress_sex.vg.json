@@ -7,150 +7,329 @@
       "feature": "phn"
     }
   },
-  "hconcat": [
+  "resolve": {
+    "scale": {
+      "color": "independent"
+    },
+    "legend": {
+      "color": "independent"
+    }
+  },
+  "vconcat": [
     {
-      "projection": {
-        "type": "conicEqualArea",
-        "parallels": [
-          -18,
-          -36
-        ],
-        "rotate": [
-          -134,
-          0
-        ]
-      },
-      "layer": [
+      "hconcat": [
         {
-          "transform": [
+          "projection": {
+            "type": "conicEqualArea",
+            "parallels": [
+              -18,
+              -36
+            ],
+            "rotate": [
+              -134,
+              0
+            ],
+            "center": [
+              0,
+              -27
+            ],
+            "scale": 590,
+            "translate": [
+              220.0,
+              185.0
+            ]
+          },
+          "layer": [
             {
-              "calculate": "'No data (suppressed)'",
-              "as": "status"
+              "transform": [
+                {
+                  "calculate": "'No data (suppressed)'",
+                  "as": "status"
+                }
+              ],
+              "mark": {
+                "type": "geoshape",
+                "fill": "#e4e4ea",
+                "stroke": "#ffffff",
+                "strokeWidth": 0.5
+              },
+              "encoding": {
+                "tooltip": [
+                  {
+                    "field": "properties.PHN_NAME",
+                    "title": "PHN"
+                  },
+                  {
+                    "field": "status",
+                    "title": "Distress"
+                  }
+                ]
+              }
+            },
+            {
+              "transform": [
+                {
+                  "lookup": "properties.PHN_CODE",
+                  "from": {
+                    "data": {
+                      "url": "data/phidu_phn_2022.csv"
+                    },
+                    "key": "code",
+                    "fields": [
+                      "k10_high_persons",
+                      "k10_high_female",
+                      "k10_high_male"
+                    ]
+                  }
+                },
+                {
+                  "filter": "isValid(datum.k10_high_persons)"
+                },
+                {
+                  "calculate": "datum.k10_high_female - datum.k10_high_male",
+                  "as": "gap"
+                }
+              ],
+              "mark": {
+                "type": "geoshape",
+                "stroke": "#ffffff",
+                "strokeWidth": 0.5
+              },
+              "encoding": {
+                "color": {
+                  "field": "k10_high_female",
+                  "type": "quantitative",
+                  "scale": {
+                    "type": "threshold",
+                    "domain": [
+                      9,
+                      11,
+                      13,
+                      15,
+                      17,
+                      19
+                    ],
+                    "range": [
+                      "#efedf6",
+                      "#d9d3ea",
+                      "#bdb0dd",
+                      "#9b8bca",
+                      "#7a66b4",
+                      "#5a4697",
+                      "#2f2366"
+                    ]
+                  },
+                  "legend": {
+                    "orient": "bottom",
+                    "title": "% in high distress (women and men)",
+                    "direction": "horizontal",
+                    "labelOverlap": false
+                  }
+                },
+                "tooltip": [
+                  {
+                    "field": "properties.PHN_NAME",
+                    "title": "PHN"
+                  },
+                  {
+                    "field": "properties.STATE_NAME",
+                    "title": "State"
+                  },
+                  {
+                    "field": "k10_high_persons",
+                    "type": "quantitative",
+                    "title": "All adults (%)",
+                    "format": ".1f"
+                  },
+                  {
+                    "field": "k10_high_female",
+                    "type": "quantitative",
+                    "title": "Women (%)",
+                    "format": ".1f"
+                  },
+                  {
+                    "field": "k10_high_male",
+                    "type": "quantitative",
+                    "title": "Men (%)",
+                    "format": ".1f"
+                  },
+                  {
+                    "field": "gap",
+                    "type": "quantitative",
+                    "title": "Gap (points)",
+                    "format": ".1f"
+                  }
+                ]
+              }
             }
           ],
-          "mark": {
-            "type": "geoshape",
-            "fill": "#e4e4ea",
-            "stroke": "#ffffff",
-            "strokeWidth": 0.5
-          },
-          "encoding": {
-            "tooltip": [
-              {
-                "field": "properties.PHN_NAME",
-                "title": "PHN"
-              },
-              {
-                "field": "status",
-                "title": "Distress"
-              }
-            ]
+          "width": 440,
+          "height": 390,
+          "title": {
+            "text": "Women",
+            "fontSize": 14,
+            "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
+            "fontWeight": 600
           }
         },
         {
-          "transform": [
+          "projection": {
+            "type": "conicEqualArea",
+            "parallels": [
+              -18,
+              -36
+            ],
+            "rotate": [
+              -134,
+              0
+            ],
+            "center": [
+              0,
+              -27
+            ],
+            "scale": 590,
+            "translate": [
+              220.0,
+              185.0
+            ]
+          },
+          "layer": [
             {
-              "lookup": "properties.PHN_CODE",
-              "from": {
-                "data": {
-                  "url": "data/phidu_phn_2022.csv"
-                },
-                "key": "code",
-                "fields": [
-                  "k10_high_persons",
-                  "k10_high_female",
-                  "k10_high_male"
+              "transform": [
+                {
+                  "calculate": "'No data (suppressed)'",
+                  "as": "status"
+                }
+              ],
+              "mark": {
+                "type": "geoshape",
+                "fill": "#e4e4ea",
+                "stroke": "#ffffff",
+                "strokeWidth": 0.5
+              },
+              "encoding": {
+                "tooltip": [
+                  {
+                    "field": "properties.PHN_NAME",
+                    "title": "PHN"
+                  },
+                  {
+                    "field": "status",
+                    "title": "Distress"
+                  }
                 ]
               }
             },
             {
-              "filter": "isValid(datum.k10_high_persons)"
-            },
-            {
-              "calculate": "datum.k10_high_female - datum.k10_high_male",
-              "as": "gap"
+              "transform": [
+                {
+                  "lookup": "properties.PHN_CODE",
+                  "from": {
+                    "data": {
+                      "url": "data/phidu_phn_2022.csv"
+                    },
+                    "key": "code",
+                    "fields": [
+                      "k10_high_persons",
+                      "k10_high_female",
+                      "k10_high_male"
+                    ]
+                  }
+                },
+                {
+                  "filter": "isValid(datum.k10_high_persons)"
+                },
+                {
+                  "calculate": "datum.k10_high_female - datum.k10_high_male",
+                  "as": "gap"
+                }
+              ],
+              "mark": {
+                "type": "geoshape",
+                "stroke": "#ffffff",
+                "strokeWidth": 0.5
+              },
+              "encoding": {
+                "color": {
+                  "field": "k10_high_male",
+                  "type": "quantitative",
+                  "scale": {
+                    "type": "threshold",
+                    "domain": [
+                      9,
+                      11,
+                      13,
+                      15,
+                      17,
+                      19
+                    ],
+                    "range": [
+                      "#efedf6",
+                      "#d9d3ea",
+                      "#bdb0dd",
+                      "#9b8bca",
+                      "#7a66b4",
+                      "#5a4697",
+                      "#2f2366"
+                    ]
+                  },
+                  "legend": null
+                },
+                "tooltip": [
+                  {
+                    "field": "properties.PHN_NAME",
+                    "title": "PHN"
+                  },
+                  {
+                    "field": "properties.STATE_NAME",
+                    "title": "State"
+                  },
+                  {
+                    "field": "k10_high_persons",
+                    "type": "quantitative",
+                    "title": "All adults (%)",
+                    "format": ".1f"
+                  },
+                  {
+                    "field": "k10_high_female",
+                    "type": "quantitative",
+                    "title": "Women (%)",
+                    "format": ".1f"
+                  },
+                  {
+                    "field": "k10_high_male",
+                    "type": "quantitative",
+                    "title": "Men (%)",
+                    "format": ".1f"
+                  },
+                  {
+                    "field": "gap",
+                    "type": "quantitative",
+                    "title": "Gap (points)",
+                    "format": ".1f"
+                  }
+                ]
+              }
             }
           ],
-          "mark": {
-            "type": "geoshape",
-            "stroke": "#ffffff",
-            "strokeWidth": 0.5
-          },
-          "encoding": {
-            "color": {
-              "field": "k10_high_female",
-              "type": "quantitative",
-              "scale": {
-                "type": "threshold",
-                "domain": [
-                  9,
-                  11,
-                  13,
-                  15,
-                  17,
-                  19
-                ],
-                "range": [
-                  "#efedf6",
-                  "#d9d3ea",
-                  "#bdb0dd",
-                  "#9b8bca",
-                  "#7a66b4",
-                  "#5a4697",
-                  "#2f2366"
-                ]
-              },
-              "legend": {
-                "orient": "bottom",
-                "title": "% in high distress (women and men)",
-                "direction": "horizontal",
-                "labelOverlap": false
-              }
-            },
-            "tooltip": [
-              {
-                "field": "properties.PHN_NAME",
-                "title": "PHN"
-              },
-              {
-                "field": "properties.STATE_NAME",
-                "title": "State"
-              },
-              {
-                "field": "k10_high_persons",
-                "type": "quantitative",
-                "title": "All adults (%)",
-                "format": ".1f"
-              },
-              {
-                "field": "k10_high_female",
-                "type": "quantitative",
-                "title": "Women (%)",
-                "format": ".1f"
-              },
-              {
-                "field": "k10_high_male",
-                "type": "quantitative",
-                "title": "Men (%)",
-                "format": ".1f"
-              },
-              {
-                "field": "gap",
-                "type": "quantitative",
-                "title": "Gap (points)",
-                "format": ".1f"
-              }
-            ]
+          "width": 440,
+          "height": 390,
+          "title": {
+            "text": "Men",
+            "fontSize": 14,
+            "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
+            "fontWeight": 600
           }
         }
       ],
-      "width": 300,
-      "height": 270,
-      "title": {
-        "text": "Women",
-        "fontSize": 14,
-        "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
-        "fontWeight": 600
+      "spacing": 24,
+      "resolve": {
+        "scale": {
+          "color": "independent"
+        },
+        "legend": {
+          "color": "independent"
+        }
       }
     },
     {
@@ -163,146 +342,15 @@
         "rotate": [
           -134,
           0
-        ]
-      },
-      "layer": [
-        {
-          "transform": [
-            {
-              "calculate": "'No data (suppressed)'",
-              "as": "status"
-            }
-          ],
-          "mark": {
-            "type": "geoshape",
-            "fill": "#e4e4ea",
-            "stroke": "#ffffff",
-            "strokeWidth": 0.5
-          },
-          "encoding": {
-            "tooltip": [
-              {
-                "field": "properties.PHN_NAME",
-                "title": "PHN"
-              },
-              {
-                "field": "status",
-                "title": "Distress"
-              }
-            ]
-          }
-        },
-        {
-          "transform": [
-            {
-              "lookup": "properties.PHN_CODE",
-              "from": {
-                "data": {
-                  "url": "data/phidu_phn_2022.csv"
-                },
-                "key": "code",
-                "fields": [
-                  "k10_high_persons",
-                  "k10_high_female",
-                  "k10_high_male"
-                ]
-              }
-            },
-            {
-              "filter": "isValid(datum.k10_high_persons)"
-            },
-            {
-              "calculate": "datum.k10_high_female - datum.k10_high_male",
-              "as": "gap"
-            }
-          ],
-          "mark": {
-            "type": "geoshape",
-            "stroke": "#ffffff",
-            "strokeWidth": 0.5
-          },
-          "encoding": {
-            "color": {
-              "field": "k10_high_male",
-              "type": "quantitative",
-              "scale": {
-                "type": "threshold",
-                "domain": [
-                  9,
-                  11,
-                  13,
-                  15,
-                  17,
-                  19
-                ],
-                "range": [
-                  "#efedf6",
-                  "#d9d3ea",
-                  "#bdb0dd",
-                  "#9b8bca",
-                  "#7a66b4",
-                  "#5a4697",
-                  "#2f2366"
-                ]
-              },
-              "legend": null
-            },
-            "tooltip": [
-              {
-                "field": "properties.PHN_NAME",
-                "title": "PHN"
-              },
-              {
-                "field": "properties.STATE_NAME",
-                "title": "State"
-              },
-              {
-                "field": "k10_high_persons",
-                "type": "quantitative",
-                "title": "All adults (%)",
-                "format": ".1f"
-              },
-              {
-                "field": "k10_high_female",
-                "type": "quantitative",
-                "title": "Women (%)",
-                "format": ".1f"
-              },
-              {
-                "field": "k10_high_male",
-                "type": "quantitative",
-                "title": "Men (%)",
-                "format": ".1f"
-              },
-              {
-                "field": "gap",
-                "type": "quantitative",
-                "title": "Gap (points)",
-                "format": ".1f"
-              }
-            ]
-          }
-        }
-      ],
-      "width": 300,
-      "height": 270,
-      "title": {
-        "text": "Men",
-        "fontSize": 14,
-        "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
-        "fontWeight": 600
-      }
-    },
-    {
-      "projection": {
-        "type": "conicEqualArea",
-        "parallels": [
-          -18,
-          -36
         ],
-        "rotate": [
-          -134,
-          0
+        "center": [
+          0,
+          -27
+        ],
+        "scale": 780,
+        "translate": [
+          240.0,
+          190.0
         ]
       },
       "layer": [
@@ -374,11 +422,11 @@
                   6
                 ],
                 "range": [
-                  "#fbeedd",
-                  "#f6d3a6",
-                  "#eaa95c",
-                  "#d08a1e",
-                  "#8f5a0c"
+                  "#e3f1ef",
+                  "#b5dcd6",
+                  "#7cc0b6",
+                  "#3f9a8f",
+                  "#1f6b62"
                 ]
               },
               "legend": {
@@ -430,8 +478,8 @@
               {
                 "lon": 151.11,
                 "lat": -27.29,
-                "lon2": 135.5,
-                "lat2": -17.5,
+                "lon2": 156.5,
+                "lat2": -24.5,
                 "lab": "Largest gap:\nDarling Downs 7.3"
               }
             ]
@@ -473,7 +521,7 @@
             {
               "mark": {
                 "type": "text",
-                "align": "center",
+                "align": "left",
                 "baseline": "middle",
                 "fontSize": 10.5,
                 "fontWeight": 600,
@@ -500,7 +548,7 @@
             {
               "mark": {
                 "type": "text",
-                "align": "center",
+                "align": "left",
                 "baseline": "middle",
                 "fontSize": 10.5,
                 "fontWeight": 600,
@@ -529,9 +577,9 @@
               {
                 "lon": 151.16,
                 "lat": -33.62,
-                "lon2": 141,
-                "lat2": -40.5,
-                "lab": "Smallest: Northern Sydney 2.4"
+                "lon2": 155.5,
+                "lat2": -36.5,
+                "lab": "Smallest:\nNorthern Sydney 2.4"
               }
             ]
           },
@@ -572,7 +620,7 @@
             {
               "mark": {
                 "type": "text",
-                "align": "center",
+                "align": "left",
                 "baseline": "middle",
                 "fontSize": 10.5,
                 "fontWeight": 600,
@@ -599,7 +647,7 @@
             {
               "mark": {
                 "type": "text",
-                "align": "center",
+                "align": "left",
                 "baseline": "middle",
                 "fontSize": 10.5,
                 "fontWeight": 600,
@@ -623,8 +671,8 @@
           ]
         }
       ],
-      "width": 300,
-      "height": 270,
+      "width": 560,
+      "height": 400,
       "title": {
         "text": "Gap: women minus men",
         "fontSize": 14,
@@ -633,15 +681,8 @@
       }
     }
   ],
-  "resolve": {
-    "scale": {
-      "color": "independent"
-    },
-    "legend": {
-      "color": "independent"
-    }
-  },
-  "spacing": 16,
+  "spacing": 28,
+  "center": true,
   "config": {
     "background": "transparent",
     "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",

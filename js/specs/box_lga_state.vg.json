@@ -1,0 +1,212 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": {
+    "step": 46
+  },
+  "data": {
+    "url": "data/phidu_lga_2022.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "k10_high_persons": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "filter": "isValid(datum.k10_high_persons)"
+    },
+    {
+      "calculate": "{'1': 'NSW', '2': 'Vic', '3': 'Qld', '4': 'SA', '5': 'WA', '6': 'Tas', '7': 'NT', '8': 'ACT'}[slice(datum.code, 0, 1)]",
+      "as": "state"
+    },
+    {
+      "filter": "datum.state && datum.state != 'ACT'"
+    },
+    {
+      "calculate": "((toNumber(datum.code) * 7919) % 101) / 101 * 26 - 13",
+      "as": "jit"
+    }
+  ],
+  "encoding": {
+    "y": {
+      "field": "state",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "Tas",
+        "Qld",
+        "SA",
+        "NSW",
+        "Vic",
+        "NT",
+        "WA"
+      ],
+      "axis": {
+        "domain": false,
+        "ticks": false,
+        "labelFontSize": 13,
+        "labelFontWeight": 600,
+        "labelPadding": 8
+      }
+    },
+    "x": {
+      "field": "k10_high_persons",
+      "type": "quantitative",
+      "title": "% of adults in high or very high distress",
+      "scale": {
+        "domain": [
+          5,
+          32
+        ]
+      },
+      "axis": {
+        "grid": true,
+        "tickCount": 6
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "boxplot",
+        "extent": "min-max",
+        "size": 26,
+        "opacity": 1,
+        "box": {
+          "color": "#bdb0dd",
+          "opacity": 0.55,
+          "stroke": "#5e4a9e",
+          "strokeWidth": 1
+        },
+        "median": {
+          "color": "#2f2366",
+          "strokeWidth": 2.5
+        },
+        "rule": {
+          "color": "#5e4a9e"
+        },
+        "ticks": {
+          "color": "#5e4a9e",
+          "size": 12
+        }
+      },
+      "encoding": {
+        "tooltip": null
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "size": 18,
+        "color": "#5e4a9e",
+        "opacity": 0.55,
+        "stroke": "#ffffff",
+        "strokeWidth": 0.5
+      },
+      "encoding": {
+        "yOffset": {
+          "field": "jit",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -23,
+              23
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "name",
+            "title": "Local council area"
+          },
+          {
+            "field": "state",
+            "title": "State"
+          },
+          {
+            "field": "k10_high_persons",
+            "title": "% in high distress",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.name == 'Brighton' || datum.name == 'Ku-ring-gai'"
+        },
+        {
+          "calculate": "datum.name + ' ' + format(datum.k10_high_persons, '.1f') + '%'",
+          "as": "lab"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 11.5,
+        "fontWeight": 600,
+        "color": "#23263a",
+        "dy": -16
+      },
+      "encoding": {
+        "text": {
+          "field": "lab"
+        }
+      }
+    }
+  ],
+  "autosize": {
+    "type": "fit-x",
+    "contains": "padding"
+  },
+  "config": {
+    "background": "transparent",
+    "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "font": "Fraunces, Georgia, serif",
+      "fontSize": 18,
+      "fontWeight": 600,
+      "color": "#23263a",
+      "anchor": "start",
+      "subtitleFont": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
+      "subtitleFontSize": 13,
+      "subtitleFontWeight": 400,
+      "subtitleColor": "#5d6077",
+      "offset": 12
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleColor": "#5d6077",
+      "labelColor": "#5d6077",
+      "gridColor": "#e6e3dc",
+      "labelLimit": 320,
+      "domainColor": "#c9c5bb",
+      "tickColor": "#c9c5bb",
+      "titleFontWeight": 400
+    },
+    "legend": {
+      "labelLimit": 260,
+      "titleLimit": 300,
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "titleColor": "#5d6077",
+      "labelColor": "#23263a",
+      "titleFontWeight": 400
+    },
+    "header": {
+      "labelFontSize": 13,
+      "labelColor": "#23263a",
+      "titleFontSize": 13
+    },
+    "text": {
+      "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
+      "color": "#23263a"
+    }
+  }
+}
