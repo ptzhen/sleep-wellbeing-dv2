@@ -675,6 +675,31 @@ def drop_colour_legend(o):
 for k in ["waffle_short_sleep", "dumbbell_country_sex", "line_age_quality", "bar_circumstance", "dumbbell_lifestyle", "bar_work_impacts"]:
     drop_colour_legend(specs[k])
 
+# Night chapters: these charts sit straight on the dark sky, so their colours are swapped for
+# night versions (light text, faint grids, brighter data colours, sequential scales that get
+# brighter rather than darker as values rise)
+NIGHT_CHARTS = ["waffle_short_sleep", "map_world_sleep", "dumbbell_country_sex", "radial_clock", "ridgeline_day",
+                "map_sunrise", "line_age_quality", "bar_circumstance", "dumbbell_lifestyle", "bar_work_impacts",
+                "heatmap_wellbeing"]
+NIGHT_SCALES = [  # whole palettes first, before single colours are swapped
+    ('"#cfd9f0", "#a9bce4", "#7f9bd2", "#5679bd", "#3b5ba5", "#1e2f63"', '"#5670b8", "#6a84d0", "#86a0e2", "#a5bbf0", "#c6d5f8", "#e6edff"'),
+    ('"#f6efe4", "#e9b46a", "#8f5a0c"]', '"#565c96", "#a07a45", "#f3b64e"], "interpolate": "rgb"'),
+    ('"#5e3a5e", "#2b2a55"', '"#a0587a", "#8a6fc8"')]
+NIGHT_COLOURS = {
+    INK: "#e9e7f3", MUTED: "#b4b2cf", "#c9c5bb": "#5f669e", "#e6e3dc": "#2b3266", "#fbfaf7": "#1a2150",
+    "#ffffff": "#1a2150", "#ecebe6": "#2f365f", "#cdd3e6": "#7d83aa",
+    "#3b5ba5": "#86a3e6", "#8fa6d6": "#7d83aa", "#d08a1e": "#e9a23b", "#c4527a": "#f08bb0", "#2a7fbf": "#6fb7ec",
+    "#8a8fa8": "#a7abc6"}
+def nightify(spec):
+    t = json.dumps(spec)
+    for a, b in NIGHT_SCALES:
+        t = t.replace(a, b)
+    for a, b in NIGHT_COLOURS.items():
+        t = t.replace(f'"{a}"', f'"{b}"')
+    return json.loads(t)
+for k in NIGHT_CHARTS:
+    specs[k] = nightify(specs[k])
+
 for k, v in specs.items():
     with open(f"{OUT}/{k}.vg.json", "w") as f:
         json.dump(v, f, indent=2, ensure_ascii=False); f.write("\n")

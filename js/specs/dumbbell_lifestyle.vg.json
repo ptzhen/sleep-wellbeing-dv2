@@ -92,7 +92,7 @@
       "mark": {
         "type": "rule",
         "strokeWidth": 3,
-        "color": "#c9c5bb"
+        "color": "#5f669e"
       },
       "encoding": {
         "x": {
@@ -110,7 +110,7 @@
         "type": "circle",
         "size": 140,
         "opacity": 1,
-        "stroke": "#fbfaf7",
+        "stroke": "#1a2150",
         "strokeWidth": 1.5
       },
       "encoding": {
@@ -124,8 +124,8 @@
               "Riskier habit"
             ],
             "range": [
-              "#3b5ba5",
-              "#d08a1e"
+              "#86a3e6",
+              "#e9a23b"
             ]
           },
           "legend": null
@@ -152,7 +152,7 @@
         "type": "text",
         "dy": -14,
         "fontSize": 11,
-        "color": "#5d6077"
+        "color": "#b4b2cf"
       },
       "encoding": {
         "text": {
@@ -175,23 +175,23 @@
       "font": "Fraunces, Georgia, serif",
       "fontSize": 18,
       "fontWeight": 600,
-      "color": "#23263a",
+      "color": "#e9e7f3",
       "anchor": "start",
       "subtitleFont": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
       "subtitleFontSize": 13,
       "subtitleFontWeight": 400,
-      "subtitleColor": "#5d6077",
+      "subtitleColor": "#b4b2cf",
       "offset": 12
     },
     "axis": {
       "labelFontSize": 12,
       "titleFontSize": 12,
-      "titleColor": "#5d6077",
-      "labelColor": "#5d6077",
-      "gridColor": "#e6e3dc",
+      "titleColor": "#b4b2cf",
+      "labelColor": "#b4b2cf",
+      "gridColor": "#2b3266",
       "labelLimit": 320,
-      "domainColor": "#c9c5bb",
-      "tickColor": "#c9c5bb",
+      "domainColor": "#5f669e",
+      "tickColor": "#5f669e",
       "titleFontWeight": 400
     },
     "legend": {
@@ -199,18 +199,18 @@
       "titleLimit": 300,
       "labelFontSize": 12,
       "titleFontSize": 12,
-      "titleColor": "#5d6077",
-      "labelColor": "#23263a",
+      "titleColor": "#b4b2cf",
+      "labelColor": "#e9e7f3",
       "titleFontWeight": 400
     },
     "header": {
       "labelFontSize": 13,
-      "labelColor": "#23263a",
+      "labelColor": "#e9e7f3",
       "titleFontSize": 13
     },
     "text": {
       "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
-      "color": "#23263a"
+      "color": "#e9e7f3"
     }
   }
 }

@@ -47,7 +47,7 @@
       ],
       "mark": {
         "type": "geoshape",
-        "stroke": "#ffffff",
+        "stroke": "#1a2150",
         "strokeWidth": 0.6
       },
       "encoding": {
@@ -73,8 +73,8 @@
               "#e79a5c",
               "#c96f4f",
               "#96505a",
-              "#5e3a5e",
-              "#2b2a55"
+              "#a0587a",
+              "#8a6fc8"
             ]
           },
           "legend": {
@@ -111,7 +111,7 @@
       "mark": {
         "type": "geoshape",
         "filled": false,
-        "stroke": "#23263a",
+        "stroke": "#e9e7f3",
         "strokeWidth": 0.8
       }
     },
@@ -143,8 +143,8 @@
           "mark": {
             "type": "circle",
             "size": 34,
-            "color": "#23263a",
-            "stroke": "#ffffff",
+            "color": "#e9e7f3",
+            "stroke": "#1a2150",
             "strokeWidth": 1,
             "opacity": 1
           },
@@ -166,7 +166,7 @@
             "type": "text",
             "fontSize": 11,
             "fontWeight": 600,
-            "color": "#23263a",
+            "color": "#e9e7f3",
             "dx": {
               "expr": "datum.city == 'Adelaide' || datum.city == 'Melbourne' ? -6 : 6"
             },
@@ -176,7 +176,7 @@
             "dy": {
               "expr": "datum.city == 'Canberra' ? 8 : datum.city == 'Sydney' ? -4 : datum.city == 'Melbourne' ? 6 : datum.city == 'Adelaide' ? -4 : 0"
             },
-            "stroke": "#ffffff",
+            "stroke": "#1a2150",
             "strokeWidth": 3,
             "strokeOpacity": 0.85
           },
@@ -191,7 +191,7 @@
             "type": "text",
             "fontSize": 11,
             "fontWeight": 600,
-            "color": "#23263a",
+            "color": "#e9e7f3",
             "dx": {
               "expr": "datum.city == 'Adelaide' || datum.city == 'Melbourne' ? -6 : 6"
             },
@@ -221,23 +221,23 @@
       "font": "Fraunces, Georgia, serif",
       "fontSize": 18,
       "fontWeight": 600,
-      "color": "#23263a",
+      "color": "#e9e7f3",
       "anchor": "start",
       "subtitleFont": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
       "subtitleFontSize": 13,
       "subtitleFontWeight": 400,
-      "subtitleColor": "#5d6077",
+      "subtitleColor": "#b4b2cf",
       "offset": 12
     },
     "axis": {
       "labelFontSize": 12,
       "titleFontSize": 12,
-      "titleColor": "#5d6077",
-      "labelColor": "#5d6077",
-      "gridColor": "#e6e3dc",
+      "titleColor": "#b4b2cf",
+      "labelColor": "#b4b2cf",
+      "gridColor": "#2b3266",
       "labelLimit": 320,
-      "domainColor": "#c9c5bb",
-      "tickColor": "#c9c5bb",
+      "domainColor": "#5f669e",
+      "tickColor": "#5f669e",
       "titleFontWeight": 400
     },
     "legend": {
@@ -245,18 +245,18 @@
       "titleLimit": 300,
       "labelFontSize": 12,
       "titleFontSize": 12,
-      "titleColor": "#5d6077",
-      "labelColor": "#23263a",
+      "titleColor": "#b4b2cf",
+      "labelColor": "#e9e7f3",
       "titleFontWeight": 400
     },
     "header": {
       "labelFontSize": 13,
-      "labelColor": "#23263a",
+      "labelColor": "#e9e7f3",
       "titleFontSize": 13
     },
     "text": {
       "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",
-      "color": "#23263a"
+      "color": "#e9e7f3"
     }
   }
 }

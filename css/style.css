@@ -32,7 +32,7 @@ h2 { font-size: clamp(1.7rem, 3vw, 2.5rem); max-width: 24ch; margin: 0 0 40px; }
 .hero {
   position: relative; overflow: hidden; min-height: 100vh;
   display: flex; flex-direction: column; justify-content: center;
-  padding: 96px 0 120px; color: var(--night-text);
+  padding: 96px 0 170px; color: var(--night-text);
   background: radial-gradient(1200px 700px at 78% 18%, #2a3270 0%, rgba(42,50,112,0) 60%),
               linear-gradient(180deg, #070a1f 0%, #0d1230 55%, #141a3a 100%);
 }
@@ -52,7 +52,7 @@ h2 { font-size: clamp(1.7rem, 3vw, 2.5rem); max-width: 24ch; margin: 0 0 40px; }
 .stat .lab { display: block; font-size: .9rem; line-height: 1.35; color: #c9c7dd; }
 .hero-card { justify-self: center; max-width: 390px; }
 .hero-card h3 { font-size: 1.1rem; }
-.scroll-cue {
+.scroll-cue { z-index: 2;
   position: absolute; left: 50%; bottom: 28px; transform: translateX(-50%);
   display: flex; flex-direction: column; align-items: center; gap: 4px;
   color: var(--night-muted); text-decoration: none; font-size: .85rem; letter-spacing: .06em;
@@ -117,8 +117,20 @@ h2 { font-size: clamp(1.7rem, 3vw, 2.5rem); max-width: 24ch; margin: 0 0 40px; }
   background: var(--card); color: var(--ink); border-radius: 16px; padding: 28px 28px 20px;
   box-shadow: 0 1px 2px rgba(10,14,40,.06), 0 12px 32px rgba(10,14,40,.14);
 }
-.night .card { box-shadow: 0 1px 0 rgba(255,255,255,.05) inset, 0 18px 48px rgba(0,0,0,.35); }
-.day .card { box-shadow: 0 1px 2px rgba(60,40,20,.05), 0 10px 30px rgba(120,80,40,.10); }
+/* Charts sit straight on their chapter's sky rather than in boxes */
+.night .card, .day .card, .hero .card { background: transparent; box-shadow: none; padding: 0; border-radius: 0; }
+.night .card { color: var(--night-text); }
+.night .fig h3, .hero .fig h3 { color: #fff; }
+.night .fig .sub, .hero .fig .sub { color: var(--night-muted); }
+.night .fig .src, .hero .fig .src { color: var(--night-muted); border-top-color: rgba(255,255,255,.12); }
+.night .fig .src a, .hero .fig .src a { color: var(--night-text); }
+.day .fig .src { border-top-color: rgba(120,80,40,.15); }
+.night .vega-bind, .hero .vega-bind { color: var(--night-muted); }
+.night .k-or, .hero .k-or { color: #f3b64e; } .night .k-bl { color: #9db4ff; } .night .k-lb { color: #a9aed3; }
+.night .k-gr, .hero .k-gr { color: #a7abc6; } .night .k-w { color: #f39ac0; } .night .k-m { color: #8fcaf2; }
+.night .play { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.25); color: var(--night-text); }
+.night .play:hover { background: rgba(255,255,255,.12); }
+.night .play[aria-pressed="true"] { background: var(--gold); color: var(--navy); border-color: var(--gold); }
 .fig h3 { font-family: var(--serif); font-weight: 600; font-size: 1.25rem; line-height: 1.3; margin: 0 0 6px; max-width: 48ch; }
 .fig .sub { font-size: .92rem; line-height: 1.45; color: var(--muted); margin: 0 0 16px; max-width: 60ch; }
 /* Coloured words in subtitles stand in for colour legends (darker tints so the text stays readable on white) */
@@ -147,10 +159,22 @@ h2 { font-size: clamp(1.7rem, 3vw, 2.5rem); max-width: 24ch; margin: 0 0 40px; }
 /* ---------- Big-number moments ---------- */
 .moment { padding: 120px 0; text-align: center; }
 .moment.night { background: linear-gradient(180deg, #161d42, #161d42); }
-.moment.sunrise { background: linear-gradient(180deg, #362b66 0%, #6b3f72 30%, #c9687a 58%, #f2a477 80%, #fbefe4 100%); color: #fff; padding: 140px 0 170px; }
+.moment.sunrise { background: linear-gradient(180deg, #362b66 0%, #6b3f72 30%, #c9687a 60%, #f2a477 85%, #f7c79a 100%); color: #fff; padding: 140px 0 210px; }
 .big { font-family: var(--serif); font-weight: 600; font-size: clamp(4rem, 13vw, 9rem); line-height: 1; margin: 0 0 18px; color: var(--gold); letter-spacing: -.02em; }
 .big small { font-size: .45em; margin: 0 .06em; color: inherit; opacity: .8; }
 .sunrise .big { color: #fff; text-shadow: 0 6px 40px rgba(80,20,60,.35); }
+/* Rooftop horizon at the chapter breaks: lit windows at night, a dark skyline against the sunrise */
+.skyline { position: absolute; left: 0; right: 0; bottom: 0; height: 120px; background-repeat: repeat-x; background-position: center bottom; background-size: auto 100%; pointer-events: none; }
+.skyline-night { background-image: url("../img/skyline-night.svg"); }
+.skyline-dawn { background-image: url("../img/skyline-dawn.svg"); }
+.moment.sunrise { position: relative; }
+/* Big-number tiles between chapters */
+.tiles { background: #1a2150; padding: 8px 0 24px; }
+.tiles-in { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.tile { border-top: 1px solid rgba(255,255,255,.18); padding-top: 18px; }
+.tile-num { font: 600 clamp(2.6rem, 6vw, 4rem)/1 var(--serif); color: var(--gold); margin: 0 0 8px; }
+.tile-num small { font-size: .45em; opacity: .8; }
+.tile-lab { margin: 0; color: var(--night-muted); max-width: 36ch; }
 .big-lab { max-width: 46ch; margin: 0 auto; font-size: 1.2rem; color: var(--night-muted); }
 .sunrise .big-lab { color: #fff3ea; text-shadow: 0 1px 12px rgba(80,20,60,.4); }
 
@@ -231,6 +255,8 @@ table.behind tbody tr:hover { background: #f4f2ec; }
   .card { padding: 20px 16px 14px; border-radius: 12px; }
   .nightbar ol { display: none; }
   .moment { padding: 80px 0; }
+  .tiles-in { grid-template-columns: 1fr; }
+  .skyline { height: 80px; }
 }
 @media (max-width: 700px) { footer .about-body { padding: 0 18px 6px; } }
 footer details.about:last-of-type { margin-bottom: 36px; }
