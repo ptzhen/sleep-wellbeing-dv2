@@ -67,7 +67,7 @@ function fitSpec(spec, avail) {
 // do not shrink), scale its fixed-size views down and draw it again
 async function embed(id) {
   const el = document.getElementById(id);
-  let spec = await fetch("js/specs/" + id + ".vg.json?v=9").then(r => r.json());
+  let spec = await fetch("js/specs/" + id + ".vg.json?v=10").then(r => r.json());
   if (FIT.includes(id)) spec = fitSpec(spec, el.clientWidth - 24);
   let r = await vegaEmbed("#" + id, spec, {actions: false});
   for (let i = 0; i < 4; i++) {

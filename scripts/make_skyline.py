@@ -32,5 +32,5 @@ def skyline(fill, windows, seed=7, W=1440, H=140):
     return svg + '</svg>'
 
 out = sys.argv[1]
-open(f"{out}/skyline-night.svg", "w").write(skyline("#141a3a", True))   # same colour as the first chapter, so the street becomes its ground
+open(f"{out}/skyline-night.svg", "w").write(skyline("#0b0f2a", True))   # darker than the sky, so the rooftops read as a silhouette
 open(f"{out}/skyline-dawn.svg", "w").write(skyline("#3b2550", False))

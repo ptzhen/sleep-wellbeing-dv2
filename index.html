@@ -9,7 +9,7 @@
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=9">
+  <link rel="stylesheet" href="css/style.css?v=10">
   <script src="https://cdn.jsdelivr.net/npm/vega@5.30.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.21.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
@@ -21,7 +21,8 @@
       <div class="hero-copy">
         <p class="kicker">FIT3179 Data Visualisation 2 · Pierre Thian Zhen</p>
         <h1>Sleep and Wellbeing <span>in Australia</span></h1>
-        <p class="lede">Most of us know we should get 7 to 9 hours a night. Who actually does, what gets in the way, and how is it linked to the way Australians feel? Scroll through one Australian night, from dark to morning light.</p>
+        <p class="lede">Who actually gets 7 to 9 hours a night, what gets in the way, and how is it linked to how Australians feel? Scroll through one Australian night, from dark to morning.</p>
+        <p class="guess"><strong>Before you scroll:</strong> how many hours a day do you think the average Australian sleeps? Hold that number.</p>
         <div class="stats">
           <div class="stat"><span class="num">33%</span><span class="lab">of adults sleep under 7 hours</span></div>
           <div class="stat"><span class="num">46%</span><span class="lab">had a day's work or study hurt by poor sleep last week</span></div>
@@ -62,9 +63,9 @@
       <h2>On paper, Australians sleep well</h2>
       <div class="two-col">
         <div class="text">
-          <p>In the ABS <span class="term" tabindex="0">time-use survey<span class="tip" role="tooltip">People record what they do across a whole day in a diary, so sleep is added up from the diary rather than estimated from memory.</span></span> (2024), Australians aged 15 and over recorded about <span class="hl">8 hours 48 minutes</span> of sleep a day. The international comparison has to use Australia's older 2006 survey (8 hours 32 minutes), and on those figures Australia sits mid-pack among <span class="term" tabindex="0">OECD<span class="tip" role="tooltip">Organisation for Economic Co-operation and Development, a group of 38 mostly high-income countries. Its time-use data also covers a few non-members, such as China, India and South Africa.</span></span> countries: Japan sleeps about 70 minutes less, and Korea about 40 minutes less. Each country's survey year and method differ, so small gaps should not be over-read.</p>
-          <p>In most countries <span class="women">women</span> sleep a few minutes longer than <span class="men">men</span>. Australia's 2006 OECD figures follow that pattern. In the 2024 ABS survey the gap has all but closed: women and men both sleep about 8 hours 48 minutes.</p>
-          <p class="note">Time-use diaries add up all the time people record as sleeping across the day, including naps, so these figures are higher than the hours people report in sleep surveys.</p>
+          <p>Australia sits mid-pack among <span class="term" tabindex="0">OECD<span class="tip" role="tooltip">Organisation for Economic Co-operation and Development, a group of 38 mostly high-income countries. Its time-use data also covers a few non-members, such as China, India and South Africa.</span></span> countries. On the OECD figures, which use Australia's 2006 <span class="term" tabindex="0">time-use survey<span class="tip" role="tooltip">People record what they do across a whole day in a diary, so sleep is added up from the diary rather than estimated from memory.</span></span>, Japan sleeps about <span class="hl">70 minutes less</span> and Korea about 40 minutes less. Survey years and methods differ, so small gaps mean little.</p>
+          <p><span class="women">Women</span> sleep a few minutes longer than <span class="men">men</span> in most countries. In Australia's 2024 survey the gap has all but closed.</p>
+          <p class="note">Diaries count naps too, so these figures run higher than the hours people report in surveys.</p>
         </div>
         <figure class="fig card">
           <h3>Australians sleep about as long as people in most surveyed countries</h3>
@@ -85,7 +86,7 @@
     <aside class="moment night" aria-label="Key figure">
       <div class="wrap">
         <p class="big">8<small>h</small> 48<small>m</small></p>
-        <p class="big-lab">of sleep a day for the average Australian aged 15 and over in 2024.<br>So why do a third of adults say they sleep less than 7 hours a night?</p>
+        <p class="big-lab">Was your guess close? That is the average day's sleep for Australians aged 15 and over in 2024.<br>So why do a third of adults say they sleep less than 7 hours a night?</p>
       </div>
     </aside>
 
@@ -95,8 +96,8 @@
       <h2>The weekday alarm clock steals sleep we try to win back at the weekend</h2>
       <div class="two-col">
         <div class="text">
-          <p>By 3 am almost everyone is asleep. The difference is in the morning: between 7 and 8 am on a <span class="weekday">weekday</span> only 43% are still asleep, while at the <span class="weekend">weekend</span> 60% are. In the 2024 survey that lie-in adds up to about <span class="hl">44 extra minutes</span> a night, a sign that many people run short of sleep during the working week.</p>
-          <p>Press <strong>Play the night</strong> to step from 10 pm to 10 am, or drag the hour slider. Hover over an hour to see the share asleep, and switch between women and men.</p>
+          <p>Between 7 and 8 am, only 43% are still asleep on a <span class="weekday">weekday</span>, against 60% at the <span class="weekend">weekend</span>. That lie-in adds up to about <span class="hl">44 extra minutes</span> a night (2024), a sign that many people run short during the week.</p>
+          <p>Press <strong>Play the night</strong>, or hover over an hour to see who is asleep.</p>
         </div>
         <figure class="fig card">
           <h3>Weekday alarms get most of us up by 8 am; at the weekend 6 in 10 are still asleep at 7</h3>
@@ -108,8 +109,8 @@
       </div>
       <div class="two-col">
         <div class="text">
-          <p>Sleep is not the only part of the day that runs to the clock. On a weekday, 38% of people who do paid work have started by 7 am and <span class="hl">80% are working by 9 am</span>, the same hours in which sleep drops away.</p>
-          <p>Child care peaks three times: before school, after school and at bedtime. Free time is squeezed into the evening on weekdays, peaking at 75% between 8 and 9 pm. At the weekend it spreads through the afternoon.</p>
+          <p>On a weekday, <span class="hl">80% of workers have started by 9 am</span>, the same hours in which sleep drops away.</p>
+          <p>Free time is squeezed into the evening, peaking at 75% between 8 and 9 pm.</p>
         </div>
         <figure class="fig card">
           <h3>Sleep hands over to paid work between 6 and 9 am</h3>
@@ -120,7 +121,7 @@
       </div>
       <div class="two-col">
         <div class="text">
-          <p>Clocks set the start of the working day, but the sun sets the body clock. Because Queensland has no daylight saving, on the longest day <span class="hl">Brisbane sees sunrise at 4:49 am</span>, 51 minutes before Sydney. Perth's winter sunrise comes after 7:15 am. Switch between summer and winter to compare.</p>
+          <p>Clocks set the working day, but the sun sets the body clock. With no daylight saving, <span class="hl">Brisbane's summer sunrise is 4:49 am</span>, 51 minutes before Sydney's.</p>
         </div>
         <figure class="fig card">
           <h3>In summer the sun rises before 5 am in Brisbane, almost an hour before Sydney</h3>
@@ -145,8 +146,8 @@
       <h2>Age and life stage shape how well we sleep</h2>
       <div class="two-col">
         <div class="text">
-          <p>Young adults spend the most time asleep: just over 9 hours a day for 15 to 24 year olds in the 2024 ABS survey. Yet in the Sleep Health Foundation survey they are the <span class="hl">least likely</span> to say they get enough, and two in three often wake up unrefreshed.</p>
-          <p>Three in four 18 to 24 year olds go online in the hour before bed nearly every night, compared with one in five people over 65.</p>
+          <p>Young adults sleep the longest, just over 9 hours a day at 15 to 24 (2024). Yet they are the <span class="hl">least likely</span> to feel they get enough, and two in three often wake up unrefreshed.</p>
+          <p>Three in four go online in the hour before bed nearly every night, against one in five people over 65.</p>
         </div>
         <figure class="fig card">
           <h3>Young adults are the least likely to feel they get enough sleep</h3>
@@ -157,8 +158,8 @@
       </div>
       <div class="two-col">
         <div class="text">
-          <p>Parents with a baby report the least sleep: those whose youngest child is under one get about <span class="hl">half an hour less</span> than the average adult (8 hours 16 minutes against 8 hours 48). Parents of school-age children still lose about 20 minutes, and carers and volunteers about 8.</p>
-          <p>People with a disability spend longer asleep. Time-use data only records duration, so it can't say whether that means better rest.</p>
+          <p>Parents with a baby report the least sleep, about <span class="hl">half an hour less</span> than the average adult.</p>
+          <p>People with a disability sleep longer, though diaries can't say whether that rest is better.</p>
         </div>
         <figure class="fig card">
           <h3>A baby at home costs about half an hour of sleep a day</h3>
@@ -176,7 +177,7 @@
       <h2>What we do before bed follows us into the next day</h2>
       <div class="two-col">
         <div class="text">
-          <p>Adults who work in the hour before bed are almost <span class="hl">twice as likely</span> to have several sleep problems as those who never do. Nightly screens and heavy caffeine show the same pattern, though these are associations, not proof that one causes the other.</p>
+          <p>Adults who work in the hour before bed are almost <span class="hl">twice as likely</span> to have several sleep problems. Screens and caffeine show the same pattern. These are associations, not proof of cause.</p>
         </div>
         <figure class="fig card">
           <h3>Late-night screens, work and caffeine go with poorer sleep</h3>
@@ -187,7 +188,7 @@
       </div>
       <div class="two-col">
         <div class="text">
-          <p>Poor sleep doesn't stay at home. Nearly <span class="hl">1 in 3</span> people in work made mistakes because they were too sleepy, rising to almost half of 18 to 24 year olds. About 1 in 6 adults drive drowsy every week, and nearly 1 in 3 of those aged 25 to 34.</p>
+          <p>Nearly <span class="hl">1 in 3</span> workers made mistakes because they were too sleepy, and about 1 in 6 adults drive drowsy every week.</p>
         </div>
         <figure class="fig card">
           <h3>Sleepiness follows people to work and onto the road</h3>
@@ -205,8 +206,8 @@
       <h2>Poor health and poor sleep travel together</h2>
       <div class="two-col">
         <div class="text">
-          <p>People with both back pain and a mental health condition have nearly <span class="hl">5 poor nights a week</span>, against fewer than 3 for people with neither. They are almost four times as likely to have <span class="term" tabindex="0">insomnia<span class="tip" role="tooltip">Ongoing trouble falling asleep or staying asleep that affects how you feel the next day.</span></span> and three times as likely to report <span class="term" tabindex="0">sleep apnoea<span class="tip" role="tooltip">A condition where breathing repeatedly stops and starts during sleep, often with loud snoring.</span></span>.</p>
-          <p>This chart shows an association, not a cause. Research reviews find the link likely runs both ways: worry and low mood disturb sleep, and poor sleep raises the risk of anxiety and depression (<a href="https://pubmed.ncbi.nlm.nih.gov/23814343">Alvaro et al., 2013</a>).</p>
+          <p>With both back pain and a mental health condition, people have nearly <span class="hl">5 poor nights a week</span>, against fewer than 3 with neither. They have about four times the rate of <span class="term" tabindex="0">insomnia<span class="tip" role="tooltip">Ongoing trouble falling asleep or staying asleep that affects how you feel the next day.</span></span> and three times the rate of <span class="term" tabindex="0">sleep apnoea<span class="tip" role="tooltip">A condition where breathing repeatedly stops and starts during sleep, often with loud snoring.</span></span>.</p>
+          <p>This shows an association, not a cause. Research suggests the link runs both ways (<a href="https://pubmed.ncbi.nlm.nih.gov/23814343">Alvaro et al., 2013</a>).</p>
         </div>
         <figure class="fig card">
           <h3>People with both back pain and a mental health condition sleep worst on five of six measures</h3>
@@ -232,7 +233,7 @@
       <h2>Where Australians feel worst: distress is highest in the regions, but most distressed people live in cities</h2>
       <div class="two-col">
         <div class="text">
-          <p>The sleep surveys used here do not give comparable sleep estimates region by region, so these maps show the wellbeing side of the story instead: <strong><span class="term" tabindex="0">psychological distress<span class="tip" role="tooltip">Feeling anxious, depressed or overwhelmed, measured with the K10 survey. "High or very high" means a score of 22 or more out of 50.</span></span>, not sleep</strong>. They can show where people feel worst, but not whether poor sleep is the cause.</p>
+          <p>The sleep surveys used here can't be broken down by region, so these maps show <strong><span class="term" tabindex="0">psychological distress<span class="tip" role="tooltip">Feeling anxious, depressed or overwhelmed, measured with the K10 survey. "High or very high" means a score of 22 or more out of 50.</span></span>, not sleep</strong>: where people feel worst, not whether poor sleep is the cause.</p>
           <div class="bridge">
             <p class="bridge-h">Why distress belongs in a sleep story</p>
             <p class="bridge-lab">Top reasons Australians give for sleeping poorly, <a href="https://www.sleephealthfoundation.org.au/news-and-articles/work-stress-fuelling-australians-poor-sleep-new-sleep-health-foundation-data-reveals">Sleep Health Foundation, 2026</a></p>
@@ -254,8 +255,8 @@
       </div>
       <div class="two-col">
         <div class="text">
-          <p>Splitting each state into its capital city and the rest makes the regional gap clearer. Outside Sydney, distress is <span class="hl">3.6 points higher</span> than in the city (15.4% against 11.8%), and Melbourne, Darwin, Perth and Adelaide show the same pattern.</p>
-          <p>Queensland is the exception, with Brisbane and the rest of the state level, and Hobart is higher than the rest of Tasmania.</p>
+          <p>Outside Sydney, distress is <span class="hl">3.6 points higher</span> than in the city, and most states show the same gap between the capital and the regions.</p>
+          <p>Brisbane and the rest of Queensland are level, and Hobart is the exception, higher than the rest of Tasmania.</p>
         </div>
         <figure class="fig card">
           <h3>Outside the capitals, distress is higher in most states</h3>
@@ -266,8 +267,8 @@
       </div>
       <div class="two-col">
         <div class="text">
-          <p>State averages hide a lot. In four states the most distressed local area has more than twice the rate of the least, and in NSW it ranges from <span class="hl">7.5%</span> in Ku-ring-gai on Sydney's North Shore to almost 20% in Broken Hill.</p>
-          <p>Tasmania has the highest typical area, and Brighton, north of Hobart, stands out at <span class="hl">31%</span>.</p>
+          <p>State averages hide a lot. Within NSW, distress runs from <span class="hl">7.5%</span> in Ku-ring-gai to almost 20% in Broken Hill.</p>
+          <p>Brighton, north of Hobart, stands out at <span class="hl">31%</span>.</p>
         </div>
         <figure class="fig card">
           <h3>Where you live within a state matters: some local areas have twice the distress of others</h3>
@@ -283,8 +284,8 @@
           <p class="src">Source: <a href="https://phidu.torrens.edu.au/social-health-atlases/data">PHIDU Social Health Atlas of Australia</a>; <a href="https://data.gov.au/data/dataset/primary-health-networks">PHN boundaries, data.gov.au</a></p>
         </figure>
       <div class="text lead-in cols">
-        <p>The gap is smallest in Sydney (about 2.5 points) and largest in Darling Downs and West Moreton, Tasmania and Murray (about 7). It echoes the 2025 sleep survey, where women reported more poor nights (3.5 vs 2.9 a week) and more insomnia (13% vs 9%).</p>
-        <p>Rates tell only half the story. About two in three distressed adults (<span class="hl">1.76 million of 2.7 million</span>) live in the capital cities, and the largest numbers of distressed adults are in Melbourne, Sydney, Adelaide and Brisbane, plus the populous Hunter and Central Coast.</p>
+        <p>The gap is smallest in Sydney (about 2.5 points) and largest in Darling Downs and West Moreton (about 7). Women also report more poor nights in the 2025 sleep survey (3.5 against 2.9 a week).</p>
+        <p>Rates tell only half the story. About two in three distressed adults (<span class="hl">1.76 million of 2.7 million</span>) live in the capital cities.</p>
       </div>
       <figure class="fig card">
           <h3>But most distressed Australians live in the big cities</h3>
@@ -305,7 +306,7 @@
         <li><strong>A calm last hour</strong> No work and fewer screens before bed go with fewer sleep problems.</li>
         <li><strong>Good health</strong> People without chronic pain or a mental health condition sleep longer and more regularly.</li>
       </ul>
-      <p class="text">If you're one of the third of Australians not getting 7 hours, start with the last hour before bed.</p>
+      <p class="text">Back to the 100 squares at the top: 33 of them sleep less than 7 hours. If you are one of them, start with the last hour before bed.</p>
       </div>
     </section>
   </main>
@@ -363,6 +364,6 @@
     <p><strong>AI acknowledgement:</strong> Claude (Anthropic) is used, an AI assistant, to help clean the source data, brainstorm ideas on storytelling and plan the design framework. Claude also looked for inconsistencies of the overall visualisation and advised on improvements. I chose the topic, story and design, checked the figures against the original sources, and edited the wording.</p>
   </div></footer>
 
-  <script src="js/main.js?v=9"></script>
+  <script src="js/main.js?v=10"></script>
 </body>
 </html>

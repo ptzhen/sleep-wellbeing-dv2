@@ -649,7 +649,7 @@ spec("box_lga_state", "Within every state, some local areas have twice the distr
               "sort": ["Tas", "Qld", "SA", "NSW", "Vic", "NT", "WA"],
               "axis": {"domain": False, "ticks": False, "labelFontSize": 13, "labelFontWeight": 600, "labelPadding": 8}},
         "x": {"field": "k10_high_persons", "type": "quantitative", "title": "% of adults in high or very high distress",
-              "scale": {"domain": [5, 32]}, "axis": {"grid": True, "tickCount": 6}}},
+              "scale": {"domain": [0, 32]}, "axis": {"grid": True, "tickCount": 6}}},
     "layer": [
         {"mark": {"type": "boxplot", "extent": "min-max", "size": 26, "opacity": 1,
                   "box": {"color": "#bdb0dd", "opacity": 0.55, "stroke": "#5e4a9e", "strokeWidth": 1},

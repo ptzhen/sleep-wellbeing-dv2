@@ -60,7 +60,7 @@
       "title": "% of adults in high or very high distress",
       "scale": {
         "domain": [
-          5,
+          0,
           32
         ]
       },

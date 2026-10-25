@@ -45,7 +45,9 @@ h2 { font-size: clamp(1.7rem, 3vw, 2.5rem); max-width: 24ch; margin: 0 0 40px; }
 .kicker { color: var(--night-muted); text-transform: uppercase; letter-spacing: .12em; font-size: .78rem; font-weight: 600; margin: 0 0 18px; }
 .hero h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); margin: 0 0 22px; }
 .hero h1 span { display: block; color: var(--gold); font-style: italic; }
-.lede { max-width: 50ch; color: #cfcde4; margin: 0 0 40px; font-size: 1.18rem; }
+.lede { max-width: 50ch; color: #cfcde4; margin: 0 0 24px; font-size: 1.18rem; }
+.guess { margin: 0 0 36px; padding: 10px 14px; max-width: 52ch; border-left: 3px solid var(--gold); background: rgba(255,255,255,.05); border-radius: 0 8px 8px 0; color: var(--night-text); }
+.guess strong { color: var(--gold); }
 .stats { display: flex; gap: 36px; flex-wrap: wrap; }
 .stat { max-width: 15ch; padding-left: 14px; border-left: 2px solid rgba(243,182,78,.55); }
 .stat .num { display: block; font-family: var(--serif); font-size: 2.3rem; color: var(--gold); line-height: 1.1; }
