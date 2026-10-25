@@ -12,7 +12,7 @@ const charts = [
 const views = {};
 // Charts that build up once when first scrolled into view. Each spec has a
 // "reveal" parameter (default 1 = the finished chart); here we run it from 0 to 1.
-const REVEAL = {waffle_short_sleep: 1500, bar_circumstance: 1000, heatmap_wellbeing: 1200};
+const REVEAL = {waffle_short_sleep: 3200, bar_circumstance: 1000, heatmap_wellbeing: 1200};
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 // The multi-map figures have fixed sizes; on narrow screens stack them and shrink them to fit
@@ -67,7 +67,7 @@ function fitSpec(spec, avail) {
 // do not shrink), scale its fixed-size views down and draw it again
 async function embed(id) {
   const el = document.getElementById(id);
-  let spec = await fetch("js/specs/" + id + ".vg.json?v=11").then(r => r.json());
+  let spec = await fetch("js/specs/" + id + ".vg.json?v=12").then(r => r.json());
   if (FIT.includes(id)) spec = fitSpec(spec, el.clientWidth - 24);
   let r = await vegaEmbed("#" + id, spec, {actions: false});
   for (let i = 0; i < 4; i++) {

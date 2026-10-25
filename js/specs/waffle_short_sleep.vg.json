@@ -1,73 +1,835 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": 300,
-  "height": 300,
-  "data": {
-    "sequence": {
-      "start": 0,
-      "stop": 100,
-      "as": "i"
-    }
-  },
-  "transform": [
-    {
-      "calculate": "datum.i % 10",
-      "as": "col"
-    },
-    {
-      "calculate": "floor(datum.i / 10)",
-      "as": "row"
-    },
-    {
-      "calculate": "datum.i < round(33 * reveal) ? 'Less than 7 hours' : '7 hours or more'",
-      "as": "group"
-    }
-  ],
+  "height": 380,
   "params": [
     {
       "name": "reveal",
       "value": 1
     }
   ],
-  "mark": {
-    "type": "square",
-    "size": 520,
-    "cornerRadius": 3
-  },
   "encoding": {
     "x": {
-      "field": "col",
-      "type": "ordinal",
+      "type": "quantitative",
+      "scale": {
+        "domain": [
+          -0.7,
+          10.7
+        ]
+      },
       "axis": null
     },
     "y": {
-      "field": "row",
-      "type": "ordinal",
-      "axis": null
-    },
-    "color": {
-      "field": "group",
-      "type": "nominal",
-      "title": null,
+      "type": "quantitative",
       "scale": {
         "domain": [
-          "Less than 7 hours",
-          "7 hours or more"
+          -2.2,
+          11.8
         ],
-        "range": [
-          "#e9a23b",
-          "#7d83aa"
+        "reverse": true
+      },
+      "axis": null
+    }
+  },
+  "layer": [
+    {
+      "data": {
+        "values": [
+          {
+            "x0": 6.2,
+            "x1": 9.0,
+            "y0": -1.25,
+            "y1": -0.45
+          },
+          {
+            "x0": -0.45,
+            "x1": 10.45,
+            "y0": -0.55,
+            "y1": 10.9
+          }
         ]
       },
-      "legend": null
-    },
-    "tooltip": [
-      {
-        "field": "group",
-        "title": "Usual sleep"
+      "mark": {
+        "type": "rect",
+        "color": "#121842",
+        "cornerRadius": 2,
+        "stroke": "#3a4280",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "x": {
+          "field": "x0"
+        },
+        "x2": {
+          "field": "x1"
+        },
+        "y": {
+          "field": "y0"
+        },
+        "y2": {
+          "field": "y1"
+        }
       }
-    ]
-  },
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "x": 2.0,
+            "y0": -2.1,
+            "y1": -0.55
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "color": "#3a4280",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "x": {
+          "field": "x"
+        },
+        "y": {
+          "field": "y0"
+        },
+        "y2": {
+          "field": "y1"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "i": 0,
+            "col": 0,
+            "row": 0,
+            "rank": 0
+          },
+          {
+            "i": 1,
+            "col": 1,
+            "row": 0,
+            "rank": 1
+          },
+          {
+            "i": 2,
+            "col": 2,
+            "row": 0,
+            "rank": 2
+          },
+          {
+            "i": 3,
+            "col": 3,
+            "row": 0,
+            "rank": 3
+          },
+          {
+            "i": 4,
+            "col": 4,
+            "row": 0,
+            "rank": 4
+          },
+          {
+            "i": 5,
+            "col": 5,
+            "row": 0,
+            "rank": 5
+          },
+          {
+            "i": 6,
+            "col": 6,
+            "row": 0,
+            "rank": 6
+          },
+          {
+            "i": 7,
+            "col": 7,
+            "row": 0,
+            "rank": 7
+          },
+          {
+            "i": 8,
+            "col": 8,
+            "row": 0,
+            "rank": 8
+          },
+          {
+            "i": 9,
+            "col": 9,
+            "row": 0,
+            "rank": 9
+          },
+          {
+            "i": 10,
+            "col": 0,
+            "row": 1,
+            "rank": 10
+          },
+          {
+            "i": 11,
+            "col": 1,
+            "row": 1,
+            "rank": 11
+          },
+          {
+            "i": 12,
+            "col": 2,
+            "row": 1,
+            "rank": 12
+          },
+          {
+            "i": 13,
+            "col": 3,
+            "row": 1,
+            "rank": 13
+          },
+          {
+            "i": 14,
+            "col": 4,
+            "row": 1,
+            "rank": 14
+          },
+          {
+            "i": 15,
+            "col": 5,
+            "row": 1,
+            "rank": 15
+          },
+          {
+            "i": 16,
+            "col": 6,
+            "row": 1,
+            "rank": 16
+          },
+          {
+            "i": 17,
+            "col": 7,
+            "row": 1,
+            "rank": 17
+          },
+          {
+            "i": 18,
+            "col": 8,
+            "row": 1,
+            "rank": 18
+          },
+          {
+            "i": 19,
+            "col": 9,
+            "row": 1,
+            "rank": 19
+          },
+          {
+            "i": 20,
+            "col": 0,
+            "row": 2,
+            "rank": 20
+          },
+          {
+            "i": 21,
+            "col": 1,
+            "row": 2,
+            "rank": 21
+          },
+          {
+            "i": 22,
+            "col": 2,
+            "row": 2,
+            "rank": 22
+          },
+          {
+            "i": 23,
+            "col": 3,
+            "row": 2,
+            "rank": 23
+          },
+          {
+            "i": 24,
+            "col": 4,
+            "row": 2,
+            "rank": 24
+          },
+          {
+            "i": 25,
+            "col": 5,
+            "row": 2,
+            "rank": 25
+          },
+          {
+            "i": 26,
+            "col": 6,
+            "row": 2,
+            "rank": 26
+          },
+          {
+            "i": 27,
+            "col": 7,
+            "row": 2,
+            "rank": 27
+          },
+          {
+            "i": 28,
+            "col": 8,
+            "row": 2,
+            "rank": 28
+          },
+          {
+            "i": 29,
+            "col": 9,
+            "row": 2,
+            "rank": 29
+          },
+          {
+            "i": 30,
+            "col": 0,
+            "row": 3,
+            "rank": 30
+          },
+          {
+            "i": 31,
+            "col": 1,
+            "row": 3,
+            "rank": 31
+          },
+          {
+            "i": 32,
+            "col": 2,
+            "row": 3,
+            "rank": 32
+          },
+          {
+            "i": 33,
+            "col": 3,
+            "row": 3,
+            "rank": 33
+          },
+          {
+            "i": 34,
+            "col": 4,
+            "row": 3,
+            "rank": 34
+          },
+          {
+            "i": 35,
+            "col": 5,
+            "row": 3,
+            "rank": 35
+          },
+          {
+            "i": 36,
+            "col": 6,
+            "row": 3,
+            "rank": 36
+          },
+          {
+            "i": 37,
+            "col": 7,
+            "row": 3,
+            "rank": 37
+          },
+          {
+            "i": 38,
+            "col": 8,
+            "row": 3,
+            "rank": 38
+          },
+          {
+            "i": 39,
+            "col": 9,
+            "row": 3,
+            "rank": 39
+          },
+          {
+            "i": 40,
+            "col": 0,
+            "row": 4,
+            "rank": 40
+          },
+          {
+            "i": 41,
+            "col": 1,
+            "row": 4,
+            "rank": 41
+          },
+          {
+            "i": 42,
+            "col": 2,
+            "row": 4,
+            "rank": 42
+          },
+          {
+            "i": 43,
+            "col": 3,
+            "row": 4,
+            "rank": 43
+          },
+          {
+            "i": 44,
+            "col": 4,
+            "row": 4,
+            "rank": 44
+          },
+          {
+            "i": 45,
+            "col": 5,
+            "row": 4,
+            "rank": 45
+          },
+          {
+            "i": 46,
+            "col": 6,
+            "row": 4,
+            "rank": 46
+          },
+          {
+            "i": 47,
+            "col": 7,
+            "row": 4,
+            "rank": 47
+          },
+          {
+            "i": 48,
+            "col": 8,
+            "row": 4,
+            "rank": 48
+          },
+          {
+            "i": 49,
+            "col": 9,
+            "row": 4,
+            "rank": 49
+          },
+          {
+            "i": 50,
+            "col": 0,
+            "row": 5,
+            "rank": 50
+          },
+          {
+            "i": 51,
+            "col": 1,
+            "row": 5,
+            "rank": 51
+          },
+          {
+            "i": 52,
+            "col": 2,
+            "row": 5,
+            "rank": 52
+          },
+          {
+            "i": 53,
+            "col": 3,
+            "row": 5,
+            "rank": 53
+          },
+          {
+            "i": 54,
+            "col": 4,
+            "row": 5,
+            "rank": 54
+          },
+          {
+            "i": 55,
+            "col": 5,
+            "row": 5,
+            "rank": 55
+          },
+          {
+            "i": 56,
+            "col": 6,
+            "row": 5,
+            "rank": 56
+          },
+          {
+            "i": 57,
+            "col": 7,
+            "row": 5,
+            "rank": 57
+          },
+          {
+            "i": 58,
+            "col": 8,
+            "row": 5,
+            "rank": 58
+          },
+          {
+            "i": 59,
+            "col": 9,
+            "row": 5,
+            "rank": 59
+          },
+          {
+            "i": 60,
+            "col": 0,
+            "row": 6,
+            "rank": 60
+          },
+          {
+            "i": 61,
+            "col": 1,
+            "row": 6,
+            "rank": 61
+          },
+          {
+            "i": 62,
+            "col": 2,
+            "row": 6,
+            "rank": 62
+          },
+          {
+            "i": 63,
+            "col": 3,
+            "row": 6,
+            "rank": 63
+          },
+          {
+            "i": 64,
+            "col": 4,
+            "row": 6,
+            "rank": 64
+          },
+          {
+            "i": 65,
+            "col": 5,
+            "row": 6,
+            "rank": 65
+          },
+          {
+            "i": 66,
+            "col": 6,
+            "row": 6,
+            "rank": 66
+          },
+          {
+            "i": 67,
+            "col": 7,
+            "row": 6,
+            "rank": 67
+          },
+          {
+            "i": 68,
+            "col": 8,
+            "row": 6,
+            "rank": 68
+          },
+          {
+            "i": 69,
+            "col": 9,
+            "row": 6,
+            "rank": 69
+          },
+          {
+            "i": 70,
+            "col": 0,
+            "row": 7,
+            "rank": 70
+          },
+          {
+            "i": 71,
+            "col": 1,
+            "row": 7,
+            "rank": 71
+          },
+          {
+            "i": 72,
+            "col": 2,
+            "row": 7,
+            "rank": 72
+          },
+          {
+            "i": 73,
+            "col": 3,
+            "row": 7,
+            "rank": 73
+          },
+          {
+            "i": 74,
+            "col": 4,
+            "row": 7,
+            "rank": 74
+          },
+          {
+            "i": 75,
+            "col": 5,
+            "row": 7,
+            "rank": 75
+          },
+          {
+            "i": 76,
+            "col": 6,
+            "row": 7,
+            "rank": 76
+          },
+          {
+            "i": 77,
+            "col": 7,
+            "row": 7,
+            "rank": 77
+          },
+          {
+            "i": 78,
+            "col": 8,
+            "row": 7,
+            "rank": 78
+          },
+          {
+            "i": 79,
+            "col": 9,
+            "row": 7,
+            "rank": 79
+          },
+          {
+            "i": 80,
+            "col": 0,
+            "row": 8,
+            "rank": 80
+          },
+          {
+            "i": 81,
+            "col": 1,
+            "row": 8,
+            "rank": 81
+          },
+          {
+            "i": 82,
+            "col": 2,
+            "row": 8,
+            "rank": 82
+          },
+          {
+            "i": 83,
+            "col": 3,
+            "row": 8,
+            "rank": 83
+          },
+          {
+            "i": 84,
+            "col": 4,
+            "row": 8,
+            "rank": 84
+          },
+          {
+            "i": 85,
+            "col": 5,
+            "row": 8,
+            "rank": 85
+          },
+          {
+            "i": 86,
+            "col": 6,
+            "row": 8,
+            "rank": 86
+          },
+          {
+            "i": 87,
+            "col": 7,
+            "row": 8,
+            "rank": 87
+          },
+          {
+            "i": 88,
+            "col": 8,
+            "row": 8,
+            "rank": 88
+          },
+          {
+            "i": 89,
+            "col": 9,
+            "row": 8,
+            "rank": 89
+          },
+          {
+            "i": 90,
+            "col": 0,
+            "row": 9,
+            "rank": 90
+          },
+          {
+            "i": 91,
+            "col": 1,
+            "row": 9,
+            "rank": 91
+          },
+          {
+            "i": 92,
+            "col": 2,
+            "row": 9,
+            "rank": 92
+          },
+          {
+            "i": 93,
+            "col": 3,
+            "row": 9,
+            "rank": 93
+          },
+          {
+            "i": 94,
+            "col": 4,
+            "row": 9,
+            "rank": 94
+          },
+          {
+            "i": 95,
+            "col": 5,
+            "row": 9,
+            "rank": 95
+          },
+          {
+            "i": 96,
+            "col": 6,
+            "row": 9,
+            "rank": 96
+          },
+          {
+            "i": 97,
+            "col": 7,
+            "row": 9,
+            "rank": 97
+          },
+          {
+            "i": 98,
+            "col": 8,
+            "row": 9,
+            "rank": 98
+          },
+          {
+            "i": 99,
+            "col": 9,
+            "row": 9,
+            "rank": 99
+          }
+        ]
+      },
+      "transform": [
+        {
+          "calculate": "datum.rank < round(100 - 67 * reveal) ? 'Less than 7 hours' : '7 hours or more'",
+          "as": "group"
+        },
+        {
+          "calculate": "datum.col + 0.18",
+          "as": "x0"
+        },
+        {
+          "calculate": "datum.col + 0.82",
+          "as": "x1"
+        },
+        {
+          "calculate": "datum.row + 0.2",
+          "as": "y0"
+        },
+        {
+          "calculate": "datum.row + 0.8",
+          "as": "y1"
+        }
+      ],
+      "layer": [
+        {
+          "transform": [
+            {
+              "filter": "datum.group == 'Less than 7 hours'"
+            }
+          ],
+          "mark": {
+            "type": "rect",
+            "color": "#f3b64e",
+            "opacity": 0.22,
+            "cornerRadius": 4
+          },
+          "encoding": {
+            "x": {
+              "field": "x0",
+              "type": "quantitative"
+            },
+            "x2": {
+              "field": "x1"
+            },
+            "y": {
+              "field": "y0",
+              "type": "quantitative"
+            },
+            "y2": {
+              "field": "y1"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "rect",
+            "cornerRadius": 1.5
+          },
+          "encoding": {
+            "x": {
+              "field": "x0",
+              "type": "quantitative"
+            },
+            "x2": {
+              "field": "x1"
+            },
+            "y": {
+              "field": "y0",
+              "type": "quantitative"
+            },
+            "y2": {
+              "field": "y1"
+            },
+            "color": {
+              "field": "group",
+              "type": "nominal",
+              "title": null,
+              "scale": {
+                "domain": [
+                  "Less than 7 hours",
+                  "7 hours or more"
+                ],
+                "range": [
+                  "#f3b64e",
+                  "#262d5c"
+                ]
+              },
+              "legend": null
+            },
+            "tooltip": [
+              {
+                "field": "group",
+                "title": "Usual sleep"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "x": 5,
+            "y": 11.55
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 13,
+        "fontWeight": 600,
+        "color": "#e9e7f3",
+        "baseline": "middle",
+        "text": {
+          "expr": "reveal < 1 ? round(100 - 67 * reveal) + ' lights still on' : '33 in 100 adults sleep less than 7 hours'"
+        }
+      },
+      "encoding": {
+        "x": {
+          "field": "x"
+        },
+        "y": {
+          "field": "y"
+        }
+      }
+    }
+  ],
   "config": {
     "background": "transparent",
     "font": "'Source Sans 3', 'Helvetica Neue', Arial, sans-serif",

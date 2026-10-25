@@ -29,23 +29,51 @@ def spec(name, title, subtitle, body):
     s["config"] = CONFIG; specs[name] = s
 
 # 1. Waffle: 1 in 3 sleep under 7 hours (SHF 2025)
+# Drawn as an apartment block at night: each window is 1 in 100 adults, and the lights of the 33 who
+# usually sleep under 7 hours stay on. The page script runs "reveal" from 0 (every light on) to 1 (33 left).
+# Windows fill in reading order from the top floor, as in any waffle chart, so the 33 lit windows read
+# as one block (three full floors and three more) and the bottom floors go dark first
+WINDOWS = [{"i": i, "col": i % 10, "row": i // 10, "rank": i} for i in range(100)]
+LIT, UNLIT, WALL, EDGE = "#f3b64e", "#262d5c", "#121842", "#3a4280"
 spec("waffle_short_sleep", "1 in 3 Australian adults sleep less than 7 hours",
-     ["Each square is 1 in 100 adults, by usual sleep a night", "Sleep Health Foundation, Aussie Sleep Snapshot", "2025 (n = 1,012)"], {
-    "width": 300, "height": 300,
-    "data": {"sequence": {"start": 0, "stop": 100, "as": "i"}},
-    "transform": [
-        {"calculate": "datum.i % 10", "as": "col"},
-        {"calculate": "floor(datum.i / 10)", "as": "row"},
-        {"calculate": "datum.i < round(33 * reveal) ? 'Less than 7 hours' : '7 hours or more'", "as": "group"}],
-    "params": [{"name": "reveal", "value": 1}],  # page script counts the squares in from 0 to 1
-    "mark": {"type": "square", "size": 520, "cornerRadius": 3},
+     ["Each window is 1 in 100 adults, by usual sleep a night", "Sleep Health Foundation, Aussie Sleep Snapshot", "2025 (n = 1,012)"], {
+    "width": 300, "height": 380,
+    "params": [{"name": "reveal", "value": 1}],
     "encoding": {
-        "x": {"field": "col", "type": "ordinal", "axis": None},
-        "y": {"field": "row", "type": "ordinal", "axis": None},
-        "color": {"field": "group", "type": "nominal", "title": None,
-                  "scale": {"domain": ["Less than 7 hours", "7 hours or more"], "range": [ACCENT, "#cdd3e6"]},
-                  "legend": {"orient": "bottom", "direction": "horizontal"}},
-        "tooltip": [{"field": "group", "title": "Usual sleep"}]}})
+        "x": {"type": "quantitative", "scale": {"domain": [-0.7, 10.7]}, "axis": None},
+        "y": {"type": "quantitative", "scale": {"domain": [-2.2, 11.8], "reverse": True}, "axis": None}},
+    "layer": [
+        # the building: rooftop plant room, aerial and the main block
+        {"data": {"values": [{"x0": 6.2, "x1": 9.0, "y0": -1.25, "y1": -0.45}, {"x0": -0.45, "x1": 10.45, "y0": -0.55, "y1": 10.9}]},
+         "mark": {"type": "rect", "color": WALL, "cornerRadius": 2, "stroke": EDGE, "strokeWidth": 1},
+         "encoding": {"x": {"field": "x0"}, "x2": {"field": "x1"}, "y": {"field": "y0"}, "y2": {"field": "y1"}}},
+        {"data": {"values": [{"x": 2.0, "y0": -2.1, "y1": -0.55}]},
+         "mark": {"type": "rule", "color": EDGE, "strokeWidth": 2},
+         "encoding": {"x": {"field": "x"}, "y": {"field": "y0"}, "y2": {"field": "y1"}}},
+        {"data": {"values": WINDOWS},
+         "transform": [
+             {"calculate": "datum.rank < round(100 - 67 * reveal) ? 'Less than 7 hours' : '7 hours or more'", "as": "group"},
+             {"calculate": "datum.col + 0.18", "as": "x0"}, {"calculate": "datum.col + 0.82", "as": "x1"},
+             {"calculate": "datum.row + 0.2", "as": "y0"}, {"calculate": "datum.row + 0.8", "as": "y1"}],
+         "layer": [
+             # soft glow behind the lit windows
+             {"transform": [{"filter": "datum.group == 'Less than 7 hours'"}],
+              "mark": {"type": "rect", "color": LIT, "opacity": 0.22, "cornerRadius": 4},
+              "encoding": {"x": {"field": "x0", "type": "quantitative"}, "x2": {"field": "x1"},
+                           "y": {"field": "y0", "type": "quantitative"}, "y2": {"field": "y1"}}},
+             {"mark": {"type": "rect", "cornerRadius": 1.5},
+              "encoding": {"x": {"field": "x0", "type": "quantitative"}, "x2": {"field": "x1"},
+                           "y": {"field": "y0", "type": "quantitative"}, "y2": {"field": "y1"},
+                           "color": {"field": "group", "type": "nominal", "title": None,
+                                     "scale": {"domain": ["Less than 7 hours", "7 hours or more"], "range": [LIT, UNLIT]},
+                                     "legend": {"orient": "bottom", "direction": "horizontal", "symbolType": "square",
+                                                "labelExpr": "datum.label == 'Less than 7 hours' ? 'Light on: less than 7 hours' : 'Light off: 7 hours or more'"}},
+                           "tooltip": [{"field": "group", "title": "Usual sleep"}]}}]},
+        # running count while the lights go out, then the finding
+        {"data": {"values": [{"x": 5, "y": 11.55}]},
+         "mark": {"type": "text", "fontSize": 13, "fontWeight": 600, "color": INK, "baseline": "middle",
+                  "text": {"expr": "reveal < 1 ? round(100 - 67 * reveal) + ' lights still on' : '33 in 100 adults sleep less than 7 hours'"}},
+         "encoding": {"x": {"field": "x"}, "y": {"field": "y"}}}]})
 
 # 2. World choropleth (OECD time use)
 spec("map_world_sleep", "Australians sleep about as long as people in most surveyed countries",
