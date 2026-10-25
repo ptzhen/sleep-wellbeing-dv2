@@ -144,6 +144,33 @@
           }
         ]
       }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "fontStyle": "italic",
+        "color": "#b4b2cf",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 12,
+        "opacity": {
+          "expr": "width < 420 ? 0 : 1"
+        }
+      },
+      "encoding": {
+        "x": {
+          "field": "minutes",
+          "type": "quantitative"
+        },
+        "text": {
+          "condition": {
+            "test": "datum.country == 'Japan' && datum.sex == 'Men'",
+            "value": "Japan sleeps least, and its men out-sleep its women"
+          },
+          "value": ""
+        }
+      }
     }
   ],
   "autosize": {

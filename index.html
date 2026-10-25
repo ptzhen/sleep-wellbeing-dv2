@@ -9,7 +9,7 @@
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=10">
+  <link rel="stylesheet" href="css/style.css?v=11">
   <script src="https://cdn.jsdelivr.net/npm/vega@5.30.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.21.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
@@ -21,7 +21,7 @@
       <div class="hero-copy">
         <p class="kicker">FIT3179 Data Visualisation 2 · Pierre Thian Zhen</p>
         <h1>Sleep and Wellbeing <span>in Australia</span></h1>
-        <p class="lede">Who actually gets 7 to 9 hours a night, what gets in the way, and how is it linked to how Australians feel? Scroll through one Australian night, from dark to morning.</p>
+        <p class="lede">We all know we should get 7 to 9 hours. A third of us don't. Follow one Australian night, from lights-out to sunrise, to see who's awake, what's keeping them up, and how it shows the next day.</p>
         <p class="guess"><strong>Before you scroll:</strong> how many hours a day do you think the average Australian sleeps? Hold that number.</p>
         <div class="stats">
           <div class="stat"><span class="num">33%</span><span class="lab">of adults sleep under 7 hours</span></div>
@@ -43,6 +43,7 @@
   <nav class="nightbar" aria-label="Chapters">
     <div class="nightbar-in">
       <a class="brand" href="#top"><img src="img/favicon.svg" alt="" width="22" height="22"> Sleep &amp; Wellbeing</a>
+      <span class="nightclock" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.6"/><path class="hand-h" d="M12 12V7.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path class="hand-m" d="M12 12V4.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg><span class="nc-time">9:00 pm</span></span>
       <ol>
         <li><a href="#world"><b><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 4.5a6 6 0 1 0 5 9.2A5 5 0 0 1 14.5 4.5z" fill="currentColor"/></svg></b> Compare</a></li>
         <li><a href="#day"><b><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 4.5a6 6 0 1 0 5 9.2A5 5 0 0 1 14.5 4.5z" fill="currentColor"/></svg></b> The day</a></li>
@@ -57,6 +58,7 @@
   </nav>
 
   <main>
+    <div class="skyfx" aria-hidden="true"><div class="fx-glow"></div><svg class="fx-moon" viewBox="0 0 100 100"><defs><mask id="moonCut2"><rect width="100" height="100" fill="#fff"/><circle cx="64" cy="36" r="34" fill="#000"/></mask></defs><circle cx="46" cy="54" r="38" fill="#f5c76a" mask="url(#moonCut2)"/></svg></div>
     <section class="chapter ch-world night" id="world">
       <div class="wrap">
       <p class="eyebrow"><span class="clock"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 4.5a6 6 0 1 0 5 9.2A5 5 0 0 1 14.5 4.5z" fill="currentColor"/></svg></span><span>1 · How we compare</span></p>
@@ -143,11 +145,11 @@
     <section class="chapter ch-who night" id="who">
       <div class="wrap">
       <p class="eyebrow"><span class="clock"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 10a5 5 0 1 0 4.2 7.7A4.2 4.2 0 0 1 11 10z" fill="currentColor"/><path d="M3 19.5h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity=".6"/></svg></span><span>3 · Who sleeps well</span></p>
-      <h2>Age and life stage shape how well we sleep</h2>
+      <h2>The young sleep longest and still feel the most tired</h2>
       <div class="two-col">
         <div class="text">
           <p>Young adults sleep the longest, just over 9 hours a day at 15 to 24 (2024). Yet they are the <span class="hl">least likely</span> to feel they get enough, and two in three often wake up unrefreshed.</p>
-          <p>Three in four go online in the hour before bed nearly every night, against one in five people over 65.</p>
+          <p>Three in four of them are online in the last hour before bed most nights. Among people over 65 it's one in five.</p>
         </div>
         <figure class="fig card">
           <h3>Young adults are the least likely to feel they get enough sleep</h3>
@@ -158,7 +160,7 @@
       </div>
       <div class="two-col">
         <div class="text">
-          <p>Parents with a baby report the least sleep, about <span class="hl">half an hour less</span> than the average adult.</p>
+          <p>New parents lose the most, about <span class="hl">half an hour a day</span>. Anyone who has had a baby at home will believe it.</p>
           <p>People with a disability sleep longer, though diaries can't say whether that rest is better.</p>
         </div>
         <figure class="fig card">
@@ -177,7 +179,7 @@
       <h2>What we do before bed follows us into the next day</h2>
       <div class="two-col">
         <div class="text">
-          <p>Adults who work in the hour before bed are almost <span class="hl">twice as likely</span> to have several sleep problems. Screens and caffeine show the same pattern. These are associations, not proof of cause.</p>
+          <p>If you're still working in the last hour before bed, you're in the group with almost <span class="hl">twice the sleep problems</span>. Late-night scrolling and six caffeinated drinks a day show the same pattern.</p>
         </div>
         <figure class="fig card">
           <h3>Late-night screens, work and caffeine go with poorer sleep</h3>
@@ -206,8 +208,8 @@
       <h2>Poor health and poor sleep travel together</h2>
       <div class="two-col">
         <div class="text">
-          <p>With both back pain and a mental health condition, people have nearly <span class="hl">5 poor nights a week</span>, against fewer than 3 with neither. They have about four times the rate of <span class="term" tabindex="0">insomnia<span class="tip" role="tooltip">Ongoing trouble falling asleep or staying asleep that affects how you feel the next day.</span></span> and three times the rate of <span class="term" tabindex="0">sleep apnoea<span class="tip" role="tooltip">A condition where breathing repeatedly stops and starts during sleep, often with loud snoring.</span></span>.</p>
-          <p>This shows an association, not a cause. Research suggests the link runs both ways (<a href="https://pubmed.ncbi.nlm.nih.gov/23814343">Alvaro et al., 2013</a>).</p>
+          <p>People living with both back pain and a mental health condition have nearly <span class="hl">5 bad nights a week</span>. For people with neither, it's fewer than 3. They have about four times the rate of <span class="term" tabindex="0">insomnia<span class="tip" role="tooltip">Ongoing trouble falling asleep or staying asleep that affects how you feel the next day.</span></span> and three times the rate of <span class="term" tabindex="0">sleep apnoea<span class="tip" role="tooltip">A condition where breathing repeatedly stops and starts during sleep, often with loud snoring.</span></span>.</p>
+          <p>So which comes first, the bad nights or the bad days? Probably both: worry keeps people awake, and poor sleep makes anxiety and depression worse in turn (<a href="https://pubmed.ncbi.nlm.nih.gov/23814343">Alvaro et al., 2013</a>).</p>
         </div>
         <figure class="fig card">
           <h3>People with both back pain and a mental health condition sleep worst on five of six measures</h3>
@@ -222,15 +224,16 @@
     <aside class="moment sunrise" aria-label="Key figure">
       <div class="wrap">
         <p class="big">1 <small>in</small> 7</p>
-        <p class="big-lab">Australian adults report high or very high psychological distress.<br>As the sun comes up, the story turns from how we sleep to how we feel.</p>
+        <p class="big-lab">Australian adults report high or very high psychological distress.<br>By morning the question changes. Not how long we slept, but how we're doing.</p>
       </div>
+      <div class="sun" aria-hidden="true"></div>
       <div class="skyline skyline-dawn" aria-hidden="true"></div>
     </aside>
 
     <section class="chapter ch-where day" id="where">
       <div class="wrap">
       <p class="eyebrow"><span class="clock"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 19.5a5 5 0 0 1 10 0z" fill="currentColor"/><path d="M12 9.5v2.5M5.5 12.5l1.8 1.6M18.5 12.5l-1.8 1.6M3 19.5h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span>6 · Where wellbeing is lowest</span></p>
-      <h2>Where Australians feel worst: distress is highest in the regions, but most distressed people live in cities</h2>
+      <h2>Distress runs highest in the regions, but most distressed people live in the cities</h2>
       <div class="two-col">
         <div class="text">
           <p>The sleep surveys used here can't be broken down by region, so these maps show <strong><span class="term" tabindex="0">psychological distress<span class="tip" role="tooltip">Feeling anxious, depressed or overwhelmed, measured with the K10 survey. "High or very high" means a score of 22 or more out of 50.</span></span>, not sleep</strong>: where people feel worst, not whether poor sleep is the cause.</p>
@@ -267,8 +270,8 @@
       </div>
       <div class="two-col">
         <div class="text">
-          <p>State averages hide a lot. Within NSW, distress runs from <span class="hl">7.5%</span> in Ku-ring-gai to almost 20% in Broken Hill.</p>
-          <p>Brighton, north of Hobart, stands out at <span class="hl">31%</span>.</p>
+          <p>Zoom in and the gaps grow. In NSW, distress runs from <span class="hl">7.5%</span> in Ku-ring-gai to almost 20% in Broken Hill.</p>
+          <p>In Brighton, just north of Hobart, it's <span class="hl">almost 1 in 3</span> adults (31%).</p>
         </div>
         <figure class="fig card">
           <h3>Where you live within a state matters: some local areas have twice the distress of others</h3>
@@ -284,8 +287,8 @@
           <p class="src">Source: <a href="https://phidu.torrens.edu.au/social-health-atlases/data">PHIDU Social Health Atlas of Australia</a>; <a href="https://data.gov.au/data/dataset/primary-health-networks">PHN boundaries, data.gov.au</a></p>
         </figure>
       <div class="text lead-in cols">
-        <p>The gap is smallest in Sydney (about 2.5 points) and largest in Darling Downs and West Moreton (about 7). Women also report more poor nights in the 2025 sleep survey (3.5 against 2.9 a week).</p>
-        <p>Rates tell only half the story. About two in three distressed adults (<span class="hl">1.76 million of 2.7 million</span>) live in the capital cities.</p>
+        <p>The gap is smallest in Sydney (about 2.5 points) and largest in Darling Downs and West Moreton (about 7). Women also have more bad nights: 3.5 a week, compared with 2.9 for men (2025).</p>
+        <p>A high rate in a small town is still a small number of people. Two in three distressed adults (<span class="hl">1.76 million of 2.7 million</span>) live in the capital cities.</p>
       </div>
       <figure class="fig card">
           <h3>But most distressed Australians live in the big cities</h3>
@@ -299,7 +302,7 @@
     <section class="chapter ch-takeaways day" id="takeaways">
       <div class="wrap">
       <p class="eyebrow"><span class="clock"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span>7 · Who sleeps best?</span></p>
-      <h2>Healthier sleepers have a few things in common</h2>
+      <h2>What good sleepers have in common</h2>
       <ul class="takeaways">
         <li><strong>Older adults</strong> They are the most likely to say they get enough sleep and wake up refreshed.</li>
         <li><strong>No baby at home</strong> Adults without a baby sleep up to 40 minutes a day more than new parents, and non-carers about 10 minutes more than carers.</li>
@@ -364,6 +367,6 @@
     <p><strong>AI acknowledgement:</strong> Claude (Anthropic) is used, an AI assistant, to help clean the source data, brainstorm ideas on storytelling and plan the design framework. Claude also looked for inconsistencies of the overall visualisation and advised on improvements. I chose the topic, story and design, checked the figures against the original sources, and edited the wording.</p>
   </div></footer>
 
-  <script src="js/main.js?v=10"></script>
+  <script src="js/main.js?v=11"></script>
 </body>
 </html>

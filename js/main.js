@@ -67,7 +67,7 @@ function fitSpec(spec, avail) {
 // do not shrink), scale its fixed-size views down and draw it again
 async function embed(id) {
   const el = document.getElementById(id);
-  let spec = await fetch("js/specs/" + id + ".vg.json?v=10").then(r => r.json());
+  let spec = await fetch("js/specs/" + id + ".vg.json?v=11").then(r => r.json());
   if (FIT.includes(id)) spec = fitSpec(spec, el.clientWidth - 24);
   let r = await vegaEmbed("#" + id, spec, {actions: false});
   for (let i = 0; i < 4; i++) {
@@ -175,6 +175,56 @@ function onScroll() {
 }
 document.addEventListener("scroll", onScroll, {passive: true});
 onScroll();
+
+// The night sky behind the chapters: one fixed layer whose colour, horizon glow and moon follow the scroll
+const skyfx = document.querySelector(".skyfx");
+const nightStart = document.querySelector("#world"), nightEnd = document.querySelector(".moment.sunrise");
+const sunrise = nightEnd, sun = document.querySelector(".sun");
+const SKY = [[0x14, 0x1a, 0x3a], [0x1a, 0x21, 0x50], [0x22, 0x26, 0x5c], [0x36, 0x2b, 0x66]];
+function mix(stops, t) {
+  const x = Math.min(Math.max(t, 0), 1) * (stops.length - 1), i = Math.min(Math.floor(x), stops.length - 2), f = x - i;
+  return "rgb(" + stops[i].map((v, k) => Math.round(v + (stops[i + 1][k] - v) * f)).join(",") + ")";
+}
+// Story clock: each part of the page is pinned to a time of night, and the clock interpolates between them
+const clockStops = [["#top", 21 * 60], ["#world", 22 * 60], ["#day", 23 * 60 + 30], ["#who", 25 * 60], ["#habits", 26 * 60 + 30],
+  ["#wellbeing", 28 * 60], [".moment.sunrise", 29 * 60 + 30], ["#where", 30 * 60 + 30], ["#takeaways", 31 * 60 + 30], ["footer", 32 * 60]]
+  .map(([sel, m]) => [document.querySelector(sel), m]).filter(([el]) => el);
+const ncTime = document.querySelector(".nc-time"), handH = document.querySelector(".hand-h"), handM = document.querySelector(".hand-m");
+function pageY(el) { return el.getBoundingClientRect().top + window.scrollY; }
+function onSky() {
+  const vh = window.innerHeight, mid = window.scrollY + vh * 0.5;
+  if (skyfx && nightStart && nightEnd) {
+    const a = pageY(nightStart), b = pageY(nightEnd);
+    const t = Math.min(Math.max((mid - a) / Math.max(1, b - a), 0), 1);
+    skyfx.style.setProperty("--sky", mix(SKY, t));
+    skyfx.style.setProperty("--glow", Math.max(0, (t - 0.55) / 0.45 * 0.6).toFixed(3));
+    skyfx.style.setProperty("--moon-y", (10 + t * 85).toFixed(1) + "vh");
+    skyfx.style.setProperty("--moon-o", (t < 0.75 ? 0.9 : 0.9 * (1 - (t - 0.75) / 0.25)).toFixed(3));
+  }
+  if (sun && sunrise) {
+    const r = sunrise.getBoundingClientRect();
+    const t = Math.min(Math.max((vh - r.top) / (vh + r.height * 0.5), 0), 1);
+    sun.style.setProperty("--sun-y", Math.round(140 - t * 220) + "px");
+  }
+  if (ncTime && clockStops.length > 1) {
+    let m = clockStops[0][1];
+    for (let i = 0; i < clockStops.length - 1; i++) {
+      const y0 = pageY(clockStops[i][0]), y1 = pageY(clockStops[i + 1][0]);
+      if (mid >= y0) m = clockStops[i][1] + (clockStops[i + 1][1] - clockStops[i][1]) * Math.min(1, (mid - y0) / Math.max(1, y1 - y0));
+    }
+    m = Math.round(m / 5) * 5;
+    const h24 = Math.floor(m / 60) % 24, mm = m % 60, h12 = h24 % 12 || 12;
+    ncTime.textContent = `${h12}:${String(mm).padStart(2, "0")} ${h24 < 12 ? "am" : "pm"}`;
+    if (handH) handH.style.transform = `rotate(${(h24 % 12) * 30 + mm * 0.5}deg)`;
+    if (handM) handM.style.transform = `rotate(${mm * 6}deg)`;
+  }
+}
+let skyQueued = false;
+document.addEventListener("scroll", () => {
+  if (!skyQueued) { skyQueued = true; requestAnimationFrame(() => { skyQueued = false; onSky(); }); }
+}, {passive: true});
+window.addEventListener("resize", onSky);
+onSky();
 
 // Keep jargon definitions inside the screen on narrow layouts
 document.querySelectorAll(".term").forEach(t => {

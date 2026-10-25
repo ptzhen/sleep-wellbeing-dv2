@@ -159,6 +159,33 @@
           "field": "level"
         }
       }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "fontStyle": "italic",
+        "color": "#b4b2cf",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 14,
+        "opacity": {
+          "expr": "width < 420 ? 0 : 1"
+        }
+      },
+      "encoding": {
+        "x": {
+          "field": "pct",
+          "type": "quantitative"
+        },
+        "text": {
+          "condition": {
+            "test": "datum.habit == 'Work in the hour before bed' && datum.level == 'Nightly'",
+            "value": "Nearly double"
+          },
+          "value": ""
+        }
+      }
     }
   ],
   "autosize": {

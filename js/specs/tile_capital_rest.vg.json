@@ -257,6 +257,40 @@
           "value": "#23263a"
         }
       }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "x": 1.92,
+            "y": 3.45,
+            "t": "In Tasmania it flips:\nHobart is worse than\nthe rest of the state →"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "fontStyle": "italic",
+        "color": "#5d6077",
+        "align": "right",
+        "baseline": "middle",
+        "lineBreak": "\n",
+        "lineHeight": 16
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "t"
+        }
+      }
     }
   ],
   "config": {

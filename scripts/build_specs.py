@@ -113,7 +113,9 @@ spec("dumbbell_country_sex", "Women out-sleep men in most countries",
                                 "legend": {"orient": "top", "direction": "horizontal"}},
                       "tooltip": [{"field": "country", "title": "Country"}, {"field": "sex", "title": "Sex"},
                                   {"field": "minutes", "title": "Minutes a day", "format": ".0f"},
-                                  {"field": "survey_year", "title": "Survey year"}]}}]})
+                                  {"field": "survey_year", "title": "Survey year"}]}},
+        {"mark": {"type": "text", "fontSize": 12, "fontStyle": "italic", "color": MUTED, "align": "left", "baseline": "middle", "dx": 12, "opacity": {"expr": "width < 420 ? 0 : 1"}},  # hidden on phones, where it would not fit
+         "encoding": {"x": {"field": "minutes", "type": "quantitative"}, "text": {"condition": {"test": "datum.country == 'Japan' && datum.sex == 'Men'", "value": "Japan sleeps least, and its men out-sleep its women"}, "value": ""}}}]})
 
 # 4. Radial clock: % asleep by hour, weekday vs weekend
 clock_layer = lambda day: {
@@ -232,7 +234,9 @@ spec("bar_circumstance", "A baby at home costs about half an hour of sleep a nig
         {"mark": {"type": "rule", "color": INK}, "encoding": {"x": {"datum": 0}, "y": None}},
         {"mark": {"type": "text", "fontSize": 12, "dx": {"expr": "datum.diff >= 0 ? 6 : -6"},
                   "align": {"expr": "datum.diff >= 0 ? 'left' : 'right'"}, "opacity": {"expr": "reveal"}},
-         "encoding": {"text": {"field": "difflabel"}}}]})
+         "encoding": {"text": {"field": "difflabel"}}},
+        {"mark": {"type": "text", "fontSize": 12, "fontStyle": "italic", "color": MUTED, "align": "left", "baseline": "middle", "dx": 8, "opacity": {"expr": "width < 420 ? 0 : reveal"}},  # hidden on phones
+         "encoding": {"x": {"datum": 0}, "text": {"condition": {"test": "datum.group == 'Parent, youngest child under 1'", "value": "A new baby costs the most sleep"}, "value": ""}}}]})
 
 # 8. Lifestyle dumbbell (SHF 2016 Table 9)
 spec("dumbbell_lifestyle", "Late-night screens, work and caffeine go with poorer sleep",
@@ -261,7 +265,9 @@ spec("dumbbell_lifestyle", "Late-night screens, work and caffeine go with poorer
                                 "legend": {"orient": "top", "direction": "horizontal"}},
                       "tooltip": [{"field": "habit", "title": "Habit"}, {"field": "level", "title": "Level"},
                                   {"field": "pct", "title": "% with 2+ problems", "format": ".1f"}]}},
-        {"mark": {"type": "text", "dy": -14, "fontSize": 11, "color": MUTED}, "encoding": {"text": {"field": "level"}}}]})
+        {"mark": {"type": "text", "dy": -14, "fontSize": 11, "color": MUTED}, "encoding": {"text": {"field": "level"}}},
+        {"mark": {"type": "text", "fontSize": 12, "fontStyle": "italic", "color": MUTED, "align": "left", "baseline": "middle", "dx": 14, "opacity": {"expr": "width < 420 ? 0 : 1"}},  # hidden on phones
+         "encoding": {"x": {"field": "pct", "type": "quantitative"}, "text": {"condition": {"test": "datum.habit == 'Work in the hour before bed' && datum.level == 'Nightly'", "value": "Nearly double"}, "value": ""}}}]})
 
 # 9. Work and driving impacts: two bases, shown as two panels
 spec("bar_work_impacts", "Sleepiness follows people to work and onto the road",
@@ -630,7 +636,10 @@ spec("tile_capital_rest", "Outside the capitals, distress is higher in most stat
         {"mark": {"type": "text", "fontSize": 13, "fontWeight": 600, "dy": 8},
          "encoding": {"x": {"field": "xm"}, "y": {"field": "ymid", "type": "quantitative"},
                       "text": {"field": "lab"},
-                      "color": {"condition": {"test": "datum.k10_high_persons >= 15", "value": "#ffffff"}, "value": INK}}}]})
+                      "color": {"condition": {"test": "datum.k10_high_persons >= 15", "value": "#ffffff"}, "value": INK}}},
+        {"data": {"values": [{"x": 1.92, "y": 3.45, "t": "In Tasmania it flips:\nHobart is worse than\nthe rest of the state →"}]},
+         "mark": {"type": "text", "fontSize": 12, "fontStyle": "italic", "color": MUTED, "align": "right", "baseline": "middle", "lineBreak": "\n", "lineHeight": 16},
+         "encoding": {"x": {"field": "x", "type": "quantitative"}, "y": {"field": "y", "type": "quantitative"}, "text": {"field": "t"}}}]})
 
 # 18. Box plot with dots: spread of distress across local council areas within each state (PHIDU 2022, LGA level)
 spec("box_lga_state", "Within every state, some local areas have twice the distress of others", [], {

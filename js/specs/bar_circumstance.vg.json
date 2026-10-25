@@ -176,6 +176,32 @@
           "field": "difflabel"
         }
       }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "fontStyle": "italic",
+        "color": "#b4b2cf",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 8,
+        "opacity": {
+          "expr": "width < 420 ? 0 : reveal"
+        }
+      },
+      "encoding": {
+        "x": {
+          "datum": 0
+        },
+        "text": {
+          "condition": {
+            "test": "datum.group == 'Parent, youngest child under 1'",
+            "value": "A new baby costs the most sleep"
+          },
+          "value": ""
+        }
+      }
     }
   ],
   "autosize": {
