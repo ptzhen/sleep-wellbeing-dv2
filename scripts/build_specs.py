@@ -233,7 +233,7 @@ spec("line_age_quality", "Young adults sleep the longest but feel the worst",
         {"transform": [{"filter": "datum.age_group == '65+'"}],
          "mark": {"type": "text", "align": "left", "dx": 10, "fontSize": 12, "fontWeight": 700},
          "encoding": {"text": {"field": "short"}}},
-        {"data": {"values": [{"t": "From the mid-30s, more feel rested than unrefreshed"}]},
+        {"data": {"values": [{"t": "From the mid-30s, more say they get enough sleep than wake unrefreshed"}]},
          "mark": {"type": "text", "fontSize": 12, "fontStyle": "italic", "color": "#5d6077", "align": "center",
                   "opacity": {"expr": "width < 420 ? 0 : 1"}},  # hidden on phones, where it would not fit
          "encoding": {"x": {"datum": "35-44", "type": "ordinal"}, "y": {"value": 200}, "text": {"field": "t"}, "color": {"value": "#5d6077"}}}]})
@@ -293,7 +293,7 @@ spec("dumbbell_lifestyle", "Late-night screens, work and caffeine go with poorer
         "y": {"field": "habit", "type": "nominal", "title": None, "sort": {"field": "pct", "op": "max", "order": "descending"},
               "axis": {"domain": False, "ticks": False, "labelLimit": 320}},
         "x": {"field": "pct", "type": "quantitative", "title": "% with two or more sleep problems",
-              "scale": {"domain": [0, 100]}, "axis": {"grid": True}}},
+              "scale": {"domain": [0, 100]}, "axis": {"grid": True, "values": [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}}},
     "layer": [
         {"mark": {"type": "rule", "strokeWidth": 3, "color": "#c9c5bb"}, "encoding": {"x": {"aggregate": "min", "field": "pct"}, "x2": {"aggregate": "max", "field": "pct"}}},
         {"mark": {"type": "circle", "size": 140, "opacity": 1, "stroke": "#fbfaf7", "strokeWidth": 1.5},
@@ -491,10 +491,10 @@ sm = {"data": {"url": "data/phn.topojson", "format": {"type": "topojson", "featu
 for f, lab, sc in [("k10_high_female", "Women", SEX_SCALE), ("k10_high_male", "Men", SEX_SCALE),
                    ("gap", "Gap: women minus men", GAP_SCALE)]:
     v = phn_choro(f, scale=sc)
-    v["width"], v["height"] = (440, 390) if not lab.startswith("Gap") else (560, 400)
-    # fixed zoom, so far-off islands in the boundary file do not shrink the mainland
-    v["projection"] = dict(AUS_PROJ, center=[0, -27], scale=590 if lab != "Gap: women minus men" else 780,
-                           translate=[v["width"] / 2 - (40 if lab.startswith("Gap") else 0), v["height"] / 2 - 10])
+    v["width"], v["height"] = (300, 270) if not lab.startswith("Gap") else (380, 270)
+    # fixed zoom, the same for all three maps, so far-off islands in the boundary file do not shrink the mainland
+    v["projection"] = dict(AUS_PROJ, center=[0, -27], scale=405,
+                           translate=[150, v["height"] / 2 - 8])
     leg = None
     if lab == "Women": leg = {"orient": "bottom", "title": "% in high distress (women and men)", "direction": "horizontal", "labelOverlap": False, "titleLimit": 400}
     if lab.startswith("Gap"): leg = {"orient": "bottom", "title": "Percentage points more for women", "direction": "horizontal", "labelOverlap": False, "titleLimit": 400}
@@ -506,11 +506,8 @@ sm["hconcat"][2]["layer"].append(callouts([
 sm["hconcat"][2]["layer"].append(callouts([
     {"lon": 151.16, "lat": -33.62, "lon2": 155.5, "lat2": -36.5, "lab": "Smallest:\nNorthern Sydney 2.4"}], align="left", size=10.5))
 sm["resolve"] = {"scale": {"color": "independent"}, "legend": {"color": "independent"}}
-# Women and men side by side, the gap map larger underneath
-women, men, gapmap = sm.pop("hconcat")
-sm["vconcat"] = [{"hconcat": [women, men], "spacing": 24, "resolve": sm["resolve"]}, gapmap]
-sm["spacing"] = 28
-sm["center"] = True
+# Women, men and the gap in one row (the gap map is wider to fit its callouts)
+sm["spacing"] = 16
 spec("map_distress_sex", "Women report more distress than men in every region",
      ["% of women and of men with high or very high psychological distress, by PHN, 2022", "PHIDU Social Health Atlas of Australia"], sm)
 

@@ -163,6 +163,7 @@ h2 { font-size: clamp(1.7rem, 3vw, 2.5rem); max-width: 24ch; margin: 0 0 40px; }
 .men { color: var(--men); font-weight: 700; }
 .women { color: var(--women); font-weight: 700; }
 .night .hl { color: #fff; }
+.night .text a { color: var(--night-text); text-decoration-color: rgba(255,255,255,.4); text-underline-offset: 2px; }
 .night .weekend { color: var(--gold); }
 .night .weekday { color: #9db4ff; }
 .night .men { color: #8fcaf2; }

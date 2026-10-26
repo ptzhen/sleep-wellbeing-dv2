@@ -9,7 +9,7 @@
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=15">
+  <link rel="stylesheet" href="css/style.css?v=16">
   <script src="https://cdn.jsdelivr.net/npm/vega@5.30.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.21.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
@@ -101,7 +101,7 @@
           <p>Press <strong>Play the night</strong>, or hover over an hour to see who is asleep.</p>
         </div>
         <figure class="fig card">
-          <h3>Weekday alarms get most of us up by 8 am; at the weekend 6 in 10 are still asleep at 7</h3>
+          <h3>Weekday alarms wake most of us by 8 am</h3>
           <p class="sub">% of people aged 15+ asleep in each hour on <span class="k k-bl">weekdays</span> and <span class="k k-or">weekends</span>. Midnight is at the top and time runs clockwise; the dashed ring marks 50%. Hour-by-hour data comes from the 2020–21 survey, the latest that published it.</p>
           <button class="play" id="playNight" type="button" aria-pressed="false"><span class="ico" aria-hidden="true">▶</span> <span class="lbl">Play the night</span></button>
           <div class="chart" id="radial_clock"></div>
@@ -110,7 +110,7 @@
       </div>
       <div class="two-col">
         <div class="text">
-          <p>On a weekday, <span class="hl">80% of workers have started by 9 am</span>, the same hours in which sleep drops away.</p>
+          <p>On a weekday, <span class="hl">8 in 10</span> people who do paid work that day are working between 9 and 10 am, just after sleep drops away.</p>
           <p>Free time is squeezed into the evening, peaking at 75% between 8 and 9 pm.</p>
         </div>
         <figure class="fig card">
@@ -137,7 +137,7 @@
     <aside class="tiles night" aria-label="Key figures">
       <div class="wrap tiles-in">
         <div class="tile"><p class="tile-num" data-count>44 <small>min</small></p><p class="tile-lab">extra sleep on a <span class="weekend">weekend</span> night compared with a <span class="weekday">weekday</span>, 2024</p></div>
-        <div class="tile"><p class="tile-num">8 <small>in</small> 10</p><p class="tile-lab">people who do paid work have started by 9 am on a weekday, 2020–21</p></div>
+        <div class="tile"><p class="tile-num">8 <small>in</small> 10</p><p class="tile-lab">weekday workers are already working between 9 and 10 am, 2020–21</p></div>
       </div>
     </aside>
 
@@ -147,14 +147,14 @@
       <h2>The young sleep longest and still feel the most tired</h2>
       <div class="two-col">
         <div class="text">
-          <p>Young adults sleep the longest, just over 9 hours a day at 15 to 24 (2024). Yet they are the <span class="hl">least likely</span> to feel they get enough, and two in three often wake up unrefreshed.</p>
+          <p>Young people sleep the longest, just over 9 hours a day at 15 to 24 (ABS, 2024). Yet in the 2016 sleep survey, 18 to 24 year olds were the <span class="hl">least likely</span> to say they get enough sleep, and two in three often woke up unrefreshed.</p>
           <p>Three in four of them are online in the last hour before bed most nights. Among people over 65 it's one in five.</p>
         </div>
         <figure class="fig card">
           <h3>Young adults are the least likely to feel they get enough sleep</h3>
           <p class="sub">% of adults who usually <span class="k k-bl">get enough sleep</span>, and % who often <span class="k k-or">wake up unrefreshed</span>, by age, 2016.</p>
           <div class="chart" id="line_age_quality"></div>
-          <p class="src">Source: Sleep Health Foundation, Sleep Health Survey of Australian Adults 2016, Table 1. The 2016 survey is the latest that reports these results; newer Sleep Health Foundation surveys do not break them down this way.</p>
+          <p class="src">Source: Sleep Health Foundation, Sleep Health Survey of Australian Adults 2016, Table 1. This 2016 survey is the latest that breaks results down by age and habit; newer surveys do not.</p>
         </figure>
       </div>
       <div class="two-col">
@@ -178,13 +178,13 @@
       <h2>What we do before bed follows us into the next day</h2>
       <div class="two-col">
         <div class="text">
-          <p>If you're still working in the last hour before bed, you're in the group with almost <span class="hl">twice the sleep problems</span>. Late-night scrolling and six caffeinated drinks a day show the same pattern.</p>
+          <p>If you're still working in the last hour before bed, you're <span class="hl">almost twice as likely</span> to report two or more sleep problems. Late-night scrolling and six caffeinated drinks a day show the same pattern.</p>
         </div>
         <figure class="fig card">
           <h3>Late-night screens, work and caffeine go with poorer sleep</h3>
           <p class="sub">% of adults with two or more sleep problems, comparing the <span class="k k-bl">healthier</span> and the <span class="k k-or">riskier</span> habit, 2016.</p>
           <div class="chart" id="dumbbell_lifestyle"></div>
-          <p class="src">Source: Sleep Health Foundation, Sleep Health Survey of Australian Adults 2016, Table 9. The 2016 survey is the latest that reports these results; newer Sleep Health Foundation surveys do not break them down this way.</p>
+          <p class="src">Source: Sleep Health Foundation, Sleep Health Survey of Australian Adults 2016, Table 9</p>
         </figure>
       </div>
       <div class="two-col">
@@ -195,7 +195,7 @@
           <h3>Sleepiness follows people to work and onto the road</h3>
           <p class="sub">% who did this because of sleepiness or a sleep problem, 2016. Work questions were answered by <span class="k k-bl">people in work</span>; driving questions by <span class="k k-lb">all adults</span>.</p>
           <div class="chart" id="bar_work_impacts"></div>
-          <p class="src">Source: Sleep Health Foundation, Sleep Health Survey of Australian Adults 2016, Table 7. The 2016 survey is the latest that reports these results; newer Sleep Health Foundation surveys do not break them down this way.</p>
+          <p class="src">Source: Sleep Health Foundation, Sleep Health Survey of Australian Adults 2016, Table 7</p>
         </figure>
       </div>
       </div>
@@ -281,7 +281,7 @@
       </div>
       <figure class="fig card">
           <h3>Women report more distress than men in every region</h3>
-          <p class="sub">% of women and of men with high or very high psychological distress, by Primary Health Network, 2022, on the same colour scale. The larger map below shows the gap: how many <span class="term" tabindex="0">percentage points<span class="tip" role="tooltip">The plain difference between two percentages: 15% against 10% is a gap of 5 percentage points.</span></span> higher the rate is for women.</p>
+          <p class="sub">% of women and of men with high or very high psychological distress, by Primary Health Network, 2022, on the same colour scale. The third map shows the gap: how many <span class="term" tabindex="0">percentage points<span class="tip" role="tooltip">The plain difference between two percentages: 15% against 10% is a gap of 5 percentage points.</span></span> higher the rate is for women.</p>
           <div class="chart" id="map_distress_sex"></div>
           <p class="src">Source: <a href="https://phidu.torrens.edu.au/social-health-atlases/data">PHIDU Social Health Atlas of Australia</a>; <a href="https://data.gov.au/data/dataset/primary-health-networks">PHN boundaries, data.gov.au</a></p>
         </figure>
@@ -301,16 +301,16 @@
     <section class="chapter ch-takeaways day" id="takeaways">
       <div class="wrap">
       <p class="eyebrow"><span class="clock"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><span>7 · Who sleeps best?</span></p>
-      <h2>What good sleepers have in common</h2>
+      <h2>Who reports better sleep?</h2>
       <ul class="takeaways">
-        <li><strong>Older adults</strong> They are the most likely to say they get enough sleep and wake up refreshed.</li>
-        <li><strong>No baby at home</strong> Adults without a baby sleep up to 40 minutes a day more than new parents, and non-carers about 10 minutes more than carers.</li>
-        <li><strong>A calm last hour</strong> No work and fewer screens before bed go with fewer sleep problems.</li>
-        <li><strong>Good health</strong> People without chronic pain or a mental health condition sleep longer and more regularly.</li>
+        <li><strong>Older adults</strong> They are the most likely to say they get enough sleep, and the least likely to wake up unrefreshed (2016).</li>
+        <li><strong>Fewer caring duties</strong> Adults with no child under 15 at home sleep about 38 minutes a day more than parents of a baby under one, and non-carers about 10 minutes more than carers (2024).</li>
+        <li><strong>A calm last hour</strong> People who never work or go online in the hour before bed are less likely to report two or more sleep problems (2016).</li>
+        <li><strong>Good health</strong> People with neither back pain nor a mental health condition sleep longer and keep a more regular routine (2025).</li>
       </ul>
       <div class="closing">
         <svg class="dawn-block" viewBox="0 0 168 200" aria-hidden="true"><circle class="db-sun" cx="138" cy="34" r="22"/><rect class="db-roof" x="96" y="10" width="40" height="12" rx="2"/><path class="db-aerial" d="M34 2v20"/><rect class="db-wall" x="6" y="22" width="148" height="176" rx="3"/><g class="db-win"><rect x="14" y="30" width="9" height="9" rx="1"/><rect x="28" y="30" width="9" height="9" rx="1"/><rect x="42" y="30" width="9" height="9" rx="1"/><rect x="56" y="30" width="9" height="9" rx="1"/><rect x="70" y="30" width="9" height="9" rx="1"/><rect x="84" y="30" width="9" height="9" rx="1"/><rect x="98" y="30" width="9" height="9" rx="1"/><rect x="112" y="30" width="9" height="9" rx="1"/><rect x="126" y="30" width="9" height="9" rx="1"/><rect x="140" y="30" width="9" height="9" rx="1"/><rect x="14" y="44" width="9" height="9" rx="1"/><rect x="28" y="44" width="9" height="9" rx="1"/><rect x="42" y="44" width="9" height="9" rx="1"/><rect x="56" y="44" width="9" height="9" rx="1"/><rect x="70" y="44" width="9" height="9" rx="1"/><rect x="84" y="44" width="9" height="9" rx="1"/><rect x="98" y="44" width="9" height="9" rx="1"/><rect x="112" y="44" width="9" height="9" rx="1"/><rect x="126" y="44" width="9" height="9" rx="1"/><rect x="140" y="44" width="9" height="9" rx="1"/><rect x="14" y="58" width="9" height="9" rx="1"/><rect x="28" y="58" width="9" height="9" rx="1"/><rect x="42" y="58" width="9" height="9" rx="1"/><rect x="56" y="58" width="9" height="9" rx="1"/><rect x="70" y="58" width="9" height="9" rx="1"/><rect x="84" y="58" width="9" height="9" rx="1"/><rect x="98" y="58" width="9" height="9" rx="1"/><rect x="112" y="58" width="9" height="9" rx="1"/><rect x="126" y="58" width="9" height="9" rx="1"/><rect x="140" y="58" width="9" height="9" rx="1"/><rect x="14" y="72" width="9" height="9" rx="1"/><rect x="28" y="72" width="9" height="9" rx="1"/><rect x="42" y="72" width="9" height="9" rx="1"/><rect x="56" y="72" width="9" height="9" rx="1"/><rect x="70" y="72" width="9" height="9" rx="1"/><rect x="84" y="72" width="9" height="9" rx="1"/><rect x="98" y="72" width="9" height="9" rx="1"/><rect x="112" y="72" width="9" height="9" rx="1"/><rect x="126" y="72" width="9" height="9" rx="1"/><rect x="140" y="72" width="9" height="9" rx="1"/><rect x="14" y="86" width="9" height="9" rx="1"/><rect x="28" y="86" width="9" height="9" rx="1"/><rect x="42" y="86" width="9" height="9" rx="1"/><rect x="56" y="86" width="9" height="9" rx="1"/><rect x="70" y="86" width="9" height="9" rx="1"/><rect x="84" y="86" width="9" height="9" rx="1"/><rect x="98" y="86" width="9" height="9" rx="1"/><rect x="112" y="86" width="9" height="9" rx="1"/><rect x="126" y="86" width="9" height="9" rx="1"/><rect x="140" y="86" width="9" height="9" rx="1"/><rect x="14" y="100" width="9" height="9" rx="1"/><rect x="28" y="100" width="9" height="9" rx="1"/><rect x="42" y="100" width="9" height="9" rx="1"/><rect x="56" y="100" width="9" height="9" rx="1"/><rect x="70" y="100" width="9" height="9" rx="1"/><rect x="84" y="100" width="9" height="9" rx="1"/><rect x="98" y="100" width="9" height="9" rx="1"/><rect x="112" y="100" width="9" height="9" rx="1"/><rect x="126" y="100" width="9" height="9" rx="1"/><rect x="140" y="100" width="9" height="9" rx="1"/><rect x="14" y="114" width="9" height="9" rx="1"/><rect x="28" y="114" width="9" height="9" rx="1"/><rect x="42" y="114" width="9" height="9" rx="1"/><rect x="56" y="114" width="9" height="9" rx="1"/><rect x="70" y="114" width="9" height="9" rx="1"/><rect x="84" y="114" width="9" height="9" rx="1"/><rect x="98" y="114" width="9" height="9" rx="1"/><rect x="112" y="114" width="9" height="9" rx="1"/><rect x="126" y="114" width="9" height="9" rx="1"/><rect x="140" y="114" width="9" height="9" rx="1"/><rect x="14" y="128" width="9" height="9" rx="1"/><rect x="28" y="128" width="9" height="9" rx="1"/><rect x="42" y="128" width="9" height="9" rx="1"/><rect x="56" y="128" width="9" height="9" rx="1"/><rect x="70" y="128" width="9" height="9" rx="1"/><rect x="84" y="128" width="9" height="9" rx="1"/><rect x="98" y="128" width="9" height="9" rx="1"/><rect x="112" y="128" width="9" height="9" rx="1"/><rect x="126" y="128" width="9" height="9" rx="1"/><rect x="140" y="128" width="9" height="9" rx="1"/><rect x="14" y="142" width="9" height="9" rx="1"/><rect x="28" y="142" width="9" height="9" rx="1"/><rect x="42" y="142" width="9" height="9" rx="1"/><rect x="56" y="142" width="9" height="9" rx="1"/><rect x="70" y="142" width="9" height="9" rx="1"/><rect x="84" y="142" width="9" height="9" rx="1"/><rect x="98" y="142" width="9" height="9" rx="1"/><rect x="112" y="142" width="9" height="9" rx="1"/><rect x="126" y="142" width="9" height="9" rx="1"/><rect x="140" y="142" width="9" height="9" rx="1"/><rect x="14" y="156" width="9" height="9" rx="1"/><rect x="28" y="156" width="9" height="9" rx="1"/><rect x="42" y="156" width="9" height="9" rx="1"/><rect x="56" y="156" width="9" height="9" rx="1"/><rect x="70" y="156" width="9" height="9" rx="1"/><rect x="84" y="156" width="9" height="9" rx="1"/><rect x="98" y="156" width="9" height="9" rx="1"/><rect x="112" y="156" width="9" height="9" rx="1"/><rect x="126" y="156" width="9" height="9" rx="1"/><rect x="140" y="156" width="9" height="9" rx="1"/></g></svg>
-        <p class="text">Back to the apartment block at the top: 33 of its 100 lights stayed on. If yours is one of them, start with the last hour before bed.</p>
+        <p class="text">Back to the apartment block at the top: 33 of its 100 lights stayed on. Some of the reasons, like a new baby or poor health, are hard to change. The last hour before bed is one you can.</p>
       </div>
       </div>
     </section>
@@ -369,6 +369,6 @@
     <p><strong>AI acknowledgement:</strong> Claude (Anthropic) is used, an AI assistant, to help clean the source data, brainstorm ideas on storytelling and plan the design framework. Claude also looked for inconsistencies of the overall visualisation and advised on improvements. I chose the topic, story and design, checked the figures against the original sources, and edited the wording.</p>
   </div></footer>
 
-  <script src="js/main.js?v=15"></script>
+  <script src="js/main.js?v=16"></script>
 </body>
 </html>
