@@ -69,11 +69,6 @@ h2 { font-size: clamp(1.7rem, 3vw, 2.5rem); max-width: 24ch; margin: 0 0 40px; }
   border-bottom: 1px solid rgba(255,255,255,.08);
 }
 .nightbar-in { max-width: 1180px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; gap: 24px; height: 52px; }
-/* Story clock: runs from 9 pm to 8 am as you scroll */
-.nightclock { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px 3px 6px; border-radius: 999px; color: var(--gold);
-  background: rgba(243,182,78,.1); border: 1px solid rgba(243,182,78,.3); font: 600 .84rem/1.2 "Source Sans 3", sans-serif; font-variant-numeric: tabular-nums; white-space: nowrap; }
-.nightclock path { transform-box: view-box; transform-origin: 12px 12px; }
-.nc-time { min-width: 5.2em; }
 .brand { display: flex; align-items: center; gap: 8px; color: #fff; text-decoration: none; font-family: var(--serif); font-weight: 600; white-space: nowrap; }
 .nightbar ol { list-style: none; display: flex; gap: 4px; margin: 0 0 0 auto; padding: 0; overflow-x: auto; scrollbar-width: none; }
 .nightbar ol::-webkit-scrollbar { display: none; }
@@ -282,3 +277,12 @@ table.behind tbody tr:hover { background: #f4f2ec; }
 @media (max-width: 700px) { footer .about-body { padding: 0 18px 6px; } }
 footer details.about:last-of-type { margin-bottom: 36px; }
 footer .about .table-wrap { margin-bottom: 12px; }
+
+/* ---------- Closing: the same apartment block, now at sunrise with every light off ---------- */
+.closing { display: flex; align-items: center; gap: 28px; }
+.dawn-block { flex: 0 0 auto; width: 120px; height: auto; }
+.db-sun { fill: #f7c79a; }
+.db-wall, .db-roof { fill: #3b2550; }
+.db-aerial { stroke: #3b2550; stroke-width: 2; }
+.db-win rect { fill: #6b4a72; }
+@media (max-width: 700px) { .dawn-block { width: 84px; } .closing { gap: 18px; } }

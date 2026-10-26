@@ -67,7 +67,7 @@ function fitSpec(spec, avail) {
 // do not shrink), scale its fixed-size views down and draw it again
 async function embed(id) {
   const el = document.getElementById(id);
-  let spec = await fetch("js/specs/" + id + ".vg.json?v=12").then(r => r.json());
+  let spec = await fetch("js/specs/" + id + ".vg.json?v=14").then(r => r.json());
   if (FIT.includes(id)) spec = fitSpec(spec, el.clientWidth - 24);
   let r = await vegaEmbed("#" + id, spec, {actions: false});
   for (let i = 0; i < 4; i++) {
@@ -153,6 +153,28 @@ if (stars) {
   }
 }
 
+// Big numbers count up from zero the first time they come into view
+const counters = document.querySelectorAll("[data-count]");
+if (!reduceMotion) {
+  const cio = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      cio.unobserve(e.target);
+      const nodes = [];
+      const walk = n => n.childNodes.forEach(c => c.nodeType === 3 ? (/\d/.test(c.textContent) && nodes.push([c, c.textContent])) : walk(c));
+      walk(e.target);
+      const start = performance.now(), dur = 1300, ease = t => 1 - Math.pow(1 - t, 3);
+      const step = now => {
+        const t = Math.min(1, (now - start) / dur);
+        nodes.forEach(([n, txt]) => { n.textContent = txt.replace(/\d+/g, d => String(Math.round(+d * ease(t)))); });
+        if (t < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    });
+  }, {threshold: 0.6});
+  counters.forEach(el => cio.observe(el));
+}
+
 // Fade figures up as they scroll into view
 const revealed = document.querySelectorAll(".card, .moment .wrap, .takeaways li");
 revealed.forEach(el => el.classList.add("reveal"));
@@ -185,11 +207,6 @@ function mix(stops, t) {
   const x = Math.min(Math.max(t, 0), 1) * (stops.length - 1), i = Math.min(Math.floor(x), stops.length - 2), f = x - i;
   return "rgb(" + stops[i].map((v, k) => Math.round(v + (stops[i + 1][k] - v) * f)).join(",") + ")";
 }
-// Story clock: each part of the page is pinned to a time of night, and the clock interpolates between them
-const clockStops = [["#top", 21 * 60], ["#world", 22 * 60], ["#day", 23 * 60 + 30], ["#who", 25 * 60], ["#habits", 26 * 60 + 30],
-  ["#wellbeing", 28 * 60], [".moment.sunrise", 29 * 60 + 30], ["#where", 30 * 60 + 30], ["#takeaways", 31 * 60 + 30], ["footer", 32 * 60]]
-  .map(([sel, m]) => [document.querySelector(sel), m]).filter(([el]) => el);
-const ncTime = document.querySelector(".nc-time"), handH = document.querySelector(".hand-h"), handM = document.querySelector(".hand-m");
 function pageY(el) { return el.getBoundingClientRect().top + window.scrollY; }
 function onSky() {
   const vh = window.innerHeight, mid = window.scrollY + vh * 0.5;
@@ -205,18 +222,6 @@ function onSky() {
     const r = sunrise.getBoundingClientRect();
     const t = Math.min(Math.max((vh - r.top) / (vh + r.height * 0.5), 0), 1);
     sun.style.setProperty("--sun-y", Math.round(140 - t * 220) + "px");
-  }
-  if (ncTime && clockStops.length > 1) {
-    let m = clockStops[0][1];
-    for (let i = 0; i < clockStops.length - 1; i++) {
-      const y0 = pageY(clockStops[i][0]), y1 = pageY(clockStops[i + 1][0]);
-      if (mid >= y0) m = clockStops[i][1] + (clockStops[i + 1][1] - clockStops[i][1]) * Math.min(1, (mid - y0) / Math.max(1, y1 - y0));
-    }
-    m = Math.round(m / 5) * 5;
-    const h24 = Math.floor(m / 60) % 24, mm = m % 60, h12 = h24 % 12 || 12;
-    ncTime.textContent = `${h12}:${String(mm).padStart(2, "0")} ${h24 < 12 ? "am" : "pm"}`;
-    if (handH) handH.style.transform = `rotate(${(h24 % 12) * 30 + mm * 0.5}deg)`;
-    if (handM) handM.style.transform = `rotate(${mm * 6}deg)`;
   }
 }
 let skyQueued = false;

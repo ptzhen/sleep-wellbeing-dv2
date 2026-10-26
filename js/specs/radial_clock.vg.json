@@ -205,6 +205,76 @@
           "data": {
             "values": [
               {
+                "r": 100
+              }
+            ]
+          },
+          "mark": {
+            "type": "arc",
+            "innerRadius": 0,
+            "color": "#e9e7f3",
+            "opacity": 0.85,
+            "theta": {
+              "expr": "(playHour + 0.42) / 24 * 2 * PI"
+            },
+            "theta2": {
+              "expr": "(playHour + 0.58) / 24 * 2 * PI"
+            }
+          },
+          "encoding": {
+            "radius": {
+              "field": "r",
+              "type": "quantitative",
+              "scale": {
+                "type": "sqrt",
+                "zero": true,
+                "domain": [
+                  0,
+                  100
+                ],
+                "range": [
+                  18,
+                  125
+                ]
+              }
+            }
+          }
+        },
+        {
+          "data": {
+            "values": [
+              {
+                "k": 1
+              }
+            ]
+          },
+          "mark": {
+            "type": "point",
+            "filled": true,
+            "size": 190,
+            "color": "#f3b64e",
+            "opacity": 1
+          },
+          "encoding": {
+            "x": {
+              "value": 130
+            },
+            "y": {
+              "value": 130
+            },
+            "shape": {
+              "condition": {
+                "test": "playHour < 6 || playHour >= 18",
+                "value": "M0.25,-0.95A0.95,0.95,0,1,0,0.95,0.3A0.72,0.72,0,1,1,0.25,-0.95Z"
+              },
+              "value": "circle"
+            }
+          }
+        },
+        {
+          "data": {
+            "values": [
+              {
                 "r": 50
               }
             ]
@@ -468,6 +538,76 @@
               }
             }
           ]
+        },
+        {
+          "data": {
+            "values": [
+              {
+                "r": 100
+              }
+            ]
+          },
+          "mark": {
+            "type": "arc",
+            "innerRadius": 0,
+            "color": "#e9e7f3",
+            "opacity": 0.85,
+            "theta": {
+              "expr": "(playHour + 0.42) / 24 * 2 * PI"
+            },
+            "theta2": {
+              "expr": "(playHour + 0.58) / 24 * 2 * PI"
+            }
+          },
+          "encoding": {
+            "radius": {
+              "field": "r",
+              "type": "quantitative",
+              "scale": {
+                "type": "sqrt",
+                "zero": true,
+                "domain": [
+                  0,
+                  100
+                ],
+                "range": [
+                  18,
+                  125
+                ]
+              }
+            }
+          }
+        },
+        {
+          "data": {
+            "values": [
+              {
+                "k": 1
+              }
+            ]
+          },
+          "mark": {
+            "type": "point",
+            "filled": true,
+            "size": 190,
+            "color": "#f3b64e",
+            "opacity": 1
+          },
+          "encoding": {
+            "x": {
+              "value": 130
+            },
+            "y": {
+              "value": 130
+            },
+            "shape": {
+              "condition": {
+                "test": "playHour < 6 || playHour >= 18",
+                "value": "M0.25,-0.95A0.95,0.95,0,1,0,0.95,0.3A0.72,0.72,0,1,1,0.25,-0.95Z"
+              },
+              "value": "circle"
+            }
+          }
         },
         {
           "data": {
