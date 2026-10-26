@@ -156,12 +156,14 @@ h2 { font-size: clamp(1.7rem, 3vw, 2.5rem); max-width: 24ch; margin: 0 0 40px; }
 .play .ico { font-size: .75rem; }
 
 /* Highlight colours: brighter versions on the night background */
-.hl { color: var(--accent); font-weight: 700; }
+/* Emphasis in the text is bold only: colour in the text is kept for words that name a series in the chart beside it */
+.hl { color: var(--ink); font-weight: 700; }
 .weekday { color: var(--weekday); font-weight: 700; }
 .weekend { color: var(--weekend); font-weight: 700; }
 .men { color: var(--men); font-weight: 700; }
 .women { color: var(--women); font-weight: 700; }
-.night .hl, .night .weekend { color: var(--gold); }
+.night .hl { color: #fff; }
+.night .weekend { color: var(--gold); }
 .night .weekday { color: #9db4ff; }
 .night .men { color: #8fcaf2; }
 .night .women { color: #f39ac0; }
@@ -190,7 +192,7 @@ h2 { font-size: clamp(1.7rem, 3vw, 2.5rem); max-width: 24ch; margin: 0 0 40px; }
 .tile-num { font: 600 clamp(2.6rem, 6vw, 4rem)/1 var(--serif); color: var(--gold); margin: 0 0 8px; }
 .tile-num small { font-size: .45em; opacity: .8; }
 .tile-lab { margin: 0; color: var(--night-muted); max-width: 36ch; }
-.big-lab { max-width: 46ch; margin: 0 auto; font-size: 1.2rem; color: var(--night-muted); }
+.big-lab { max-width: 62ch; margin: 0 auto; font-size: 1.2rem; color: var(--night-muted); }
 .sunrise .big-lab { color: #fff3ea; text-shadow: 0 1px 12px rgba(80,20,60,.4); }
 
 .takeaways { list-style: none; padding: 0; margin: 0 0 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
